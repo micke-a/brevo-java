@@ -243,7 +243,7 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 
 TasksApi apiInstance = new TasksApi();
 String id = "id_example"; // String | 
-Body10 body = new Body10(); // Body10 | Updated task details.
+Body14 body = new Body14(); // Body14 | Updated task details.
 try {
     apiInstance.crmTasksIdPatch(id, body);
 } catch (ApiException e) {
@@ -257,7 +257,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**|  |
- **body** | [**Body10**](Body10.md)| Updated task details. |
+ **body** | [**Body14**](Body14.md)| Updated task details. |
 
 ### Return type
 
@@ -302,7 +302,7 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 //partnerKey.setApiKeyPrefix("Token");
 
 TasksApi apiInstance = new TasksApi();
-Body9 body = new Body9(); // Body9 | Task name.
+Body13 body = new Body13(); // Body13 | Task name.
 try {
     InlineResponse2012 result = apiInstance.crmTasksPost(body);
     System.out.println(result);
@@ -316,7 +316,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body9**](Body9.md)| Task name. |
+ **body** | [**Body13**](Body13.md)| Task name. |
 
 ### Return type
 

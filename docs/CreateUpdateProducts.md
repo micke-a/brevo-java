@@ -12,8 +12,9 @@ Name | Type | Description | Notes
 **price** | **Float** | Price of the product |  [optional]
 **categories** | **List&lt;String&gt;** | Category ID-s of the product |  [optional]
 **parentId** | **String** | Parent product id of the product |  [optional]
-**metaInfo** | **Map&lt;String, String&gt;** | Meta data of product such as description, vendor, producer, stock level. The size of cumulative metaInfo shall not exceed **1000 KB**. Maximum length of metaInfo object can be 10. |  [optional]
+**metaInfo** | **Map&lt;String, String&gt;** | Meta data of product such as description, vendor, producer, stock level. The size of cumulative metaInfo shall not exceed **1000 KB**. Maximum length of metaInfo object can be 20. |  [optional]
 **deletedAt** | **String** | UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) of the product deleted from the shop&#39;s database |  [optional]
+**isDeleted** | **Boolean** | product deleted from the shop&#39;s database |  [optional]
 
 
 

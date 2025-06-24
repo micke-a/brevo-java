@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,11 +13,15 @@
 
 package brevoModel;
 
+import org.apache.commons.lang3.ObjectUtils;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.ObjectUtils;
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +29,7 @@ import java.util.List;
  * Granular feature permissions given to the user.
  */
 @ApiModel(description = "Granular feature permissions given to the user.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class GetCorporateUserPermissionFeatureAccess {
   @SerializedName("api_keys")
   private List<String> apiKeys = null;
@@ -38,6 +42,21 @@ public class GetCorporateUserPermissionFeatureAccess {
 
   @SerializedName("apps_management")
   private List<String> appsManagement = null;
+
+  @SerializedName("sub_organization_groups")
+  private List<String> subOrganizationGroups = null;
+
+  @SerializedName("create_sub_organizations")
+  private List<String> createSubOrganizations = null;
+
+  @SerializedName("manage_sub_organizations")
+  private List<String> manageSubOrganizations = null;
+
+  @SerializedName("analytics")
+  private List<String> analytics = null;
+
+  @SerializedName("security")
+  private List<String> security = null;
 
   public GetCorporateUserPermissionFeatureAccess apiKeys(List<String> apiKeys) {
     this.apiKeys = apiKeys;
@@ -143,6 +162,136 @@ public class GetCorporateUserPermissionFeatureAccess {
     this.appsManagement = appsManagement;
   }
 
+  public GetCorporateUserPermissionFeatureAccess subOrganizationGroups(List<String> subOrganizationGroups) {
+    this.subOrganizationGroups = subOrganizationGroups;
+    return this;
+  }
+
+  public GetCorporateUserPermissionFeatureAccess addSubOrganizationGroupsItem(String subOrganizationGroupsItem) {
+    if (this.subOrganizationGroups == null) {
+      this.subOrganizationGroups = new ArrayList<String>();
+    }
+    this.subOrganizationGroups.add(subOrganizationGroupsItem);
+    return this;
+  }
+
+   /**
+   * Permission on groups
+   * @return subOrganizationGroups
+  **/
+  @ApiModelProperty(value = "Permission on groups")
+  public List<String> getSubOrganizationGroups() {
+    return subOrganizationGroups;
+  }
+
+  public void setSubOrganizationGroups(List<String> subOrganizationGroups) {
+    this.subOrganizationGroups = subOrganizationGroups;
+  }
+
+  public GetCorporateUserPermissionFeatureAccess createSubOrganizations(List<String> createSubOrganizations) {
+    this.createSubOrganizations = createSubOrganizations;
+    return this;
+  }
+
+  public GetCorporateUserPermissionFeatureAccess addCreateSubOrganizationsItem(String createSubOrganizationsItem) {
+    if (this.createSubOrganizations == null) {
+      this.createSubOrganizations = new ArrayList<String>();
+    }
+    this.createSubOrganizations.add(createSubOrganizationsItem);
+    return this;
+  }
+
+   /**
+   * Permission on create sub-accounts
+   * @return createSubOrganizations
+  **/
+  @ApiModelProperty(value = "Permission on create sub-accounts")
+  public List<String> getCreateSubOrganizations() {
+    return createSubOrganizations;
+  }
+
+  public void setCreateSubOrganizations(List<String> createSubOrganizations) {
+    this.createSubOrganizations = createSubOrganizations;
+  }
+
+  public GetCorporateUserPermissionFeatureAccess manageSubOrganizations(List<String> manageSubOrganizations) {
+    this.manageSubOrganizations = manageSubOrganizations;
+    return this;
+  }
+
+  public GetCorporateUserPermissionFeatureAccess addManageSubOrganizationsItem(String manageSubOrganizationsItem) {
+    if (this.manageSubOrganizations == null) {
+      this.manageSubOrganizations = new ArrayList<String>();
+    }
+    this.manageSubOrganizations.add(manageSubOrganizationsItem);
+    return this;
+  }
+
+   /**
+   * Permission on manage sub-accounts
+   * @return manageSubOrganizations
+  **/
+  @ApiModelProperty(value = "Permission on manage sub-accounts")
+  public List<String> getManageSubOrganizations() {
+    return manageSubOrganizations;
+  }
+
+  public void setManageSubOrganizations(List<String> manageSubOrganizations) {
+    this.manageSubOrganizations = manageSubOrganizations;
+  }
+
+  public GetCorporateUserPermissionFeatureAccess analytics(List<String> analytics) {
+    this.analytics = analytics;
+    return this;
+  }
+
+  public GetCorporateUserPermissionFeatureAccess addAnalyticsItem(String analyticsItem) {
+    if (this.analytics == null) {
+      this.analytics = new ArrayList<String>();
+    }
+    this.analytics.add(analyticsItem);
+    return this;
+  }
+
+   /**
+   * Permission on analytics
+   * @return analytics
+  **/
+  @ApiModelProperty(value = "Permission on analytics")
+  public List<String> getAnalytics() {
+    return analytics;
+  }
+
+  public void setAnalytics(List<String> analytics) {
+    this.analytics = analytics;
+  }
+
+  public GetCorporateUserPermissionFeatureAccess security(List<String> security) {
+    this.security = security;
+    return this;
+  }
+
+  public GetCorporateUserPermissionFeatureAccess addSecurityItem(String securityItem) {
+    if (this.security == null) {
+      this.security = new ArrayList<String>();
+    }
+    this.security.add(securityItem);
+    return this;
+  }
+
+   /**
+   * Permission on security
+   * @return security
+  **/
+  @ApiModelProperty(value = "Permission on security")
+  public List<String> getSecurity() {
+    return security;
+  }
+
+  public void setSecurity(List<String> security) {
+    this.security = security;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -156,12 +305,17 @@ public class GetCorporateUserPermissionFeatureAccess {
     return ObjectUtils.equals(this.apiKeys, getCorporateUserPermissionFeatureAccess.apiKeys) &&
     ObjectUtils.equals(this.myPlan, getCorporateUserPermissionFeatureAccess.myPlan) &&
     ObjectUtils.equals(this.userManagement, getCorporateUserPermissionFeatureAccess.userManagement) &&
-    ObjectUtils.equals(this.appsManagement, getCorporateUserPermissionFeatureAccess.appsManagement);
+    ObjectUtils.equals(this.appsManagement, getCorporateUserPermissionFeatureAccess.appsManagement) &&
+    ObjectUtils.equals(this.subOrganizationGroups, getCorporateUserPermissionFeatureAccess.subOrganizationGroups) &&
+    ObjectUtils.equals(this.createSubOrganizations, getCorporateUserPermissionFeatureAccess.createSubOrganizations) &&
+    ObjectUtils.equals(this.manageSubOrganizations, getCorporateUserPermissionFeatureAccess.manageSubOrganizations) &&
+    ObjectUtils.equals(this.analytics, getCorporateUserPermissionFeatureAccess.analytics) &&
+    ObjectUtils.equals(this.security, getCorporateUserPermissionFeatureAccess.security);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(apiKeys, myPlan, userManagement, appsManagement);
+    return ObjectUtils.hashCodeMulti(apiKeys, myPlan, userManagement, appsManagement, subOrganizationGroups, createSubOrganizations, manageSubOrganizations, analytics, security);
   }
 
 
@@ -174,6 +328,11 @@ public class GetCorporateUserPermissionFeatureAccess {
     sb.append("    myPlan: ").append(toIndentedString(myPlan)).append("\n");
     sb.append("    userManagement: ").append(toIndentedString(userManagement)).append("\n");
     sb.append("    appsManagement: ").append(toIndentedString(appsManagement)).append("\n");
+    sb.append("    subOrganizationGroups: ").append(toIndentedString(subOrganizationGroups)).append("\n");
+    sb.append("    createSubOrganizations: ").append(toIndentedString(createSubOrganizations)).append("\n");
+    sb.append("    manageSubOrganizations: ").append(toIndentedString(manageSubOrganizations)).append("\n");
+    sb.append("    analytics: ").append(toIndentedString(analytics)).append("\n");
+    sb.append("    security: ").append(toIndentedString(security)).append("\n");
     sb.append("}");
     return sb.toString();
   }

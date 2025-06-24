@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,76 +13,71 @@
 
 package brevoModel;
 
-import com.google.gson.annotations.SerializedName;
-import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.ObjectUtils;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Body3
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class Body3 {
-  @SerializedName("name")
-  private String name = null;
+  @SerializedName("groupName")
+  private String groupName = null;
 
-  @SerializedName("attributes")
-  private Object attributes = null;
+  @SerializedName("subAccountIds")
+  private List<Long> subAccountIds = null;
 
-  @SerializedName("countryCode")
-  private Long countryCode = null;
-
-  public Body3 name(String name) {
-    this.name = name;
+  public Body3 groupName(String groupName) {
+    this.groupName = groupName;
     return this;
   }
 
    /**
-   * Name of company
-   * @return name
+   * The name of the group of sub-accounts
+   * @return groupName
   **/
-  @ApiModelProperty(example = "company", required = true, value = "Name of company")
-  public String getName() {
-    return name;
+  @ApiModelProperty(example = "My group", required = true, value = "The name of the group of sub-accounts")
+  public String getGroupName() {
+    return groupName;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setGroupName(String groupName) {
+    this.groupName = groupName;
   }
 
-  public Body3 attributes(Object attributes) {
-    this.attributes = attributes;
+  public Body3 subAccountIds(List<Long> subAccountIds) {
+    this.subAccountIds = subAccountIds;
+    return this;
+  }
+
+  public Body3 addSubAccountIdsItem(Long subAccountIdsItem) {
+    if (this.subAccountIds == null) {
+      this.subAccountIds = new ArrayList<Long>();
+    }
+    this.subAccountIds.add(subAccountIdsItem);
     return this;
   }
 
    /**
-   * Attributes for company creation
-   * @return attributes
+   * Pass the list of sub-account Ids to be included in the group
+   * @return subAccountIds
   **/
-  @ApiModelProperty(example = "{\"domain\":\"https://example.com\",\"industry\":\"Fabric\",\"owner\":\"60e68d60582a3b006f524197\"}", value = "Attributes for company creation")
-  public Object getAttributes() {
-    return attributes;
+  @ApiModelProperty(example = "[234322,325553,893432]", value = "Pass the list of sub-account Ids to be included in the group")
+  public List<Long> getSubAccountIds() {
+    return subAccountIds;
   }
 
-  public void setAttributes(Object attributes) {
-    this.attributes = attributes;
-  }
-
-  public Body3 countryCode(Long countryCode) {
-    this.countryCode = countryCode;
-    return this;
-  }
-
-   /**
-   * Country code if phone_number is passed in attributes.
-   * @return countryCode
-  **/
-  @ApiModelProperty(example = "91", value = "Country code if phone_number is passed in attributes.")
-  public Long getCountryCode() {
-    return countryCode;
-  }
-
-  public void setCountryCode(Long countryCode) {
-    this.countryCode = countryCode;
+  public void setSubAccountIds(List<Long> subAccountIds) {
+    this.subAccountIds = subAccountIds;
   }
 
 
@@ -95,14 +90,13 @@ public class Body3 {
     return false;
   }
     Body3 body3 = (Body3) o;
-    return ObjectUtils.equals(this.name, body3.name) &&
-    ObjectUtils.equals(this.attributes, body3.attributes) &&
-    ObjectUtils.equals(this.countryCode, body3.countryCode);
+    return ObjectUtils.equals(this.groupName, body3.groupName) &&
+    ObjectUtils.equals(this.subAccountIds, body3.subAccountIds);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(name, attributes, countryCode);
+    return ObjectUtils.hashCodeMulti(groupName, subAccountIds);
   }
 
 
@@ -111,9 +105,8 @@ public class Body3 {
     StringBuilder sb = new StringBuilder();
     sb.append("class Body3 {\n");
     
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    attributes: ").append(toIndentedString(attributes)).append("\n");
-    sb.append("    countryCode: ").append(toIndentedString(countryCode)).append("\n");
+    sb.append("    groupName: ").append(toIndentedString(groupName)).append("\n");
+    sb.append("    subAccountIds: ").append(toIndentedString(subAccountIds)).append("\n");
     sb.append("}");
     return sb.toString();
   }

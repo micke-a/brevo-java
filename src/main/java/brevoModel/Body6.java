@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,14 +13,22 @@
 
 package brevoModel;
 
-import com.google.gson.annotations.SerializedName;
-import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.ObjectUtils;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Body6
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class Body6 {
   @SerializedName("name")
   private String name = null;
@@ -28,16 +36,25 @@ public class Body6 {
   @SerializedName("attributes")
   private Object attributes = null;
 
+  @SerializedName("countryCode")
+  private Long countryCode = null;
+
+  @SerializedName("linkedContactsIds")
+  private List<Long> linkedContactsIds = null;
+
+  @SerializedName("linkedDealsIds")
+  private List<String> linkedDealsIds = null;
+
   public Body6 name(String name) {
     this.name = name;
     return this;
   }
 
    /**
-   * Name of deal
+   * Name of company
    * @return name
   **/
-  @ApiModelProperty(example = "Deal: Connect with company", required = true, value = "Name of deal")
+  @ApiModelProperty(example = "company", required = true, value = "Name of company")
   public String getName() {
     return name;
   }
@@ -52,16 +69,86 @@ public class Body6 {
   }
 
    /**
-   * Attributes for deal creation  To assign owner of a Deal you can send attributes.deal_owner and utilize the account email or ID.  If you want to create a deal on a specific pipeline and stage you can use the following attributes &#x60;pipeline&#x60; and &#x60;deal_stage&#x60;.  Pipeline and deal_stage are ids you can fetch using this endpoint &#x60;/crm/pipeline/details/{pipelineID}&#x60; 
+   * Attributes for company creation
    * @return attributes
   **/
-  @ApiModelProperty(example = "{\"deal_owner\":\"6093d2425a9b436e9519d034\",\"amount\":12}", value = "Attributes for deal creation  To assign owner of a Deal you can send attributes.deal_owner and utilize the account email or ID.  If you want to create a deal on a specific pipeline and stage you can use the following attributes `pipeline` and `deal_stage`.  Pipeline and deal_stage are ids you can fetch using this endpoint `/crm/pipeline/details/{pipelineID}` ")
+  @ApiModelProperty(example = "{\"domain\":\"https://example.com\",\"industry\":\"Fabric\",\"owner\":\"60e68d60582a3b006f524197\"}", value = "Attributes for company creation")
   public Object getAttributes() {
     return attributes;
   }
 
   public void setAttributes(Object attributes) {
     this.attributes = attributes;
+  }
+
+  public Body6 countryCode(Long countryCode) {
+    this.countryCode = countryCode;
+    return this;
+  }
+
+   /**
+   * Country code if phone_number is passed in attributes.
+   * @return countryCode
+  **/
+  @ApiModelProperty(example = "91", value = "Country code if phone_number is passed in attributes.")
+  public Long getCountryCode() {
+    return countryCode;
+  }
+
+  public void setCountryCode(Long countryCode) {
+    this.countryCode = countryCode;
+  }
+
+  public Body6 linkedContactsIds(List<Long> linkedContactsIds) {
+    this.linkedContactsIds = linkedContactsIds;
+    return this;
+  }
+
+  public Body6 addLinkedContactsIdsItem(Long linkedContactsIdsItem) {
+    if (this.linkedContactsIds == null) {
+      this.linkedContactsIds = new ArrayList<Long>();
+    }
+    this.linkedContactsIds.add(linkedContactsIdsItem);
+    return this;
+  }
+
+   /**
+   * Contact ids to be linked with company
+   * @return linkedContactsIds
+  **/
+  @ApiModelProperty(example = "[1,2,3]", value = "Contact ids to be linked with company")
+  public List<Long> getLinkedContactsIds() {
+    return linkedContactsIds;
+  }
+
+  public void setLinkedContactsIds(List<Long> linkedContactsIds) {
+    this.linkedContactsIds = linkedContactsIds;
+  }
+
+  public Body6 linkedDealsIds(List<String> linkedDealsIds) {
+    this.linkedDealsIds = linkedDealsIds;
+    return this;
+  }
+
+  public Body6 addLinkedDealsIdsItem(String linkedDealsIdsItem) {
+    if (this.linkedDealsIds == null) {
+      this.linkedDealsIds = new ArrayList<String>();
+    }
+    this.linkedDealsIds.add(linkedDealsIdsItem);
+    return this;
+  }
+
+   /**
+   * Deal ids to be linked with company
+   * @return linkedDealsIds
+  **/
+  @ApiModelProperty(example = "[\"61a5ce58c5d4795761045990\",\"61a5ce58c5d4795761045991\",\"61a5ce58c5d4795761045992\"]", value = "Deal ids to be linked with company")
+  public List<String> getLinkedDealsIds() {
+    return linkedDealsIds;
+  }
+
+  public void setLinkedDealsIds(List<String> linkedDealsIds) {
+    this.linkedDealsIds = linkedDealsIds;
   }
 
 
@@ -75,12 +162,15 @@ public class Body6 {
   }
     Body6 body6 = (Body6) o;
     return ObjectUtils.equals(this.name, body6.name) &&
-    ObjectUtils.equals(this.attributes, body6.attributes);
+    ObjectUtils.equals(this.attributes, body6.attributes) &&
+    ObjectUtils.equals(this.countryCode, body6.countryCode) &&
+    ObjectUtils.equals(this.linkedContactsIds, body6.linkedContactsIds) &&
+    ObjectUtils.equals(this.linkedDealsIds, body6.linkedDealsIds);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(name, attributes);
+    return ObjectUtils.hashCodeMulti(name, attributes, countryCode, linkedContactsIds, linkedDealsIds);
   }
 
 
@@ -91,6 +181,9 @@ public class Body6 {
     
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    attributes: ").append(toIndentedString(attributes)).append("\n");
+    sb.append("    countryCode: ").append(toIndentedString(countryCode)).append("\n");
+    sb.append("    linkedContactsIds: ").append(toIndentedString(linkedContactsIds)).append("\n");
+    sb.append("    linkedDealsIds: ").append(toIndentedString(linkedDealsIds)).append("\n");
     sb.append("}");
     return sb.toString();
   }

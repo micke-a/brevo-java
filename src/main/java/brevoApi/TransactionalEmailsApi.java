@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -20,6 +20,12 @@ import okhttp3.Call;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 import org.threeten.bp.LocalDate;
+import brevoModel.PostSendFailed;
+import brevoModel.ScheduleSmtpEmail;
+import brevoModel.SendSmtpEmail;
+import brevoModel.SendTestEmail;
+import brevoModel.TemplatePreview;
+import brevoModel.UpdateSmtpTemplate;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -2325,6 +2331,128 @@ public class TransactionalEmailsApi {
 
         Call call = getTransacEmailsListValidateBeforeCall(email, templateId, messageId, startDate, endDate, sort, limit, offset, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<GetTransacEmailsList>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for postPreviewSmtpEmailTemplates
+     * @param fetchTemplatePreview Values to fetch Template preview (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public Call postPreviewSmtpEmailTemplatesCall(FetchTemplatePreview fetchTemplatePreview, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = fetchTemplatePreview;
+
+        // create path and map variables
+        String localVarPath = "/smtp/template/preview";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
+                @Override
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "api-key", "partner-key" };
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private Call postPreviewSmtpEmailTemplatesValidateBeforeCall(FetchTemplatePreview fetchTemplatePreview, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'fetchTemplatePreview' is set
+        if (fetchTemplatePreview == null) {
+            throw new ApiException("Missing the required parameter 'fetchTemplatePreview' when calling postPreviewSmtpEmailTemplates(Async)");
+        }
+        
+
+        Call call = postPreviewSmtpEmailTemplatesCall(fetchTemplatePreview, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Generate the rendered preview of transactional template
+     * 
+     * @param fetchTemplatePreview Values to fetch Template preview (required)
+     * @return TemplatePreview
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public TemplatePreview postPreviewSmtpEmailTemplates(FetchTemplatePreview fetchTemplatePreview) throws ApiException {
+        ApiResponse<TemplatePreview> resp = postPreviewSmtpEmailTemplatesWithHttpInfo(fetchTemplatePreview);
+        return resp.getData();
+    }
+
+    /**
+     * Generate the rendered preview of transactional template
+     * 
+     * @param fetchTemplatePreview Values to fetch Template preview (required)
+     * @return ApiResponse&lt;TemplatePreview&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<TemplatePreview> postPreviewSmtpEmailTemplatesWithHttpInfo(FetchTemplatePreview fetchTemplatePreview) throws ApiException {
+        Call call = postPreviewSmtpEmailTemplatesValidateBeforeCall(fetchTemplatePreview, null, null);
+        Type localVarReturnType = new TypeToken<TemplatePreview>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Generate the rendered preview of transactional template (asynchronously)
+     * 
+     * @param fetchTemplatePreview Values to fetch Template preview (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public Call postPreviewSmtpEmailTemplatesAsync(FetchTemplatePreview fetchTemplatePreview, final ApiCallback<TemplatePreview> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        Call call = postPreviewSmtpEmailTemplatesValidateBeforeCall(fetchTemplatePreview, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<TemplatePreview>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }

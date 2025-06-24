@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,6 +13,7 @@
 
 package brevoModel;
 
+import org.apache.commons.lang3.ObjectUtils;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -20,8 +21,6 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.ObjectUtils;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,7 @@ import java.util.List;
  * Privileges given to the user
  */
 @ApiModel(description = "Privileges given to the user")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class InviteAdminUserPrivileges {
   /**
    * Feature name
@@ -43,7 +42,17 @@ public class InviteAdminUserPrivileges {
     
     USER_MANAGEMENT("user_management"),
     
-    APP_MANAGEMENT("app_management");
+    APP_MANAGEMENT("app_management"),
+    
+    SUB_ORGANIZATION_GROUPS("sub_organization_groups"),
+    
+    CREATE_SUB_ORGANIZATIONS("create_sub_organizations"),
+    
+    MANAGE_SUB_ORGANIZATIONS("manage_sub_organizations"),
+    
+    ANALYTICS("analytics"),
+    
+    SECURITY("security");
 
     private String value;
 
@@ -93,7 +102,15 @@ public class InviteAdminUserPrivileges {
   public enum PermissionsEnum {
     ALL("all"),
     
-    NONE("none");
+    NONE("none"),
+    
+    CREATE("create"),
+    
+    EDIT_DELETE("edit_delete"),
+    
+    DOWNLOAD_DATA("download_data"),
+    
+    CREATE_ALERTS("create_alerts");
 
     private String value;
 

@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**corporateGroupIdPut**](MasterAccountApi.md#corporateGroupIdPut) | **PUT** /corporate/group/{id} | Update a group of sub-accounts
 [**corporateGroupPost**](MasterAccountApi.md#corporateGroupPost) | **POST** /corporate/group | Create a new group of sub-accounts
 [**corporateGroupUnlinkGroupIdSubAccountsPut**](MasterAccountApi.md#corporateGroupUnlinkGroupIdSubAccountsPut) | **PUT** /corporate/group/unlink/{groupId}/subAccounts | Delete sub-account from group
+[**corporateIpGet**](MasterAccountApi.md#corporateIpGet) | **GET** /corporate/ip | List of all IPs
 [**corporateMasterAccountGet**](MasterAccountApi.md#corporateMasterAccountGet) | **GET** /corporate/masterAccount | Get the details of requested master account
 [**corporateSsoTokenPost**](MasterAccountApi.md#corporateSsoTokenPost) | **POST** /corporate/ssoToken | Generate SSO token to access admin account
 [**corporateSubAccountGet**](MasterAccountApi.md#corporateSubAccountGet) | **GET** /corporate/subAccount | Get the list of all the sub-accounts of the master account.
@@ -16,9 +17,13 @@ Method | HTTP request | Description
 [**corporateSubAccountIdDelete**](MasterAccountApi.md#corporateSubAccountIdDelete) | **DELETE** /corporate/subAccount/{id} | Delete a sub-account
 [**corporateSubAccountIdGet**](MasterAccountApi.md#corporateSubAccountIdGet) | **GET** /corporate/subAccount/{id} | Get sub-account details
 [**corporateSubAccountIdPlanPut**](MasterAccountApi.md#corporateSubAccountIdPlanPut) | **PUT** /corporate/subAccount/{id}/plan | Update sub-account plan
+[**corporateSubAccountIpAssociatePost**](MasterAccountApi.md#corporateSubAccountIpAssociatePost) | **POST** /corporate/subAccount/ip/associate | Associate an IP to sub-accounts
+[**corporateSubAccountIpDissociatePut**](MasterAccountApi.md#corporateSubAccountIpDissociatePut) | **PUT** /corporate/subAccount/ip/dissociate | Dissociate an IP from sub-accounts
 [**corporateSubAccountKeyPost**](MasterAccountApi.md#corporateSubAccountKeyPost) | **POST** /corporate/subAccount/key | Create an API key for a sub-account
 [**corporateSubAccountPost**](MasterAccountApi.md#corporateSubAccountPost) | **POST** /corporate/subAccount | Create a new sub-account under a master account.
 [**corporateSubAccountSsoTokenPost**](MasterAccountApi.md#corporateSubAccountSsoTokenPost) | **POST** /corporate/subAccount/ssoToken | Generate SSO token to access sub-account
+[**corporateSubAccountsPlanPut**](MasterAccountApi.md#corporateSubAccountsPlanPut) | **PUT** /corporate/subAccounts/plan | Update sub-accounts plan
+[**corporateUserEmailPermissionsPut**](MasterAccountApi.md#corporateUserEmailPermissionsPut) | **PUT** /corporate/user/{email}/permissions | Change admin user permissions
 [**corporateUserInvitationActionEmailPut**](MasterAccountApi.md#corporateUserInvitationActionEmailPut) | **PUT** /corporate/user/invitation/{action}/{email} | Resend / cancel admin user invitation
 [**corporateUserRevokeEmailDelete**](MasterAccountApi.md#corporateUserRevokeEmailDelete) | **DELETE** /corporate/user/revoke/{email} | Revoke an admin user
 [**getAccountActivity**](MasterAccountApi.md#getAccountActivity) | **GET** /organization/activities | Get user activity logs
@@ -182,7 +187,7 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 
 MasterAccountApi apiInstance = new MasterAccountApi();
 String id = "id_example"; // String | Id of the group
-Body1 body = new Body1(); // Body1 | Group details to be updated.
+Body3 body = new Body3(); // Body3 | Group details to be updated.
 try {
     apiInstance.corporateGroupIdPut(id, body);
 } catch (ApiException e) {
@@ -196,7 +201,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**| Id of the group |
- **body** | [**Body1**](Body1.md)| Group details to be updated. |
+ **body** | [**Body3**](Body3.md)| Group details to be updated. |
 
 ### Return type
 
@@ -305,7 +310,7 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 
 MasterAccountApi apiInstance = new MasterAccountApi();
 String groupId = "groupId_example"; // String | Id of the group
-Body2 body = new Body2(); // Body2 | List of sub-account ids
+Body4 body = new Body4(); // Body4 | List of sub-account ids
 try {
     apiInstance.corporateGroupUnlinkGroupIdSubAccountsPut(groupId, body);
 } catch (ApiException e) {
@@ -319,7 +324,63 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **groupId** | **String**| Id of the group |
- **body** | [**Body2**](Body2.md)| List of sub-account ids |
+ **body** | [**Body4**](Body4.md)| List of sub-account ids |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="corporateIpGet"></a>
+# **corporateIpGet**
+> corporateIpGet()
+
+List of all IPs
+
+This endpoint allows you to retrieve the list of active IPs on your Admin account
+
+### Example
+```java
+// Import classes:
+//import brevo.ApiClient;
+//import brevo.ApiException;
+//import brevo.Configuration;
+//import brevo.auth.*;
+//import brevoApi.MasterAccountApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: api-key
+ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("api-key");
+apiKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: partner-key
+ApiKeyAuth partnerKey = (ApiKeyAuth) defaultClient.getAuthentication("partner-key");
+partnerKey.setApiKey("YOUR PARTNER KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//partnerKey.setApiKeyPrefix("Token");
+
+MasterAccountApi apiInstance = new MasterAccountApi();
+try {
+    apiInstance.corporateIpGet();
+} catch (ApiException e) {
+    System.err.println("Exception when calling MasterAccountApi#corporateIpGet");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -702,7 +763,7 @@ Name | Type | Description  | Notes
 
 Update sub-account plan
 
-This endpoint will update the sub-account plan
+This endpoint will update the sub-account plan. On the Corporate solution new version v2, you can set an unlimited number of credits in your sub-organization. Please pass the value “-1&quot; to set the consumable in unlimited mode.
 
 ### Example
 ```java
@@ -744,6 +805,127 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **Long**| Id of the sub-account organization |
  **updatePlanDetails** | [**SubAccountUpdatePlanRequest**](SubAccountUpdatePlanRequest.md)| Values to update a sub-account plan |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="corporateSubAccountIpAssociatePost"></a>
+# **corporateSubAccountIpAssociatePost**
+> Object corporateSubAccountIpAssociatePost(body)
+
+Associate an IP to sub-accounts
+
+This endpoint allows to associate an IP to sub-accounts
+
+### Example
+```java
+// Import classes:
+//import brevo.ApiClient;
+//import brevo.ApiException;
+//import brevo.Configuration;
+//import brevo.auth.*;
+//import brevoApi.MasterAccountApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: api-key
+ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("api-key");
+apiKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: partner-key
+ApiKeyAuth partnerKey = (ApiKeyAuth) defaultClient.getAuthentication("partner-key");
+partnerKey.setApiKey("YOUR PARTNER KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//partnerKey.setApiKeyPrefix("Token");
+
+MasterAccountApi apiInstance = new MasterAccountApi();
+Body1 body = new Body1(); // Body1 | Ip address association details
+try {
+    Object result = apiInstance.corporateSubAccountIpAssociatePost(body);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling MasterAccountApi#corporateSubAccountIpAssociatePost");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**Body1**](Body1.md)| Ip address association details |
+
+### Return type
+
+**Object**
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="corporateSubAccountIpDissociatePut"></a>
+# **corporateSubAccountIpDissociatePut**
+> corporateSubAccountIpDissociatePut(body)
+
+Dissociate an IP from sub-accounts
+
+This endpoint allows to dissociate an IP from sub-accounts
+
+### Example
+```java
+// Import classes:
+//import brevo.ApiClient;
+//import brevo.ApiException;
+//import brevo.Configuration;
+//import brevo.auth.*;
+//import brevoApi.MasterAccountApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: api-key
+ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("api-key");
+apiKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: partner-key
+ApiKeyAuth partnerKey = (ApiKeyAuth) defaultClient.getAuthentication("partner-key");
+partnerKey.setApiKey("YOUR PARTNER KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//partnerKey.setApiKeyPrefix("Token");
+
+MasterAccountApi apiInstance = new MasterAccountApi();
+Body2 body = new Body2(); // Body2 | Ip address dissociation details
+try {
+    apiInstance.corporateSubAccountIpDissociatePut(body);
+} catch (ApiException e) {
+    System.err.println("Exception when calling MasterAccountApi#corporateSubAccountIpDissociatePut");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**Body2**](Body2.md)| Ip address dissociation details |
 
 ### Return type
 
@@ -941,13 +1123,135 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+<a name="corporateSubAccountsPlanPut"></a>
+# **corporateSubAccountsPlanPut**
+> corporateSubAccountsPlanPut(updatePlanDetails)
+
+Update sub-accounts plan
+
+This endpoint will update multiple sub-accounts plan. On the Corporate solution new version v2, you can set an unlimited number of credits in your sub-organization. Please pass the value “-1&quot; to set the consumable in unlimited mode.
+
+### Example
+```java
+// Import classes:
+//import brevo.ApiClient;
+//import brevo.ApiException;
+//import brevo.Configuration;
+//import brevo.auth.*;
+//import brevoApi.MasterAccountApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: api-key
+ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("api-key");
+apiKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: partner-key
+ApiKeyAuth partnerKey = (ApiKeyAuth) defaultClient.getAuthentication("partner-key");
+partnerKey.setApiKey("YOUR PARTNER KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//partnerKey.setApiKeyPrefix("Token");
+
+MasterAccountApi apiInstance = new MasterAccountApi();
+SubAccountsUpdatePlanRequest updatePlanDetails = new SubAccountsUpdatePlanRequest(); // SubAccountsUpdatePlanRequest | Values to update sub-accounts plan
+try {
+    apiInstance.corporateSubAccountsPlanPut(updatePlanDetails);
+} catch (ApiException e) {
+    System.err.println("Exception when calling MasterAccountApi#corporateSubAccountsPlanPut");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **updatePlanDetails** | [**SubAccountsUpdatePlanRequest**](SubAccountsUpdatePlanRequest.md)| Values to update sub-accounts plan |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="corporateUserEmailPermissionsPut"></a>
+# **corporateUserEmailPermissionsPut**
+> corporateUserEmailPermissionsPut(email, body)
+
+Change admin user permissions
+
+This endpoint will allow you to change the permissions of Admin users of your Admin account
+
+### Example
+```java
+// Import classes:
+//import brevo.ApiClient;
+//import brevo.ApiException;
+//import brevo.Configuration;
+//import brevo.auth.*;
+//import brevoApi.MasterAccountApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: api-key
+ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("api-key");
+apiKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: partner-key
+ApiKeyAuth partnerKey = (ApiKeyAuth) defaultClient.getAuthentication("partner-key");
+partnerKey.setApiKey("YOUR PARTNER KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//partnerKey.setApiKeyPrefix("Token");
+
+MasterAccountApi apiInstance = new MasterAccountApi();
+String email = "email_example"; // String | Email address of Admin user
+Body5 body = new Body5(); // Body5 | Values to update an admin user permissions
+try {
+    apiInstance.corporateUserEmailPermissionsPut(email, body);
+} catch (ApiException e) {
+    System.err.println("Exception when calling MasterAccountApi#corporateUserEmailPermissionsPut");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **email** | **String**| Email address of Admin user |
+ **body** | [**Body5**](Body5.md)| Values to update an admin user permissions |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
 <a name="corporateUserInvitationActionEmailPut"></a>
 # **corporateUserInvitationActionEmailPut**
 > InlineResponse200 corporateUserInvitationActionEmailPut(action, email)
 
 Resend / cancel admin user invitation
 
-This endpoint will allow the user to:  - Resend an admin user invitation - Cancel an admin user invitation 
+This endpoint will allow the user to: - Resend an admin user invitation - Cancel an admin user invitation 
 
 ### Example
 ```java
@@ -1066,7 +1370,7 @@ null (empty response body)
 
 <a name="getAccountActivity"></a>
 # **getAccountActivity**
-> GetAccountActivity getAccountActivity(startDate, endDate, limit, offset)
+> GetAccountActivity getAccountActivity(startDate, endDate, email, limit, offset)
 
 Get user activity logs
 
@@ -1096,10 +1400,11 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 MasterAccountApi apiInstance = new MasterAccountApi();
 String startDate = "startDate_example"; // String | Mandatory if endDate is used. Enter start date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. Additionally, you can retrieve activity logs from the past 12 months from the date of your search.
 String endDate = "endDate_example"; // String | Mandatory if startDate is used. Enter end date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month.
+String email = "email_example"; // String | Enter the user's email address to filter their activity in the account.
 Long limit = 10L; // Long | Number of documents per page
 Long offset = 0L; // Long | Index of the first document in the page.
 try {
-    GetAccountActivity result = apiInstance.getAccountActivity(startDate, endDate, limit, offset);
+    GetAccountActivity result = apiInstance.getAccountActivity(startDate, endDate, email, limit, offset);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling MasterAccountApi#getAccountActivity");
@@ -1113,6 +1418,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **startDate** | **String**| Mandatory if endDate is used. Enter start date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. Additionally, you can retrieve activity logs from the past 12 months from the date of your search. | [optional]
  **endDate** | **String**| Mandatory if startDate is used. Enter end date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. | [optional]
+ **email** | **String**| Enter the user&#39;s email address to filter their activity in the account. | [optional]
  **limit** | **Long**| Number of documents per page | [optional] [default to 10]
  **offset** | **Long**| Index of the first document in the page. | [optional] [default to 0]
 
@@ -1191,6 +1497,8 @@ This endpoint does not need any parameter.
 > GetCorporateUserPermission getCorporateUserPermission(email)
 
 Check admin user permissions
+
+This endpoint will provide the list of admin user permissions
 
 ### Example
 ```java
@@ -1308,7 +1616,7 @@ This endpoint does not need any parameter.
 
 Send invitation to an admin user
 
-&#x60;This endpoint allows you to invite a member to manage the Admin account  Features and their respective permissions are as below:  - &#x60;my_plan&#x60;:   - &quot;all&quot; - &#x60;api&#x60;:   - &quot;none&quot; - &#x60;user_management&#x60;:   - &quot;all&quot; - &#x60;app_management&#x60; | Not available in ENTv2:   - &quot;all&quot;  **Note**: - If &#x60;all_features_access: false&#x60; then only privileges are required otherwise if &#x60;true&#x60; then it&#39;s assumed that all permissions will be there for the invited admin user. 
+&#x60;This endpoint allows you to invite a member to manage the Admin account  Features and their respective permissions are as below:  - &#x60;my_plan&#x60;:   - &quot;all&quot; - &#x60;api&#x60;:   - &quot;none&quot; - &#x60;user_management&#x60;:   - &quot;all&quot; - &#x60;app_management&#x60; | Not available in ENTv2:   - &quot;all&quot; - &#x60;sub_organization_groups&#x60;   - &quot;create&quot;   - &quot;edit_delete&quot; - &#x60;create_sub_organizations&#x60;   - &quot;all&quot; - &#x60;manage_sub_organizations&#x60;   - &quot;all&quot; - &#x60;analytics&#x60;   - &quot;download_data&quot;   - &quot;create_alerts&quot;   - &quot;my_looks&quot;   - &quot;explore_create&quot; - &#x60;security&#x60;   - &quot;all&quot;  **Note**: - If &#x60;all_features_access: false&#x60; then only privileges are required otherwise if &#x60;true&#x60; then it&#39;s assumed that all permissions will be there for the invited admin user. 
 
 ### Example
 ```java

@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,11 +13,15 @@
 
 package brevoModel;
 
+import org.apache.commons.lang3.ObjectUtils;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.ObjectUtils;
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +29,7 @@ import java.util.List;
  * Segment ids and List ids to include/exclude from campaign
  */
 @ApiModel(description = "Segment ids and List ids to include/exclude from campaign")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class CreateEmailCampaignRecipients {
   @SerializedName("exclusionListIds")
   private List<Long> exclusionListIds = null;
@@ -35,6 +39,9 @@ public class CreateEmailCampaignRecipients {
 
   @SerializedName("segmentIds")
   private List<Long> segmentIds = null;
+
+  @SerializedName("exclusionSegmentIds")
+  private List<Long> exclusionSegmentIds = null;
 
   public CreateEmailCampaignRecipients exclusionListIds(List<Long> exclusionListIds) {
     this.exclusionListIds = exclusionListIds;
@@ -114,6 +121,32 @@ public class CreateEmailCampaignRecipients {
     this.segmentIds = segmentIds;
   }
 
+  public CreateEmailCampaignRecipients exclusionSegmentIds(List<Long> exclusionSegmentIds) {
+    this.exclusionSegmentIds = exclusionSegmentIds;
+    return this;
+  }
+
+  public CreateEmailCampaignRecipients addExclusionSegmentIdsItem(Long exclusionSegmentIdsItem) {
+    if (this.exclusionSegmentIds == null) {
+      this.exclusionSegmentIds = new ArrayList<Long>();
+    }
+    this.exclusionSegmentIds.add(exclusionSegmentIdsItem);
+    return this;
+  }
+
+   /**
+   * Segment ids which have to be excluded from a campaign. 
+   * @return exclusionSegmentIds
+  **/
+  @ApiModelProperty(value = "Segment ids which have to be excluded from a campaign. ")
+  public List<Long> getExclusionSegmentIds() {
+    return exclusionSegmentIds;
+  }
+
+  public void setExclusionSegmentIds(List<Long> exclusionSegmentIds) {
+    this.exclusionSegmentIds = exclusionSegmentIds;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -126,12 +159,13 @@ public class CreateEmailCampaignRecipients {
     CreateEmailCampaignRecipients createEmailCampaignRecipients = (CreateEmailCampaignRecipients) o;
     return ObjectUtils.equals(this.exclusionListIds, createEmailCampaignRecipients.exclusionListIds) &&
     ObjectUtils.equals(this.listIds, createEmailCampaignRecipients.listIds) &&
-    ObjectUtils.equals(this.segmentIds, createEmailCampaignRecipients.segmentIds);
+    ObjectUtils.equals(this.segmentIds, createEmailCampaignRecipients.segmentIds) &&
+    ObjectUtils.equals(this.exclusionSegmentIds, createEmailCampaignRecipients.exclusionSegmentIds);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(exclusionListIds, listIds, segmentIds);
+    return ObjectUtils.hashCodeMulti(exclusionListIds, listIds, segmentIds, exclusionSegmentIds);
   }
 
 
@@ -143,6 +177,7 @@ public class CreateEmailCampaignRecipients {
     sb.append("    exclusionListIds: ").append(toIndentedString(exclusionListIds)).append("\n");
     sb.append("    listIds: ").append(toIndentedString(listIds)).append("\n");
     sb.append("    segmentIds: ").append(toIndentedString(segmentIds)).append("\n");
+    sb.append("    exclusionSegmentIds: ").append(toIndentedString(exclusionSegmentIds)).append("\n");
     sb.append("}");
     return sb.toString();
   }

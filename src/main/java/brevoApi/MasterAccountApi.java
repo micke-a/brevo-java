@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -21,6 +21,37 @@ import okhttp3.Interceptor;
 import okhttp3.Response;
 
 import java.io.IOException;
+
+
+import brevoModel.Body;
+import brevoModel.Body1;
+import brevoModel.Body2;
+import brevoModel.Body3;
+import brevoModel.Body4;
+import brevoModel.Body5;
+import brevoModel.CorporateGroupDetailsResponse;
+import brevoModel.CreateApiKeyRequest;
+import brevoModel.CreateApiKeyResponse;
+import brevoModel.CreateSubAccount;
+import brevoModel.CreateSubAccountResponse;
+import brevoModel.ErrorModel;
+import brevoModel.GetAccountActivity;
+import brevoModel.GetCorporateInvitedUsersList;
+import brevoModel.GetCorporateUserPermission;
+import brevoModel.GetSsoToken;
+import brevoModel.InlineResponse200;
+import brevoModel.InlineResponse2001;
+import brevoModel.InlineResponse201;
+import brevoModel.InviteAdminUser;
+import brevoModel.MasterDetailsResponse;
+import brevoModel.SsoTokenRequest;
+import brevoModel.SsoTokenRequestCorporate;
+import brevoModel.SubAccountAppsToggleRequest;
+import brevoModel.SubAccountDetailsResponse;
+import brevoModel.SubAccountUpdatePlanRequest;
+import brevoModel.SubAccountsResponse;
+import brevoModel.SubAccountsUpdatePlanRequest;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -297,7 +328,7 @@ public class MasterAccountApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call corporateGroupIdPutCall(String id, Body1 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call corporateGroupIdPutCall(String id, Body3 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -340,7 +371,7 @@ public class MasterAccountApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call corporateGroupIdPutValidateBeforeCall(String id, Body1 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call corporateGroupIdPutValidateBeforeCall(String id, Body3 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'id' is set
         if (id == null) {
@@ -365,7 +396,7 @@ public class MasterAccountApi {
      * @param body Group details to be updated. (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public void corporateGroupIdPut(String id, Body1 body) throws ApiException {
+    public void corporateGroupIdPut(String id, Body3 body) throws ApiException {
         corporateGroupIdPutWithHttpInfo(id, body);
     }
 
@@ -377,7 +408,7 @@ public class MasterAccountApi {
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Void> corporateGroupIdPutWithHttpInfo(String id, Body1 body) throws ApiException {
+    public ApiResponse<Void> corporateGroupIdPutWithHttpInfo(String id, Body3 body) throws ApiException {
         Call call = corporateGroupIdPutValidateBeforeCall(id, body, null, null);
         return apiClient.execute(call);
     }
@@ -391,7 +422,7 @@ public class MasterAccountApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call corporateGroupIdPutAsync(String id, Body1 body, final ApiCallback<Void> callback) throws ApiException {
+    public Call corporateGroupIdPutAsync(String id, Body3 body, final ApiCallback<Void> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -547,7 +578,7 @@ public class MasterAccountApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call corporateGroupUnlinkGroupIdSubAccountsPutCall(String groupId, Body2 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call corporateGroupUnlinkGroupIdSubAccountsPutCall(String groupId, Body4 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -590,7 +621,7 @@ public class MasterAccountApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call corporateGroupUnlinkGroupIdSubAccountsPutValidateBeforeCall(String groupId, Body2 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call corporateGroupUnlinkGroupIdSubAccountsPutValidateBeforeCall(String groupId, Body4 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'groupId' is set
         if (groupId == null) {
@@ -615,7 +646,7 @@ public class MasterAccountApi {
      * @param body List of sub-account ids (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public void corporateGroupUnlinkGroupIdSubAccountsPut(String groupId, Body2 body) throws ApiException {
+    public void corporateGroupUnlinkGroupIdSubAccountsPut(String groupId, Body4 body) throws ApiException {
         corporateGroupUnlinkGroupIdSubAccountsPutWithHttpInfo(groupId, body);
     }
 
@@ -627,7 +658,7 @@ public class MasterAccountApi {
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Void> corporateGroupUnlinkGroupIdSubAccountsPutWithHttpInfo(String groupId, Body2 body) throws ApiException {
+    public ApiResponse<Void> corporateGroupUnlinkGroupIdSubAccountsPutWithHttpInfo(String groupId, Body4 body) throws ApiException {
         Call call = corporateGroupUnlinkGroupIdSubAccountsPutValidateBeforeCall(groupId, body, null, null);
         return apiClient.execute(call);
     }
@@ -641,7 +672,7 @@ public class MasterAccountApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call corporateGroupUnlinkGroupIdSubAccountsPutAsync(String groupId, Body2 body, final ApiCallback<Void> callback) throws ApiException {
+    public Call corporateGroupUnlinkGroupIdSubAccountsPutAsync(String groupId, Body4 body, final ApiCallback<Void> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -663,6 +694,115 @@ public class MasterAccountApi {
         }
 
         Call call = corporateGroupUnlinkGroupIdSubAccountsPutValidateBeforeCall(groupId, body, progressListener, progressRequestListener);
+        apiClient.executeAsync(call, callback);
+        return call;
+    }
+    /**
+     * Build call for corporateIpGet
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public Call corporateIpGetCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/corporate/ip";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
+                @Override
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "api-key", "partner-key" };
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private Call corporateIpGetValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+
+        Call call = corporateIpGetCall(progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * List of all IPs
+     * This endpoint allows you to retrieve the list of active IPs on your Admin account
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public void corporateIpGet() throws ApiException {
+        corporateIpGetWithHttpInfo();
+    }
+
+    /**
+     * List of all IPs
+     * This endpoint allows you to retrieve the list of active IPs on your Admin account
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<Void> corporateIpGetWithHttpInfo() throws ApiException {
+        Call call = corporateIpGetValidateBeforeCall(null, null);
+        return apiClient.execute(call);
+    }
+
+    /**
+     * List of all IPs (asynchronously)
+     * This endpoint allows you to retrieve the list of active IPs on your Admin account
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public Call corporateIpGetAsync(final ApiCallback<Void> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        Call call = corporateIpGetValidateBeforeCall(progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }
@@ -1478,7 +1618,7 @@ public class MasterAccountApi {
 
     /**
      * Update sub-account plan
-     * This endpoint will update the sub-account plan
+     * This endpoint will update the sub-account plan. On the Corporate solution new version v2, you can set an unlimited number of credits in your sub-organization. Please pass the value “-1&quot; to set the consumable in unlimited mode.
      * @param id Id of the sub-account organization (required)
      * @param updatePlanDetails Values to update a sub-account plan (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1489,7 +1629,7 @@ public class MasterAccountApi {
 
     /**
      * Update sub-account plan
-     * This endpoint will update the sub-account plan
+     * This endpoint will update the sub-account plan. On the Corporate solution new version v2, you can set an unlimited number of credits in your sub-organization. Please pass the value “-1&quot; to set the consumable in unlimited mode.
      * @param id Id of the sub-account organization (required)
      * @param updatePlanDetails Values to update a sub-account plan (required)
      * @return ApiResponse&lt;Void&gt;
@@ -1502,7 +1642,7 @@ public class MasterAccountApi {
 
     /**
      * Update sub-account plan (asynchronously)
-     * This endpoint will update the sub-account plan
+     * This endpoint will update the sub-account plan. On the Corporate solution new version v2, you can set an unlimited number of credits in your sub-organization. Please pass the value “-1&quot; to set the consumable in unlimited mode.
      * @param id Id of the sub-account organization (required)
      * @param updatePlanDetails Values to update a sub-account plan (required)
      * @param callback The callback to be executed when the API call finishes
@@ -1531,6 +1671,246 @@ public class MasterAccountApi {
         }
 
         Call call = corporateSubAccountIdPlanPutValidateBeforeCall(id, updatePlanDetails, progressListener, progressRequestListener);
+        apiClient.executeAsync(call, callback);
+        return call;
+    }
+    /**
+     * Build call for corporateSubAccountIpAssociatePost
+     * @param body Ip address association details (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public Call corporateSubAccountIpAssociatePostCall(Body1 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/corporate/subAccount/ip/associate";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
+                @Override
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "api-key", "partner-key" };
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private Call corporateSubAccountIpAssociatePostValidateBeforeCall(Body1 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling corporateSubAccountIpAssociatePost(Async)");
+        }
+        
+
+        Call call = corporateSubAccountIpAssociatePostCall(body, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Associate an IP to sub-accounts
+     * This endpoint allows to associate an IP to sub-accounts
+     * @param body Ip address association details (required)
+     * @return Object
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public Object corporateSubAccountIpAssociatePost(Body1 body) throws ApiException {
+        ApiResponse<Object> resp = corporateSubAccountIpAssociatePostWithHttpInfo(body);
+        return resp.getData();
+    }
+
+    /**
+     * Associate an IP to sub-accounts
+     * This endpoint allows to associate an IP to sub-accounts
+     * @param body Ip address association details (required)
+     * @return ApiResponse&lt;Object&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<Object> corporateSubAccountIpAssociatePostWithHttpInfo(Body1 body) throws ApiException {
+        Call call = corporateSubAccountIpAssociatePostValidateBeforeCall(body, null, null);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Associate an IP to sub-accounts (asynchronously)
+     * This endpoint allows to associate an IP to sub-accounts
+     * @param body Ip address association details (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public Call corporateSubAccountIpAssociatePostAsync(Body1 body, final ApiCallback<Object> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        Call call = corporateSubAccountIpAssociatePostValidateBeforeCall(body, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for corporateSubAccountIpDissociatePut
+     * @param body Ip address dissociation details (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public Call corporateSubAccountIpDissociatePutCall(Body2 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/corporate/subAccount/ip/dissociate";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
+                @Override
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "api-key", "partner-key" };
+        return apiClient.buildCall(localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private Call corporateSubAccountIpDissociatePutValidateBeforeCall(Body2 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling corporateSubAccountIpDissociatePut(Async)");
+        }
+        
+
+        Call call = corporateSubAccountIpDissociatePutCall(body, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Dissociate an IP from sub-accounts
+     * This endpoint allows to dissociate an IP from sub-accounts
+     * @param body Ip address dissociation details (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public void corporateSubAccountIpDissociatePut(Body2 body) throws ApiException {
+        corporateSubAccountIpDissociatePutWithHttpInfo(body);
+    }
+
+    /**
+     * Dissociate an IP from sub-accounts
+     * This endpoint allows to dissociate an IP from sub-accounts
+     * @param body Ip address dissociation details (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<Void> corporateSubAccountIpDissociatePutWithHttpInfo(Body2 body) throws ApiException {
+        Call call = corporateSubAccountIpDissociatePutValidateBeforeCall(body, null, null);
+        return apiClient.execute(call);
+    }
+
+    /**
+     * Dissociate an IP from sub-accounts (asynchronously)
+     * This endpoint allows to dissociate an IP from sub-accounts
+     * @param body Ip address dissociation details (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public Call corporateSubAccountIpDissociatePutAsync(Body2 body, final ApiCallback<Void> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        Call call = corporateSubAccountIpDissociatePutValidateBeforeCall(body, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }
@@ -1901,6 +2281,252 @@ public class MasterAccountApi {
         return call;
     }
     /**
+     * Build call for corporateSubAccountsPlanPut
+     * @param updatePlanDetails Values to update sub-accounts plan (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public Call corporateSubAccountsPlanPutCall(SubAccountsUpdatePlanRequest updatePlanDetails, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = updatePlanDetails;
+
+        // create path and map variables
+        String localVarPath = "/corporate/subAccounts/plan";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
+                @Override
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "api-key", "partner-key" };
+        return apiClient.buildCall(localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private Call corporateSubAccountsPlanPutValidateBeforeCall(SubAccountsUpdatePlanRequest updatePlanDetails, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'updatePlanDetails' is set
+        if (updatePlanDetails == null) {
+            throw new ApiException("Missing the required parameter 'updatePlanDetails' when calling corporateSubAccountsPlanPut(Async)");
+        }
+        
+
+        Call call = corporateSubAccountsPlanPutCall(updatePlanDetails, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Update sub-accounts plan
+     * This endpoint will update multiple sub-accounts plan. On the Corporate solution new version v2, you can set an unlimited number of credits in your sub-organization. Please pass the value “-1&quot; to set the consumable in unlimited mode.
+     * @param updatePlanDetails Values to update sub-accounts plan (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public void corporateSubAccountsPlanPut(SubAccountsUpdatePlanRequest updatePlanDetails) throws ApiException {
+        corporateSubAccountsPlanPutWithHttpInfo(updatePlanDetails);
+    }
+
+    /**
+     * Update sub-accounts plan
+     * This endpoint will update multiple sub-accounts plan. On the Corporate solution new version v2, you can set an unlimited number of credits in your sub-organization. Please pass the value “-1&quot; to set the consumable in unlimited mode.
+     * @param updatePlanDetails Values to update sub-accounts plan (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<Void> corporateSubAccountsPlanPutWithHttpInfo(SubAccountsUpdatePlanRequest updatePlanDetails) throws ApiException {
+        Call call = corporateSubAccountsPlanPutValidateBeforeCall(updatePlanDetails, null, null);
+        return apiClient.execute(call);
+    }
+
+    /**
+     * Update sub-accounts plan (asynchronously)
+     * This endpoint will update multiple sub-accounts plan. On the Corporate solution new version v2, you can set an unlimited number of credits in your sub-organization. Please pass the value “-1&quot; to set the consumable in unlimited mode.
+     * @param updatePlanDetails Values to update sub-accounts plan (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public Call corporateSubAccountsPlanPutAsync(SubAccountsUpdatePlanRequest updatePlanDetails, final ApiCallback<Void> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        Call call = corporateSubAccountsPlanPutValidateBeforeCall(updatePlanDetails, progressListener, progressRequestListener);
+        apiClient.executeAsync(call, callback);
+        return call;
+    }
+    /**
+     * Build call for corporateUserEmailPermissionsPut
+     * @param email Email address of Admin user (required)
+     * @param body Values to update an admin user permissions (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public Call corporateUserEmailPermissionsPutCall(String email, Body5 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/corporate/user/{email}/permissions"
+            .replaceAll("\\{" + "email" + "\\}", apiClient.escapeString(email.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
+                @Override
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "api-key", "partner-key" };
+        return apiClient.buildCall(localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private Call corporateUserEmailPermissionsPutValidateBeforeCall(String email, Body5 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'email' is set
+        if (email == null) {
+            throw new ApiException("Missing the required parameter 'email' when calling corporateUserEmailPermissionsPut(Async)");
+        }
+        
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling corporateUserEmailPermissionsPut(Async)");
+        }
+        
+
+        Call call = corporateUserEmailPermissionsPutCall(email, body, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Change admin user permissions
+     * This endpoint will allow you to change the permissions of Admin users of your Admin account
+     * @param email Email address of Admin user (required)
+     * @param body Values to update an admin user permissions (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public void corporateUserEmailPermissionsPut(String email, Body5 body) throws ApiException {
+        corporateUserEmailPermissionsPutWithHttpInfo(email, body);
+    }
+
+    /**
+     * Change admin user permissions
+     * This endpoint will allow you to change the permissions of Admin users of your Admin account
+     * @param email Email address of Admin user (required)
+     * @param body Values to update an admin user permissions (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<Void> corporateUserEmailPermissionsPutWithHttpInfo(String email, Body5 body) throws ApiException {
+        Call call = corporateUserEmailPermissionsPutValidateBeforeCall(email, body, null, null);
+        return apiClient.execute(call);
+    }
+
+    /**
+     * Change admin user permissions (asynchronously)
+     * This endpoint will allow you to change the permissions of Admin users of your Admin account
+     * @param email Email address of Admin user (required)
+     * @param body Values to update an admin user permissions (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public Call corporateUserEmailPermissionsPutAsync(String email, Body5 body, final ApiCallback<Void> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        Call call = corporateUserEmailPermissionsPutValidateBeforeCall(email, body, progressListener, progressRequestListener);
+        apiClient.executeAsync(call, callback);
+        return call;
+    }
+    /**
      * Build call for corporateUserInvitationActionEmailPut
      * @param action Action to be performed (cancel / resend) (required)
      * @param email Email address of the recipient (required)
@@ -1973,7 +2599,7 @@ public class MasterAccountApi {
 
     /**
      * Resend / cancel admin user invitation
-     * This endpoint will allow the user to:  - Resend an admin user invitation - Cancel an admin user invitation 
+     * This endpoint will allow the user to: - Resend an admin user invitation - Cancel an admin user invitation 
      * @param action Action to be performed (cancel / resend) (required)
      * @param email Email address of the recipient (required)
      * @return InlineResponse200
@@ -1986,7 +2612,7 @@ public class MasterAccountApi {
 
     /**
      * Resend / cancel admin user invitation
-     * This endpoint will allow the user to:  - Resend an admin user invitation - Cancel an admin user invitation 
+     * This endpoint will allow the user to: - Resend an admin user invitation - Cancel an admin user invitation 
      * @param action Action to be performed (cancel / resend) (required)
      * @param email Email address of the recipient (required)
      * @return ApiResponse&lt;InlineResponse200&gt;
@@ -2000,7 +2626,7 @@ public class MasterAccountApi {
 
     /**
      * Resend / cancel admin user invitation (asynchronously)
-     * This endpoint will allow the user to:  - Resend an admin user invitation - Cancel an admin user invitation 
+     * This endpoint will allow the user to: - Resend an admin user invitation - Cancel an admin user invitation 
      * @param action Action to be performed (cancel / resend) (required)
      * @param email Email address of the recipient (required)
      * @param callback The callback to be executed when the API call finishes
@@ -2156,6 +2782,7 @@ public class MasterAccountApi {
      * Build call for getAccountActivity
      * @param startDate Mandatory if endDate is used. Enter start date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. Additionally, you can retrieve activity logs from the past 12 months from the date of your search. (optional)
      * @param endDate Mandatory if startDate is used. Enter end date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. (optional)
+     * @param email Enter the user&#39;s email address to filter their activity in the account. (optional)
      * @param limit Number of documents per page (optional, default to 10)
      * @param offset Index of the first document in the page. (optional, default to 0)
      * @param progressListener Progress listener
@@ -2163,7 +2790,7 @@ public class MasterAccountApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call getAccountActivityCall(String startDate, String endDate, Long limit, Long offset, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call getAccountActivityCall(String startDate, String endDate, String email, Long limit, Long offset, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -2175,6 +2802,8 @@ public class MasterAccountApi {
         localVarQueryParams.addAll(apiClient.parameterToPair("startDate", startDate));
         if (endDate != null)
         localVarQueryParams.addAll(apiClient.parameterToPair("endDate", endDate));
+        if (email != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("email", email));
         if (limit != null)
         localVarQueryParams.addAll(apiClient.parameterToPair("limit", limit));
         if (offset != null)
@@ -2213,10 +2842,10 @@ public class MasterAccountApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call getAccountActivityValidateBeforeCall(String startDate, String endDate, Long limit, Long offset, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call getAccountActivityValidateBeforeCall(String startDate, String endDate, String email, Long limit, Long offset, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
 
-        Call call = getAccountActivityCall(startDate, endDate, limit, offset, progressListener, progressRequestListener);
+        Call call = getAccountActivityCall(startDate, endDate, email, limit, offset, progressListener, progressRequestListener);
         return call;
 
     }
@@ -2226,13 +2855,14 @@ public class MasterAccountApi {
      * 
      * @param startDate Mandatory if endDate is used. Enter start date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. Additionally, you can retrieve activity logs from the past 12 months from the date of your search. (optional)
      * @param endDate Mandatory if startDate is used. Enter end date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. (optional)
+     * @param email Enter the user&#39;s email address to filter their activity in the account. (optional)
      * @param limit Number of documents per page (optional, default to 10)
      * @param offset Index of the first document in the page. (optional, default to 0)
      * @return GetAccountActivity
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public GetAccountActivity getAccountActivity(String startDate, String endDate, Long limit, Long offset) throws ApiException {
-        ApiResponse<GetAccountActivity> resp = getAccountActivityWithHttpInfo(startDate, endDate, limit, offset);
+    public GetAccountActivity getAccountActivity(String startDate, String endDate, String email, Long limit, Long offset) throws ApiException {
+        ApiResponse<GetAccountActivity> resp = getAccountActivityWithHttpInfo(startDate, endDate, email, limit, offset);
         return resp.getData();
     }
 
@@ -2241,13 +2871,14 @@ public class MasterAccountApi {
      * 
      * @param startDate Mandatory if endDate is used. Enter start date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. Additionally, you can retrieve activity logs from the past 12 months from the date of your search. (optional)
      * @param endDate Mandatory if startDate is used. Enter end date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. (optional)
+     * @param email Enter the user&#39;s email address to filter their activity in the account. (optional)
      * @param limit Number of documents per page (optional, default to 10)
      * @param offset Index of the first document in the page. (optional, default to 0)
      * @return ApiResponse&lt;GetAccountActivity&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<GetAccountActivity> getAccountActivityWithHttpInfo(String startDate, String endDate, Long limit, Long offset) throws ApiException {
-        Call call = getAccountActivityValidateBeforeCall(startDate, endDate, limit, offset, null, null);
+    public ApiResponse<GetAccountActivity> getAccountActivityWithHttpInfo(String startDate, String endDate, String email, Long limit, Long offset) throws ApiException {
+        Call call = getAccountActivityValidateBeforeCall(startDate, endDate, email, limit, offset, null, null);
         Type localVarReturnType = new TypeToken<GetAccountActivity>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -2257,13 +2888,14 @@ public class MasterAccountApi {
      * 
      * @param startDate Mandatory if endDate is used. Enter start date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. Additionally, you can retrieve activity logs from the past 12 months from the date of your search. (optional)
      * @param endDate Mandatory if startDate is used. Enter end date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. (optional)
+     * @param email Enter the user&#39;s email address to filter their activity in the account. (optional)
      * @param limit Number of documents per page (optional, default to 10)
      * @param offset Index of the first document in the page. (optional, default to 0)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call getAccountActivityAsync(String startDate, String endDate, Long limit, Long offset, final ApiCallback<GetAccountActivity> callback) throws ApiException {
+    public Call getAccountActivityAsync(String startDate, String endDate, String email, Long limit, Long offset, final ApiCallback<GetAccountActivity> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -2284,7 +2916,7 @@ public class MasterAccountApi {
             };
         }
 
-        Call call = getAccountActivityValidateBeforeCall(startDate, endDate, limit, offset, progressListener, progressRequestListener);
+        Call call = getAccountActivityValidateBeforeCall(startDate, endDate, email, limit, offset, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<GetAccountActivity>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -2468,7 +3100,7 @@ public class MasterAccountApi {
 
     /**
      * Check admin user permissions
-     * 
+     * This endpoint will provide the list of admin user permissions
      * @param email Email of the invited user (required)
      * @return GetCorporateUserPermission
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -2480,7 +3112,7 @@ public class MasterAccountApi {
 
     /**
      * Check admin user permissions
-     * 
+     * This endpoint will provide the list of admin user permissions
      * @param email Email of the invited user (required)
      * @return ApiResponse&lt;GetCorporateUserPermission&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -2493,7 +3125,7 @@ public class MasterAccountApi {
 
     /**
      * Check admin user permissions (asynchronously)
-     * 
+     * This endpoint will provide the list of admin user permissions
      * @param email Email of the invited user (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
@@ -2703,7 +3335,7 @@ public class MasterAccountApi {
 
     /**
      * Send invitation to an admin user
-     * &#x60;This endpoint allows you to invite a member to manage the Admin account  Features and their respective permissions are as below:  - &#x60;my_plan&#x60;:   - \&quot;all\&quot; - &#x60;api&#x60;:   - \&quot;none\&quot; - &#x60;user_management&#x60;:   - \&quot;all\&quot; - &#x60;app_management&#x60; | Not available in ENTv2:   - \&quot;all\&quot;  **Note**: - If &#x60;all_features_access: false&#x60; then only privileges are required otherwise if &#x60;true&#x60; then it&#39;s assumed that all permissions will be there for the invited admin user. 
+     * &#x60;This endpoint allows you to invite a member to manage the Admin account  Features and their respective permissions are as below:  - &#x60;my_plan&#x60;:   - &quot;all&quot; - &#x60;api&#x60;:   - &quot;none&quot; - &#x60;user_management&#x60;:   - &quot;all&quot; - &#x60;app_management&#x60; | Not available in ENTv2:   - &quot;all&quot; - &#x60;sub_organization_groups&#x60;   - &quot;create&quot;   - &quot;edit_delete&quot; - &#x60;create_sub_organizations&#x60;   - &quot;all&quot; - &#x60;manage_sub_organizations&#x60;   - &quot;all&quot; - &#x60;analytics&#x60;   - &quot;download_data&quot;   - &quot;create_alerts&quot;   - &quot;my_looks&quot;   - &quot;explore_create&quot; - &#x60;security&#x60;   - &quot;all&quot;  **Note**: - If &#x60;all_features_access: false&#x60; then only privileges are required otherwise if &#x60;true&#x60; then it&#39;s assumed that all permissions will be there for the invited admin user. 
      * @param sendInvitation Payload to send an invitation (required)
      * @return InviteAdminUser
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -2715,7 +3347,7 @@ public class MasterAccountApi {
 
     /**
      * Send invitation to an admin user
-     * &#x60;This endpoint allows you to invite a member to manage the Admin account  Features and their respective permissions are as below:  - &#x60;my_plan&#x60;:   - \&quot;all\&quot; - &#x60;api&#x60;:   - \&quot;none\&quot; - &#x60;user_management&#x60;:   - \&quot;all\&quot; - &#x60;app_management&#x60; | Not available in ENTv2:   - \&quot;all\&quot;  **Note**: - If &#x60;all_features_access: false&#x60; then only privileges are required otherwise if &#x60;true&#x60; then it&#39;s assumed that all permissions will be there for the invited admin user. 
+     * &#x60;This endpoint allows you to invite a member to manage the Admin account  Features and their respective permissions are as below:  - &#x60;my_plan&#x60;:   - &quot;all&quot; - &#x60;api&#x60;:   - &quot;none&quot; - &#x60;user_management&#x60;:   - &quot;all&quot; - &#x60;app_management&#x60; | Not available in ENTv2:   - &quot;all&quot; - &#x60;sub_organization_groups&#x60;   - &quot;create&quot;   - &quot;edit_delete&quot; - &#x60;create_sub_organizations&#x60;   - &quot;all&quot; - &#x60;manage_sub_organizations&#x60;   - &quot;all&quot; - &#x60;analytics&#x60;   - &quot;download_data&quot;   - &quot;create_alerts&quot;   - &quot;my_looks&quot;   - &quot;explore_create&quot; - &#x60;security&#x60;   - &quot;all&quot;  **Note**: - If &#x60;all_features_access: false&#x60; then only privileges are required otherwise if &#x60;true&#x60; then it&#39;s assumed that all permissions will be there for the invited admin user. 
      * @param sendInvitation Payload to send an invitation (required)
      * @return ApiResponse&lt;InviteAdminUser&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -2728,7 +3360,7 @@ public class MasterAccountApi {
 
     /**
      * Send invitation to an admin user (asynchronously)
-     * &#x60;This endpoint allows you to invite a member to manage the Admin account  Features and their respective permissions are as below:  - &#x60;my_plan&#x60;:   - \&quot;all\&quot; - &#x60;api&#x60;:   - \&quot;none\&quot; - &#x60;user_management&#x60;:   - \&quot;all\&quot; - &#x60;app_management&#x60; | Not available in ENTv2:   - \&quot;all\&quot;  **Note**: - If &#x60;all_features_access: false&#x60; then only privileges are required otherwise if &#x60;true&#x60; then it&#39;s assumed that all permissions will be there for the invited admin user. 
+     * &#x60;This endpoint allows you to invite a member to manage the Admin account  Features and their respective permissions are as below:  - &#x60;my_plan&#x60;:   - &quot;all&quot; - &#x60;api&#x60;:   - &quot;none&quot; - &#x60;user_management&#x60;:   - &quot;all&quot; - &#x60;app_management&#x60; | Not available in ENTv2:   - &quot;all&quot; - &#x60;sub_organization_groups&#x60;   - &quot;create&quot;   - &quot;edit_delete&quot; - &#x60;create_sub_organizations&#x60;   - &quot;all&quot; - &#x60;manage_sub_organizations&#x60;   - &quot;all&quot; - &#x60;analytics&#x60;   - &quot;download_data&quot;   - &quot;create_alerts&quot;   - &quot;my_looks&quot;   - &quot;explore_create&quot; - &#x60;security&#x60;   - &quot;all&quot;  **Note**: - If &#x60;all_features_access: false&#x60; then only privileges are required otherwise if &#x60;true&#x60; then it&#39;s assumed that all permissions will be there for the invited admin user. 
      * @param sendInvitation Payload to send an invitation (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call

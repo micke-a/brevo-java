@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,16 +13,49 @@
 
 package brevoApi;
 
-import brevo.*;
-import brevoModel.*;
+import brevo.ApiCallback;
+import brevo.ApiClient;
+import brevo.ApiException;
+import brevo.ApiResponse;
+import brevo.Configuration;
+import brevo.Pair;
+import brevo.ProgressRequestBody;
+import brevo.ProgressResponseBody;
+
 import com.google.gson.reflect.TypeToken;
 import okhttp3.Call;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
+
+
 import java.math.BigDecimal;
+import brevoModel.CreateCategoryModel;
+import brevoModel.CreateProductModel;
+import brevoModel.CreateUpdateBatchCategory;
+import brevoModel.CreateUpdateBatchCategoryModel;
+import brevoModel.CreateUpdateBatchProducts;
+import brevoModel.CreateUpdateBatchProductsModel;
+import brevoModel.CreateUpdateCategory;
+import brevoModel.CreateUpdateProduct;
+import brevoModel.ErrorModel;
+import brevoModel.GetCategories;
+import brevoModel.GetCategoryDetails;
+import brevoModel.GetOrders;
+import brevoModel.GetProductDetails;
+import brevoModel.GetProducts;
+import brevoModel.InlineResponse2005;
+import brevoModel.InlineResponse2006;
+import brevoModel.InlineResponse2007;
+import brevoModel.InlineResponse2008;
+import okhttp3.*;
+import org.threeten.bp.OffsetDateTime;
+import brevoModel.Order;
+import brevoModel.OrderBatch;
+import brevoModel.SetConfigDisplayCurrency;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -882,14 +915,14 @@ public class EcommerceApi {
     }
     /**
      * Build call for ecommerceAttributionMetricsConversionSourceConversionSourceIdGet
-     * @param conversionSource The Brevo campaign type for which data will be retrieved (required)
-     * @param conversionSourceId The Brevo campaign id for which data will be retrieved (required)
+     * @param conversionSource The Brevo campaign type or workflow type for which data will be retrieved (required)
+     * @param conversionSourceId The Brevo campaign or automation workflow id for which data will be retrieved (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call ecommerceAttributionMetricsConversionSourceConversionSourceIdGetCall(Object conversionSource, Object conversionSourceId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call ecommerceAttributionMetricsConversionSourceConversionSourceIdGetCall(String conversionSource, String conversionSourceId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -933,7 +966,7 @@ public class EcommerceApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call ecommerceAttributionMetricsConversionSourceConversionSourceIdGetValidateBeforeCall(Object conversionSource, Object conversionSourceId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call ecommerceAttributionMetricsConversionSourceConversionSourceIdGetValidateBeforeCall(String conversionSource, String conversionSourceId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'conversionSource' is set
         if (conversionSource == null) {
@@ -952,39 +985,42 @@ public class EcommerceApi {
     }
 
     /**
-     * Get detailed attribution metrics for a single Brevo campaign
+     * Get detailed attribution metrics for a single Brevo campaign or workflow
      * 
-     * @param conversionSource The Brevo campaign type for which data will be retrieved (required)
-     * @param conversionSourceId The Brevo campaign id for which data will be retrieved (required)
+     * @param conversionSource The Brevo campaign type or workflow type for which data will be retrieved (required)
+     * @param conversionSourceId The Brevo campaign or automation workflow id for which data will be retrieved (required)
+     * @return InlineResponse2007
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public void ecommerceAttributionMetricsConversionSourceConversionSourceIdGet(Object conversionSource, Object conversionSourceId) throws ApiException {
-        ecommerceAttributionMetricsConversionSourceConversionSourceIdGetWithHttpInfo(conversionSource, conversionSourceId);
+    public InlineResponse2007 ecommerceAttributionMetricsConversionSourceConversionSourceIdGet(String conversionSource, String conversionSourceId) throws ApiException {
+        ApiResponse<InlineResponse2007> resp = ecommerceAttributionMetricsConversionSourceConversionSourceIdGetWithHttpInfo(conversionSource, conversionSourceId);
+        return resp.getData();
     }
 
     /**
-     * Get detailed attribution metrics for a single Brevo campaign
+     * Get detailed attribution metrics for a single Brevo campaign or workflow
      * 
-     * @param conversionSource The Brevo campaign type for which data will be retrieved (required)
-     * @param conversionSourceId The Brevo campaign id for which data will be retrieved (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @param conversionSource The Brevo campaign type or workflow type for which data will be retrieved (required)
+     * @param conversionSourceId The Brevo campaign or automation workflow id for which data will be retrieved (required)
+     * @return ApiResponse&lt;InlineResponse2007&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Void> ecommerceAttributionMetricsConversionSourceConversionSourceIdGetWithHttpInfo(Object conversionSource, Object conversionSourceId) throws ApiException {
+    public ApiResponse<InlineResponse2007> ecommerceAttributionMetricsConversionSourceConversionSourceIdGetWithHttpInfo(String conversionSource, String conversionSourceId) throws ApiException {
         Call call = ecommerceAttributionMetricsConversionSourceConversionSourceIdGetValidateBeforeCall(conversionSource, conversionSourceId, null, null);
-        return apiClient.execute(call);
+        Type localVarReturnType = new TypeToken<InlineResponse2007>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
     }
 
     /**
-     * Get detailed attribution metrics for a single Brevo campaign (asynchronously)
+     * Get detailed attribution metrics for a single Brevo campaign or workflow (asynchronously)
      * 
-     * @param conversionSource The Brevo campaign type for which data will be retrieved (required)
-     * @param conversionSourceId The Brevo campaign id for which data will be retrieved (required)
+     * @param conversionSource The Brevo campaign type or workflow type for which data will be retrieved (required)
+     * @param conversionSourceId The Brevo campaign or automation workflow id for which data will be retrieved (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call ecommerceAttributionMetricsConversionSourceConversionSourceIdGetAsync(Object conversionSource, Object conversionSourceId, final ApiCallback<Void> callback) throws ApiException {
+    public Call ecommerceAttributionMetricsConversionSourceConversionSourceIdGetAsync(String conversionSource, String conversionSourceId, final ApiCallback<InlineResponse2007> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1006,20 +1042,24 @@ public class EcommerceApi {
         }
 
         Call call = ecommerceAttributionMetricsConversionSourceConversionSourceIdGetValidateBeforeCall(conversionSource, conversionSourceId, progressListener, progressRequestListener);
-        apiClient.executeAsync(call, callback);
+        Type localVarReturnType = new TypeToken<InlineResponse2007>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
     /**
      * Build call for ecommerceAttributionMetricsGet
      * @param periodFrom When getting metrics for a specific period, define the starting datetime in RFC3339 format (optional)
      * @param periodTo When getting metrics for a specific period, define the end datetime in RFC3339 format (optional)
-     * @param emailCampaignId The email campaign id(s) to get metrics for (optional)
+     * @param emailCampaignId The email campaign ID(s) to get metrics for (optional)
+     * @param smsCampaignId The SMS campaign ID(s) to get metrics for (optional)
+     * @param automationWorkflowEmailId The automation workflow ID(s) to get email attribution metrics for (optional)
+     * @param automationWorkflowSmsId The automation workflow ID(s) to get SMS attribution metrics for (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call ecommerceAttributionMetricsGetCall(Object periodFrom, Object periodTo, Object emailCampaignId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call ecommerceAttributionMetricsGetCall(OffsetDateTime periodFrom, OffsetDateTime periodTo, List<String> emailCampaignId, List<String> smsCampaignId, List<String> automationWorkflowEmailId, List<String> automationWorkflowSmsId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -1032,7 +1072,13 @@ public class EcommerceApi {
         if (periodTo != null)
         localVarQueryParams.addAll(apiClient.parameterToPair("periodTo", periodTo));
         if (emailCampaignId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("emailCampaignId[]", emailCampaignId));
+        localVarCollectionQueryParams.addAll(apiClient.parameterToPairs("csv", "emailCampaignId[]", emailCampaignId));
+        if (smsCampaignId != null)
+        localVarCollectionQueryParams.addAll(apiClient.parameterToPairs("csv", "smsCampaignId[]", smsCampaignId));
+        if (automationWorkflowEmailId != null)
+        localVarCollectionQueryParams.addAll(apiClient.parameterToPairs("csv", "automationWorkflowEmailId[]", automationWorkflowEmailId));
+        if (automationWorkflowSmsId != null)
+        localVarCollectionQueryParams.addAll(apiClient.parameterToPairs("csv", "automationWorkflowSmsId[]", automationWorkflowSmsId));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -1067,51 +1113,63 @@ public class EcommerceApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call ecommerceAttributionMetricsGetValidateBeforeCall(Object periodFrom, Object periodTo, Object emailCampaignId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call ecommerceAttributionMetricsGetValidateBeforeCall(OffsetDateTime periodFrom, OffsetDateTime periodTo, List<String> emailCampaignId, List<String> smsCampaignId, List<String> automationWorkflowEmailId, List<String> automationWorkflowSmsId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
 
-        Call call = ecommerceAttributionMetricsGetCall(periodFrom, periodTo, emailCampaignId, progressListener, progressRequestListener);
+        Call call = ecommerceAttributionMetricsGetCall(periodFrom, periodTo, emailCampaignId, smsCampaignId, automationWorkflowEmailId, automationWorkflowSmsId, progressListener, progressRequestListener);
         return call;
 
     }
 
     /**
-     * Get attribution metrics for one or more Brevo campaigns
+     * Get attribution metrics for one or more Brevo campaigns or workflows
      * 
      * @param periodFrom When getting metrics for a specific period, define the starting datetime in RFC3339 format (optional)
      * @param periodTo When getting metrics for a specific period, define the end datetime in RFC3339 format (optional)
-     * @param emailCampaignId The email campaign id(s) to get metrics for (optional)
+     * @param emailCampaignId The email campaign ID(s) to get metrics for (optional)
+     * @param smsCampaignId The SMS campaign ID(s) to get metrics for (optional)
+     * @param automationWorkflowEmailId The automation workflow ID(s) to get email attribution metrics for (optional)
+     * @param automationWorkflowSmsId The automation workflow ID(s) to get SMS attribution metrics for (optional)
+     * @return InlineResponse2006
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public void ecommerceAttributionMetricsGet(Object periodFrom, Object periodTo, Object emailCampaignId) throws ApiException {
-        ecommerceAttributionMetricsGetWithHttpInfo(periodFrom, periodTo, emailCampaignId);
+    public InlineResponse2006 ecommerceAttributionMetricsGet(OffsetDateTime periodFrom, OffsetDateTime periodTo, List<String> emailCampaignId, List<String> smsCampaignId, List<String> automationWorkflowEmailId, List<String> automationWorkflowSmsId) throws ApiException {
+        ApiResponse<InlineResponse2006> resp = ecommerceAttributionMetricsGetWithHttpInfo(periodFrom, periodTo, emailCampaignId, smsCampaignId, automationWorkflowEmailId, automationWorkflowSmsId);
+        return resp.getData();
     }
 
     /**
-     * Get attribution metrics for one or more Brevo campaigns
+     * Get attribution metrics for one or more Brevo campaigns or workflows
      * 
      * @param periodFrom When getting metrics for a specific period, define the starting datetime in RFC3339 format (optional)
      * @param periodTo When getting metrics for a specific period, define the end datetime in RFC3339 format (optional)
-     * @param emailCampaignId The email campaign id(s) to get metrics for (optional)
-     * @return ApiResponse&lt;Void&gt;
+     * @param emailCampaignId The email campaign ID(s) to get metrics for (optional)
+     * @param smsCampaignId The SMS campaign ID(s) to get metrics for (optional)
+     * @param automationWorkflowEmailId The automation workflow ID(s) to get email attribution metrics for (optional)
+     * @param automationWorkflowSmsId The automation workflow ID(s) to get SMS attribution metrics for (optional)
+     * @return ApiResponse&lt;InlineResponse2006&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Void> ecommerceAttributionMetricsGetWithHttpInfo(Object periodFrom, Object periodTo, Object emailCampaignId) throws ApiException {
-        Call call = ecommerceAttributionMetricsGetValidateBeforeCall(periodFrom, periodTo, emailCampaignId, null, null);
-        return apiClient.execute(call);
+    public ApiResponse<InlineResponse2006> ecommerceAttributionMetricsGetWithHttpInfo(OffsetDateTime periodFrom, OffsetDateTime periodTo, List<String> emailCampaignId, List<String> smsCampaignId, List<String> automationWorkflowEmailId, List<String> automationWorkflowSmsId) throws ApiException {
+        Call call = ecommerceAttributionMetricsGetValidateBeforeCall(periodFrom, periodTo, emailCampaignId, smsCampaignId, automationWorkflowEmailId, automationWorkflowSmsId, null, null);
+        Type localVarReturnType = new TypeToken<InlineResponse2006>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
     }
 
     /**
-     * Get attribution metrics for one or more Brevo campaigns (asynchronously)
+     * Get attribution metrics for one or more Brevo campaigns or workflows (asynchronously)
      * 
      * @param periodFrom When getting metrics for a specific period, define the starting datetime in RFC3339 format (optional)
      * @param periodTo When getting metrics for a specific period, define the end datetime in RFC3339 format (optional)
-     * @param emailCampaignId The email campaign id(s) to get metrics for (optional)
+     * @param emailCampaignId The email campaign ID(s) to get metrics for (optional)
+     * @param smsCampaignId The SMS campaign ID(s) to get metrics for (optional)
+     * @param automationWorkflowEmailId The automation workflow ID(s) to get email attribution metrics for (optional)
+     * @param automationWorkflowSmsId The automation workflow ID(s) to get SMS attribution metrics for (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call ecommerceAttributionMetricsGetAsync(Object periodFrom, Object periodTo, Object emailCampaignId, final ApiCallback<Void> callback) throws ApiException {
+    public Call ecommerceAttributionMetricsGetAsync(OffsetDateTime periodFrom, OffsetDateTime periodTo, List<String> emailCampaignId, List<String> smsCampaignId, List<String> automationWorkflowEmailId, List<String> automationWorkflowSmsId, final ApiCallback<InlineResponse2006> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1132,20 +1190,21 @@ public class EcommerceApi {
             };
         }
 
-        Call call = ecommerceAttributionMetricsGetValidateBeforeCall(periodFrom, periodTo, emailCampaignId, progressListener, progressRequestListener);
-        apiClient.executeAsync(call, callback);
+        Call call = ecommerceAttributionMetricsGetValidateBeforeCall(periodFrom, periodTo, emailCampaignId, smsCampaignId, automationWorkflowEmailId, automationWorkflowSmsId, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<InlineResponse2006>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
     /**
      * Build call for ecommerceAttributionProductsConversionSourceConversionSourceIdGet
-     * @param conversionSource The Brevo campaign type for which data will be retrieved (required)
-     * @param conversionSourceId The Brevo campaign id for which data will be retrieved (required)
+     * @param conversionSource The Brevo campaign or automation workflow type for which data will be retrieved (required)
+     * @param conversionSourceId The Brevo campaign or automation workflow id for which data will be retrieved (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call ecommerceAttributionProductsConversionSourceConversionSourceIdGetCall(Object conversionSource, Object conversionSourceId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call ecommerceAttributionProductsConversionSourceConversionSourceIdGetCall(String conversionSource, String conversionSourceId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -1189,7 +1248,7 @@ public class EcommerceApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call ecommerceAttributionProductsConversionSourceConversionSourceIdGetValidateBeforeCall(Object conversionSource, Object conversionSourceId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call ecommerceAttributionProductsConversionSourceConversionSourceIdGetValidateBeforeCall(String conversionSource, String conversionSourceId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'conversionSource' is set
         if (conversionSource == null) {
@@ -1208,39 +1267,42 @@ public class EcommerceApi {
     }
 
     /**
-     * Get attributed product sales for a single Brevo campaign
+     * Get attributed product sales for a single Brevo campaign or workflow
      * 
-     * @param conversionSource The Brevo campaign type for which data will be retrieved (required)
-     * @param conversionSourceId The Brevo campaign id for which data will be retrieved (required)
+     * @param conversionSource The Brevo campaign or automation workflow type for which data will be retrieved (required)
+     * @param conversionSourceId The Brevo campaign or automation workflow id for which data will be retrieved (required)
+     * @return InlineResponse2008
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public void ecommerceAttributionProductsConversionSourceConversionSourceIdGet(Object conversionSource, Object conversionSourceId) throws ApiException {
-        ecommerceAttributionProductsConversionSourceConversionSourceIdGetWithHttpInfo(conversionSource, conversionSourceId);
+    public InlineResponse2008 ecommerceAttributionProductsConversionSourceConversionSourceIdGet(String conversionSource, String conversionSourceId) throws ApiException {
+        ApiResponse<InlineResponse2008> resp = ecommerceAttributionProductsConversionSourceConversionSourceIdGetWithHttpInfo(conversionSource, conversionSourceId);
+        return resp.getData();
     }
 
     /**
-     * Get attributed product sales for a single Brevo campaign
+     * Get attributed product sales for a single Brevo campaign or workflow
      * 
-     * @param conversionSource The Brevo campaign type for which data will be retrieved (required)
-     * @param conversionSourceId The Brevo campaign id for which data will be retrieved (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @param conversionSource The Brevo campaign or automation workflow type for which data will be retrieved (required)
+     * @param conversionSourceId The Brevo campaign or automation workflow id for which data will be retrieved (required)
+     * @return ApiResponse&lt;InlineResponse2008&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Void> ecommerceAttributionProductsConversionSourceConversionSourceIdGetWithHttpInfo(Object conversionSource, Object conversionSourceId) throws ApiException {
+    public ApiResponse<InlineResponse2008> ecommerceAttributionProductsConversionSourceConversionSourceIdGetWithHttpInfo(String conversionSource, String conversionSourceId) throws ApiException {
         Call call = ecommerceAttributionProductsConversionSourceConversionSourceIdGetValidateBeforeCall(conversionSource, conversionSourceId, null, null);
-        return apiClient.execute(call);
+        Type localVarReturnType = new TypeToken<InlineResponse2008>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
     }
 
     /**
-     * Get attributed product sales for a single Brevo campaign (asynchronously)
+     * Get attributed product sales for a single Brevo campaign or workflow (asynchronously)
      * 
-     * @param conversionSource The Brevo campaign type for which data will be retrieved (required)
-     * @param conversionSourceId The Brevo campaign id for which data will be retrieved (required)
+     * @param conversionSource The Brevo campaign or automation workflow type for which data will be retrieved (required)
+     * @param conversionSourceId The Brevo campaign or automation workflow id for which data will be retrieved (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call ecommerceAttributionProductsConversionSourceConversionSourceIdGetAsync(Object conversionSource, Object conversionSourceId, final ApiCallback<Void> callback) throws ApiException {
+    public Call ecommerceAttributionProductsConversionSourceConversionSourceIdGetAsync(String conversionSource, String conversionSourceId, final ApiCallback<InlineResponse2008> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1262,7 +1324,121 @@ public class EcommerceApi {
         }
 
         Call call = ecommerceAttributionProductsConversionSourceConversionSourceIdGetValidateBeforeCall(conversionSource, conversionSourceId, progressListener, progressRequestListener);
-        apiClient.executeAsync(call, callback);
+        Type localVarReturnType = new TypeToken<InlineResponse2008>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for ecommerceConfigDisplayCurrencyGet
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public Call ecommerceConfigDisplayCurrencyGetCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/ecommerce/config/displayCurrency";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
+                @Override
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "api-key", "partner-key" };
+        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private Call ecommerceConfigDisplayCurrencyGetValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+
+        Call call = ecommerceConfigDisplayCurrencyGetCall(progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Get the ISO 4217 compliant display currency code for your Brevo account
+     * 
+     * @return InlineResponse2005
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public InlineResponse2005 ecommerceConfigDisplayCurrencyGet() throws ApiException {
+        ApiResponse<InlineResponse2005> resp = ecommerceConfigDisplayCurrencyGetWithHttpInfo();
+        return resp.getData();
+    }
+
+    /**
+     * Get the ISO 4217 compliant display currency code for your Brevo account
+     * 
+     * @return ApiResponse&lt;InlineResponse2005&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<InlineResponse2005> ecommerceConfigDisplayCurrencyGetWithHttpInfo() throws ApiException {
+        Call call = ecommerceConfigDisplayCurrencyGetValidateBeforeCall(null, null);
+        Type localVarReturnType = new TypeToken<InlineResponse2005>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Get the ISO 4217 compliant display currency code for your Brevo account (asynchronously)
+     * 
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public Call ecommerceConfigDisplayCurrencyGetAsync(final ApiCallback<InlineResponse2005> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        Call call = ecommerceConfigDisplayCurrencyGetValidateBeforeCall(progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<InlineResponse2005>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
     /**
@@ -1272,8 +1448,8 @@ public class EcommerceApi {
      * @param sort Sort the results in the ascending/descending order of record creation. Default order is **descending** if &#x60;sort&#x60; is not passed (optional, default to desc)
      * @param ids Filter by category ids (optional)
      * @param name Filter by category name (optional)
-     * @param modifiedSince Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**          (optional)
-     * @param createdSince Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**          (optional)
+     * @param modifiedSince Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
+     * @param createdSince Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
@@ -1351,8 +1527,8 @@ public class EcommerceApi {
      * @param sort Sort the results in the ascending/descending order of record creation. Default order is **descending** if &#x60;sort&#x60; is not passed (optional, default to desc)
      * @param ids Filter by category ids (optional)
      * @param name Filter by category name (optional)
-     * @param modifiedSince Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**          (optional)
-     * @param createdSince Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**          (optional)
+     * @param modifiedSince Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
+     * @param createdSince Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
      * @return GetCategories
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -1369,8 +1545,8 @@ public class EcommerceApi {
      * @param sort Sort the results in the ascending/descending order of record creation. Default order is **descending** if &#x60;sort&#x60; is not passed (optional, default to desc)
      * @param ids Filter by category ids (optional)
      * @param name Filter by category name (optional)
-     * @param modifiedSince Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**          (optional)
-     * @param createdSince Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**          (optional)
+     * @param modifiedSince Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
+     * @param createdSince Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
      * @return ApiResponse&lt;GetCategories&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -1388,8 +1564,8 @@ public class EcommerceApi {
      * @param sort Sort the results in the ascending/descending order of record creation. Default order is **descending** if &#x60;sort&#x60; is not passed (optional, default to desc)
      * @param ids Filter by category ids (optional)
      * @param name Filter by category name (optional)
-     * @param modifiedSince Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**          (optional)
-     * @param createdSince Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**          (optional)
+     * @param modifiedSince Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
+     * @param createdSince Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -2003,6 +2179,128 @@ public class EcommerceApi {
 
         Call call = getProductsValidateBeforeCall(limit, offset, sort, ids, name, priceLte, priceGte, priceLt, priceGt, priceEq, priceNe, categories, modifiedSince, createdSince, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<GetProducts>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for setConfigDisplayCurrency
+     * @param setConfigDisplayCurrency set ISO 4217 compliant display currency code payload (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public Call setConfigDisplayCurrencyCall(SetConfigDisplayCurrency setConfigDisplayCurrency, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = setConfigDisplayCurrency;
+
+        // create path and map variables
+        String localVarPath = "/ecommerce/config/displayCurrency";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
+                @Override
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "api-key", "partner-key" };
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private Call setConfigDisplayCurrencyValidateBeforeCall(SetConfigDisplayCurrency setConfigDisplayCurrency, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'setConfigDisplayCurrency' is set
+        if (setConfigDisplayCurrency == null) {
+            throw new ApiException("Missing the required parameter 'setConfigDisplayCurrency' when calling setConfigDisplayCurrency(Async)");
+        }
+        
+
+        Call call = setConfigDisplayCurrencyCall(setConfigDisplayCurrency, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Set the ISO 4217 compliant display currency code for your Brevo account
+     * 
+     * @param setConfigDisplayCurrency set ISO 4217 compliant display currency code payload (required)
+     * @return SetConfigDisplayCurrency
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public SetConfigDisplayCurrency setConfigDisplayCurrency(SetConfigDisplayCurrency setConfigDisplayCurrency) throws ApiException {
+        ApiResponse<SetConfigDisplayCurrency> resp = setConfigDisplayCurrencyWithHttpInfo(setConfigDisplayCurrency);
+        return resp.getData();
+    }
+
+    /**
+     * Set the ISO 4217 compliant display currency code for your Brevo account
+     * 
+     * @param setConfigDisplayCurrency set ISO 4217 compliant display currency code payload (required)
+     * @return ApiResponse&lt;SetConfigDisplayCurrency&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<SetConfigDisplayCurrency> setConfigDisplayCurrencyWithHttpInfo(SetConfigDisplayCurrency setConfigDisplayCurrency) throws ApiException {
+        Call call = setConfigDisplayCurrencyValidateBeforeCall(setConfigDisplayCurrency, null, null);
+        Type localVarReturnType = new TypeToken<SetConfigDisplayCurrency>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Set the ISO 4217 compliant display currency code for your Brevo account (asynchronously)
+     * 
+     * @param setConfigDisplayCurrency set ISO 4217 compliant display currency code payload (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public Call setConfigDisplayCurrencyAsync(SetConfigDisplayCurrency setConfigDisplayCurrency, final ApiCallback<SetConfigDisplayCurrency> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        Call call = setConfigDisplayCurrencyValidateBeforeCall(setConfigDisplayCurrency, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<SetConfigDisplayCurrency>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }

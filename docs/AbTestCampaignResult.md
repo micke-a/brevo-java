@@ -1,3 +1,4 @@
+
 # AbTestCampaignResult
 
 ## Properties
@@ -15,10 +16,9 @@ WinningCriteriaEnum**](#WinningCriteriaEnum) | Criteria choosen for winning vers
 **statistics** | [**AbTestCampaignResultStatistics**](AbTestCampaignResultStatistics.md) |  |  [optional]
 **clickedLinks** | [**AbTestCampaignResultClickedLinks**](AbTestCampaignResultClickedLinks.md) |  |  [optional]
 
+
 <a name="WinningVersionEnum"></a>
-
 ## Enum: WinningVersionEnum
-
 Name | Value
 ---- | -----
 NOTAVAILABLE | &quot;notAvailable&quot;
@@ -28,9 +28,7 @@ A | &quot;A&quot;
 B | &quot;B&quot;
 
 <a name="WinningCriteriaEnum"></a>
-
 ## Enum: WinningCriteriaEnum
-
 Name | Value
 ---- | -----
 OPEN | &quot;Open&quot;

@@ -11,14 +11,16 @@ Method | HTTP request | Description
 [**createUpdateCategory**](EcommerceApi.md#createUpdateCategory) | **POST** /categories | Create/Update a category
 [**createUpdateProduct**](EcommerceApi.md#createUpdateProduct) | **POST** /products | Create/Update a product
 [**ecommerceActivatePost**](EcommerceApi.md#ecommerceActivatePost) | **POST** /ecommerce/activate | Activate the eCommerce app
-[**ecommerceAttributionMetricsConversionSourceConversionSourceIdGet**](EcommerceApi.md#ecommerceAttributionMetricsConversionSourceConversionSourceIdGet) | **GET** /ecommerce/attribution/metrics/{conversionSource}/{conversionSourceId} | Get detailed attribution metrics for a single Brevo campaign
-[**ecommerceAttributionMetricsGet**](EcommerceApi.md#ecommerceAttributionMetricsGet) | **GET** /ecommerce/attribution/metrics | Get attribution metrics for one or more Brevo campaigns
-[**ecommerceAttributionProductsConversionSourceConversionSourceIdGet**](EcommerceApi.md#ecommerceAttributionProductsConversionSourceConversionSourceIdGet) | **GET** /ecommerce/attribution/products/{conversionSource}/{conversionSourceId} | Get attributed product sales for a single Brevo campaign
+[**ecommerceAttributionMetricsConversionSourceConversionSourceIdGet**](EcommerceApi.md#ecommerceAttributionMetricsConversionSourceConversionSourceIdGet) | **GET** /ecommerce/attribution/metrics/{conversionSource}/{conversionSourceId} | Get detailed attribution metrics for a single Brevo campaign or workflow
+[**ecommerceAttributionMetricsGet**](EcommerceApi.md#ecommerceAttributionMetricsGet) | **GET** /ecommerce/attribution/metrics | Get attribution metrics for one or more Brevo campaigns or workflows
+[**ecommerceAttributionProductsConversionSourceConversionSourceIdGet**](EcommerceApi.md#ecommerceAttributionProductsConversionSourceConversionSourceIdGet) | **GET** /ecommerce/attribution/products/{conversionSource}/{conversionSourceId} | Get attributed product sales for a single Brevo campaign or workflow
+[**ecommerceConfigDisplayCurrencyGet**](EcommerceApi.md#ecommerceConfigDisplayCurrencyGet) | **GET** /ecommerce/config/displayCurrency | Get the ISO 4217 compliant display currency code for your Brevo account
 [**getCategories**](EcommerceApi.md#getCategories) | **GET** /categories | Return all your categories
 [**getCategoryInfo**](EcommerceApi.md#getCategoryInfo) | **GET** /categories/{id} | Get a category details
 [**getOrders**](EcommerceApi.md#getOrders) | **GET** /orders | Get order details
 [**getProductInfo**](EcommerceApi.md#getProductInfo) | **GET** /products/{id} | Get a product&#39;s details
 [**getProducts**](EcommerceApi.md#getProducts) | **GET** /products | Return all your products
+[**setConfigDisplayCurrency**](EcommerceApi.md#setConfigDisplayCurrency) | **POST** /ecommerce/config/displayCurrency | Set the ISO 4217 compliant display currency code for your Brevo account
 
 
 <a name="createBatchOrder"></a>
@@ -435,9 +437,9 @@ null (empty response body)
 
 <a name="ecommerceAttributionMetricsConversionSourceConversionSourceIdGet"></a>
 # **ecommerceAttributionMetricsConversionSourceConversionSourceIdGet**
-> ecommerceAttributionMetricsConversionSourceConversionSourceIdGet(conversionSource, conversionSourceId)
+> InlineResponse2007 ecommerceAttributionMetricsConversionSourceConversionSourceIdGet(conversionSource, conversionSourceId)
 
-Get detailed attribution metrics for a single Brevo campaign
+Get detailed attribution metrics for a single Brevo campaign or workflow
 
 ### Example
 ```java
@@ -463,10 +465,11 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 //partnerKey.setApiKeyPrefix("Token");
 
 EcommerceApi apiInstance = new EcommerceApi();
-Object conversionSource = null; // Object | The Brevo campaign type for which data will be retrieved
-Object conversionSourceId = null; // Object | The Brevo campaign id for which data will be retrieved
+String conversionSource = "conversionSource_example"; // String | The Brevo campaign type or workflow type for which data will be retrieved
+String conversionSourceId = "conversionSourceId_example"; // String | The Brevo campaign or automation workflow id for which data will be retrieved
 try {
-    apiInstance.ecommerceAttributionMetricsConversionSourceConversionSourceIdGet(conversionSource, conversionSourceId);
+    InlineResponse2007 result = apiInstance.ecommerceAttributionMetricsConversionSourceConversionSourceIdGet(conversionSource, conversionSourceId);
+    System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling EcommerceApi#ecommerceAttributionMetricsConversionSourceConversionSourceIdGet");
     e.printStackTrace();
@@ -477,12 +480,12 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **conversionSource** | [**Object**](.md)| The Brevo campaign type for which data will be retrieved |
- **conversionSourceId** | [**Object**](.md)| The Brevo campaign id for which data will be retrieved |
+ **conversionSource** | **String**| The Brevo campaign type or workflow type for which data will be retrieved | [enum: email_campaign, sms_campaign, automation_workflow_email, automation_workflow_sms]
+ **conversionSourceId** | **String**| The Brevo campaign or automation workflow id for which data will be retrieved |
 
 ### Return type
 
-null (empty response body)
+[**InlineResponse2007**](InlineResponse2007.md)
 
 ### Authorization
 
@@ -495,9 +498,9 @@ null (empty response body)
 
 <a name="ecommerceAttributionMetricsGet"></a>
 # **ecommerceAttributionMetricsGet**
-> ecommerceAttributionMetricsGet(periodFrom, periodTo, emailCampaignId)
+> InlineResponse2006 ecommerceAttributionMetricsGet(periodFrom, periodTo, emailCampaignId, smsCampaignId, automationWorkflowEmailId, automationWorkflowSmsId)
 
-Get attribution metrics for one or more Brevo campaigns
+Get attribution metrics for one or more Brevo campaigns or workflows
 
 ### Example
 ```java
@@ -523,11 +526,15 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 //partnerKey.setApiKeyPrefix("Token");
 
 EcommerceApi apiInstance = new EcommerceApi();
-Object periodFrom = null; // Object | When getting metrics for a specific period, define the starting datetime in RFC3339 format
-Object periodTo = null; // Object | When getting metrics for a specific period, define the end datetime in RFC3339 format
-Object emailCampaignId = null; // Object | The email campaign id(s) to get metrics for
+OffsetDateTime periodFrom = OffsetDateTime.now(); // OffsetDateTime | When getting metrics for a specific period, define the starting datetime in RFC3339 format
+OffsetDateTime periodTo = OffsetDateTime.now(); // OffsetDateTime | When getting metrics for a specific period, define the end datetime in RFC3339 format
+List<String> emailCampaignId = Arrays.asList("emailCampaignId_example"); // List<String> | The email campaign ID(s) to get metrics for
+List<String> smsCampaignId = Arrays.asList("smsCampaignId_example"); // List<String> | The SMS campaign ID(s) to get metrics for
+List<String> automationWorkflowEmailId = Arrays.asList("automationWorkflowEmailId_example"); // List<String> | The automation workflow ID(s) to get email attribution metrics for
+List<String> automationWorkflowSmsId = Arrays.asList("automationWorkflowSmsId_example"); // List<String> | The automation workflow ID(s) to get SMS attribution metrics for
 try {
-    apiInstance.ecommerceAttributionMetricsGet(periodFrom, periodTo, emailCampaignId);
+    InlineResponse2006 result = apiInstance.ecommerceAttributionMetricsGet(periodFrom, periodTo, emailCampaignId, smsCampaignId, automationWorkflowEmailId, automationWorkflowSmsId);
+    System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling EcommerceApi#ecommerceAttributionMetricsGet");
     e.printStackTrace();
@@ -538,13 +545,16 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **periodFrom** | [**Object**](.md)| When getting metrics for a specific period, define the starting datetime in RFC3339 format | [optional]
- **periodTo** | [**Object**](.md)| When getting metrics for a specific period, define the end datetime in RFC3339 format | [optional]
- **emailCampaignId** | [**Object**](.md)| The email campaign id(s) to get metrics for | [optional]
+ **periodFrom** | **OffsetDateTime**| When getting metrics for a specific period, define the starting datetime in RFC3339 format | [optional]
+ **periodTo** | **OffsetDateTime**| When getting metrics for a specific period, define the end datetime in RFC3339 format | [optional]
+ **emailCampaignId** | [**List&lt;String&gt;**](String.md)| The email campaign ID(s) to get metrics for | [optional]
+ **smsCampaignId** | [**List&lt;String&gt;**](String.md)| The SMS campaign ID(s) to get metrics for | [optional]
+ **automationWorkflowEmailId** | [**List&lt;String&gt;**](String.md)| The automation workflow ID(s) to get email attribution metrics for | [optional]
+ **automationWorkflowSmsId** | [**List&lt;String&gt;**](String.md)| The automation workflow ID(s) to get SMS attribution metrics for | [optional]
 
 ### Return type
 
-null (empty response body)
+[**InlineResponse2006**](InlineResponse2006.md)
 
 ### Authorization
 
@@ -557,9 +567,9 @@ null (empty response body)
 
 <a name="ecommerceAttributionProductsConversionSourceConversionSourceIdGet"></a>
 # **ecommerceAttributionProductsConversionSourceConversionSourceIdGet**
-> ecommerceAttributionProductsConversionSourceConversionSourceIdGet(conversionSource, conversionSourceId)
+> InlineResponse2008 ecommerceAttributionProductsConversionSourceConversionSourceIdGet(conversionSource, conversionSourceId)
 
-Get attributed product sales for a single Brevo campaign
+Get attributed product sales for a single Brevo campaign or workflow
 
 ### Example
 ```java
@@ -585,10 +595,11 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 //partnerKey.setApiKeyPrefix("Token");
 
 EcommerceApi apiInstance = new EcommerceApi();
-Object conversionSource = null; // Object | The Brevo campaign type for which data will be retrieved
-Object conversionSourceId = null; // Object | The Brevo campaign id for which data will be retrieved
+String conversionSource = "conversionSource_example"; // String | The Brevo campaign or automation workflow type for which data will be retrieved
+String conversionSourceId = "conversionSourceId_example"; // String | The Brevo campaign or automation workflow id for which data will be retrieved
 try {
-    apiInstance.ecommerceAttributionProductsConversionSourceConversionSourceIdGet(conversionSource, conversionSourceId);
+    InlineResponse2008 result = apiInstance.ecommerceAttributionProductsConversionSourceConversionSourceIdGet(conversionSource, conversionSourceId);
+    System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling EcommerceApi#ecommerceAttributionProductsConversionSourceConversionSourceIdGet");
     e.printStackTrace();
@@ -599,12 +610,67 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **conversionSource** | [**Object**](.md)| The Brevo campaign type for which data will be retrieved |
- **conversionSourceId** | [**Object**](.md)| The Brevo campaign id for which data will be retrieved |
+ **conversionSource** | **String**| The Brevo campaign or automation workflow type for which data will be retrieved | [enum: email_campaign, sms_campaign, automation_workflow_email, automation_workflow_sms]
+ **conversionSourceId** | **String**| The Brevo campaign or automation workflow id for which data will be retrieved |
 
 ### Return type
 
-null (empty response body)
+[**InlineResponse2008**](InlineResponse2008.md)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="ecommerceConfigDisplayCurrencyGet"></a>
+# **ecommerceConfigDisplayCurrencyGet**
+> InlineResponse2005 ecommerceConfigDisplayCurrencyGet()
+
+Get the ISO 4217 compliant display currency code for your Brevo account
+
+### Example
+```java
+// Import classes:
+//import brevo.ApiClient;
+//import brevo.ApiException;
+//import brevo.Configuration;
+//import brevo.auth.*;
+//import brevoApi.EcommerceApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: api-key
+ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("api-key");
+apiKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: partner-key
+ApiKeyAuth partnerKey = (ApiKeyAuth) defaultClient.getAuthentication("partner-key");
+partnerKey.setApiKey("YOUR PARTNER KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//partnerKey.setApiKeyPrefix("Token");
+
+EcommerceApi apiInstance = new EcommerceApi();
+try {
+    InlineResponse2005 result = apiInstance.ecommerceConfigDisplayCurrencyGet();
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling EcommerceApi#ecommerceConfigDisplayCurrencyGet");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**InlineResponse2005**](InlineResponse2005.md)
 
 ### Authorization
 
@@ -650,8 +716,8 @@ Long offset = 0L; // Long | Index of the first document in the page
 String sort = "desc"; // String | Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
 List<String> ids = Arrays.asList("ids_example"); // List<String> | Filter by category ids
 String name = "name_example"; // String | Filter by category name
-String modifiedSince = "modifiedSince_example"; // String | Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**         
-String createdSince = "createdSince_example"; // String | Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**         
+String modifiedSince = "modifiedSince_example"; // String | Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.** 
+String createdSince = "createdSince_example"; // String | Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.** 
 try {
     GetCategories result = apiInstance.getCategories(limit, offset, sort, ids, name, modifiedSince, createdSince);
     System.out.println(result);
@@ -670,8 +736,8 @@ Name | Type | Description  | Notes
  **sort** | **String**| Sort the results in the ascending/descending order of record creation. Default order is **descending** if &#x60;sort&#x60; is not passed | [optional] [default to desc] [enum: asc, desc]
  **ids** | [**List&lt;String&gt;**](String.md)| Filter by category ids | [optional]
  **name** | **String**| Filter by category name | [optional]
- **modifiedSince** | **String**| Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**          | [optional]
- **createdSince** | **String**| Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**          | [optional]
+ **modifiedSince** | **String**| Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  | [optional]
+ **createdSince** | **String**| Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  | [optional]
 
 ### Return type
 
@@ -948,6 +1014,65 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetProducts**](GetProducts.md)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="setConfigDisplayCurrency"></a>
+# **setConfigDisplayCurrency**
+> SetConfigDisplayCurrency setConfigDisplayCurrency(setConfigDisplayCurrency)
+
+Set the ISO 4217 compliant display currency code for your Brevo account
+
+### Example
+```java
+// Import classes:
+//import brevo.ApiClient;
+//import brevo.ApiException;
+//import brevo.Configuration;
+//import brevo.auth.*;
+//import brevoApi.EcommerceApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: api-key
+ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("api-key");
+apiKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: partner-key
+ApiKeyAuth partnerKey = (ApiKeyAuth) defaultClient.getAuthentication("partner-key");
+partnerKey.setApiKey("YOUR PARTNER KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//partnerKey.setApiKeyPrefix("Token");
+
+EcommerceApi apiInstance = new EcommerceApi();
+SetConfigDisplayCurrency setConfigDisplayCurrency = new SetConfigDisplayCurrency(); // SetConfigDisplayCurrency | set ISO 4217 compliant display currency code payload
+try {
+    SetConfigDisplayCurrency result = apiInstance.setConfigDisplayCurrency(setConfigDisplayCurrency);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling EcommerceApi#setConfigDisplayCurrency");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **setConfigDisplayCurrency** | [**SetConfigDisplayCurrency**](SetConfigDisplayCurrency.md)| set ISO 4217 compliant display currency code payload |
+
+### Return type
+
+[**SetConfigDisplayCurrency**](SetConfigDisplayCurrency.md)
 
 ### Authorization
 

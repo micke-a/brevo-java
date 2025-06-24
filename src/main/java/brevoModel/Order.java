@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,18 +13,28 @@
 
 package brevoModel;
 
-import com.google.gson.annotations.SerializedName;
-import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.ObjectUtils;
-
+import brevoModel.OrderBilling;
+import brevoModel.OrderIdentifiers;
+import brevoModel.OrderProducts;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Order
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class Order {
   @SerializedName("id")
   private String id = null;
@@ -41,17 +51,23 @@ public class Order {
   @SerializedName("amount")
   private BigDecimal amount = null;
 
+  @SerializedName("storeId")
+  private String storeId = null;
+
+  @SerializedName("identifiers")
+  private OrderIdentifiers identifiers = null;
+
   @SerializedName("products")
   private List<OrderProducts> products = new ArrayList<OrderProducts>();
-
-  @SerializedName("email")
-  private String email = null;
 
   @SerializedName("billing")
   private OrderBilling billing = null;
 
   @SerializedName("coupons")
   private List<String> coupons = null;
+
+  @SerializedName("metaInfo")
+  private Map<String, Object> metaInfo = null;
 
   public Order id(String id) {
     this.id = id;
@@ -143,6 +159,42 @@ public class Order {
     this.amount = amount;
   }
 
+  public Order storeId(String storeId) {
+    this.storeId = storeId;
+    return this;
+  }
+
+   /**
+   * ID of store where the order is placed
+   * @return storeId
+  **/
+  @ApiModelProperty(example = "ST-21", value = "ID of store where the order is placed")
+  public String getStoreId() {
+    return storeId;
+  }
+
+  public void setStoreId(String storeId) {
+    this.storeId = storeId;
+  }
+
+  public Order identifiers(OrderIdentifiers identifiers) {
+    this.identifiers = identifiers;
+    return this;
+  }
+
+   /**
+   * Get identifiers
+   * @return identifiers
+  **/
+  @ApiModelProperty(value = "")
+  public OrderIdentifiers getIdentifiers() {
+    return identifiers;
+  }
+
+  public void setIdentifiers(OrderIdentifiers identifiers) {
+    this.identifiers = identifiers;
+  }
+
   public Order products(List<OrderProducts> products) {
     this.products = products;
     return this;
@@ -164,24 +216,6 @@ public class Order {
 
   public void setProducts(List<OrderProducts> products) {
     this.products = products;
-  }
-
-  public Order email(String email) {
-    this.email = email;
-    return this;
-  }
-
-   /**
-   * Email of the contact, Mandatory if \&quot;phone\&quot; field is not passed in \&quot;billing\&quot; parameter.
-   * @return email
-  **/
-  @ApiModelProperty(example = "example@brevo.com", value = "Email of the contact, Mandatory if \"phone\" field is not passed in \"billing\" parameter.")
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
   }
 
   public Order billing(OrderBilling billing) {
@@ -228,6 +262,32 @@ public class Order {
     this.coupons = coupons;
   }
 
+  public Order metaInfo(Map<String, Object> metaInfo) {
+    this.metaInfo = metaInfo;
+    return this;
+  }
+
+  public Order putMetaInfoItem(String key, Object metaInfoItem) {
+    if (this.metaInfo == null) {
+      this.metaInfo = new HashMap<String, Object>();
+    }
+    this.metaInfo.put(key, metaInfoItem);
+    return this;
+  }
+
+   /**
+   * Meta data of order to store additional detal such as custom message, customer type, source.
+   * @return metaInfo
+  **/
+  @ApiModelProperty(example = "{\"order_source\":\"Website\",\"gift_message\":\"Happy Birthday!\",\"customer_loyalty_tier\":\"Gold\"}", value = "Meta data of order to store additional detal such as custom message, customer type, source.")
+  public Map<String, Object> getMetaInfo() {
+    return metaInfo;
+  }
+
+  public void setMetaInfo(Map<String, Object> metaInfo) {
+    this.metaInfo = metaInfo;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -243,15 +303,17 @@ public class Order {
     ObjectUtils.equals(this.updatedAt, order.updatedAt) &&
     ObjectUtils.equals(this.status, order.status) &&
     ObjectUtils.equals(this.amount, order.amount) &&
+    ObjectUtils.equals(this.storeId, order.storeId) &&
+    ObjectUtils.equals(this.identifiers, order.identifiers) &&
     ObjectUtils.equals(this.products, order.products) &&
-    ObjectUtils.equals(this.email, order.email) &&
     ObjectUtils.equals(this.billing, order.billing) &&
-    ObjectUtils.equals(this.coupons, order.coupons);
+    ObjectUtils.equals(this.coupons, order.coupons) &&
+    ObjectUtils.equals(this.metaInfo, order.metaInfo);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(id, createdAt, updatedAt, status, amount, products, email, billing, coupons);
+    return ObjectUtils.hashCodeMulti(id, createdAt, updatedAt, status, amount, storeId, identifiers, products, billing, coupons, metaInfo);
   }
 
 
@@ -265,10 +327,12 @@ public class Order {
     sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
+    sb.append("    storeId: ").append(toIndentedString(storeId)).append("\n");
+    sb.append("    identifiers: ").append(toIndentedString(identifiers)).append("\n");
     sb.append("    products: ").append(toIndentedString(products)).append("\n");
-    sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    billing: ").append(toIndentedString(billing)).append("\n");
     sb.append("    coupons: ").append(toIndentedString(coupons)).append("\n");
+    sb.append("    metaInfo: ").append(toIndentedString(metaInfo)).append("\n");
     sb.append("}");
     return sb.toString();
   }

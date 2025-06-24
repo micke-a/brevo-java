@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -14,9 +14,26 @@
 package brevoApi;
 
 import brevo.ApiException;
-import brevoModel.*;
-import org.junit.Ignore;
+import brevoModel.Body6;
+import brevoModel.Body7;
+import brevoModel.Body8;
+import brevoModel.Body9;
+import brevoModel.CompaniesList;
+import brevoModel.Company;
+import brevoModel.CompanyAttributes;
+import brevoModel.ErrorModel;
+import java.io.File;
+import brevoModel.InlineResponse2002;
+import brevoModel.InlineResponse2003;
+import brevoModel.InlineResponse2004;
+import brevoModel.InlineResponse400;
 import org.junit.Test;
+import org.junit.Ignore;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * API tests for CompaniesApi
@@ -26,21 +43,6 @@ public class CompaniesApiTest {
 
     private final CompaniesApi api = new CompaniesApi();
 
-    
-    /**
-     * Get company attributes
-     *
-     * 
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
-    @Test
-    public void companiesAttributesGetTest() throws ApiException {
-        CompanyAttributes response = api.companiesAttributesGet();
-
-        // TODO: test validations
-    }
     
     /**
      * Get all companies
@@ -55,11 +57,13 @@ public class CompaniesApiTest {
         String filters = null;
         Long linkedContactsIds = null;
         String linkedDealsIds = null;
+        String modifiedSince = null;
+        String createdSince = null;
         Long page = null;
         Long limit = null;
         String sort = null;
         String sortBy = null;
-        CompaniesList response = api.companiesGet(filters, linkedContactsIds, linkedDealsIds, page, limit, sort, sortBy);
+        CompaniesList response = api.companiesGet(filters, linkedContactsIds, linkedDealsIds, modifiedSince, createdSince, page, limit, sort, sortBy);
 
         // TODO: test validations
     }
@@ -107,8 +111,25 @@ public class CompaniesApiTest {
     @Test
     public void companiesIdPatchTest() throws ApiException {
         String id = null;
-        Body4 body = null;
+        Body7 body = null;
         Company response = api.companiesIdPatch(id, body);
+
+        // TODO: test validations
+    }
+    
+    /**
+     * Import companies(creation and updation)
+     *
+     * Import companies from a CSV file with mapping options.
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void companiesImportPostTest() throws ApiException {
+        File file = null;
+        String mapping = null;
+        InlineResponse2004 response = api.companiesImportPost(file, mapping);
 
         // TODO: test validations
     }
@@ -124,7 +145,7 @@ public class CompaniesApiTest {
     @Test
     public void companiesLinkUnlinkIdPatchTest() throws ApiException {
         String id = null;
-        Body5 body = null;
+        Body8 body = null;
         api.companiesLinkUnlinkIdPatch(id, body);
 
         // TODO: test validations
@@ -140,8 +161,39 @@ public class CompaniesApiTest {
      */
     @Test
     public void companiesPostTest() throws ApiException {
-        Body3 body = null;
+        Body6 body = null;
         InlineResponse2002 response = api.companiesPost(body);
+
+        // TODO: test validations
+    }
+    
+    /**
+     * Get company attributes
+     *
+     * 
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void crmAttributesCompaniesGetTest() throws ApiException {
+        CompanyAttributes response = api.crmAttributesCompaniesGet();
+
+        // TODO: test validations
+    }
+    
+    /**
+     * Create a deal/company attribute
+     *
+     * 
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void crmAttributesPostTest() throws ApiException {
+        Body9 body = null;
+        InlineResponse2003 response = api.crmAttributesPost(body);
 
         // TODO: test validations
     }

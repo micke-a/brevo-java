@@ -18,7 +18,6 @@ OUT_OF_RANGE | &quot;out_of_range&quot;
 CAMPAIGN_PROCESSING | &quot;campaign_processing&quot;
 CAMPAIGN_SENT | &quot;campaign_sent&quot;
 DOCUMENT_NOT_FOUND | &quot;document_not_found&quot;
-RESELLER_PERMISSION_DENIED | &quot;reseller_permission_denied&quot;
 NOT_ENOUGH_CREDITS | &quot;not_enough_credits&quot;
 PERMISSION_DENIED | &quot;permission_denied&quot;
 DUPLICATE_PARAMETER | &quot;duplicate_parameter&quot;
@@ -28,6 +27,7 @@ UNAUTHORIZED | &quot;unauthorized&quot;
 ACCOUNT_UNDER_VALIDATION | &quot;account_under_validation&quot;
 NOT_ACCEPTABLE | &quot;not_acceptable&quot;
 BAD_REQUEST | &quot;bad_request&quot;
+UNPROCESSABLE_ENTITY | &quot;unprocessable_entity&quot;
 
 
 

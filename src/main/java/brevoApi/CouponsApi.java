@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -21,6 +21,16 @@ import okhttp3.Interceptor;
 import okhttp3.Response;
 
 import java.io.IOException;
+
+
+import brevoModel.CreateCouponCollection;
+import brevoModel.CreateCoupons;
+import brevoModel.ErrorModel;
+import brevoModel.GetCouponCollection;
+import brevoModel.InlineResponse2009;
+import brevoModel.InlineResponse2013;
+import brevoModel.UpdateCouponCollection;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -414,13 +424,13 @@ public class CouponsApi {
      * @param limit Number of documents returned per page (optional, default to 50)
      * @param offset Index of the first document on the page (optional, default to 0)
      * @param sort Sort the results by creation time in ascending/descending order (optional, default to desc)
-     * @param sortBy The field used to sort coupon collections (optional)
+     * @param sortBy The field used to sort coupon collections (optional, default to createdAt)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call getCouponCollectionsCall(Long limit, Long offset, String sort, Object sortBy, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call getCouponCollectionsCall(Long limit, Long offset, String sort, String sortBy, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -470,7 +480,7 @@ public class CouponsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call getCouponCollectionsValidateBeforeCall(Long limit, Long offset, String sort, Object sortBy, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call getCouponCollectionsValidateBeforeCall(Long limit, Long offset, String sort, String sortBy, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
 
         Call call = getCouponCollectionsCall(limit, offset, sort, sortBy, progressListener, progressRequestListener);
@@ -484,11 +494,11 @@ public class CouponsApi {
      * @param limit Number of documents returned per page (optional, default to 50)
      * @param offset Index of the first document on the page (optional, default to 0)
      * @param sort Sort the results by creation time in ascending/descending order (optional, default to desc)
-     * @param sortBy The field used to sort coupon collections (optional)
+     * @param sortBy The field used to sort coupon collections (optional, default to createdAt)
      * @return GetCouponCollection
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public GetCouponCollection getCouponCollections(Long limit, Long offset, String sort, Object sortBy) throws ApiException {
+    public GetCouponCollection getCouponCollections(Long limit, Long offset, String sort, String sortBy) throws ApiException {
         ApiResponse<GetCouponCollection> resp = getCouponCollectionsWithHttpInfo(limit, offset, sort, sortBy);
         return resp.getData();
     }
@@ -499,11 +509,11 @@ public class CouponsApi {
      * @param limit Number of documents returned per page (optional, default to 50)
      * @param offset Index of the first document on the page (optional, default to 0)
      * @param sort Sort the results by creation time in ascending/descending order (optional, default to desc)
-     * @param sortBy The field used to sort coupon collections (optional)
+     * @param sortBy The field used to sort coupon collections (optional, default to createdAt)
      * @return ApiResponse&lt;GetCouponCollection&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<GetCouponCollection> getCouponCollectionsWithHttpInfo(Long limit, Long offset, String sort, Object sortBy) throws ApiException {
+    public ApiResponse<GetCouponCollection> getCouponCollectionsWithHttpInfo(Long limit, Long offset, String sort, String sortBy) throws ApiException {
         Call call = getCouponCollectionsValidateBeforeCall(limit, offset, sort, sortBy, null, null);
         Type localVarReturnType = new TypeToken<GetCouponCollection>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -515,12 +525,12 @@ public class CouponsApi {
      * @param limit Number of documents returned per page (optional, default to 50)
      * @param offset Index of the first document on the page (optional, default to 0)
      * @param sort Sort the results by creation time in ascending/descending order (optional, default to desc)
-     * @param sortBy The field used to sort coupon collections (optional)
+     * @param sortBy The field used to sort coupon collections (optional, default to createdAt)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call getCouponCollectionsAsync(Long limit, Long offset, String sort, Object sortBy, final ApiCallback<GetCouponCollection> callback) throws ApiException {
+    public Call getCouponCollectionsAsync(Long limit, Long offset, String sort, String sortBy, final ApiCallback<GetCouponCollection> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -616,11 +626,11 @@ public class CouponsApi {
      * 
      * @param id Id of the collection to update (required)
      * @param updateCouponCollection Values to update the coupon collection (optional)
-     * @return InlineResponse2003
+     * @return InlineResponse2009
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2003 updateCouponCollection(String id, UpdateCouponCollection updateCouponCollection) throws ApiException {
-        ApiResponse<InlineResponse2003> resp = updateCouponCollectionWithHttpInfo(id, updateCouponCollection);
+    public InlineResponse2009 updateCouponCollection(String id, UpdateCouponCollection updateCouponCollection) throws ApiException {
+        ApiResponse<InlineResponse2009> resp = updateCouponCollectionWithHttpInfo(id, updateCouponCollection);
         return resp.getData();
     }
 
@@ -629,12 +639,12 @@ public class CouponsApi {
      * 
      * @param id Id of the collection to update (required)
      * @param updateCouponCollection Values to update the coupon collection (optional)
-     * @return ApiResponse&lt;InlineResponse2003&gt;
+     * @return ApiResponse&lt;InlineResponse2009&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2003> updateCouponCollectionWithHttpInfo(String id, UpdateCouponCollection updateCouponCollection) throws ApiException {
+    public ApiResponse<InlineResponse2009> updateCouponCollectionWithHttpInfo(String id, UpdateCouponCollection updateCouponCollection) throws ApiException {
         Call call = updateCouponCollectionValidateBeforeCall(id, updateCouponCollection, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2003>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2009>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -647,7 +657,7 @@ public class CouponsApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call updateCouponCollectionAsync(String id, UpdateCouponCollection updateCouponCollection, final ApiCallback<InlineResponse2003> callback) throws ApiException {
+    public Call updateCouponCollectionAsync(String id, UpdateCouponCollection updateCouponCollection, final ApiCallback<InlineResponse2009> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -669,7 +679,7 @@ public class CouponsApi {
         }
 
         Call call = updateCouponCollectionValidateBeforeCall(id, updateCouponCollection, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2003>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2009>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }

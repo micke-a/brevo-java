@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,14 +13,22 @@
 
 package brevoModel;
 
-import com.google.gson.annotations.SerializedName;
-import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.ObjectUtils;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Body7
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class Body7 {
   @SerializedName("name")
   private String name = null;
@@ -28,16 +36,25 @@ public class Body7 {
   @SerializedName("attributes")
   private Object attributes = null;
 
+  @SerializedName("countryCode")
+  private Long countryCode = null;
+
+  @SerializedName("linkedContactsIds")
+  private List<Long> linkedContactsIds = null;
+
+  @SerializedName("linkedDealsIds")
+  private List<String> linkedDealsIds = null;
+
   public Body7 name(String name) {
     this.name = name;
     return this;
   }
 
    /**
-   * Name of deal
+   * Name of company
    * @return name
   **/
-  @ApiModelProperty(example = "Deal: Connect with client", value = "Name of deal")
+  @ApiModelProperty(example = "company", value = "Name of company")
   public String getName() {
     return name;
   }
@@ -52,16 +69,86 @@ public class Body7 {
   }
 
    /**
-   * Attributes for deal update  To assign owner of a Deal you can send attributes.deal_owner and utilize the account email or ID.  If you wish to update the pipeline of a deal you need to provide the &#x60;pipeline&#x60; and the &#x60;deal_stage&#x60;.  Pipeline and deal_stage are ids you can fetch using this endpoint &#x60;/crm/pipeline/details/{pipelineID}&#x60; 
+   * Attributes for company update
    * @return attributes
   **/
-  @ApiModelProperty(example = "{\"deal_owner\":\"6093d2425a9b436e9519d034\",\"amount\":12}", value = "Attributes for deal update  To assign owner of a Deal you can send attributes.deal_owner and utilize the account email or ID.  If you wish to update the pipeline of a deal you need to provide the `pipeline` and the `deal_stage`.  Pipeline and deal_stage are ids you can fetch using this endpoint `/crm/pipeline/details/{pipelineID}` ")
+  @ApiModelProperty(example = "{\"category\":\"label_2\",\"domain\":\"xyz\",\"date\":\"2022-05-04T00:00:00+05:30\",\"industry\":\"flipkart\",\"number_of_contacts\":1,\"number_of_employees\":100,\"owner\":\"5b1a17d914b73d35a76ca0c7\",\"phone_number\":\"81718441912\",\"revenue\":10000.34222}", value = "Attributes for company update")
   public Object getAttributes() {
     return attributes;
   }
 
   public void setAttributes(Object attributes) {
     this.attributes = attributes;
+  }
+
+  public Body7 countryCode(Long countryCode) {
+    this.countryCode = countryCode;
+    return this;
+  }
+
+   /**
+   * Country code if phone_number is passed in attributes.
+   * @return countryCode
+  **/
+  @ApiModelProperty(example = "91", value = "Country code if phone_number is passed in attributes.")
+  public Long getCountryCode() {
+    return countryCode;
+  }
+
+  public void setCountryCode(Long countryCode) {
+    this.countryCode = countryCode;
+  }
+
+  public Body7 linkedContactsIds(List<Long> linkedContactsIds) {
+    this.linkedContactsIds = linkedContactsIds;
+    return this;
+  }
+
+  public Body7 addLinkedContactsIdsItem(Long linkedContactsIdsItem) {
+    if (this.linkedContactsIds == null) {
+      this.linkedContactsIds = new ArrayList<Long>();
+    }
+    this.linkedContactsIds.add(linkedContactsIdsItem);
+    return this;
+  }
+
+   /**
+   * Warning - Using PATCH on linkedContactIds replaces the list of linked contacts. Omitted IDs will be removed.
+   * @return linkedContactsIds
+  **/
+  @ApiModelProperty(example = "[1,2,3]", value = "Warning - Using PATCH on linkedContactIds replaces the list of linked contacts. Omitted IDs will be removed.")
+  public List<Long> getLinkedContactsIds() {
+    return linkedContactsIds;
+  }
+
+  public void setLinkedContactsIds(List<Long> linkedContactsIds) {
+    this.linkedContactsIds = linkedContactsIds;
+  }
+
+  public Body7 linkedDealsIds(List<String> linkedDealsIds) {
+    this.linkedDealsIds = linkedDealsIds;
+    return this;
+  }
+
+  public Body7 addLinkedDealsIdsItem(String linkedDealsIdsItem) {
+    if (this.linkedDealsIds == null) {
+      this.linkedDealsIds = new ArrayList<String>();
+    }
+    this.linkedDealsIds.add(linkedDealsIdsItem);
+    return this;
+  }
+
+   /**
+   * Warning - Using PATCH on linkedDealsIds replaces the list of linked contacts. Omitted IDs will be removed.
+   * @return linkedDealsIds
+  **/
+  @ApiModelProperty(example = "[\"61a5ce58c5d4795761045990\",\"61a5ce58c5d4795761045991\",\"61a5ce58c5d4795761045992\"]", value = "Warning - Using PATCH on linkedDealsIds replaces the list of linked contacts. Omitted IDs will be removed.")
+  public List<String> getLinkedDealsIds() {
+    return linkedDealsIds;
+  }
+
+  public void setLinkedDealsIds(List<String> linkedDealsIds) {
+    this.linkedDealsIds = linkedDealsIds;
   }
 
 
@@ -75,12 +162,15 @@ public class Body7 {
   }
     Body7 body7 = (Body7) o;
     return ObjectUtils.equals(this.name, body7.name) &&
-    ObjectUtils.equals(this.attributes, body7.attributes);
+    ObjectUtils.equals(this.attributes, body7.attributes) &&
+    ObjectUtils.equals(this.countryCode, body7.countryCode) &&
+    ObjectUtils.equals(this.linkedContactsIds, body7.linkedContactsIds) &&
+    ObjectUtils.equals(this.linkedDealsIds, body7.linkedDealsIds);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(name, attributes);
+    return ObjectUtils.hashCodeMulti(name, attributes, countryCode, linkedContactsIds, linkedDealsIds);
   }
 
 
@@ -91,6 +181,9 @@ public class Body7 {
     
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    attributes: ").append(toIndentedString(attributes)).append("\n");
+    sb.append("    countryCode: ").append(toIndentedString(countryCode)).append("\n");
+    sb.append("    linkedContactsIds: ").append(toIndentedString(linkedContactsIds)).append("\n");
+    sb.append("    linkedDealsIds: ").append(toIndentedString(linkedDealsIds)).append("\n");
     sb.append("}");
     return sb.toString();
   }

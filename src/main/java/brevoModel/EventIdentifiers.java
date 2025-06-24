@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,28 +13,33 @@
 
 package brevoModel;
 
+import org.apache.commons.lang3.ObjectUtils;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.ObjectUtils;
+import java.io.IOException;
 
 /**
  * Identifies the contact associated with the event. At least one identifier is required.
  */
 @ApiModel(description = "Identifies the contact associated with the event. At least one identifier is required.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class EventIdentifiers {
   @SerializedName("email_id")
   private String emailId = null;
 
-  @SerializedName("sms")
-  private String sms = null;
+  @SerializedName("phone_id")
+  private String phoneId = null;
 
-  @SerializedName("whatsapp")
-  private String whatsapp = null;
+  @SerializedName("whatsapp_id")
+  private String whatsappId = null;
 
-  @SerializedName("landline_number")
-  private String landlineNumber = null;
+  @SerializedName("landline_number_id")
+  private String landlineNumberId = null;
 
   @SerializedName("ext_id")
   private String extId = null;
@@ -57,58 +62,58 @@ public class EventIdentifiers {
     this.emailId = emailId;
   }
 
-  public EventIdentifiers sms(String sms) {
-    this.sms = sms;
+  public EventIdentifiers phoneId(String phoneId) {
+    this.phoneId = phoneId;
     return this;
   }
 
    /**
    * SMS associated with the event
-   * @return sms
+   * @return phoneId
   **/
   @ApiModelProperty(example = "+91xxxxxxxxxx", value = "SMS associated with the event")
-  public String getSms() {
-    return sms;
+  public String getPhoneId() {
+    return phoneId;
   }
 
-  public void setSms(String sms) {
-    this.sms = sms;
+  public void setPhoneId(String phoneId) {
+    this.phoneId = phoneId;
   }
 
-  public EventIdentifiers whatsapp(String whatsapp) {
-    this.whatsapp = whatsapp;
+  public EventIdentifiers whatsappId(String whatsappId) {
+    this.whatsappId = whatsappId;
     return this;
   }
 
    /**
    * whatsapp associated with the event
-   * @return whatsapp
+   * @return whatsappId
   **/
   @ApiModelProperty(example = "+91xxxxxxxxxx", value = "whatsapp associated with the event")
-  public String getWhatsapp() {
-    return whatsapp;
+  public String getWhatsappId() {
+    return whatsappId;
   }
 
-  public void setWhatsapp(String whatsapp) {
-    this.whatsapp = whatsapp;
+  public void setWhatsappId(String whatsappId) {
+    this.whatsappId = whatsappId;
   }
 
-  public EventIdentifiers landlineNumber(String landlineNumber) {
-    this.landlineNumber = landlineNumber;
+  public EventIdentifiers landlineNumberId(String landlineNumberId) {
+    this.landlineNumberId = landlineNumberId;
     return this;
   }
 
    /**
    * landline_number associated with the event
-   * @return landlineNumber
+   * @return landlineNumberId
   **/
   @ApiModelProperty(example = "+91xxxxxxxxxx", value = "landline_number associated with the event")
-  public String getLandlineNumber() {
-    return landlineNumber;
+  public String getLandlineNumberId() {
+    return landlineNumberId;
   }
 
-  public void setLandlineNumber(String landlineNumber) {
-    this.landlineNumber = landlineNumber;
+  public void setLandlineNumberId(String landlineNumberId) {
+    this.landlineNumberId = landlineNumberId;
   }
 
   public EventIdentifiers extId(String extId) {
@@ -140,15 +145,15 @@ public class EventIdentifiers {
   }
     EventIdentifiers eventIdentifiers = (EventIdentifiers) o;
     return ObjectUtils.equals(this.emailId, eventIdentifiers.emailId) &&
-    ObjectUtils.equals(this.sms, eventIdentifiers.sms) &&
-    ObjectUtils.equals(this.whatsapp, eventIdentifiers.whatsapp) &&
-    ObjectUtils.equals(this.landlineNumber, eventIdentifiers.landlineNumber) &&
+    ObjectUtils.equals(this.phoneId, eventIdentifiers.phoneId) &&
+    ObjectUtils.equals(this.whatsappId, eventIdentifiers.whatsappId) &&
+    ObjectUtils.equals(this.landlineNumberId, eventIdentifiers.landlineNumberId) &&
     ObjectUtils.equals(this.extId, eventIdentifiers.extId);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(emailId, sms, whatsapp, landlineNumber, extId);
+    return ObjectUtils.hashCodeMulti(emailId, phoneId, whatsappId, landlineNumberId, extId);
   }
 
 
@@ -158,9 +163,9 @@ public class EventIdentifiers {
     sb.append("class EventIdentifiers {\n");
     
     sb.append("    emailId: ").append(toIndentedString(emailId)).append("\n");
-    sb.append("    sms: ").append(toIndentedString(sms)).append("\n");
-    sb.append("    whatsapp: ").append(toIndentedString(whatsapp)).append("\n");
-    sb.append("    landlineNumber: ").append(toIndentedString(landlineNumber)).append("\n");
+    sb.append("    phoneId: ").append(toIndentedString(phoneId)).append("\n");
+    sb.append("    whatsappId: ").append(toIndentedString(whatsappId)).append("\n");
+    sb.append("    landlineNumberId: ").append(toIndentedString(landlineNumberId)).append("\n");
     sb.append("    extId: ").append(toIndentedString(extId)).append("\n");
     sb.append("}");
     return sb.toString();

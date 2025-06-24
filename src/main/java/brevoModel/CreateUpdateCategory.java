@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,14 +13,20 @@
 
 package brevoModel;
 
-import com.google.gson.annotations.SerializedName;
-import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.ObjectUtils;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 
 /**
  * CreateUpdateCategory
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class CreateUpdateCategory {
   @SerializedName("id")
   private String id = null;
@@ -36,6 +42,9 @@ public class CreateUpdateCategory {
 
   @SerializedName("deletedAt")
   private String deletedAt = null;
+
+  @SerializedName("isDeleted")
+  private Boolean isDeleted = null;
 
   public CreateUpdateCategory id(String id) {
     this.id = id;
@@ -127,6 +136,24 @@ public class CreateUpdateCategory {
     this.deletedAt = deletedAt;
   }
 
+  public CreateUpdateCategory isDeleted(Boolean isDeleted) {
+    this.isDeleted = isDeleted;
+    return this;
+  }
+
+   /**
+   * category deleted from the shop&#39;s database
+   * @return isDeleted
+  **/
+  @ApiModelProperty(example = "true", value = "category deleted from the shop's database")
+  public Boolean isIsDeleted() {
+    return isDeleted;
+  }
+
+  public void setIsDeleted(Boolean isDeleted) {
+    this.isDeleted = isDeleted;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -141,12 +168,13 @@ public class CreateUpdateCategory {
     ObjectUtils.equals(this.name, createUpdateCategory.name) &&
     ObjectUtils.equals(this.url, createUpdateCategory.url) &&
     ObjectUtils.equals(this.updateEnabled, createUpdateCategory.updateEnabled) &&
-    ObjectUtils.equals(this.deletedAt, createUpdateCategory.deletedAt);
+    ObjectUtils.equals(this.deletedAt, createUpdateCategory.deletedAt) &&
+    ObjectUtils.equals(this.isDeleted, createUpdateCategory.isDeleted);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(id, name, url, updateEnabled, deletedAt);
+    return ObjectUtils.hashCodeMulti(id, name, url, updateEnabled, deletedAt, isDeleted);
   }
 
 
@@ -160,6 +188,7 @@ public class CreateUpdateCategory {
     sb.append("    url: ").append(toIndentedString(url)).append("\n");
     sb.append("    updateEnabled: ").append(toIndentedString(updateEnabled)).append("\n");
     sb.append("    deletedAt: ").append(toIndentedString(deletedAt)).append("\n");
+    sb.append("    isDeleted: ").append(toIndentedString(isDeleted)).append("\n");
     sb.append("}");
     return sb.toString();
   }

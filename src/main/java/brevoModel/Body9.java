@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,273 +13,238 @@
 
 package brevoModel;
 
-import com.google.gson.annotations.SerializedName;
-import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.ObjectUtils;
-import org.threeten.bp.OffsetDateTime;
-
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Body9
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class Body9 {
-  @SerializedName("name")
-  private String name = null;
+  @SerializedName("label")
+  private String label = null;
 
-  @SerializedName("duration")
-  private Long duration = null;
+  /**
+   * The type of attribute (must be one of the defined enums)
+   */
+  @JsonAdapter(AttributeTypeEnum.Adapter.class)
+  public enum AttributeTypeEnum {
+    TEXT("text"),
+    
+    USER("user"),
+    
+    NUMBER("number"),
+    
+    SINGLE_SELECT("single-select"),
+    
+    DATE("date"),
+    
+    BOOLEAN("boolean"),
+    
+    MULTI_CHOICE("multi-choice");
 
-  @SerializedName("taskTypeId")
-  private String taskTypeId = null;
+    private String value;
 
-  @SerializedName("date")
-  private OffsetDateTime date = null;
-
-  @SerializedName("notes")
-  private String notes = null;
-
-  @SerializedName("done")
-  private Boolean done = null;
-
-  @SerializedName("assignToId")
-  private String assignToId = null;
-
-  @SerializedName("contactsIds")
-  private List<Integer> contactsIds = null;
-
-  @SerializedName("dealsIds")
-  private List<String> dealsIds = null;
-
-  @SerializedName("companiesIds")
-  private List<String> companiesIds = null;
-
-  @SerializedName("reminder")
-  private TaskReminder reminder = null;
-
-  public Body9 name(String name) {
-    this.name = name;
-    return this;
-  }
-
-   /**
-   * Name of task
-   * @return name
-  **/
-  @ApiModelProperty(example = "Task: Connect with client", required = true, value = "Name of task")
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public Body9 duration(Long duration) {
-    this.duration = duration;
-    return this;
-  }
-
-   /**
-   * Duration of task in milliseconds [1 minute &#x3D; 60000 ms]
-   * minimum: 0
-   * @return duration
-  **/
-  @ApiModelProperty(example = "600000", value = "Duration of task in milliseconds [1 minute = 60000 ms]")
-  public Long getDuration() {
-    return duration;
-  }
-
-  public void setDuration(Long duration) {
-    this.duration = duration;
-  }
-
-  public Body9 taskTypeId(String taskTypeId) {
-    this.taskTypeId = taskTypeId;
-    return this;
-  }
-
-   /**
-   * Id for type of task e.g Call / Email / Meeting etc.
-   * @return taskTypeId
-  **/
-  @ApiModelProperty(example = "61a5cd07ca1347c82306ad09", required = true, value = "Id for type of task e.g Call / Email / Meeting etc.")
-  public String getTaskTypeId() {
-    return taskTypeId;
-  }
-
-  public void setTaskTypeId(String taskTypeId) {
-    this.taskTypeId = taskTypeId;
-  }
-
-  public Body9 date(OffsetDateTime date) {
-    this.date = date;
-    return this;
-  }
-
-   /**
-   * Task due date and time
-   * @return date
-  **/
-  @ApiModelProperty(example = "2021-11-01T17:44:54.668Z", required = true, value = "Task due date and time")
-  public OffsetDateTime getDate() {
-    return date;
-  }
-
-  public void setDate(OffsetDateTime date) {
-    this.date = date;
-  }
-
-  public Body9 notes(String notes) {
-    this.notes = notes;
-    return this;
-  }
-
-   /**
-   * Notes added to a task
-   * @return notes
-  **/
-  @ApiModelProperty(example = "In communication with client for resolution of queries.", value = "Notes added to a task")
-  public String getNotes() {
-    return notes;
-  }
-
-  public void setNotes(String notes) {
-    this.notes = notes;
-  }
-
-  public Body9 done(Boolean done) {
-    this.done = done;
-    return this;
-  }
-
-   /**
-   * Task marked as done
-   * @return done
-  **/
-  @ApiModelProperty(example = "false", value = "Task marked as done")
-  public Boolean isDone() {
-    return done;
-  }
-
-  public void setDone(Boolean done) {
-    this.done = done;
-  }
-
-  public Body9 assignToId(String assignToId) {
-    this.assignToId = assignToId;
-    return this;
-  }
-
-   /**
-   * To assign a task to a user you can use either the account email or ID.
-   * @return assignToId
-  **/
-  @ApiModelProperty(example = "5faab4b7f195bb3c4c31e62a", value = "To assign a task to a user you can use either the account email or ID.")
-  public String getAssignToId() {
-    return assignToId;
-  }
-
-  public void setAssignToId(String assignToId) {
-    this.assignToId = assignToId;
-  }
-
-  public Body9 contactsIds(List<Integer> contactsIds) {
-    this.contactsIds = contactsIds;
-    return this;
-  }
-
-  public Body9 addContactsIdsItem(Integer contactsIdsItem) {
-    if (this.contactsIds == null) {
-      this.contactsIds = new ArrayList<Integer>();
+    AttributeTypeEnum(String value) {
+      this.value = value;
     }
-    this.contactsIds.add(contactsIdsItem);
-    return this;
-  }
 
-   /**
-   * Contact ids for contacts linked to this task
-   * @return contactsIds
-  **/
-  @ApiModelProperty(example = "[1,2,3]", value = "Contact ids for contacts linked to this task")
-  public List<Integer> getContactsIds() {
-    return contactsIds;
-  }
-
-  public void setContactsIds(List<Integer> contactsIds) {
-    this.contactsIds = contactsIds;
-  }
-
-  public Body9 dealsIds(List<String> dealsIds) {
-    this.dealsIds = dealsIds;
-    return this;
-  }
-
-  public Body9 addDealsIdsItem(String dealsIdsItem) {
-    if (this.dealsIds == null) {
-      this.dealsIds = new ArrayList<String>();
+    public String getValue() {
+      return value;
     }
-    this.dealsIds.add(dealsIdsItem);
-    return this;
-  }
 
-   /**
-   * Deal ids for deals a task is linked to
-   * @return dealsIds
-  **/
-  @ApiModelProperty(example = "[\"61a5ce58c5d4795761045990\",\"61a5ce58c5d4795761045991\",\"61a5ce58c5d4795761045992\"]", value = "Deal ids for deals a task is linked to")
-  public List<String> getDealsIds() {
-    return dealsIds;
-  }
-
-  public void setDealsIds(List<String> dealsIds) {
-    this.dealsIds = dealsIds;
-  }
-
-  public Body9 companiesIds(List<String> companiesIds) {
-    this.companiesIds = companiesIds;
-    return this;
-  }
-
-  public Body9 addCompaniesIdsItem(String companiesIdsItem) {
-    if (this.companiesIds == null) {
-      this.companiesIds = new ArrayList<String>();
+    @Override
+    public String toString() {
+      return String.valueOf(value);
     }
-    this.companiesIds.add(companiesIdsItem);
+
+    public static AttributeTypeEnum fromValue(String text) {
+      for (AttributeTypeEnum b : AttributeTypeEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public static class Adapter extends TypeAdapter<AttributeTypeEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final AttributeTypeEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public AttributeTypeEnum read(final JsonReader jsonReader) throws IOException {
+        String value = jsonReader.nextString();
+        return AttributeTypeEnum.fromValue(String.valueOf(value));
+      }
+    }
+  }
+
+  @SerializedName("attributeType")
+  private AttributeTypeEnum attributeType = null;
+
+  @SerializedName("description")
+  private String description = null;
+
+  @SerializedName("optionsLabels")
+  private List<String> optionsLabels = null;
+
+  /**
+   * The type of object the attribute belongs to (prefilled with &#x60;companies&#x60;or &#x60;deal&#x60;, mandatory)
+   */
+  @JsonAdapter(ObjectTypeEnum.Adapter.class)
+  public enum ObjectTypeEnum {
+    COMPANIES("companies"),
+    
+    DEALS("deals");
+
+    private String value;
+
+    ObjectTypeEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static ObjectTypeEnum fromValue(String text) {
+      for (ObjectTypeEnum b : ObjectTypeEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public static class Adapter extends TypeAdapter<ObjectTypeEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final ObjectTypeEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public ObjectTypeEnum read(final JsonReader jsonReader) throws IOException {
+        String value = jsonReader.nextString();
+        return ObjectTypeEnum.fromValue(String.valueOf(value));
+      }
+    }
+  }
+
+  @SerializedName("objectType")
+  private ObjectTypeEnum objectType = null;
+
+  public Body9 label(String label) {
+    this.label = label;
     return this;
   }
 
    /**
-   * Companies ids for companies a task is linked to
-   * @return companiesIds
+   * The label for the attribute (max 50 characters, cannot be empty)
+   * @return label
   **/
-  @ApiModelProperty(example = "[\"61a5ce58c5d4795761045990\",\"61a5ce58c5d4795761045991\",\"61a5ce58c5d4795761045992\"]", value = "Companies ids for companies a task is linked to")
-  public List<String> getCompaniesIds() {
-    return companiesIds;
+  @ApiModelProperty(example = "Attribute Label", required = true, value = "The label for the attribute (max 50 characters, cannot be empty)")
+  public String getLabel() {
+    return label;
   }
 
-  public void setCompaniesIds(List<String> companiesIds) {
-    this.companiesIds = companiesIds;
+  public void setLabel(String label) {
+    this.label = label;
   }
 
-  public Body9 reminder(TaskReminder reminder) {
-    this.reminder = reminder;
+  public Body9 attributeType(AttributeTypeEnum attributeType) {
+    this.attributeType = attributeType;
     return this;
   }
 
    /**
-   * Get reminder
-   * @return reminder
+   * The type of attribute (must be one of the defined enums)
+   * @return attributeType
   **/
-  @ApiModelProperty(value = "")
-  public TaskReminder getReminder() {
-    return reminder;
+  @ApiModelProperty(example = "single-select", required = true, value = "The type of attribute (must be one of the defined enums)")
+  public AttributeTypeEnum getAttributeType() {
+    return attributeType;
   }
 
-  public void setReminder(TaskReminder reminder) {
-    this.reminder = reminder;
+  public void setAttributeType(AttributeTypeEnum attributeType) {
+    this.attributeType = attributeType;
+  }
+
+  public Body9 description(String description) {
+    this.description = description;
+    return this;
+  }
+
+   /**
+   * A description of the attribute
+   * @return description
+  **/
+  @ApiModelProperty(example = "This is a sample attribute description.", value = "A description of the attribute")
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public Body9 optionsLabels(List<String> optionsLabels) {
+    this.optionsLabels = optionsLabels;
+    return this;
+  }
+
+  public Body9 addOptionsLabelsItem(String optionsLabelsItem) {
+    if (this.optionsLabels == null) {
+      this.optionsLabels = new ArrayList<String>();
+    }
+    this.optionsLabels.add(optionsLabelsItem);
+    return this;
+  }
+
+   /**
+   * Options for multi-choice or single-select attributes
+   * @return optionsLabels
+  **/
+  @ApiModelProperty(example = "[\"Option 1\",\"Option 2\",\"Option 3\"]", value = "Options for multi-choice or single-select attributes")
+  public List<String> getOptionsLabels() {
+    return optionsLabels;
+  }
+
+  public void setOptionsLabels(List<String> optionsLabels) {
+    this.optionsLabels = optionsLabels;
+  }
+
+  public Body9 objectType(ObjectTypeEnum objectType) {
+    this.objectType = objectType;
+    return this;
+  }
+
+   /**
+   * The type of object the attribute belongs to (prefilled with &#x60;companies&#x60;or &#x60;deal&#x60;, mandatory)
+   * @return objectType
+  **/
+  @ApiModelProperty(example = "deal,companies", required = true, value = "The type of object the attribute belongs to (prefilled with `companies`or `deal`, mandatory)")
+  public ObjectTypeEnum getObjectType() {
+    return objectType;
+  }
+
+  public void setObjectType(ObjectTypeEnum objectType) {
+    this.objectType = objectType;
   }
 
 
@@ -292,22 +257,16 @@ public class Body9 {
     return false;
   }
     Body9 body9 = (Body9) o;
-    return ObjectUtils.equals(this.name, body9.name) &&
-    ObjectUtils.equals(this.duration, body9.duration) &&
-    ObjectUtils.equals(this.taskTypeId, body9.taskTypeId) &&
-    ObjectUtils.equals(this.date, body9.date) &&
-    ObjectUtils.equals(this.notes, body9.notes) &&
-    ObjectUtils.equals(this.done, body9.done) &&
-    ObjectUtils.equals(this.assignToId, body9.assignToId) &&
-    ObjectUtils.equals(this.contactsIds, body9.contactsIds) &&
-    ObjectUtils.equals(this.dealsIds, body9.dealsIds) &&
-    ObjectUtils.equals(this.companiesIds, body9.companiesIds) &&
-    ObjectUtils.equals(this.reminder, body9.reminder);
+    return ObjectUtils.equals(this.label, body9.label) &&
+    ObjectUtils.equals(this.attributeType, body9.attributeType) &&
+    ObjectUtils.equals(this.description, body9.description) &&
+    ObjectUtils.equals(this.optionsLabels, body9.optionsLabels) &&
+    ObjectUtils.equals(this.objectType, body9.objectType);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(name, duration, taskTypeId, date, notes, done, assignToId, contactsIds, dealsIds, companiesIds, reminder);
+    return ObjectUtils.hashCodeMulti(label, attributeType, description, optionsLabels, objectType);
   }
 
 
@@ -316,17 +275,11 @@ public class Body9 {
     StringBuilder sb = new StringBuilder();
     sb.append("class Body9 {\n");
     
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    duration: ").append(toIndentedString(duration)).append("\n");
-    sb.append("    taskTypeId: ").append(toIndentedString(taskTypeId)).append("\n");
-    sb.append("    date: ").append(toIndentedString(date)).append("\n");
-    sb.append("    notes: ").append(toIndentedString(notes)).append("\n");
-    sb.append("    done: ").append(toIndentedString(done)).append("\n");
-    sb.append("    assignToId: ").append(toIndentedString(assignToId)).append("\n");
-    sb.append("    contactsIds: ").append(toIndentedString(contactsIds)).append("\n");
-    sb.append("    dealsIds: ").append(toIndentedString(dealsIds)).append("\n");
-    sb.append("    companiesIds: ").append(toIndentedString(companiesIds)).append("\n");
-    sb.append("    reminder: ").append(toIndentedString(reminder)).append("\n");
+    sb.append("    label: ").append(toIndentedString(label)).append("\n");
+    sb.append("    attributeType: ").append(toIndentedString(attributeType)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    optionsLabels: ").append(toIndentedString(optionsLabels)).append("\n");
+    sb.append("    objectType: ").append(toIndentedString(objectType)).append("\n");
     sb.append("}");
     return sb.toString();
   }

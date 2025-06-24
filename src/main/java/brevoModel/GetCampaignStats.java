@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,14 +13,20 @@
 
 package brevoModel;
 
-import com.google.gson.annotations.SerializedName;
-import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.ObjectUtils;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 
 /**
  * GetCampaignStats
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class GetCampaignStats {
   @SerializedName("listId")
   private Long listId = null;
@@ -69,6 +75,12 @@ public class GetCampaignStats {
 
   @SerializedName("returnBounce")
   private Long returnBounce = null;
+
+  @SerializedName("opensRate")
+  private Float opensRate = null;
+
+  @SerializedName("appleMppOpens")
+  private Long appleMppOpens = null;
 
   public GetCampaignStats listId(Long listId) {
     this.listId = listId;
@@ -358,6 +370,42 @@ public class GetCampaignStats {
     this.returnBounce = returnBounce;
   }
 
+  public GetCampaignStats opensRate(Float opensRate) {
+    this.opensRate = opensRate;
+    return this;
+  }
+
+   /**
+   * Percentage of recipients who open the email out of your total number of recipients. Depending on your Campaign settings, they may include Apple MPP opens.
+   * @return opensRate
+  **/
+  @ApiModelProperty(example = "29.54", required = true, value = "Percentage of recipients who open the email out of your total number of recipients. Depending on your Campaign settings, they may include Apple MPP opens.")
+  public Float getOpensRate() {
+    return opensRate;
+  }
+
+  public void setOpensRate(Float opensRate) {
+    this.opensRate = opensRate;
+  }
+
+  public GetCampaignStats appleMppOpens(Long appleMppOpens) {
+    this.appleMppOpens = appleMppOpens;
+    return this;
+  }
+
+   /**
+   * Numbers of times your email has been opened automatically through Apple MPP.
+   * @return appleMppOpens
+  **/
+  @ApiModelProperty(example = "10", required = true, value = "Numbers of times your email has been opened automatically through Apple MPP.")
+  public Long getAppleMppOpens() {
+    return appleMppOpens;
+  }
+
+  public void setAppleMppOpens(Long appleMppOpens) {
+    this.appleMppOpens = appleMppOpens;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -383,12 +431,14 @@ public class GetCampaignStats {
     ObjectUtils.equals(this.unsubscriptions, getCampaignStats.unsubscriptions) &&
     ObjectUtils.equals(this.viewed, getCampaignStats.viewed) &&
     ObjectUtils.equals(this.deferred, getCampaignStats.deferred) &&
-    ObjectUtils.equals(this.returnBounce, getCampaignStats.returnBounce);
+    ObjectUtils.equals(this.returnBounce, getCampaignStats.returnBounce) &&
+    ObjectUtils.equals(this.opensRate, getCampaignStats.opensRate) &&
+    ObjectUtils.equals(this.appleMppOpens, getCampaignStats.appleMppOpens);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(listId, uniqueClicks, clickers, complaints, delivered, sent, softBounces, hardBounces, uniqueViews, trackableViews, trackableViewsRate, estimatedViews, unsubscriptions, viewed, deferred, returnBounce);
+    return ObjectUtils.hashCodeMulti(listId, uniqueClicks, clickers, complaints, delivered, sent, softBounces, hardBounces, uniqueViews, trackableViews, trackableViewsRate, estimatedViews, unsubscriptions, viewed, deferred, returnBounce, opensRate, appleMppOpens);
   }
 
 
@@ -413,6 +463,8 @@ public class GetCampaignStats {
     sb.append("    viewed: ").append(toIndentedString(viewed)).append("\n");
     sb.append("    deferred: ").append(toIndentedString(deferred)).append("\n");
     sb.append("    returnBounce: ").append(toIndentedString(returnBounce)).append("\n");
+    sb.append("    opensRate: ").append(toIndentedString(opensRate)).append("\n");
+    sb.append("    appleMppOpens: ").append(toIndentedString(appleMppOpens)).append("\n");
     sb.append("}");
     return sb.toString();
   }

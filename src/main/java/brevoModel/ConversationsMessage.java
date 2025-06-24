@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,6 +13,13 @@
 
 package brevoModel;
 
+import org.apache.commons.lang3.ObjectUtils;
+import brevoModel.ConversationsMessageAttachments;
+import brevoModel.ConversationsMessageFile;
+import brevoModel.ConversationsMessageForwardedToSourceStatus;
+import brevoModel.ConversationsMessageFrom;
+import brevoModel.ConversationsMessageReplyTo;
+import brevoModel.ConversationsMessageTo;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -20,21 +27,21 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.ObjectUtils;
-
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * a Conversations message
  */
 @ApiModel(description = "a Conversations message")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class ConversationsMessage {
   @SerializedName("id")
   private String id = null;
 
   /**
-   * &#x60;\&quot;agent\&quot;&#x60; for agents’ messages, &#x60;\&quot;visitor\&quot;&#x60; for visitors’ messages.
+   * &#x60;&quot;agent&quot;&#x60; for agents’ messages, &#x60;&quot;visitor&quot;&#x60; for visitors’ messages.
    */
   @JsonAdapter(TypeEnum.Adapter.class)
   public enum TypeEnum {
@@ -86,6 +93,9 @@ public class ConversationsMessage {
   @SerializedName("text")
   private String text = null;
 
+  @SerializedName("subject")
+  private String subject = null;
+
   @SerializedName("visitorId")
   private String visitorId = null;
 
@@ -101,11 +111,53 @@ public class ConversationsMessage {
   @SerializedName("isPushed")
   private Boolean isPushed = null;
 
+  @SerializedName("isTrigger")
+  private Boolean isTrigger = null;
+
+  @SerializedName("isMissed")
+  private Boolean isMissed = null;
+
+  @SerializedName("isMissedByVisitor")
+  private Boolean isMissedByVisitor = null;
+
+  @SerializedName("agentUserpic")
+  private String agentUserpic = null;
+
   @SerializedName("receivedFrom")
   private String receivedFrom = null;
 
   @SerializedName("file")
   private ConversationsMessageFile file = null;
+
+  @SerializedName("from")
+  private ConversationsMessageFrom from = null;
+
+  @SerializedName("to")
+  private List<ConversationsMessageTo> to = null;
+
+  @SerializedName("replyTo")
+  private ConversationsMessageReplyTo replyTo = null;
+
+  @SerializedName("cc")
+  private List<ConversationsMessageTo> cc = null;
+
+  @SerializedName("bcc")
+  private List<ConversationsMessageTo> bcc = null;
+
+  @SerializedName("sourceMessageId")
+  private String sourceMessageId = null;
+
+  @SerializedName("forwardedToSourceStatus")
+  private ConversationsMessageForwardedToSourceStatus forwardedToSourceStatus = null;
+
+  @SerializedName("integrations")
+  private Object integrations = null;
+
+  @SerializedName("isBot")
+  private Boolean isBot = null;
+
+  @SerializedName("attachments")
+  private List<ConversationsMessageAttachments> attachments = null;
 
   public ConversationsMessage id(String id) {
     this.id = id;
@@ -131,7 +183,7 @@ public class ConversationsMessage {
   }
 
    /**
-   * &#x60;\&quot;agent\&quot;&#x60; for agents’ messages, &#x60;\&quot;visitor\&quot;&#x60; for visitors’ messages.
+   * &#x60;&quot;agent&quot;&#x60; for agents’ messages, &#x60;&quot;visitor&quot;&#x60; for visitors’ messages.
    * @return type
   **/
   @ApiModelProperty(example = "agent", value = "`\"agent\"` for agents’ messages, `\"visitor\"` for visitors’ messages.")
@@ -159,6 +211,24 @@ public class ConversationsMessage {
 
   public void setText(String text) {
     this.text = text;
+  }
+
+  public ConversationsMessage subject(String subject) {
+    this.subject = subject;
+    return this;
+  }
+
+   /**
+   * The subject line of the email message (only for messages sent to email threads).
+   * @return subject
+  **/
+  @ApiModelProperty(example = "Invitation to a meeting", value = "The subject line of the email message (only for messages sent to email threads).")
+  public String getSubject() {
+    return subject;
+  }
+
+  public void setSubject(String subject) {
+    this.subject = subject;
   }
 
   public ConversationsMessage visitorId(String visitorId) {
@@ -252,6 +322,78 @@ public class ConversationsMessage {
     this.isPushed = isPushed;
   }
 
+  public ConversationsMessage isTrigger(Boolean isTrigger) {
+    this.isTrigger = isTrigger;
+    return this;
+  }
+
+   /**
+   * &#x60;true&#x60; for automatic messages from “Targeted chats &amp; triggers” and API (https://developers.brevo.com/docs/javascript-api-reference#sendautomessage)
+   * @return isTrigger
+  **/
+  @ApiModelProperty(example = "false", value = "`true` for automatic messages from “Targeted chats & triggers” and API (https://developers.brevo.com/docs/javascript-api-reference#sendautomessage)")
+  public Boolean isIsTrigger() {
+    return isTrigger;
+  }
+
+  public void setIsTrigger(Boolean isTrigger) {
+    this.isTrigger = isTrigger;
+  }
+
+  public ConversationsMessage isMissed(Boolean isMissed) {
+    this.isMissed = isMissed;
+    return this;
+  }
+
+   /**
+   * &#x60;true&#x60; for missed and offline messages.
+   * @return isMissed
+  **/
+  @ApiModelProperty(example = "false", value = "`true` for missed and offline messages.")
+  public Boolean isIsMissed() {
+    return isMissed;
+  }
+
+  public void setIsMissed(Boolean isMissed) {
+    this.isMissed = isMissed;
+  }
+
+  public ConversationsMessage isMissedByVisitor(Boolean isMissedByVisitor) {
+    this.isMissedByVisitor = isMissedByVisitor;
+    return this;
+  }
+
+   /**
+   * &#x60;true&#x60; for unread agent’s messages in finished chats.
+   * @return isMissedByVisitor
+  **/
+  @ApiModelProperty(example = "false", value = "`true` for unread agent’s messages in finished chats.")
+  public Boolean isIsMissedByVisitor() {
+    return isMissedByVisitor;
+  }
+
+  public void setIsMissedByVisitor(Boolean isMissedByVisitor) {
+    this.isMissedByVisitor = isMissedByVisitor;
+  }
+
+  public ConversationsMessage agentUserpic(String agentUserpic) {
+    this.agentUserpic = agentUserpic;
+    return this;
+  }
+
+   /**
+   * Only set if the agent has uploaded a profile picture.
+   * @return agentUserpic
+  **/
+  @ApiModelProperty(example = "https://www.brevo.com/", value = "Only set if the agent has uploaded a profile picture.")
+  public String getAgentUserpic() {
+    return agentUserpic;
+  }
+
+  public void setAgentUserpic(String agentUserpic) {
+    this.agentUserpic = agentUserpic;
+  }
+
   public ConversationsMessage receivedFrom(String receivedFrom) {
     this.receivedFrom = receivedFrom;
     return this;
@@ -288,6 +430,218 @@ public class ConversationsMessage {
     this.file = file;
   }
 
+  public ConversationsMessage from(ConversationsMessageFrom from) {
+    this.from = from;
+    return this;
+  }
+
+   /**
+   * Get from
+   * @return from
+  **/
+  @ApiModelProperty(value = "")
+  public ConversationsMessageFrom getFrom() {
+    return from;
+  }
+
+  public void setFrom(ConversationsMessageFrom from) {
+    this.from = from;
+  }
+
+  public ConversationsMessage to(List<ConversationsMessageTo> to) {
+    this.to = to;
+    return this;
+  }
+
+  public ConversationsMessage addToItem(ConversationsMessageTo toItem) {
+    if (this.to == null) {
+      this.to = new ArrayList<ConversationsMessageTo>();
+    }
+    this.to.add(toItem);
+    return this;
+  }
+
+   /**
+   * An array containing details of the recipients (applicable only to messages in email threads).
+   * @return to
+  **/
+  @ApiModelProperty(value = "An array containing details of the recipients (applicable only to messages in email threads).")
+  public List<ConversationsMessageTo> getTo() {
+    return to;
+  }
+
+  public void setTo(List<ConversationsMessageTo> to) {
+    this.to = to;
+  }
+
+  public ConversationsMessage replyTo(ConversationsMessageReplyTo replyTo) {
+    this.replyTo = replyTo;
+    return this;
+  }
+
+   /**
+   * Get replyTo
+   * @return replyTo
+  **/
+  @ApiModelProperty(value = "")
+  public ConversationsMessageReplyTo getReplyTo() {
+    return replyTo;
+  }
+
+  public void setReplyTo(ConversationsMessageReplyTo replyTo) {
+    this.replyTo = replyTo;
+  }
+
+  public ConversationsMessage cc(List<ConversationsMessageTo> cc) {
+    this.cc = cc;
+    return this;
+  }
+
+  public ConversationsMessage addCcItem(ConversationsMessageTo ccItem) {
+    if (this.cc == null) {
+      this.cc = new ArrayList<ConversationsMessageTo>();
+    }
+    this.cc.add(ccItem);
+    return this;
+  }
+
+   /**
+   * An array containing details of the carbon copy (CC) recipients (applicable only to messages in email threads).
+   * @return cc
+  **/
+  @ApiModelProperty(value = "An array containing details of the carbon copy (CC) recipients (applicable only to messages in email threads).")
+  public List<ConversationsMessageTo> getCc() {
+    return cc;
+  }
+
+  public void setCc(List<ConversationsMessageTo> cc) {
+    this.cc = cc;
+  }
+
+  public ConversationsMessage bcc(List<ConversationsMessageTo> bcc) {
+    this.bcc = bcc;
+    return this;
+  }
+
+  public ConversationsMessage addBccItem(ConversationsMessageTo bccItem) {
+    if (this.bcc == null) {
+      this.bcc = new ArrayList<ConversationsMessageTo>();
+    }
+    this.bcc.add(bccItem);
+    return this;
+  }
+
+   /**
+   * An array containing details of the blind carbon copy (BCC) recipients (applicable only to messages in email threads).
+   * @return bcc
+  **/
+  @ApiModelProperty(value = "An array containing details of the blind carbon copy (BCC) recipients (applicable only to messages in email threads).")
+  public List<ConversationsMessageTo> getBcc() {
+    return bcc;
+  }
+
+  public void setBcc(List<ConversationsMessageTo> bcc) {
+    this.bcc = bcc;
+  }
+
+  public ConversationsMessage sourceMessageId(String sourceMessageId) {
+    this.sourceMessageId = sourceMessageId;
+    return this;
+  }
+
+   /**
+   * The ID of the message assigned by the integration source.
+   * @return sourceMessageId
+  **/
+  @ApiModelProperty(value = "The ID of the message assigned by the integration source.")
+  public String getSourceMessageId() {
+    return sourceMessageId;
+  }
+
+  public void setSourceMessageId(String sourceMessageId) {
+    this.sourceMessageId = sourceMessageId;
+  }
+
+  public ConversationsMessage forwardedToSourceStatus(ConversationsMessageForwardedToSourceStatus forwardedToSourceStatus) {
+    this.forwardedToSourceStatus = forwardedToSourceStatus;
+    return this;
+  }
+
+   /**
+   * Get forwardedToSourceStatus
+   * @return forwardedToSourceStatus
+  **/
+  @ApiModelProperty(value = "")
+  public ConversationsMessageForwardedToSourceStatus getForwardedToSourceStatus() {
+    return forwardedToSourceStatus;
+  }
+
+  public void setForwardedToSourceStatus(ConversationsMessageForwardedToSourceStatus forwardedToSourceStatus) {
+    this.forwardedToSourceStatus = forwardedToSourceStatus;
+  }
+
+  public ConversationsMessage integrations(Object integrations) {
+    this.integrations = integrations;
+    return this;
+  }
+
+   /**
+   * Integration details.
+   * @return integrations
+  **/
+  @ApiModelProperty(value = "Integration details.")
+  public Object getIntegrations() {
+    return integrations;
+  }
+
+  public void setIntegrations(Object integrations) {
+    this.integrations = integrations;
+  }
+
+  public ConversationsMessage isBot(Boolean isBot) {
+    this.isBot = isBot;
+    return this;
+  }
+
+   /**
+   * &#x60;true&#x60; for automated messages generated by an AI bot.
+   * @return isBot
+  **/
+  @ApiModelProperty(value = "`true` for automated messages generated by an AI bot.")
+  public Boolean isIsBot() {
+    return isBot;
+  }
+
+  public void setIsBot(Boolean isBot) {
+    this.isBot = isBot;
+  }
+
+  public ConversationsMessage attachments(List<ConversationsMessageAttachments> attachments) {
+    this.attachments = attachments;
+    return this;
+  }
+
+  public ConversationsMessage addAttachmentsItem(ConversationsMessageAttachments attachmentsItem) {
+    if (this.attachments == null) {
+      this.attachments = new ArrayList<ConversationsMessageAttachments>();
+    }
+    this.attachments.add(attachmentsItem);
+    return this;
+  }
+
+   /**
+   * An array of file attachments.
+   * @return attachments
+  **/
+  @ApiModelProperty(value = "An array of file attachments.")
+  public List<ConversationsMessageAttachments> getAttachments() {
+    return attachments;
+  }
+
+  public void setAttachments(List<ConversationsMessageAttachments> attachments) {
+    this.attachments = attachments;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -301,18 +655,33 @@ public class ConversationsMessage {
     return ObjectUtils.equals(this.id, conversationsMessage.id) &&
     ObjectUtils.equals(this.type, conversationsMessage.type) &&
     ObjectUtils.equals(this.text, conversationsMessage.text) &&
+    ObjectUtils.equals(this.subject, conversationsMessage.subject) &&
     ObjectUtils.equals(this.visitorId, conversationsMessage.visitorId) &&
     ObjectUtils.equals(this.agentId, conversationsMessage.agentId) &&
     ObjectUtils.equals(this.agentName, conversationsMessage.agentName) &&
     ObjectUtils.equals(this.createdAt, conversationsMessage.createdAt) &&
     ObjectUtils.equals(this.isPushed, conversationsMessage.isPushed) &&
+    ObjectUtils.equals(this.isTrigger, conversationsMessage.isTrigger) &&
+    ObjectUtils.equals(this.isMissed, conversationsMessage.isMissed) &&
+    ObjectUtils.equals(this.isMissedByVisitor, conversationsMessage.isMissedByVisitor) &&
+    ObjectUtils.equals(this.agentUserpic, conversationsMessage.agentUserpic) &&
     ObjectUtils.equals(this.receivedFrom, conversationsMessage.receivedFrom) &&
-    ObjectUtils.equals(this.file, conversationsMessage.file);
+    ObjectUtils.equals(this.file, conversationsMessage.file) &&
+    ObjectUtils.equals(this.from, conversationsMessage.from) &&
+    ObjectUtils.equals(this.to, conversationsMessage.to) &&
+    ObjectUtils.equals(this.replyTo, conversationsMessage.replyTo) &&
+    ObjectUtils.equals(this.cc, conversationsMessage.cc) &&
+    ObjectUtils.equals(this.bcc, conversationsMessage.bcc) &&
+    ObjectUtils.equals(this.sourceMessageId, conversationsMessage.sourceMessageId) &&
+    ObjectUtils.equals(this.forwardedToSourceStatus, conversationsMessage.forwardedToSourceStatus) &&
+    ObjectUtils.equals(this.integrations, conversationsMessage.integrations) &&
+    ObjectUtils.equals(this.isBot, conversationsMessage.isBot) &&
+    ObjectUtils.equals(this.attachments, conversationsMessage.attachments);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(id, type, text, visitorId, agentId, agentName, createdAt, isPushed, receivedFrom, file);
+    return ObjectUtils.hashCodeMulti(id, type, text, subject, visitorId, agentId, agentName, createdAt, isPushed, isTrigger, isMissed, isMissedByVisitor, agentUserpic, receivedFrom, file, from, to, replyTo, cc, bcc, sourceMessageId, forwardedToSourceStatus, integrations, isBot, attachments);
   }
 
 
@@ -324,13 +693,28 @@ public class ConversationsMessage {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    text: ").append(toIndentedString(text)).append("\n");
+    sb.append("    subject: ").append(toIndentedString(subject)).append("\n");
     sb.append("    visitorId: ").append(toIndentedString(visitorId)).append("\n");
     sb.append("    agentId: ").append(toIndentedString(agentId)).append("\n");
     sb.append("    agentName: ").append(toIndentedString(agentName)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    isPushed: ").append(toIndentedString(isPushed)).append("\n");
+    sb.append("    isTrigger: ").append(toIndentedString(isTrigger)).append("\n");
+    sb.append("    isMissed: ").append(toIndentedString(isMissed)).append("\n");
+    sb.append("    isMissedByVisitor: ").append(toIndentedString(isMissedByVisitor)).append("\n");
+    sb.append("    agentUserpic: ").append(toIndentedString(agentUserpic)).append("\n");
     sb.append("    receivedFrom: ").append(toIndentedString(receivedFrom)).append("\n");
     sb.append("    file: ").append(toIndentedString(file)).append("\n");
+    sb.append("    from: ").append(toIndentedString(from)).append("\n");
+    sb.append("    to: ").append(toIndentedString(to)).append("\n");
+    sb.append("    replyTo: ").append(toIndentedString(replyTo)).append("\n");
+    sb.append("    cc: ").append(toIndentedString(cc)).append("\n");
+    sb.append("    bcc: ").append(toIndentedString(bcc)).append("\n");
+    sb.append("    sourceMessageId: ").append(toIndentedString(sourceMessageId)).append("\n");
+    sb.append("    forwardedToSourceStatus: ").append(toIndentedString(forwardedToSourceStatus)).append("\n");
+    sb.append("    integrations: ").append(toIndentedString(integrations)).append("\n");
+    sb.append("    isBot: ").append(toIndentedString(isBot)).append("\n");
+    sb.append("    attachments: ").append(toIndentedString(attachments)).append("\n");
     sb.append("}");
     return sb.toString();
   }

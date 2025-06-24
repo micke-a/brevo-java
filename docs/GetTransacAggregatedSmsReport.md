@@ -12,8 +12,9 @@ Name | Type | Description | Notes
 **blocked** | **Long** | Number of blocked contact for the timeframe |  [optional]
 **unsubscribed** | **Long** | Number of unsubscription for the timeframe |  [optional]
 **replied** | **Long** | Number of answered SMS for the timeframe |  [optional]
-**accepted** | **Long** | Number of accepted for the timeframe |  [optional]
-**rejected** | **Long** | Number of rejected for the timeframe |  [optional]
+**accepted** | **Long** | Number of accepted SMS for the timeframe |  [optional]
+**rejected** | **Long** | Number of rejected SMS for the timeframe |  [optional]
+**skipped** | **Long** | Number of skipped SMS for the timeframe |  [optional]
 
 
 

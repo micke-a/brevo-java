@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **url** | **String** | URL to the category |  [optional]
 **updateEnabled** | **Boolean** | Facilitate to update the existing category in the same request (updateEnabled &#x3D; true) |  [optional]
 **deletedAt** | **String** | UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) of the category deleted from the shop&#39;s database |  [optional]
+**isDeleted** | **Boolean** | category deleted from the shop&#39;s database |  [optional]
 
 
 

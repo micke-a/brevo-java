@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -16,6 +16,8 @@ package brevoApi;
 import brevo.*;
 import brevoModel.CreateModel;
 import brevoModel.CreatePaymentRequest;
+import brevoModel.CreatePaymentResponse;
+import brevoModel.ErrorModel;
 import brevoModel.GetPaymentRequest;
 import com.google.gson.reflect.TypeToken;
 import okhttp3.Call;
@@ -115,11 +117,11 @@ public class PaymentsApi {
      * Create a payment request
      * 
      * @param createPaymentRquest Create a payment request  (required)
-     * @return CreateModel
+     * @return CreatePaymentResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public CreateModel createPaymentRequest(CreatePaymentRequest createPaymentRquest) throws ApiException {
-        ApiResponse<CreateModel> resp = createPaymentRequestWithHttpInfo(createPaymentRquest);
+    public CreatePaymentResponse createPaymentRequest(CreatePaymentRequest createPaymentRquest) throws ApiException {
+        ApiResponse<CreatePaymentResponse> resp = createPaymentRequestWithHttpInfo(createPaymentRquest);
         return resp.getData();
     }
 
@@ -127,12 +129,12 @@ public class PaymentsApi {
      * Create a payment request
      * 
      * @param createPaymentRquest Create a payment request  (required)
-     * @return ApiResponse&lt;CreateModel&gt;
+     * @return ApiResponse&lt;CreatePaymentResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<CreateModel> createPaymentRequestWithHttpInfo(CreatePaymentRequest createPaymentRquest) throws ApiException {
+    public ApiResponse<CreatePaymentResponse> createPaymentRequestWithHttpInfo(CreatePaymentRequest createPaymentRquest) throws ApiException {
         Call call = createPaymentRequestValidateBeforeCall(createPaymentRquest, null, null);
-        Type localVarReturnType = new TypeToken<CreateModel>(){}.getType();
+        Type localVarReturnType = new TypeToken<CreatePaymentResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -144,7 +146,7 @@ public class PaymentsApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call createPaymentRequestAsync(CreatePaymentRequest createPaymentRquest, final ApiCallback<CreateModel> callback) throws ApiException {
+    public Call createPaymentRequestAsync(CreatePaymentRequest createPaymentRquest, final ApiCallback<CreatePaymentResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -166,7 +168,7 @@ public class PaymentsApi {
         }
 
         Call call = createPaymentRequestValidateBeforeCall(createPaymentRquest, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<CreateModel>(){}.getType();
+        Type localVarReturnType = new TypeToken<CreatePaymentResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }

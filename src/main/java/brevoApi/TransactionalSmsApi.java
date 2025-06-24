@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,14 +13,31 @@
 
 package brevoApi;
 
-import brevo.*;
-import brevoModel.*;
+import brevo.ApiCallback;
+import brevo.ApiClient;
+import brevo.ApiException;
+import brevo.ApiResponse;
+import brevo.Configuration;
+import brevo.Pair;
+import brevo.ProgressRequestBody;
+import brevo.ProgressResponseBody;
+
 import com.google.gson.reflect.TypeToken;
 import okhttp3.Call;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 
 import java.io.IOException;
+
+
+import brevoModel.ErrorModel;
+import brevoModel.GetSmsEventReport;
+import brevoModel.GetTransacAggregatedSmsReport;
+import brevoModel.GetTransacSmsReport;
+import brevoModel.SendSms;
+import brevoModel.SendTransacSms;
+import okhttp3.*;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -71,36 +88,36 @@ public class TransactionalSmsApi {
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (limit != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("limit", limit));
+            localVarQueryParams.addAll(apiClient.parameterToPair("limit", limit));
         if (startDate != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("startDate", startDate));
+            localVarQueryParams.addAll(apiClient.parameterToPair("startDate", startDate));
         if (endDate != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("endDate", endDate));
+            localVarQueryParams.addAll(apiClient.parameterToPair("endDate", endDate));
         if (offset != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("offset", offset));
+            localVarQueryParams.addAll(apiClient.parameterToPair("offset", offset));
         if (days != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("days", days));
+            localVarQueryParams.addAll(apiClient.parameterToPair("days", days));
         if (phoneNumber != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("phoneNumber", phoneNumber));
+            localVarQueryParams.addAll(apiClient.parameterToPair("phoneNumber", phoneNumber));
         if (event != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("event", event));
+            localVarQueryParams.addAll(apiClient.parameterToPair("event", event));
         if (tags != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("tags", tags));
+            localVarQueryParams.addAll(apiClient.parameterToPair("tags", tags));
         if (sort != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("sort", sort));
+            localVarQueryParams.addAll(apiClient.parameterToPair("sort", sort));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
         final String[] localVarAccepts = {
-            "application/json"
+                "application/json"
         };
         final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
 
         final String[] localVarContentTypes = {
-            "application/json"
+                "application/json"
         };
         final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
         localVarHeaderParams.put("Content-Type", localVarContentType);
@@ -111,8 +128,8 @@ public class TransactionalSmsApi {
                 public Response intercept(Interceptor.Chain chain) throws IOException {
                     Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
-                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
-                    .build();
+                            .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                            .build();
                 }
             });
         }
@@ -123,7 +140,7 @@ public class TransactionalSmsApi {
 
     @SuppressWarnings("rawtypes")
     private Call getSmsEventsValidateBeforeCall(Long limit, String startDate, String endDate, Long offset, Long days, String phoneNumber, String event, String tags, String sort, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        
+
 
         Call call = getSmsEventsCall(limit, startDate, endDate, offset, days, phoneNumber, event, tags, sort, progressListener, progressRequestListener);
         return call;
@@ -132,7 +149,7 @@ public class TransactionalSmsApi {
 
     /**
      * Get all your SMS activity (unaggregated events)
-     * 
+     *
      * @param limit Number of documents per page (optional, default to 50)
      * @param startDate Mandatory if endDate is used. Starting date (YYYY-MM-DD) of the report (optional)
      * @param endDate Mandatory if startDate is used. Ending date (YYYY-MM-DD) of the report (optional)
@@ -152,7 +169,7 @@ public class TransactionalSmsApi {
 
     /**
      * Get all your SMS activity (unaggregated events)
-     * 
+     *
      * @param limit Number of documents per page (optional, default to 50)
      * @param startDate Mandatory if endDate is used. Starting date (YYYY-MM-DD) of the report (optional)
      * @param endDate Mandatory if startDate is used. Ending date (YYYY-MM-DD) of the report (optional)
@@ -173,7 +190,7 @@ public class TransactionalSmsApi {
 
     /**
      * Get all your SMS activity (unaggregated events) (asynchronously)
-     * 
+     *
      * @param limit Number of documents per page (optional, default to 50)
      * @param startDate Mandatory if endDate is used. Starting date (YYYY-MM-DD) of the report (optional)
      * @param endDate Mandatory if startDate is used. Ending date (YYYY-MM-DD) of the report (optional)
@@ -233,26 +250,26 @@ public class TransactionalSmsApi {
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (startDate != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("startDate", startDate));
+            localVarQueryParams.addAll(apiClient.parameterToPair("startDate", startDate));
         if (endDate != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("endDate", endDate));
+            localVarQueryParams.addAll(apiClient.parameterToPair("endDate", endDate));
         if (days != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("days", days));
+            localVarQueryParams.addAll(apiClient.parameterToPair("days", days));
         if (tag != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("tag", tag));
+            localVarQueryParams.addAll(apiClient.parameterToPair("tag", tag));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
         final String[] localVarAccepts = {
-            "application/json"
+                "application/json"
         };
         final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
 
         final String[] localVarContentTypes = {
-            "application/json"
+                "application/json"
         };
         final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
         localVarHeaderParams.put("Content-Type", localVarContentType);
@@ -263,8 +280,8 @@ public class TransactionalSmsApi {
                 public Response intercept(Interceptor.Chain chain) throws IOException {
                     Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
-                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
-                    .build();
+                            .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                            .build();
                 }
             });
         }
@@ -275,7 +292,7 @@ public class TransactionalSmsApi {
 
     @SuppressWarnings("rawtypes")
     private Call getTransacAggregatedSmsReportValidateBeforeCall(String startDate, String endDate, Long days, String tag, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        
+
 
         Call call = getTransacAggregatedSmsReportCall(startDate, endDate, days, tag, progressListener, progressRequestListener);
         return call;
@@ -284,7 +301,7 @@ public class TransactionalSmsApi {
 
     /**
      * Get your SMS activity aggregated over a period of time
-     * 
+     *
      * @param startDate Mandatory if endDate is used. Starting date (YYYY-MM-DD) of the report (optional)
      * @param endDate Mandatory if startDate is used. Ending date (YYYY-MM-DD) of the report (optional)
      * @param days Number of days in the past including today (positive integer). Not compatible with startDate and endDate (optional)
@@ -299,7 +316,7 @@ public class TransactionalSmsApi {
 
     /**
      * Get your SMS activity aggregated over a period of time
-     * 
+     *
      * @param startDate Mandatory if endDate is used. Starting date (YYYY-MM-DD) of the report (optional)
      * @param endDate Mandatory if startDate is used. Ending date (YYYY-MM-DD) of the report (optional)
      * @param days Number of days in the past including today (positive integer). Not compatible with startDate and endDate (optional)
@@ -315,7 +332,7 @@ public class TransactionalSmsApi {
 
     /**
      * Get your SMS activity aggregated over a period of time (asynchronously)
-     * 
+     *
      * @param startDate Mandatory if endDate is used. Starting date (YYYY-MM-DD) of the report (optional)
      * @param endDate Mandatory if startDate is used. Ending date (YYYY-MM-DD) of the report (optional)
      * @param days Number of days in the past including today (positive integer). Not compatible with startDate and endDate (optional)
@@ -371,28 +388,28 @@ public class TransactionalSmsApi {
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         if (startDate != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("startDate", startDate));
+            localVarQueryParams.addAll(apiClient.parameterToPair("startDate", startDate));
         if (endDate != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("endDate", endDate));
+            localVarQueryParams.addAll(apiClient.parameterToPair("endDate", endDate));
         if (days != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("days", days));
+            localVarQueryParams.addAll(apiClient.parameterToPair("days", days));
         if (tag != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("tag", tag));
+            localVarQueryParams.addAll(apiClient.parameterToPair("tag", tag));
         if (sort != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("sort", sort));
+            localVarQueryParams.addAll(apiClient.parameterToPair("sort", sort));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
         final String[] localVarAccepts = {
-            "application/json"
+                "application/json"
         };
         final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
 
         final String[] localVarContentTypes = {
-            "application/json"
+                "application/json"
         };
         final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
         localVarHeaderParams.put("Content-Type", localVarContentType);
@@ -403,8 +420,8 @@ public class TransactionalSmsApi {
                 public Response intercept(Interceptor.Chain chain) throws IOException {
                     Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
-                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
-                    .build();
+                            .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                            .build();
                 }
             });
         }
@@ -415,7 +432,7 @@ public class TransactionalSmsApi {
 
     @SuppressWarnings("rawtypes")
     private Call getTransacSmsReportValidateBeforeCall(String startDate, String endDate, Long days, String tag, String sort, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        
+
 
         Call call = getTransacSmsReportCall(startDate, endDate, days, tag, sort, progressListener, progressRequestListener);
         return call;
@@ -424,7 +441,7 @@ public class TransactionalSmsApi {
 
     /**
      * Get your SMS activity aggregated per day
-     * 
+     *
      * @param startDate Mandatory if endDate is used. Starting date (YYYY-MM-DD) of the report (optional)
      * @param endDate Mandatory if startDate is used. Ending date (YYYY-MM-DD) of the report (optional)
      * @param days Number of days in the past including today (positive integer). Not compatible with &#39;startDate&#39; and &#39;endDate&#39; (optional)
@@ -440,7 +457,7 @@ public class TransactionalSmsApi {
 
     /**
      * Get your SMS activity aggregated per day
-     * 
+     *
      * @param startDate Mandatory if endDate is used. Starting date (YYYY-MM-DD) of the report (optional)
      * @param endDate Mandatory if startDate is used. Ending date (YYYY-MM-DD) of the report (optional)
      * @param days Number of days in the past including today (positive integer). Not compatible with &#39;startDate&#39; and &#39;endDate&#39; (optional)
@@ -457,7 +474,7 @@ public class TransactionalSmsApi {
 
     /**
      * Get your SMS activity aggregated per day (asynchronously)
-     * 
+     *
      * @param startDate Mandatory if endDate is used. Starting date (YYYY-MM-DD) of the report (optional)
      * @param endDate Mandatory if startDate is used. Ending date (YYYY-MM-DD) of the report (optional)
      * @param days Number of days in the past including today (positive integer). Not compatible with &#39;startDate&#39; and &#39;endDate&#39; (optional)
@@ -494,6 +511,124 @@ public class TransactionalSmsApi {
         return call;
     }
     /**
+     * Build call for sendAsyncTransactionalSms
+     * @param sendTransacSms Values to send a transactional SMS (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public Call sendAsyncTransactionalSmsCall(SendTransacSms sendTransacSms, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = sendTransacSms;
+
+        // create path and map variables
+        String localVarPath = "/transactionalSMS/send";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+                "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+                "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
+                @Override
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                            .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                            .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "api-key", "partner-key" };
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private Call sendAsyncTransactionalSmsValidateBeforeCall(SendTransacSms sendTransacSms, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+
+        // verify the required parameter 'sendTransacSms' is set
+        if (sendTransacSms == null) {
+            throw new ApiException("Missing the required parameter 'sendTransacSms' when calling sendAsyncTransactionalSms(Async)");
+        }
+
+
+        Call call = sendAsyncTransactionalSmsCall(sendTransacSms, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Send SMS message asynchronously to a mobile number
+     *
+     * @param sendTransacSms Values to send a transactional SMS (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public void sendAsyncTransactionalSms(SendTransacSms sendTransacSms) throws ApiException {
+        sendAsyncTransactionalSmsWithHttpInfo(sendTransacSms);
+    }
+
+    /**
+     * Send SMS message asynchronously to a mobile number
+     *
+     * @param sendTransacSms Values to send a transactional SMS (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<Void> sendAsyncTransactionalSmsWithHttpInfo(SendTransacSms sendTransacSms) throws ApiException {
+        Call call = sendAsyncTransactionalSmsValidateBeforeCall(sendTransacSms, null, null);
+        return apiClient.execute(call);
+    }
+
+    /**
+     * Send SMS message asynchronously to a mobile number (asynchronously)
+     *
+     * @param sendTransacSms Values to send a transactional SMS (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public Call sendAsyncTransactionalSmsAsync(SendTransacSms sendTransacSms, final ApiCallback<Void> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        Call call = sendAsyncTransactionalSmsValidateBeforeCall(sendTransacSms, progressListener, progressRequestListener);
+        apiClient.executeAsync(call, callback);
+        return call;
+    }
+    /**
      * Build call for sendTransacSms
      * @param sendTransacSms Values to send a transactional SMS (required)
      * @param progressListener Progress listener
@@ -515,13 +650,13 @@ public class TransactionalSmsApi {
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
         final String[] localVarAccepts = {
-            "application/json"
+                "application/json"
         };
         final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
 
         final String[] localVarContentTypes = {
-            "application/json"
+                "application/json"
         };
         final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
         localVarHeaderParams.put("Content-Type", localVarContentType);
@@ -532,8 +667,8 @@ public class TransactionalSmsApi {
                 public Response intercept(Interceptor.Chain chain) throws IOException {
                     Response originalResponse = chain.proceed(chain.request());
                     return originalResponse.newBuilder()
-                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
-                    .build();
+                            .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                            .build();
                 }
             });
         }
@@ -544,12 +679,12 @@ public class TransactionalSmsApi {
 
     @SuppressWarnings("rawtypes")
     private Call sendTransacSmsValidateBeforeCall(SendTransacSms sendTransacSms, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        
+
         // verify the required parameter 'sendTransacSms' is set
         if (sendTransacSms == null) {
             throw new ApiException("Missing the required parameter 'sendTransacSms' when calling sendTransacSms(Async)");
         }
-        
+
 
         Call call = sendTransacSmsCall(sendTransacSms, progressListener, progressRequestListener);
         return call;
@@ -558,7 +693,7 @@ public class TransactionalSmsApi {
 
     /**
      * Send SMS message to a mobile number
-     * 
+     *
      * @param sendTransacSms Values to send a transactional SMS (required)
      * @return SendSms
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -570,7 +705,7 @@ public class TransactionalSmsApi {
 
     /**
      * Send SMS message to a mobile number
-     * 
+     *
      * @param sendTransacSms Values to send a transactional SMS (required)
      * @return ApiResponse&lt;SendSms&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -583,7 +718,7 @@ public class TransactionalSmsApi {
 
     /**
      * Send SMS message to a mobile number (asynchronously)
-     * 
+     *
      * @param sendTransacSms Values to send a transactional SMS (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call

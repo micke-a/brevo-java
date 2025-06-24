@@ -4,7 +4,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**subAccountIds** | **List&lt;Long&gt;** | List of sub-account ids | 
+**ip** | **String** | IP Address | 
+**ids** | **List&lt;Long&gt;** | Pass the list of sub-account Ids to be dissociated from the IP address | 
 
 
 

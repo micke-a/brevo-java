@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,14 +13,15 @@
 
 package brevoModel;
 
+import org.apache.commons.lang3.ObjectUtils;
+import brevoModel.CreateAttributeEnumeration;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.ObjectUtils;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ import java.util.List;
 /**
  * CreateAttribute
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class CreateAttribute {
   @SerializedName("value")
   private String value = null;
@@ -39,8 +40,11 @@ public class CreateAttribute {
   @SerializedName("enumeration")
   private List<CreateAttributeEnumeration> enumeration = null;
 
+  @SerializedName("multiCategoryOptions")
+  private List<String> multiCategoryOptions = null;
+
   /**
-   * Type of the attribute. Use only if the attribute&#39;s category is &#39;normal&#39;, &#39;category&#39; or &#39;transactional&#39; ( type &#39;boolean&#39; is only available if the category is &#39;normal&#39; attribute, type &#39;id&#39; is only available if the category is &#39;transactional&#39; attribute &amp; type &#39;category&#39; is only available if the category is &#39;category&#39; attribute )
+   * Type of the attribute. Use only if the attribute&#39;s category is &#39;normal&#39;, &#39;category&#39; or &#39;transactional&#39; ( type &#39;user&#39; and &#39;multiple-choice&#39; is only available if the category is &#39;normal&#39; attribute, type &#39;id&#39; is only available if the category is &#39;transactional&#39; attribute &amp; type &#39;category&#39; is only available if the category is &#39;category&#39; attribute )
    */
   @JsonAdapter(TypeEnum.Adapter.class)
   public enum TypeEnum {
@@ -54,7 +58,9 @@ public class CreateAttribute {
     
     ID("id"),
     
-    CATEGORY("category");
+    CATEGORY("category"),
+    
+    MULTIPLE_CHOICE("multiple-choice");
 
     private String value;
 
@@ -147,10 +153,10 @@ public class CreateAttribute {
   }
 
    /**
-   * List of values and labels that the attribute can take. Use only if the attribute&#39;s category is \&quot;category\&quot;. For example, [{\&quot;value\&quot;:1, \&quot;label\&quot;:\&quot;male\&quot;}, {\&quot;value\&quot;:2, \&quot;label\&quot;:\&quot;female\&quot;}]
+   * List of values and labels that the attribute can take. Use only if the attribute&#39;s category is &quot;category&quot;. None of the category options can exceed max 200 characters. For example, [{&quot;value&quot;:1, &quot;label&quot;:&quot;male&quot;}, {&quot;value&quot;:2, &quot;label&quot;:&quot;female&quot;}]
    * @return enumeration
   **/
-  @ApiModelProperty(value = "List of values and labels that the attribute can take. Use only if the attribute's category is \"category\". For example, [{\"value\":1, \"label\":\"male\"}, {\"value\":2, \"label\":\"female\"}]")
+  @ApiModelProperty(value = "List of values and labels that the attribute can take. Use only if the attribute's category is \"category\". None of the category options can exceed max 200 characters. For example, [{\"value\":1, \"label\":\"male\"}, {\"value\":2, \"label\":\"female\"}]")
   public List<CreateAttributeEnumeration> getEnumeration() {
     return enumeration;
   }
@@ -159,16 +165,42 @@ public class CreateAttribute {
     this.enumeration = enumeration;
   }
 
+  public CreateAttribute multiCategoryOptions(List<String> multiCategoryOptions) {
+    this.multiCategoryOptions = multiCategoryOptions;
+    return this;
+  }
+
+  public CreateAttribute addMultiCategoryOptionsItem(String multiCategoryOptionsItem) {
+    if (this.multiCategoryOptions == null) {
+      this.multiCategoryOptions = new ArrayList<String>();
+    }
+    this.multiCategoryOptions.add(multiCategoryOptionsItem);
+    return this;
+  }
+
+   /**
+   * List of options you want to add for multiple-choice attribute. **Use only if the attribute&#39;s category is &quot;normal&quot; and attribute&#39;s type is &quot;multiple-choice&quot;. None of the multicategory options can exceed max 200 characters.** For example: **[&quot;USA&quot;,&quot;INDIA&quot;]** 
+   * @return multiCategoryOptions
+  **/
+  @ApiModelProperty(value = "List of options you want to add for multiple-choice attribute. **Use only if the attribute's category is \"normal\" and attribute's type is \"multiple-choice\". None of the multicategory options can exceed max 200 characters.** For example: **[\"USA\",\"INDIA\"]** ")
+  public List<String> getMultiCategoryOptions() {
+    return multiCategoryOptions;
+  }
+
+  public void setMultiCategoryOptions(List<String> multiCategoryOptions) {
+    this.multiCategoryOptions = multiCategoryOptions;
+  }
+
   public CreateAttribute type(TypeEnum type) {
     this.type = type;
     return this;
   }
 
    /**
-   * Type of the attribute. Use only if the attribute&#39;s category is &#39;normal&#39;, &#39;category&#39; or &#39;transactional&#39; ( type &#39;boolean&#39; is only available if the category is &#39;normal&#39; attribute, type &#39;id&#39; is only available if the category is &#39;transactional&#39; attribute &amp; type &#39;category&#39; is only available if the category is &#39;category&#39; attribute )
+   * Type of the attribute. Use only if the attribute&#39;s category is &#39;normal&#39;, &#39;category&#39; or &#39;transactional&#39; ( type &#39;user&#39; and &#39;multiple-choice&#39; is only available if the category is &#39;normal&#39; attribute, type &#39;id&#39; is only available if the category is &#39;transactional&#39; attribute &amp; type &#39;category&#39; is only available if the category is &#39;category&#39; attribute )
    * @return type
   **/
-  @ApiModelProperty(example = "text", value = "Type of the attribute. Use only if the attribute's category is 'normal', 'category' or 'transactional' ( type 'boolean' is only available if the category is 'normal' attribute, type 'id' is only available if the category is 'transactional' attribute & type 'category' is only available if the category is 'category' attribute )")
+  @ApiModelProperty(example = "text", value = "Type of the attribute. Use only if the attribute's category is 'normal', 'category' or 'transactional' ( type 'user' and 'multiple-choice' is only available if the category is 'normal' attribute, type 'id' is only available if the category is 'transactional' attribute & type 'category' is only available if the category is 'category' attribute )")
   public TypeEnum getType() {
     return type;
   }
@@ -190,12 +222,13 @@ public class CreateAttribute {
     return ObjectUtils.equals(this.value, createAttribute.value) &&
     ObjectUtils.equals(this.isRecurring, createAttribute.isRecurring) &&
     ObjectUtils.equals(this.enumeration, createAttribute.enumeration) &&
+    ObjectUtils.equals(this.multiCategoryOptions, createAttribute.multiCategoryOptions) &&
     ObjectUtils.equals(this.type, createAttribute.type);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(value, isRecurring, enumeration, type);
+    return ObjectUtils.hashCodeMulti(value, isRecurring, enumeration, multiCategoryOptions, type);
   }
 
 
@@ -207,6 +240,7 @@ public class CreateAttribute {
     sb.append("    value: ").append(toIndentedString(value)).append("\n");
     sb.append("    isRecurring: ").append(toIndentedString(isRecurring)).append("\n");
     sb.append("    enumeration: ").append(toIndentedString(enumeration)).append("\n");
+    sb.append("    multiCategoryOptions: ").append(toIndentedString(multiCategoryOptions)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
     return sb.toString();

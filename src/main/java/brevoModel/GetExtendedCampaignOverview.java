@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,20 +13,22 @@
 
 package brevoModel;
 
+import org.apache.commons.lang3.ObjectUtils;
+import brevoModel.GetCampaignOverview;
+import brevoModel.GetExtendedCampaignOverviewSender;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.ObjectUtils;
-
 import java.io.IOException;
 
 /**
  * GetExtendedCampaignOverview
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class GetExtendedCampaignOverview {
   @SerializedName("id")
   private Long id = null;
@@ -171,6 +173,18 @@ public class GetExtendedCampaignOverview {
 
   @SerializedName("sendAtBestTime")
   private Boolean sendAtBestTime = null;
+
+  @SerializedName("utmCampaignValue")
+  private String utmCampaignValue = null;
+
+  @SerializedName("utmSource")
+  private String utmSource = null;
+
+  @SerializedName("utmMedium")
+  private String utmMedium = null;
+
+  @SerializedName("utmID")
+  private Integer utmID = null;
 
   @SerializedName("testSent")
   private Boolean testSent = null;
@@ -472,6 +486,78 @@ public class GetExtendedCampaignOverview {
     this.sendAtBestTime = sendAtBestTime;
   }
 
+  public GetExtendedCampaignOverview utmCampaignValue(String utmCampaignValue) {
+    this.utmCampaignValue = utmCampaignValue;
+    return this;
+  }
+
+   /**
+   * utm parameter associated with campaign
+   * @return utmCampaignValue
+  **/
+  @ApiModelProperty(example = "myutm", value = "utm parameter associated with campaign")
+  public String getUtmCampaignValue() {
+    return utmCampaignValue;
+  }
+
+  public void setUtmCampaignValue(String utmCampaignValue) {
+    this.utmCampaignValue = utmCampaignValue;
+  }
+
+  public GetExtendedCampaignOverview utmSource(String utmSource) {
+    this.utmSource = utmSource;
+    return this;
+  }
+
+   /**
+   * source of utm parameter
+   * @return utmSource
+  **/
+  @ApiModelProperty(example = "Brevo", value = "source of utm parameter")
+  public String getUtmSource() {
+    return utmSource;
+  }
+
+  public void setUtmSource(String utmSource) {
+    this.utmSource = utmSource;
+  }
+
+  public GetExtendedCampaignOverview utmMedium(String utmMedium) {
+    this.utmMedium = utmMedium;
+    return this;
+  }
+
+   /**
+   * medium parameter
+   * @return utmMedium
+  **/
+  @ApiModelProperty(example = "EMAIL", value = "medium parameter")
+  public String getUtmMedium() {
+    return utmMedium;
+  }
+
+  public void setUtmMedium(String utmMedium) {
+    this.utmMedium = utmMedium;
+  }
+
+  public GetExtendedCampaignOverview utmID(Integer utmID) {
+    this.utmID = utmID;
+    return this;
+  }
+
+   /**
+   * utm id
+   * @return utmID
+  **/
+  @ApiModelProperty(example = "10", value = "utm id")
+  public Integer getUtmID() {
+    return utmID;
+  }
+
+  public void setUtmID(Integer utmID) {
+    this.utmID = utmID;
+  }
+
   public GetExtendedCampaignOverview testSent(Boolean testSent) {
     this.testSent = testSent;
     return this;
@@ -550,7 +636,7 @@ public class GetExtendedCampaignOverview {
   }
 
    /**
-   * Email defined as the \&quot;Reply to\&quot; of the campaign
+   * Email defined as the &quot;Reply to&quot; of the campaign
    * @return replyTo
   **/
   @ApiModelProperty(example = "replyto@domain.com", required = true, value = "Email defined as the \"Reply to\" of the campaign")
@@ -568,7 +654,7 @@ public class GetExtendedCampaignOverview {
   }
 
    /**
-   * Customisation of the \&quot;to\&quot; field of the campaign
+   * Customisation of the &quot;to&quot; field of the campaign
    * @return toField
   **/
   @ApiModelProperty(example = "{FNAME} {LNAME}", value = "Customisation of the \"to\" field of the campaign")
@@ -784,6 +870,10 @@ public class GetExtendedCampaignOverview {
     ObjectUtils.equals(this.winnerCriteria, getExtendedCampaignOverview.winnerCriteria) &&
     ObjectUtils.equals(this.winnerDelay, getExtendedCampaignOverview.winnerDelay) &&
     ObjectUtils.equals(this.sendAtBestTime, getExtendedCampaignOverview.sendAtBestTime) &&
+    ObjectUtils.equals(this.utmCampaignValue, getExtendedCampaignOverview.utmCampaignValue) &&
+    ObjectUtils.equals(this.utmSource, getExtendedCampaignOverview.utmSource) &&
+    ObjectUtils.equals(this.utmMedium, getExtendedCampaignOverview.utmMedium) &&
+    ObjectUtils.equals(this.utmID, getExtendedCampaignOverview.utmID) &&
     ObjectUtils.equals(this.testSent, getExtendedCampaignOverview.testSent) &&
     ObjectUtils.equals(this.header, getExtendedCampaignOverview.header) &&
     ObjectUtils.equals(this.footer, getExtendedCampaignOverview.footer) &&
@@ -804,7 +894,7 @@ public class GetExtendedCampaignOverview {
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(id, name, subject, previewText, type, status, scheduledAt, abTesting, subjectA, subjectB, splitRule, winnerCriteria, winnerDelay, sendAtBestTime, testSent, header, footer, sender, replyTo, toField, htmlContent, shareLink, tag, createdAt, modifiedAt, inlineImageActivation, mirrorActive, recurring, sentDate, returnBounce);
+    return ObjectUtils.hashCodeMulti(id, name, subject, previewText, type, status, scheduledAt, abTesting, subjectA, subjectB, splitRule, winnerCriteria, winnerDelay, sendAtBestTime, utmCampaignValue, utmSource, utmMedium, utmID, testSent, header, footer, sender, replyTo, toField, htmlContent, shareLink, tag, createdAt, modifiedAt, inlineImageActivation, mirrorActive, recurring, sentDate, returnBounce);
   }
 
 
@@ -827,6 +917,10 @@ public class GetExtendedCampaignOverview {
     sb.append("    winnerCriteria: ").append(toIndentedString(winnerCriteria)).append("\n");
     sb.append("    winnerDelay: ").append(toIndentedString(winnerDelay)).append("\n");
     sb.append("    sendAtBestTime: ").append(toIndentedString(sendAtBestTime)).append("\n");
+    sb.append("    utmCampaignValue: ").append(toIndentedString(utmCampaignValue)).append("\n");
+    sb.append("    utmSource: ").append(toIndentedString(utmSource)).append("\n");
+    sb.append("    utmMedium: ").append(toIndentedString(utmMedium)).append("\n");
+    sb.append("    utmID: ").append(toIndentedString(utmID)).append("\n");
     sb.append("    testSent: ").append(toIndentedString(testSent)).append("\n");
     sb.append("    header: ").append(toIndentedString(header)).append("\n");
     sb.append("    footer: ").append(toIndentedString(footer)).append("\n");

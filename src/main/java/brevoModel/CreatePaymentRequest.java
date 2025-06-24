@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,14 +13,23 @@
 
 package brevoModel;
 
-import com.google.gson.annotations.SerializedName;
-import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.ObjectUtils;
+import brevoModel.Cart;
+import brevoModel.ModelConfiguration;
+import brevoModel.Notification;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 
 /**
  * CreatePaymentRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class CreatePaymentRequest {
   @SerializedName("reference")
   private String reference = null;
@@ -30,6 +39,9 @@ public class CreatePaymentRequest {
 
   @SerializedName("contactId")
   private Long contactId = null;
+
+  @SerializedName("description")
+  private String description = null;
 
   @SerializedName("notification")
   private Notification notification = null;
@@ -91,6 +103,24 @@ public class CreatePaymentRequest {
     this.contactId = contactId;
   }
 
+  public CreatePaymentRequest description(String description) {
+    this.description = description;
+    return this;
+  }
+
+   /**
+   * description of payment request. 
+   * @return description
+  **/
+  @ApiModelProperty(example = "Shipping Cost for sending bottles to NYC", value = "description of payment request. ")
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
   public CreatePaymentRequest notification(Notification notification) {
     this.notification = notification;
     return this;
@@ -118,7 +148,7 @@ public class CreatePaymentRequest {
    * Get _configuration
    * @return _configuration
   **/
-  @ApiModelProperty(required = true, value = "")
+  @ApiModelProperty(value = "")
   public ModelConfiguration getConfiguration() {
     return _configuration;
   }
@@ -140,13 +170,14 @@ public class CreatePaymentRequest {
     return ObjectUtils.equals(this.reference, createPaymentRequest.reference) &&
     ObjectUtils.equals(this.cart, createPaymentRequest.cart) &&
     ObjectUtils.equals(this.contactId, createPaymentRequest.contactId) &&
+    ObjectUtils.equals(this.description, createPaymentRequest.description) &&
     ObjectUtils.equals(this.notification, createPaymentRequest.notification) &&
     ObjectUtils.equals(this._configuration, createPaymentRequest._configuration);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(reference, cart, contactId, notification, _configuration);
+    return ObjectUtils.hashCodeMulti(reference, cart, contactId, description, notification, _configuration);
   }
 
 
@@ -158,6 +189,7 @@ public class CreatePaymentRequest {
     sb.append("    reference: ").append(toIndentedString(reference)).append("\n");
     sb.append("    cart: ").append(toIndentedString(cart)).append("\n");
     sb.append("    contactId: ").append(toIndentedString(contactId)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    notification: ").append(toIndentedString(notification)).append("\n");
     sb.append("    _configuration: ").append(toIndentedString(_configuration)).append("\n");
     sb.append("}");

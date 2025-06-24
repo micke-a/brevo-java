@@ -47,7 +47,7 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 //partnerKey.setApiKeyPrefix("Token");
 
 ConversationsApi apiInstance = new ConversationsApi();
-Body15 body = new Body15(); // Body15 | Agent fields.
+Body19 body = new Body19(); // Body19 | Agent fields.
 try {
     apiInstance.conversationsAgentOnlinePingPost(body);
 } catch (ApiException e) {
@@ -60,7 +60,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body15**](Body15.md)| Agent fields. |
+ **body** | [**Body19**](Body19.md)| Agent fields. |
 
 ### Return type
 
@@ -227,7 +227,7 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 
 ConversationsApi apiInstance = new ConversationsApi();
 String id = "id_example"; // String | ID of the message
-Body12 body = new Body12(); // Body12 | 
+Body16 body = new Body16(); // Body16 | 
 try {
     ConversationsMessage result = apiInstance.conversationsMessagesIdPut(id, body);
     System.out.println(result);
@@ -242,7 +242,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**| ID of the message |
- **body** | [**Body12**](Body12.md)|  | [optional]
+ **body** | [**Body16**](Body16.md)|  | [optional]
 
 ### Return type
 
@@ -287,7 +287,7 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 //partnerKey.setApiKeyPrefix("Token");
 
 ConversationsApi apiInstance = new ConversationsApi();
-Body11 body = new Body11(); // Body11 | Message fields.
+Body15 body = new Body15(); // Body15 | Message fields.
 try {
     ConversationsMessage result = apiInstance.conversationsMessagesPost(body);
     System.out.println(result);
@@ -301,7 +301,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body11**](Body11.md)| Message fields. |
+ **body** | [**Body15**](Body15.md)| Message fields. |
 
 ### Return type
 
@@ -464,7 +464,7 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 
 ConversationsApi apiInstance = new ConversationsApi();
 String id = "id_example"; // String | ID of the message
-Body14 body = new Body14(); // Body14 | 
+Body18 body = new Body18(); // Body18 | 
 try {
     ConversationsMessage result = apiInstance.conversationsPushedMessagesIdPut(id, body);
     System.out.println(result);
@@ -479,7 +479,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**| ID of the message |
- **body** | [**Body14**](Body14.md)|  |
+ **body** | [**Body18**](Body18.md)|  |
 
 ### Return type
 
@@ -526,7 +526,7 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 //partnerKey.setApiKeyPrefix("Token");
 
 ConversationsApi apiInstance = new ConversationsApi();
-Body13 body = new Body13(); // Body13 | 
+Body17 body = new Body17(); // Body17 | 
 try {
     ConversationsMessage result = apiInstance.conversationsPushedMessagesPost(body);
     System.out.println(result);
@@ -540,7 +540,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body13**](Body13.md)|  |
+ **body** | [**Body17**](Body17.md)|  |
 
 ### Return type
 

@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -21,6 +21,24 @@ import okhttp3.Interceptor;
 import okhttp3.Response;
 
 import java.io.IOException;
+
+
+import brevoModel.Body10;
+import brevoModel.Body11;
+import brevoModel.Body12;
+import brevoModel.Body9;
+import brevoModel.Deal;
+import brevoModel.DealAttributes;
+import brevoModel.DealsList;
+import brevoModel.ErrorModel;
+import java.io.File;
+import brevoModel.InlineResponse2003;
+import brevoModel.InlineResponse2004;
+import brevoModel.InlineResponse2011;
+import brevoModel.InlineResponse400;
+import brevoModel.Pipeline;
+import brevoModel.Pipelines;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -160,10 +178,134 @@ public class DealsApi {
         return call;
     }
     /**
+     * Build call for crmAttributesPost
+     * @param body Attribute creation data for company (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public Call crmAttributesPostCall(Body9 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/crm/attributes";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
+                @Override
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "api-key", "partner-key" };
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private Call crmAttributesPostValidateBeforeCall(Body9 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling crmAttributesPost(Async)");
+        }
+        
+
+        Call call = crmAttributesPostCall(body, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Create a deal/company attribute
+     * 
+     * @param body Attribute creation data for company (required)
+     * @return InlineResponse2003
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public InlineResponse2003 crmAttributesPost(Body9 body) throws ApiException {
+        ApiResponse<InlineResponse2003> resp = crmAttributesPostWithHttpInfo(body);
+        return resp.getData();
+    }
+
+    /**
+     * Create a deal/company attribute
+     * 
+     * @param body Attribute creation data for company (required)
+     * @return ApiResponse&lt;InlineResponse2003&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<InlineResponse2003> crmAttributesPostWithHttpInfo(Body9 body) throws ApiException {
+        Call call = crmAttributesPostValidateBeforeCall(body, null, null);
+        Type localVarReturnType = new TypeToken<InlineResponse2003>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Create a deal/company attribute (asynchronously)
+     * 
+     * @param body Attribute creation data for company (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public Call crmAttributesPostAsync(Body9 body, final ApiCallback<InlineResponse2003> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        Call call = crmAttributesPostValidateBeforeCall(body, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<InlineResponse2003>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
      * Build call for crmDealsGet
      * @param filtersAttributesDealName Filter by attributes. If you have a filter for the owner on your end, please send it as filters[attributes.deal_owner] and utilize the account email for the filtering. (optional)
      * @param filtersLinkedCompaniesIds Filter by linked companies ids (optional)
      * @param filtersLinkedContactsIds Filter by linked companies ids (optional)
+     * @param modifiedSince Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result. (optional)
+     * @param createdSince Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result. (optional)
      * @param offset Index of the first document of the page (optional)
      * @param limit Number of documents per page (optional, default to 50)
      * @param sort Sort the results in the ascending/descending order. Default order is **descending** by creation if &#x60;sort&#x60; is not passed (optional)
@@ -173,7 +315,7 @@ public class DealsApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call crmDealsGetCall(String filtersAttributesDealName, String filtersLinkedCompaniesIds, String filtersLinkedContactsIds, Long offset, Long limit, String sort, String sortBy, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call crmDealsGetCall(String filtersAttributesDealName, String filtersLinkedCompaniesIds, String filtersLinkedContactsIds, String modifiedSince, String createdSince, Long offset, Long limit, String sort, String sortBy, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -187,6 +329,10 @@ public class DealsApi {
         localVarQueryParams.addAll(apiClient.parameterToPair("filters[linkedCompaniesIds]", filtersLinkedCompaniesIds));
         if (filtersLinkedContactsIds != null)
         localVarQueryParams.addAll(apiClient.parameterToPair("filters[linkedContactsIds]", filtersLinkedContactsIds));
+        if (modifiedSince != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("modifiedSince", modifiedSince));
+        if (createdSince != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("createdSince", createdSince));
         if (offset != null)
         localVarQueryParams.addAll(apiClient.parameterToPair("offset", offset));
         if (limit != null)
@@ -229,10 +375,10 @@ public class DealsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call crmDealsGetValidateBeforeCall(String filtersAttributesDealName, String filtersLinkedCompaniesIds, String filtersLinkedContactsIds, Long offset, Long limit, String sort, String sortBy, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call crmDealsGetValidateBeforeCall(String filtersAttributesDealName, String filtersLinkedCompaniesIds, String filtersLinkedContactsIds, String modifiedSince, String createdSince, Long offset, Long limit, String sort, String sortBy, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
 
-        Call call = crmDealsGetCall(filtersAttributesDealName, filtersLinkedCompaniesIds, filtersLinkedContactsIds, offset, limit, sort, sortBy, progressListener, progressRequestListener);
+        Call call = crmDealsGetCall(filtersAttributesDealName, filtersLinkedCompaniesIds, filtersLinkedContactsIds, modifiedSince, createdSince, offset, limit, sort, sortBy, progressListener, progressRequestListener);
         return call;
 
     }
@@ -243,6 +389,8 @@ public class DealsApi {
      * @param filtersAttributesDealName Filter by attributes. If you have a filter for the owner on your end, please send it as filters[attributes.deal_owner] and utilize the account email for the filtering. (optional)
      * @param filtersLinkedCompaniesIds Filter by linked companies ids (optional)
      * @param filtersLinkedContactsIds Filter by linked companies ids (optional)
+     * @param modifiedSince Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result. (optional)
+     * @param createdSince Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result. (optional)
      * @param offset Index of the first document of the page (optional)
      * @param limit Number of documents per page (optional, default to 50)
      * @param sort Sort the results in the ascending/descending order. Default order is **descending** by creation if &#x60;sort&#x60; is not passed (optional)
@@ -250,8 +398,8 @@ public class DealsApi {
      * @return DealsList
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public DealsList crmDealsGet(String filtersAttributesDealName, String filtersLinkedCompaniesIds, String filtersLinkedContactsIds, Long offset, Long limit, String sort, String sortBy) throws ApiException {
-        ApiResponse<DealsList> resp = crmDealsGetWithHttpInfo(filtersAttributesDealName, filtersLinkedCompaniesIds, filtersLinkedContactsIds, offset, limit, sort, sortBy);
+    public DealsList crmDealsGet(String filtersAttributesDealName, String filtersLinkedCompaniesIds, String filtersLinkedContactsIds, String modifiedSince, String createdSince, Long offset, Long limit, String sort, String sortBy) throws ApiException {
+        ApiResponse<DealsList> resp = crmDealsGetWithHttpInfo(filtersAttributesDealName, filtersLinkedCompaniesIds, filtersLinkedContactsIds, modifiedSince, createdSince, offset, limit, sort, sortBy);
         return resp.getData();
     }
 
@@ -261,6 +409,8 @@ public class DealsApi {
      * @param filtersAttributesDealName Filter by attributes. If you have a filter for the owner on your end, please send it as filters[attributes.deal_owner] and utilize the account email for the filtering. (optional)
      * @param filtersLinkedCompaniesIds Filter by linked companies ids (optional)
      * @param filtersLinkedContactsIds Filter by linked companies ids (optional)
+     * @param modifiedSince Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result. (optional)
+     * @param createdSince Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result. (optional)
      * @param offset Index of the first document of the page (optional)
      * @param limit Number of documents per page (optional, default to 50)
      * @param sort Sort the results in the ascending/descending order. Default order is **descending** by creation if &#x60;sort&#x60; is not passed (optional)
@@ -268,8 +418,8 @@ public class DealsApi {
      * @return ApiResponse&lt;DealsList&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<DealsList> crmDealsGetWithHttpInfo(String filtersAttributesDealName, String filtersLinkedCompaniesIds, String filtersLinkedContactsIds, Long offset, Long limit, String sort, String sortBy) throws ApiException {
-        Call call = crmDealsGetValidateBeforeCall(filtersAttributesDealName, filtersLinkedCompaniesIds, filtersLinkedContactsIds, offset, limit, sort, sortBy, null, null);
+    public ApiResponse<DealsList> crmDealsGetWithHttpInfo(String filtersAttributesDealName, String filtersLinkedCompaniesIds, String filtersLinkedContactsIds, String modifiedSince, String createdSince, Long offset, Long limit, String sort, String sortBy) throws ApiException {
+        Call call = crmDealsGetValidateBeforeCall(filtersAttributesDealName, filtersLinkedCompaniesIds, filtersLinkedContactsIds, modifiedSince, createdSince, offset, limit, sort, sortBy, null, null);
         Type localVarReturnType = new TypeToken<DealsList>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -280,6 +430,8 @@ public class DealsApi {
      * @param filtersAttributesDealName Filter by attributes. If you have a filter for the owner on your end, please send it as filters[attributes.deal_owner] and utilize the account email for the filtering. (optional)
      * @param filtersLinkedCompaniesIds Filter by linked companies ids (optional)
      * @param filtersLinkedContactsIds Filter by linked companies ids (optional)
+     * @param modifiedSince Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result. (optional)
+     * @param createdSince Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result. (optional)
      * @param offset Index of the first document of the page (optional)
      * @param limit Number of documents per page (optional, default to 50)
      * @param sort Sort the results in the ascending/descending order. Default order is **descending** by creation if &#x60;sort&#x60; is not passed (optional)
@@ -288,7 +440,7 @@ public class DealsApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call crmDealsGetAsync(String filtersAttributesDealName, String filtersLinkedCompaniesIds, String filtersLinkedContactsIds, Long offset, Long limit, String sort, String sortBy, final ApiCallback<DealsList> callback) throws ApiException {
+    public Call crmDealsGetAsync(String filtersAttributesDealName, String filtersLinkedCompaniesIds, String filtersLinkedContactsIds, String modifiedSince, String createdSince, Long offset, Long limit, String sort, String sortBy, final ApiCallback<DealsList> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -309,7 +461,7 @@ public class DealsApi {
             };
         }
 
-        Call call = crmDealsGetValidateBeforeCall(filtersAttributesDealName, filtersLinkedCompaniesIds, filtersLinkedContactsIds, offset, limit, sort, sortBy, progressListener, progressRequestListener);
+        Call call = crmDealsGetValidateBeforeCall(filtersAttributesDealName, filtersLinkedCompaniesIds, filtersLinkedContactsIds, modifiedSince, createdSince, offset, limit, sort, sortBy, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<DealsList>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -565,7 +717,7 @@ public class DealsApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call crmDealsIdPatchCall(String id, Body7 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call crmDealsIdPatchCall(String id, Body11 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -608,7 +760,7 @@ public class DealsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call crmDealsIdPatchValidateBeforeCall(String id, Body7 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call crmDealsIdPatchValidateBeforeCall(String id, Body11 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'id' is set
         if (id == null) {
@@ -633,7 +785,7 @@ public class DealsApi {
      * @param body Updated deal details. (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public void crmDealsIdPatch(String id, Body7 body) throws ApiException {
+    public void crmDealsIdPatch(String id, Body11 body) throws ApiException {
         crmDealsIdPatchWithHttpInfo(id, body);
     }
 
@@ -645,7 +797,7 @@ public class DealsApi {
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Void> crmDealsIdPatchWithHttpInfo(String id, Body7 body) throws ApiException {
+    public ApiResponse<Void> crmDealsIdPatchWithHttpInfo(String id, Body11 body) throws ApiException {
         Call call = crmDealsIdPatchValidateBeforeCall(id, body, null, null);
         return apiClient.execute(call);
     }
@@ -659,7 +811,7 @@ public class DealsApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call crmDealsIdPatchAsync(String id, Body7 body, final ApiCallback<Void> callback) throws ApiException {
+    public Call crmDealsIdPatchAsync(String id, Body11 body, final ApiCallback<Void> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -685,6 +837,141 @@ public class DealsApi {
         return call;
     }
     /**
+     * Build call for crmDealsImportPost
+     * @param file The CSV file to upload.The file should have the first row as the mapping attribute. Some default attribute names are (a) deal_id [brevo mongoID to update deals] (b) associated_contact (c) associated_company (f) any other attribute with internal name  (required)
+     * @param mapping The mapping options in Json format.   json    {       &quot;link_entities&quot;: true, // Determines whether to link related entities during the import process       &quot;unlink_entities&quot;: false, //Determines whether to unlink related entities during the import process.       &quot;update_existing_records&quot;: true, // Determines whether to update based on deal ID or treat every row as create       &quot;unset_empty_attributes&quot;: false // Determines whether unset a specific attribute during update if values input is blank     }  (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public Call crmDealsImportPostCall(File file, String mapping, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/crm/deals/import";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+        if (file != null)
+        localVarFormParams.put("file", file);
+        if (mapping != null)
+        localVarFormParams.put("mapping", mapping);
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "multipart/form-data"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
+                @Override
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "api-key", "partner-key" };
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private Call crmDealsImportPostValidateBeforeCall(File file, String mapping, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'file' is set
+        if (file == null) {
+            throw new ApiException("Missing the required parameter 'file' when calling crmDealsImportPost(Async)");
+        }
+        
+        // verify the required parameter 'mapping' is set
+        if (mapping == null) {
+            throw new ApiException("Missing the required parameter 'mapping' when calling crmDealsImportPost(Async)");
+        }
+        
+
+        Call call = crmDealsImportPostCall(file, mapping, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Import deals(creation and updation)
+     * Import deals from a CSV file with mapping options.
+     * @param file The CSV file to upload.The file should have the first row as the mapping attribute. Some default attribute names are (a) deal_id [brevo mongoID to update deals] (b) associated_contact (c) associated_company (f) any other attribute with internal name  (required)
+     * @param mapping The mapping options in Json format.   json    {       &quot;link_entities&quot;: true, // Determines whether to link related entities during the import process       &quot;unlink_entities&quot;: false, //Determines whether to unlink related entities during the import process.       &quot;update_existing_records&quot;: true, // Determines whether to update based on deal ID or treat every row as create       &quot;unset_empty_attributes&quot;: false // Determines whether unset a specific attribute during update if values input is blank     }  (required)
+     * @return InlineResponse2004
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public InlineResponse2004 crmDealsImportPost(File file, String mapping) throws ApiException {
+        ApiResponse<InlineResponse2004> resp = crmDealsImportPostWithHttpInfo(file, mapping);
+        return resp.getData();
+    }
+
+    /**
+     * Import deals(creation and updation)
+     * Import deals from a CSV file with mapping options.
+     * @param file The CSV file to upload.The file should have the first row as the mapping attribute. Some default attribute names are (a) deal_id [brevo mongoID to update deals] (b) associated_contact (c) associated_company (f) any other attribute with internal name  (required)
+     * @param mapping The mapping options in Json format.   json    {       &quot;link_entities&quot;: true, // Determines whether to link related entities during the import process       &quot;unlink_entities&quot;: false, //Determines whether to unlink related entities during the import process.       &quot;update_existing_records&quot;: true, // Determines whether to update based on deal ID or treat every row as create       &quot;unset_empty_attributes&quot;: false // Determines whether unset a specific attribute during update if values input is blank     }  (required)
+     * @return ApiResponse&lt;InlineResponse2004&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<InlineResponse2004> crmDealsImportPostWithHttpInfo(File file, String mapping) throws ApiException {
+        Call call = crmDealsImportPostValidateBeforeCall(file, mapping, null, null);
+        Type localVarReturnType = new TypeToken<InlineResponse2004>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Import deals(creation and updation) (asynchronously)
+     * Import deals from a CSV file with mapping options.
+     * @param file The CSV file to upload.The file should have the first row as the mapping attribute. Some default attribute names are (a) deal_id [brevo mongoID to update deals] (b) associated_contact (c) associated_company (f) any other attribute with internal name  (required)
+     * @param mapping The mapping options in Json format.   json    {       &quot;link_entities&quot;: true, // Determines whether to link related entities during the import process       &quot;unlink_entities&quot;: false, //Determines whether to unlink related entities during the import process.       &quot;update_existing_records&quot;: true, // Determines whether to update based on deal ID or treat every row as create       &quot;unset_empty_attributes&quot;: false // Determines whether unset a specific attribute during update if values input is blank     }  (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public Call crmDealsImportPostAsync(File file, String mapping, final ApiCallback<InlineResponse2004> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        Call call = crmDealsImportPostValidateBeforeCall(file, mapping, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<InlineResponse2004>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
      * Build call for crmDealsLinkUnlinkIdPatch
      * @param id  (required)
      * @param body Linked / Unlinked contacts and companies ids. (required)
@@ -693,7 +980,7 @@ public class DealsApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call crmDealsLinkUnlinkIdPatchCall(String id, Body8 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call crmDealsLinkUnlinkIdPatchCall(String id, Body12 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -736,7 +1023,7 @@ public class DealsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call crmDealsLinkUnlinkIdPatchValidateBeforeCall(String id, Body8 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call crmDealsLinkUnlinkIdPatchValidateBeforeCall(String id, Body12 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'id' is set
         if (id == null) {
@@ -761,7 +1048,7 @@ public class DealsApi {
      * @param body Linked / Unlinked contacts and companies ids. (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public void crmDealsLinkUnlinkIdPatch(String id, Body8 body) throws ApiException {
+    public void crmDealsLinkUnlinkIdPatch(String id, Body12 body) throws ApiException {
         crmDealsLinkUnlinkIdPatchWithHttpInfo(id, body);
     }
 
@@ -773,7 +1060,7 @@ public class DealsApi {
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Void> crmDealsLinkUnlinkIdPatchWithHttpInfo(String id, Body8 body) throws ApiException {
+    public ApiResponse<Void> crmDealsLinkUnlinkIdPatchWithHttpInfo(String id, Body12 body) throws ApiException {
         Call call = crmDealsLinkUnlinkIdPatchValidateBeforeCall(id, body, null, null);
         return apiClient.execute(call);
     }
@@ -787,7 +1074,7 @@ public class DealsApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call crmDealsLinkUnlinkIdPatchAsync(String id, Body8 body, final ApiCallback<Void> callback) throws ApiException {
+    public Call crmDealsLinkUnlinkIdPatchAsync(String id, Body12 body, final ApiCallback<Void> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -820,7 +1107,7 @@ public class DealsApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call crmDealsPostCall(Body6 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call crmDealsPostCall(Body10 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -862,7 +1149,7 @@ public class DealsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call crmDealsPostValidateBeforeCall(Body6 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call crmDealsPostValidateBeforeCall(Body10 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'body' is set
         if (body == null) {
@@ -882,7 +1169,7 @@ public class DealsApi {
      * @return InlineResponse2011
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2011 crmDealsPost(Body6 body) throws ApiException {
+    public InlineResponse2011 crmDealsPost(Body10 body) throws ApiException {
         ApiResponse<InlineResponse2011> resp = crmDealsPostWithHttpInfo(body);
         return resp.getData();
     }
@@ -894,7 +1181,7 @@ public class DealsApi {
      * @return ApiResponse&lt;InlineResponse2011&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2011> crmDealsPostWithHttpInfo(Body6 body) throws ApiException {
+    public ApiResponse<InlineResponse2011> crmDealsPostWithHttpInfo(Body10 body) throws ApiException {
         Call call = crmDealsPostValidateBeforeCall(body, null, null);
         Type localVarReturnType = new TypeToken<InlineResponse2011>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -908,7 +1195,7 @@ public class DealsApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call crmDealsPostAsync(Body6 body, final ApiCallback<InlineResponse2011> callback) throws ApiException {
+    public Call crmDealsPostAsync(Body10 body, final ApiCallback<InlineResponse2011> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;

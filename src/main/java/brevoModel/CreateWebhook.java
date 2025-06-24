@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,14 +13,16 @@
 
 package brevoModel;
 
+import org.apache.commons.lang3.ObjectUtils;
+import brevoModel.GetWebhookAuth;
+import brevoModel.GetWebhookHeaders;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.ObjectUtils;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +30,7 @@ import java.util.List;
 /**
  * CreateWebhook
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class CreateWebhook {
   @SerializedName("url")
   private String url = null;
@@ -168,6 +170,56 @@ public class CreateWebhook {
   @SerializedName("type")
   private TypeEnum type = TypeEnum.TRANSACTIONAL;
 
+  /**
+   * channel of webhook
+   */
+  @JsonAdapter(ChannelEnum.Adapter.class)
+  public enum ChannelEnum {
+    SMS("sms"),
+    
+    EMAIL("email");
+
+    private String value;
+
+    ChannelEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static ChannelEnum fromValue(String text) {
+      for (ChannelEnum b : ChannelEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public static class Adapter extends TypeAdapter<ChannelEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final ChannelEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public ChannelEnum read(final JsonReader jsonReader) throws IOException {
+        String value = jsonReader.nextString();
+        return ChannelEnum.fromValue(String.valueOf(value));
+      }
+    }
+  }
+
+  @SerializedName("channel")
+  private ChannelEnum channel = ChannelEnum.EMAIL;
+
   @SerializedName("domain")
   private String domain = null;
 
@@ -227,10 +279,10 @@ public class CreateWebhook {
   }
 
    /**
-   * - Events triggering the webhook. Possible values for **Transactional** type webhook: #### &#x60;sent&#x60; OR &#x60;request&#x60;, &#x60;delivered&#x60;, &#x60;hardBounce&#x60;, &#x60;softBounce&#x60;, &#x60;blocked&#x60;, &#x60;spam&#x60;, &#x60;invalid&#x60;, &#x60;deferred&#x60;, &#x60;click&#x60;, &#x60;opened&#x60;, &#x60;uniqueOpened&#x60; and &#x60;unsubscribed&#x60; - Possible values for **Marketing** type webhook: #### &#x60;spam&#x60;, &#x60;opened&#x60;, &#x60;click&#x60;, &#x60;hardBounce&#x60;, &#x60;softBounce&#x60;, &#x60;unsubscribed&#x60;, &#x60;listAddition&#x60; &amp; &#x60;delivered&#x60; - Possible values for **Inbound** type webhook: #### &#x60;inboundEmailProcessed&#x60; 
+   * - Events triggering the webhook. Possible values for **Transactional** type webhook: #### &#x60;sent&#x60; OR &#x60;request&#x60;, &#x60;delivered&#x60;, &#x60;hardBounce&#x60;, &#x60;softBounce&#x60;, &#x60;blocked&#x60;, &#x60;spam&#x60;, &#x60;invalid&#x60;, &#x60;deferred&#x60;, &#x60;click&#x60;, &#x60;opened&#x60;, &#x60;uniqueOpened&#x60; and &#x60;unsubscribed&#x60; - Possible values for **Marketing** type webhook: #### &#x60;spam&#x60;, &#x60;opened&#x60;, &#x60;click&#x60;, &#x60;hardBounce&#x60;, &#x60;softBounce&#x60;, &#x60;unsubscribed&#x60;, &#x60;listAddition&#x60; &amp; &#x60;delivered&#x60; - Possible values for **Inbound** type webhook: #### &#x60;inboundEmailProcessed&#x60; - Possible values for type **Transactional** and channel **SMS** #### &#x60;accepted&#x60;,&#x60;delivered&#x60;,&#x60;softBounce&#x60;,&#x60;hardBounce&#x60;,&#x60;unsubscribe&#x60;,&#x60;reply&#x60;, &#x60;subscribe&#x60;,&#x60;sent&#x60;,&#x60;blacklisted&#x60;,&#x60;skip&#x60; - Possible values for type **Marketing**  channel **SMS** #### &#x60;sent&#x60;,&#x60;delivered&#x60;,&#x60;softBounce&#x60;,&#x60;hardBounce&#x60;,&#x60;unsubscribe&#x60;,&#x60;reply&#x60;, &#x60;subscribe&#x60;,&#x60;skip&#x60; 
    * @return events
   **/
-  @ApiModelProperty(required = true, value = "- Events triggering the webhook. Possible values for **Transactional** type webhook: #### `sent` OR `request`, `delivered`, `hardBounce`, `softBounce`, `blocked`, `spam`, `invalid`, `deferred`, `click`, `opened`, `uniqueOpened` and `unsubscribed` - Possible values for **Marketing** type webhook: #### `spam`, `opened`, `click`, `hardBounce`, `softBounce`, `unsubscribed`, `listAddition` & `delivered` - Possible values for **Inbound** type webhook: #### `inboundEmailProcessed` ")
+  @ApiModelProperty(required = true, value = "- Events triggering the webhook. Possible values for **Transactional** type webhook: #### `sent` OR `request`, `delivered`, `hardBounce`, `softBounce`, `blocked`, `spam`, `invalid`, `deferred`, `click`, `opened`, `uniqueOpened` and `unsubscribed` - Possible values for **Marketing** type webhook: #### `spam`, `opened`, `click`, `hardBounce`, `softBounce`, `unsubscribed`, `listAddition` & `delivered` - Possible values for **Inbound** type webhook: #### `inboundEmailProcessed` - Possible values for type **Transactional** and channel **SMS** #### `accepted`,`delivered`,`softBounce`,`hardBounce`,`unsubscribe`,`reply`, `subscribe`,`sent`,`blacklisted`,`skip` - Possible values for type **Marketing**  channel **SMS** #### `sent`,`delivered`,`softBounce`,`hardBounce`,`unsubscribe`,`reply`, `subscribe`,`skip` ")
   public List<EventsEnum> getEvents() {
     return events;
   }
@@ -255,6 +307,24 @@ public class CreateWebhook {
 
   public void setType(TypeEnum type) {
     this.type = type;
+  }
+
+  public CreateWebhook channel(ChannelEnum channel) {
+    this.channel = channel;
+    return this;
+  }
+
+   /**
+   * channel of webhook
+   * @return channel
+  **/
+  @ApiModelProperty(example = "sms", value = "channel of webhook")
+  public ChannelEnum getChannel() {
+    return channel;
+  }
+
+  public void setChannel(ChannelEnum channel) {
+    this.channel = channel;
   }
 
   public CreateWebhook domain(String domain) {
@@ -351,6 +421,7 @@ public class CreateWebhook {
     ObjectUtils.equals(this.description, createWebhook.description) &&
     ObjectUtils.equals(this.events, createWebhook.events) &&
     ObjectUtils.equals(this.type, createWebhook.type) &&
+    ObjectUtils.equals(this.channel, createWebhook.channel) &&
     ObjectUtils.equals(this.domain, createWebhook.domain) &&
     ObjectUtils.equals(this.batched, createWebhook.batched) &&
     ObjectUtils.equals(this.auth, createWebhook.auth) &&
@@ -359,7 +430,7 @@ public class CreateWebhook {
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(url, description, events, type, domain, batched, auth, headers);
+    return ObjectUtils.hashCodeMulti(url, description, events, type, channel, domain, batched, auth, headers);
   }
 
 
@@ -372,6 +443,7 @@ public class CreateWebhook {
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    events: ").append(toIndentedString(events)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    channel: ").append(toIndentedString(channel)).append("\n");
     sb.append("    domain: ").append(toIndentedString(domain)).append("\n");
     sb.append("    batched: ").append(toIndentedString(batched)).append("\n");
     sb.append("    auth: ").append(toIndentedString(auth)).append("\n");

@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 <a name="createPaymentRequest"></a>
 # **createPaymentRequest**
-> CreateModel createPaymentRequest(createPaymentRquest)
+> CreatePaymentResponse createPaymentRequest(createPaymentRquest)
 
 Create a payment request
 
@@ -41,7 +41,7 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 PaymentsApi apiInstance = new PaymentsApi();
 CreatePaymentRequest createPaymentRquest = new CreatePaymentRequest(); // CreatePaymentRequest | Create a payment request 
 try {
-    CreateModel result = apiInstance.createPaymentRequest(createPaymentRquest);
+    CreatePaymentResponse result = apiInstance.createPaymentRequest(createPaymentRquest);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling PaymentsApi#createPaymentRequest");
@@ -57,7 +57,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateModel**](CreateModel.md)
+[**CreatePaymentResponse**](CreatePaymentResponse.md)
 
 ### Authorization
 

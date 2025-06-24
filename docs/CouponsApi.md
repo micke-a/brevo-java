@@ -220,7 +220,7 @@ CouponsApi apiInstance = new CouponsApi();
 Long limit = 50L; // Long | Number of documents returned per page
 Long offset = 0L; // Long | Index of the first document on the page
 String sort = "desc"; // String | Sort the results by creation time in ascending/descending order
-Object sortBy = null; // Object | The field used to sort coupon collections
+String sortBy = "createdAt"; // String | The field used to sort coupon collections
 try {
     GetCouponCollection result = apiInstance.getCouponCollections(limit, offset, sort, sortBy);
     System.out.println(result);
@@ -237,7 +237,7 @@ Name | Type | Description  | Notes
  **limit** | **Long**| Number of documents returned per page | [optional] [default to 50]
  **offset** | **Long**| Index of the first document on the page | [optional] [default to 0]
  **sort** | **String**| Sort the results by creation time in ascending/descending order | [optional] [default to desc] [enum: asc, desc]
- **sortBy** | [**Object**](.md)| The field used to sort coupon collections | [optional]
+ **sortBy** | **String**| The field used to sort coupon collections | [optional] [default to createdAt] [enum: createdAt, remainingCoupons, expirationDate]
 
 ### Return type
 
@@ -254,7 +254,7 @@ Name | Type | Description  | Notes
 
 <a name="updateCouponCollection"></a>
 # **updateCouponCollection**
-> InlineResponse2003 updateCouponCollection(id, updateCouponCollection)
+> InlineResponse2009 updateCouponCollection(id, updateCouponCollection)
 
 Update a coupon collection by id
 
@@ -285,7 +285,7 @@ CouponsApi apiInstance = new CouponsApi();
 String id = "id_example"; // String | Id of the collection to update
 UpdateCouponCollection updateCouponCollection = new UpdateCouponCollection(); // UpdateCouponCollection | Values to update the coupon collection
 try {
-    InlineResponse2003 result = apiInstance.updateCouponCollection(id, updateCouponCollection);
+    InlineResponse2009 result = apiInstance.updateCouponCollection(id, updateCouponCollection);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling CouponsApi#updateCouponCollection");
@@ -302,7 +302,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**InlineResponse2009**](InlineResponse2009.md)
 
 ### Authorization
 

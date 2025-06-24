@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -21,6 +21,16 @@ import okhttp3.Interceptor;
 import okhttp3.Response;
 
 import java.io.IOException;
+
+
+import brevoModel.Body15;
+import brevoModel.Body16;
+import brevoModel.Body17;
+import brevoModel.Body18;
+import brevoModel.Body19;
+import brevoModel.ConversationsMessage;
+import brevoModel.ErrorModel;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,7 +64,7 @@ public class ConversationsApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call conversationsAgentOnlinePingPostCall(Body15 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call conversationsAgentOnlinePingPostCall(Body19 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -96,7 +106,7 @@ public class ConversationsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call conversationsAgentOnlinePingPostValidateBeforeCall(Body15 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call conversationsAgentOnlinePingPostValidateBeforeCall(Body19 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'body' is set
         if (body == null) {
@@ -115,7 +125,7 @@ public class ConversationsApi {
      * @param body Agent fields. (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public void conversationsAgentOnlinePingPost(Body15 body) throws ApiException {
+    public void conversationsAgentOnlinePingPost(Body19 body) throws ApiException {
         conversationsAgentOnlinePingPostWithHttpInfo(body);
     }
 
@@ -126,7 +136,7 @@ public class ConversationsApi {
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Void> conversationsAgentOnlinePingPostWithHttpInfo(Body15 body) throws ApiException {
+    public ApiResponse<Void> conversationsAgentOnlinePingPostWithHttpInfo(Body19 body) throws ApiException {
         Call call = conversationsAgentOnlinePingPostValidateBeforeCall(body, null, null);
         return apiClient.execute(call);
     }
@@ -139,7 +149,7 @@ public class ConversationsApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call conversationsAgentOnlinePingPostAsync(Body15 body, final ApiCallback<Void> callback) throws ApiException {
+    public Call conversationsAgentOnlinePingPostAsync(Body19 body, final ApiCallback<Void> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -415,7 +425,7 @@ public class ConversationsApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call conversationsMessagesIdPutCall(String id, Body12 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call conversationsMessagesIdPutCall(String id, Body16 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -458,7 +468,7 @@ public class ConversationsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call conversationsMessagesIdPutValidateBeforeCall(String id, Body12 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call conversationsMessagesIdPutValidateBeforeCall(String id, Body16 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'id' is set
         if (id == null) {
@@ -479,7 +489,7 @@ public class ConversationsApi {
      * @return ConversationsMessage
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ConversationsMessage conversationsMessagesIdPut(String id, Body12 body) throws ApiException {
+    public ConversationsMessage conversationsMessagesIdPut(String id, Body16 body) throws ApiException {
         ApiResponse<ConversationsMessage> resp = conversationsMessagesIdPutWithHttpInfo(id, body);
         return resp.getData();
     }
@@ -492,7 +502,7 @@ public class ConversationsApi {
      * @return ApiResponse&lt;ConversationsMessage&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<ConversationsMessage> conversationsMessagesIdPutWithHttpInfo(String id, Body12 body) throws ApiException {
+    public ApiResponse<ConversationsMessage> conversationsMessagesIdPutWithHttpInfo(String id, Body16 body) throws ApiException {
         Call call = conversationsMessagesIdPutValidateBeforeCall(id, body, null, null);
         Type localVarReturnType = new TypeToken<ConversationsMessage>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -507,7 +517,7 @@ public class ConversationsApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call conversationsMessagesIdPutAsync(String id, Body12 body, final ApiCallback<ConversationsMessage> callback) throws ApiException {
+    public Call conversationsMessagesIdPutAsync(String id, Body16 body, final ApiCallback<ConversationsMessage> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -541,7 +551,7 @@ public class ConversationsApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call conversationsMessagesPostCall(Body11 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call conversationsMessagesPostCall(Body15 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -583,7 +593,7 @@ public class ConversationsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call conversationsMessagesPostValidateBeforeCall(Body11 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call conversationsMessagesPostValidateBeforeCall(Body15 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'body' is set
         if (body == null) {
@@ -603,7 +613,7 @@ public class ConversationsApi {
      * @return ConversationsMessage
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ConversationsMessage conversationsMessagesPost(Body11 body) throws ApiException {
+    public ConversationsMessage conversationsMessagesPost(Body15 body) throws ApiException {
         ApiResponse<ConversationsMessage> resp = conversationsMessagesPostWithHttpInfo(body);
         return resp.getData();
     }
@@ -615,7 +625,7 @@ public class ConversationsApi {
      * @return ApiResponse&lt;ConversationsMessage&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<ConversationsMessage> conversationsMessagesPostWithHttpInfo(Body11 body) throws ApiException {
+    public ApiResponse<ConversationsMessage> conversationsMessagesPostWithHttpInfo(Body15 body) throws ApiException {
         Call call = conversationsMessagesPostValidateBeforeCall(body, null, null);
         Type localVarReturnType = new TypeToken<ConversationsMessage>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -629,7 +639,7 @@ public class ConversationsApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call conversationsMessagesPostAsync(Body11 body, final ApiCallback<ConversationsMessage> callback) throws ApiException {
+    public Call conversationsMessagesPostAsync(Body15 body, final ApiCallback<ConversationsMessage> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -906,7 +916,7 @@ public class ConversationsApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call conversationsPushedMessagesIdPutCall(String id, Body14 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call conversationsPushedMessagesIdPutCall(String id, Body18 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -949,7 +959,7 @@ public class ConversationsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call conversationsPushedMessagesIdPutValidateBeforeCall(String id, Body14 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call conversationsPushedMessagesIdPutValidateBeforeCall(String id, Body18 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'id' is set
         if (id == null) {
@@ -975,7 +985,7 @@ public class ConversationsApi {
      * @return ConversationsMessage
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ConversationsMessage conversationsPushedMessagesIdPut(String id, Body14 body) throws ApiException {
+    public ConversationsMessage conversationsPushedMessagesIdPut(String id, Body18 body) throws ApiException {
         ApiResponse<ConversationsMessage> resp = conversationsPushedMessagesIdPutWithHttpInfo(id, body);
         return resp.getData();
     }
@@ -988,7 +998,7 @@ public class ConversationsApi {
      * @return ApiResponse&lt;ConversationsMessage&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<ConversationsMessage> conversationsPushedMessagesIdPutWithHttpInfo(String id, Body14 body) throws ApiException {
+    public ApiResponse<ConversationsMessage> conversationsPushedMessagesIdPutWithHttpInfo(String id, Body18 body) throws ApiException {
         Call call = conversationsPushedMessagesIdPutValidateBeforeCall(id, body, null, null);
         Type localVarReturnType = new TypeToken<ConversationsMessage>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -1003,7 +1013,7 @@ public class ConversationsApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call conversationsPushedMessagesIdPutAsync(String id, Body14 body, final ApiCallback<ConversationsMessage> callback) throws ApiException {
+    public Call conversationsPushedMessagesIdPutAsync(String id, Body18 body, final ApiCallback<ConversationsMessage> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1037,7 +1047,7 @@ public class ConversationsApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call conversationsPushedMessagesPostCall(Body13 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call conversationsPushedMessagesPostCall(Body17 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -1079,7 +1089,7 @@ public class ConversationsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call conversationsPushedMessagesPostValidateBeforeCall(Body13 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call conversationsPushedMessagesPostValidateBeforeCall(Body17 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'body' is set
         if (body == null) {
@@ -1099,7 +1109,7 @@ public class ConversationsApi {
      * @return ConversationsMessage
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ConversationsMessage conversationsPushedMessagesPost(Body13 body) throws ApiException {
+    public ConversationsMessage conversationsPushedMessagesPost(Body17 body) throws ApiException {
         ApiResponse<ConversationsMessage> resp = conversationsPushedMessagesPostWithHttpInfo(body);
         return resp.getData();
     }
@@ -1111,7 +1121,7 @@ public class ConversationsApi {
      * @return ApiResponse&lt;ConversationsMessage&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<ConversationsMessage> conversationsPushedMessagesPostWithHttpInfo(Body13 body) throws ApiException {
+    public ApiResponse<ConversationsMessage> conversationsPushedMessagesPostWithHttpInfo(Body17 body) throws ApiException {
         Call call = conversationsPushedMessagesPostValidateBeforeCall(body, null, null);
         Type localVarReturnType = new TypeToken<ConversationsMessage>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -1125,7 +1135,7 @@ public class ConversationsApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call conversationsPushedMessagesPostAsync(Body13 body, final ApiCallback<ConversationsMessage> callback) throws ApiException {
+    public Call conversationsPushedMessagesPostAsync(Body17 body, final ApiCallback<ConversationsMessage> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
