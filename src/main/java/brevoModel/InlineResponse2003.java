@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,23 +13,23 @@
 
 package brevoModel;
 
-import com.google.gson.annotations.SerializedName;
-import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.ObjectUtils;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 
 /**
  * InlineResponse2003
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class InlineResponse2003 {
   @SerializedName("id")
   private String id = null;
-
-  @SerializedName("name")
-  private String name = null;
-
-  @SerializedName("defaultCoupon")
-  private String defaultCoupon = null;
 
   public InlineResponse2003 id(String id) {
     this.id = id;
@@ -37,52 +37,16 @@ public class InlineResponse2003 {
   }
 
    /**
-   * The id of the collection
+   * Unique ID of the created attribute
    * @return id
   **/
-  @ApiModelProperty(example = "23befbae-1505-47a8-bd27-e30ef739f32c", required = true, value = "The id of the collection")
+  @ApiModelProperty(example = "61a5cd07ca1347c82306ad07", required = true, value = "Unique ID of the created attribute")
   public String getId() {
     return id;
   }
 
   public void setId(String id) {
     this.id = id;
-  }
-
-  public InlineResponse2003 name(String name) {
-    this.name = name;
-    return this;
-  }
-
-   /**
-   * The name of the collection
-   * @return name
-  **/
-  @ApiModelProperty(example = "SummerPromotions", required = true, value = "The name of the collection")
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public InlineResponse2003 defaultCoupon(String defaultCoupon) {
-    this.defaultCoupon = defaultCoupon;
-    return this;
-  }
-
-   /**
-   * The default coupon of the collection
-   * @return defaultCoupon
-  **/
-  @ApiModelProperty(example = "10 OFF", value = "The default coupon of the collection")
-  public String getDefaultCoupon() {
-    return defaultCoupon;
-  }
-
-  public void setDefaultCoupon(String defaultCoupon) {
-    this.defaultCoupon = defaultCoupon;
   }
 
 
@@ -95,14 +59,12 @@ public class InlineResponse2003 {
     return false;
   }
     InlineResponse2003 inlineResponse2003 = (InlineResponse2003) o;
-    return ObjectUtils.equals(this.id, inlineResponse2003.id) &&
-    ObjectUtils.equals(this.name, inlineResponse2003.name) &&
-    ObjectUtils.equals(this.defaultCoupon, inlineResponse2003.defaultCoupon);
+    return ObjectUtils.equals(this.id, inlineResponse2003.id);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(id, name, defaultCoupon);
+    return ObjectUtils.hashCodeMulti(id);
   }
 
 
@@ -112,8 +74,6 @@ public class InlineResponse2003 {
     sb.append("class InlineResponse2003 {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    defaultCoupon: ").append(toIndentedString(defaultCoupon)).append("\n");
     sb.append("}");
     return sb.toString();
   }

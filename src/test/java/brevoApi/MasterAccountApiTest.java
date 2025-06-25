@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -18,7 +18,10 @@ import brevoModel.*;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * API tests for MasterAccountApi
@@ -72,7 +75,7 @@ public class MasterAccountApiTest {
     @Test
     public void corporateGroupIdPutTest() throws ApiException {
         String id = null;
-        Body1 body = null;
+        Body3 body = null;
         api.corporateGroupIdPut(id, body);
 
         // TODO: test validations
@@ -105,8 +108,23 @@ public class MasterAccountApiTest {
     @Test
     public void corporateGroupUnlinkGroupIdSubAccountsPutTest() throws ApiException {
         String groupId = null;
-        Body2 body = null;
+        Body4 body = null;
         api.corporateGroupUnlinkGroupIdSubAccountsPut(groupId, body);
+
+        // TODO: test validations
+    }
+    
+    /**
+     * List of all IPs
+     *
+     * This endpoint allows you to retrieve the list of active IPs on your Admin account
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void corporateIpGetTest() throws ApiException {
+        api.corporateIpGet();
 
         // TODO: test validations
     }
@@ -211,7 +229,7 @@ public class MasterAccountApiTest {
     /**
      * Update sub-account plan
      *
-     * This endpoint will update the sub-account plan
+     * This endpoint will update the sub-account plan. On the Corporate solution new version v2, you can set an unlimited number of credits in your sub-organization. Please pass the value “-1&quot; to set the consumable in unlimited mode.
      *
      * @throws ApiException
      *          if the Api call fails
@@ -221,6 +239,38 @@ public class MasterAccountApiTest {
         Long id = null;
         SubAccountUpdatePlanRequest updatePlanDetails = null;
         api.corporateSubAccountIdPlanPut(id, updatePlanDetails);
+
+        // TODO: test validations
+    }
+    
+    /**
+     * Associate an IP to sub-accounts
+     *
+     * This endpoint allows to associate an IP to sub-accounts
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void corporateSubAccountIpAssociatePostTest() throws ApiException {
+        Body1 body = null;
+        Object response = api.corporateSubAccountIpAssociatePost(body);
+
+        // TODO: test validations
+    }
+    
+    /**
+     * Dissociate an IP from sub-accounts
+     *
+     * This endpoint allows to dissociate an IP from sub-accounts
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void corporateSubAccountIpDissociatePutTest() throws ApiException {
+        Body2 body = null;
+        api.corporateSubAccountIpDissociatePut(body);
 
         // TODO: test validations
     }
@@ -274,9 +324,42 @@ public class MasterAccountApiTest {
     }
     
     /**
+     * Update sub-accounts plan
+     *
+     * This endpoint will update multiple sub-accounts plan. On the Corporate solution new version v2, you can set an unlimited number of credits in your sub-organization. Please pass the value “-1&quot; to set the consumable in unlimited mode.
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void corporateSubAccountsPlanPutTest() throws ApiException {
+        SubAccountsUpdatePlanRequest updatePlanDetails = null;
+        api.corporateSubAccountsPlanPut(updatePlanDetails);
+
+        // TODO: test validations
+    }
+    
+    /**
+     * Change admin user permissions
+     *
+     * This endpoint will allow you to change the permissions of Admin users of your Admin account
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void corporateUserEmailPermissionsPutTest() throws ApiException {
+        String email = null;
+        Body5 body = null;
+        api.corporateUserEmailPermissionsPut(email, body);
+
+        // TODO: test validations
+    }
+    
+    /**
      * Resend / cancel admin user invitation
      *
-     * This endpoint will allow the user to:  - Resend an admin user invitation - Cancel an admin user invitation 
+     * This endpoint will allow the user to: - Resend an admin user invitation - Cancel an admin user invitation 
      *
      * @throws ApiException
      *          if the Api call fails
@@ -318,9 +401,10 @@ public class MasterAccountApiTest {
     public void getAccountActivityTest() throws ApiException {
         String startDate = null;
         String endDate = null;
+        String email = null;
         Long limit = null;
         Long offset = null;
-        GetAccountActivity response = api.getAccountActivity(startDate, endDate, limit, offset);
+        GetAccountActivity response = api.getAccountActivity(startDate, endDate, email, limit, offset);
 
         // TODO: test validations
     }
@@ -343,7 +427,7 @@ public class MasterAccountApiTest {
     /**
      * Check admin user permissions
      *
-     * 
+     * This endpoint will provide the list of admin user permissions
      *
      * @throws ApiException
      *          if the Api call fails
@@ -374,7 +458,7 @@ public class MasterAccountApiTest {
     /**
      * Send invitation to an admin user
      *
-     * &#x60;This endpoint allows you to invite a member to manage the Admin account  Features and their respective permissions are as below:  - &#x60;my_plan&#x60;:   - \&quot;all\&quot; - &#x60;api&#x60;:   - \&quot;none\&quot; - &#x60;user_management&#x60;:   - \&quot;all\&quot; - &#x60;app_management&#x60; | Not available in ENTv2:   - \&quot;all\&quot;  **Note**: - If &#x60;all_features_access: false&#x60; then only privileges are required otherwise if &#x60;true&#x60; then it&#39;s assumed that all permissions will be there for the invited admin user. 
+     * &#x60;This endpoint allows you to invite a member to manage the Admin account  Features and their respective permissions are as below:  - &#x60;my_plan&#x60;:   - &quot;all&quot; - &#x60;api&#x60;:   - &quot;none&quot; - &#x60;user_management&#x60;:   - &quot;all&quot; - &#x60;app_management&#x60; | Not available in ENTv2:   - &quot;all&quot; - &#x60;sub_organization_groups&#x60;   - &quot;create&quot;   - &quot;edit_delete&quot; - &#x60;create_sub_organizations&#x60;   - &quot;all&quot; - &#x60;manage_sub_organizations&#x60;   - &quot;all&quot; - &#x60;analytics&#x60;   - &quot;download_data&quot;   - &quot;create_alerts&quot;   - &quot;my_looks&quot;   - &quot;explore_create&quot; - &#x60;security&#x60;   - &quot;all&quot;  **Note**: - If &#x60;all_features_access: false&#x60; then only privileges are required otherwise if &#x60;true&#x60; then it&#39;s assumed that all permissions will be there for the invited admin user. 
      *
      * @throws ApiException
      *          if the Api call fails

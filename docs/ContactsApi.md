@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**deleteContact**](ContactsApi.md#deleteContact) | **DELETE** /contacts/{identifier} | Delete a contact
 [**deleteFolder**](ContactsApi.md#deleteFolder) | **DELETE** /contacts/folders/{folderId} | Delete a folder (and all its lists)
 [**deleteList**](ContactsApi.md#deleteList) | **DELETE** /contacts/lists/{listId} | Delete a list
+[**deleteMultiAttributeOptions**](ContactsApi.md#deleteMultiAttributeOptions) | **DELETE** /contacts/attributes/{attributeType}/{multipleChoiceAttribute}/{multipleChoiceAttributeOption} | Delete a multiple-choice attribute option
 [**getAttributes**](ContactsApi.md#getAttributes) | **GET** /contacts/attributes | List all attributes
 [**getContactInfo**](ContactsApi.md#getContactInfo) | **GET** /contacts/{identifier} | Get a contact&#39;s details
 [**getContactStats**](ContactsApi.md#getContactStats) | **GET** /contacts/{identifier}/campaignStats | Get email campaigns&#39; statistics for a contact
@@ -66,7 +67,7 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 
 ContactsApi apiInstance = new ContactsApi();
 Long listId = 789L; // Long | Id of the list
-AddContactToList contactEmails = new AddContactToList(); // AddContactToList | Emails addresses OR IDs of the contacts
+AddContactToList contactEmails = new AddContactToList(); // AddContactToList | Emails addresses OR IDs OR EXT_ID attributes of the contacts
 try {
     PostContactInfo result = apiInstance.addContactToList(listId, contactEmails);
     System.out.println(result);
@@ -81,7 +82,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **listId** | **Long**| Id of the list |
- **contactEmails** | [**AddContactToList**](AddContactToList.md)| Emails addresses OR IDs of the contacts |
+ **contactEmails** | [**AddContactToList**](AddContactToList.md)| Emails addresses OR IDs OR EXT_ID attributes of the contacts |
 
 ### Return type
 
@@ -163,6 +164,8 @@ null (empty response body)
 > CreateUpdateContactModel createContact(createContact)
 
 Create a contact
+
+Creates new contacts on Brevo. Contacts can be created by passing either - &lt;br&gt;&lt;br&gt; 1. email address of the contact (email_id),  &lt;br&gt; 2. phone number of the contact (to be passed as &quot;SMS&quot; field in &quot;attributes&quot; along with proper country code), For example- {&quot;SMS&quot;:&quot;+91xxxxxxxxxx&quot;} or {&quot;SMS&quot;:&quot;0091xxxxxxxxxx&quot;} &lt;br&gt; 3. ext_id &lt;br&gt;
 
 ### Example
 ```java
@@ -455,9 +458,11 @@ null (empty response body)
 
 <a name="deleteContact"></a>
 # **deleteContact**
-> deleteContact(identifier)
+> deleteContact(identifier, identifierType)
 
 Delete a contact
+
+There are 2 ways to delete a contact &lt;br&gt;&lt;br&gt; Option 1- https://api.brevo.com/v3/contacts/{identifier} &lt;br&gt;&lt;br&gt; Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType&#x3D;{} &lt;br&gt; &lt;br&gt; Option 1 only works if identifierType is email_id (for EMAIL) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL and ID of the contact.   &lt;br&gt;&lt;br&gt; Option 2 works for all identifierType, use email_id for EMAIL attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute.
 
 ### Example
 ```java
@@ -483,9 +488,10 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 //partnerKey.setApiKeyPrefix("Token");
 
 ContactsApi apiInstance = new ContactsApi();
-String identifier = "identifier_example"; // String | Email (urlencoded) OR ID of the contact
+String identifier = "identifier_example"; // String | Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded)
+String identifierType = "identifierType_example"; // String | email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute
 try {
-    apiInstance.deleteContact(identifier);
+    apiInstance.deleteContact(identifier, identifierType);
 } catch (ApiException e) {
     System.err.println("Exception when calling ContactsApi#deleteContact");
     e.printStackTrace();
@@ -496,7 +502,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **identifier** | **String**| Email (urlencoded) OR ID of the contact |
+ **identifier** | **String**| Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) |
+ **identifierType** | **String**| email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute | [optional] [enum: email_id, contact_id, ext_id, phone_id, whatsapp_id, landline_number_id]
 
 ### Return type
 
@@ -627,6 +634,68 @@ null (empty response body)
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+<a name="deleteMultiAttributeOptions"></a>
+# **deleteMultiAttributeOptions**
+> deleteMultiAttributeOptions(attributeType, multipleChoiceAttribute, multipleChoiceAttributeOption)
+
+Delete a multiple-choice attribute option
+
+### Example
+```java
+// Import classes:
+//import brevo.ApiClient;
+//import brevo.ApiException;
+//import brevo.Configuration;
+//import brevo.auth.*;
+//import brevoApi.ContactsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: api-key
+ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("api-key");
+apiKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: partner-key
+ApiKeyAuth partnerKey = (ApiKeyAuth) defaultClient.getAuthentication("partner-key");
+partnerKey.setApiKey("YOUR PARTNER KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//partnerKey.setApiKeyPrefix("Token");
+
+ContactsApi apiInstance = new ContactsApi();
+String attributeType = "attributeType_example"; // String | Type of the attribute
+String multipleChoiceAttribute = "multipleChoiceAttribute_example"; // String | Name of the existing multiple-choice attribute
+String multipleChoiceAttributeOption = "multipleChoiceAttributeOption_example"; // String | Name of the existing multiple-choice attribute option that you want to delete
+try {
+    apiInstance.deleteMultiAttributeOptions(attributeType, multipleChoiceAttribute, multipleChoiceAttributeOption);
+} catch (ApiException e) {
+    System.err.println("Exception when calling ContactsApi#deleteMultiAttributeOptions");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **attributeType** | **String**| Type of the attribute | [enum: multiple-choice]
+ **multipleChoiceAttribute** | **String**| Name of the existing multiple-choice attribute |
+ **multipleChoiceAttributeOption** | **String**| Name of the existing multiple-choice attribute option that you want to delete |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
 <a name="getAttributes"></a>
 # **getAttributes**
 > GetAttributes getAttributes()
@@ -684,11 +753,11 @@ This endpoint does not need any parameter.
 
 <a name="getContactInfo"></a>
 # **getContactInfo**
-> GetExtendedContactDetails getContactInfo(identifier, startDate, endDate)
+> GetExtendedContactDetails getContactInfo(identifier, identifierType, startDate, endDate)
 
 Get a contact&#39;s details
 
-Along with the contact details, this endpoint will show the statistics of contact for the recent 90 days by default. To fetch the earlier statistics, please use Get contact campaign stats (https://developers.brevo.com/reference/contacts-7#getcontactstats) endpoint with the appropriate date ranges.
+There are 2 ways to get a contact &lt;br&gt;&lt;br&gt; Option 1- https://api.brevo.com/v3/contacts/{identifier} &lt;br&gt;&lt;br&gt; Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType&#x3D;{} &lt;br&gt; &lt;br&gt; Option 1 only works if identifierType is email_id (for EMAIL), phone_id (for SMS) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL, SMS and ID of the contact.   &lt;br&gt;&lt;br&gt; Option 2 works for all identifierType, use email_id for EMAIL attribute, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute &lt;br&gt;&lt;br&gt;Along with the contact details, this endpoint will show the statistics of contact for the recent 90 days by default. To fetch the earlier statistics, please use Get contact campaign stats &#x60;&#x60;https://developers.brevo.com/reference/contacts-7#getcontactstats&#x60;&#x60; endpoint with the appropriate date ranges.
 
 ### Example
 ```java
@@ -714,11 +783,12 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 //partnerKey.setApiKeyPrefix("Token");
 
 ContactsApi apiInstance = new ContactsApi();
-String identifier = "identifier_example"; // String | Email (urlencoded) OR ID of the contact OR its SMS attribute value
+String identifier = "identifier_example"; // String | Email (urlencoded) OR ID of the contact OR its SMS attribute value OR EXT_ID attribute (urlencoded)
+String identifierType = "identifierType_example"; // String | email_id for Email, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute
 String startDate = "startDate_example"; // String | **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be lower than equal to endDate 
 String endDate = "endDate_example"; // String | **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be greater than equal to startDate. 
 try {
-    GetExtendedContactDetails result = apiInstance.getContactInfo(identifier, startDate, endDate);
+    GetExtendedContactDetails result = apiInstance.getContactInfo(identifier, identifierType, startDate, endDate);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling ContactsApi#getContactInfo");
@@ -730,7 +800,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **identifier** | **String**| Email (urlencoded) OR ID of the contact OR its SMS attribute value |
+ **identifier** | **String**| Email (urlencoded) OR ID of the contact OR its SMS attribute value OR EXT_ID attribute (urlencoded) |
+ **identifierType** | **String**| email_id for Email, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute | [optional] [enum: email_id, phone_id, contact_id, ext_id, whatsapp_id, landline_number_id]
  **startDate** | **String**| **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be lower than equal to endDate  | [optional]
  **endDate** | **String**| **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be greater than equal to startDate.  | [optional]
 
@@ -812,7 +883,7 @@ Name | Type | Description  | Notes
 
 <a name="getContacts"></a>
 # **getContacts**
-> GetContacts getContacts(limit, offset, modifiedSince, createdSince, sort, segmentId, listIds)
+> GetContacts getContacts(limit, offset, modifiedSince, createdSince, sort, segmentId, listIds, filter)
 
 Get all the contacts
 
@@ -847,8 +918,9 @@ String createdSince = "createdSince_example"; // String | Filter (urlencoded) th
 String sort = "desc"; // String | Sort the results in the ascending/descending order of record creation. Default order is **descending** if `sort` is not passed
 Long segmentId = 789L; // Long | Id of the segment. **Either listIds or segmentId can be passed.**
 List<Long> listIds = Arrays.asList(56L); // List<Long> | Ids of the list. **Either listIds or segmentId can be passed.**
+String filter = "filter_example"; // String | Filter the contacts on the basis of attributes. **Allowed operator: equals. For multiple-choice options, the filter will apply an AND condition between the options. For category attributes, the filter will work with both id and value. (e.g. filter=equals(FIRSTNAME,\"Antoine\"), filter=equals(B1, true), filter=equals(DOB, \"1989-11-23\"), filter=equals(GENDER, \"1\"), filter=equals(GENDER, \"MALE\"), filter=equals(COUNTRY,\"USA, INDIA\")** 
 try {
-    GetContacts result = apiInstance.getContacts(limit, offset, modifiedSince, createdSince, sort, segmentId, listIds);
+    GetContacts result = apiInstance.getContacts(limit, offset, modifiedSince, createdSince, sort, segmentId, listIds, filter);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling ContactsApi#getContacts");
@@ -867,6 +939,7 @@ Name | Type | Description  | Notes
  **sort** | **String**| Sort the results in the ascending/descending order of record creation. Default order is **descending** if &#x60;sort&#x60; is not passed | [optional] [default to desc] [enum: asc, desc]
  **segmentId** | **Long**| Id of the segment. **Either listIds or segmentId can be passed.** | [optional]
  **listIds** | [**List&lt;Long&gt;**](Long.md)| Ids of the list. **Either listIds or segmentId can be passed.** | [optional]
+ **filter** | **String**| Filter the contacts on the basis of attributes. **Allowed operator: equals. For multiple-choice options, the filter will apply an AND condition between the options. For category attributes, the filter will work with both id and value. (e.g. filter&#x3D;equals(FIRSTNAME,&quot;Antoine&quot;), filter&#x3D;equals(B1, true), filter&#x3D;equals(DOB, &quot;1989-11-23&quot;), filter&#x3D;equals(GENDER, &quot;1&quot;), filter&#x3D;equals(GENDER, &quot;MALE&quot;), filter&#x3D;equals(COUNTRY,&quot;USA, INDIA&quot;)**  | [optional]
 
 ### Return type
 
@@ -1118,8 +1191,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **Long**| Number of documents per page | [default to 10]
- **offset** | **Long**| Index of the first document of the page | [default to 0]
+ **limit** | **Long**| Number of documents per page | [optional] [default to 10]
+ **offset** | **Long**| Index of the first document of the page | [optional] [default to 0]
  **sort** | **String**| Sort the results in the ascending/descending order of record creation. Default order is **descending** if &#x60;sort&#x60; is not passed | [optional] [default to desc] [enum: asc, desc]
 
 ### Return type
@@ -1416,7 +1489,7 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 
 ContactsApi apiInstance = new ContactsApi();
 Long listId = 789L; // Long | Id of the list
-RemoveContactFromList contactEmails = new RemoveContactFromList(); // RemoveContactFromList | Emails addresses OR IDs of the contacts
+RemoveContactFromList contactEmails = new RemoveContactFromList(); // RemoveContactFromList | Emails addresses OR IDs OR EXT_ID attributes of the contacts
 try {
     PostContactInfo result = apiInstance.removeContactFromList(listId, contactEmails);
     System.out.println(result);
@@ -1431,7 +1504,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **listId** | **Long**| Id of the list |
- **contactEmails** | [**RemoveContactFromList**](RemoveContactFromList.md)| Emails addresses OR IDs of the contacts |
+ **contactEmails** | [**RemoveContactFromList**](RemoveContactFromList.md)| Emails addresses OR IDs OR EXT_ID attributes of the contacts |
 
 ### Return type
 
@@ -1552,7 +1625,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **attributeCategory** | **String**| Category of the attribute | [enum: category, calculated, global]
+ **attributeCategory** | **String**| Category of the attribute | [enum: category, calculated, global, normal]
  **attributeName** | **String**| Name of the existing attribute |
  **updateAttribute** | [**UpdateAttribute**](UpdateAttribute.md)| Values to update an attribute |
 
@@ -1629,9 +1702,11 @@ null (empty response body)
 
 <a name="updateContact"></a>
 # **updateContact**
-> updateContact(identifier, updateContact)
+> updateContact(identifier, updateContact, identifierType)
 
 Update a contact
+
+There are 2 ways to update a contact &lt;br&gt;&lt;br&gt; Option 1- https://api.brevo.com/v3/contacts/{identifier} &lt;br&gt;&lt;br&gt; Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType&#x3D;{} &lt;br&gt; &lt;br&gt; Option 1 only works if identifierType is email_id (for EMAIL) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL and ID of the contact.   &lt;br&gt;&lt;br&gt; Option 2 works for all identifierType, use email_id for EMAIL attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute
 
 ### Example
 ```java
@@ -1657,10 +1732,11 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 //partnerKey.setApiKeyPrefix("Token");
 
 ContactsApi apiInstance = new ContactsApi();
-String identifier = "identifier_example"; // String | Email (urlencoded) OR ID of the contact
+String identifier = "identifier_example"; // String | Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) OR its SMS attribute value OR its WHATSAPP attribute value OR its LANDLINE attribute value
 UpdateContact updateContact = new UpdateContact(); // UpdateContact | Values to update a contact
+String identifierType = "identifierType_example"; // String | email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute
 try {
-    apiInstance.updateContact(identifier, updateContact);
+    apiInstance.updateContact(identifier, updateContact, identifierType);
 } catch (ApiException e) {
     System.err.println("Exception when calling ContactsApi#updateContact");
     e.printStackTrace();
@@ -1671,8 +1747,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **identifier** | **String**| Email (urlencoded) OR ID of the contact |
+ **identifier** | **String**| Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) OR its SMS attribute value OR its WHATSAPP attribute value OR its LANDLINE attribute value |
  **updateContact** | [**UpdateContact**](UpdateContact.md)| Values to update a contact |
+ **identifierType** | **String**| email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute | [optional] [enum: email_id, contact_id, ext_id, phone_id, whatsapp_id, landline_number_id]
 
 ### Return type
 

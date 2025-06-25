@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,40 +13,41 @@
 
 package brevoModel;
 
+import org.apache.commons.lang3.ObjectUtils;
+import brevoModel.SubAccountDetailsResponsePlanInfoCreditsEmails;
+import brevoModel.SubAccountDetailsResponsePlanInfoCreditsExternalFeeds;
+import brevoModel.SubAccountDetailsResponsePlanInfoCreditsSms;
+import brevoModel.SubAccountDetailsResponsePlanInfoCreditsWhatsapp;
+import brevoModel.SubAccountDetailsResponsePlanInfoCreditsWpSubscribers;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.ObjectUtils;
+import java.io.IOException;
 
 /**
  * Credits quota and remaining credits on the sub-account
  */
 @ApiModel(description = "Credits quota and remaining credits on the sub-account")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class SubAccountDetailsResponsePlanInfoCredits {
-  @SerializedName("sms")
-  private Long sms = null;
-
   @SerializedName("emails")
   private SubAccountDetailsResponsePlanInfoCreditsEmails emails = null;
 
-  public SubAccountDetailsResponsePlanInfoCredits sms(Long sms) {
-    this.sms = sms;
-    return this;
-  }
+  @SerializedName("sms")
+  private SubAccountDetailsResponsePlanInfoCreditsSms sms = null;
 
-   /**
-   * SMS credits remaining on the sub-account
-   * @return sms
-  **/
-  @ApiModelProperty(value = "SMS credits remaining on the sub-account")
-  public Long getSms() {
-    return sms;
-  }
+  @SerializedName("wpSubscribers")
+  private SubAccountDetailsResponsePlanInfoCreditsWpSubscribers wpSubscribers = null;
 
-  public void setSms(Long sms) {
-    this.sms = sms;
-  }
+  @SerializedName("whatsapp")
+  private SubAccountDetailsResponsePlanInfoCreditsWhatsapp whatsapp = null;
+
+  @SerializedName("externalFeeds")
+  private SubAccountDetailsResponsePlanInfoCreditsExternalFeeds externalFeeds = null;
 
   public SubAccountDetailsResponsePlanInfoCredits emails(SubAccountDetailsResponsePlanInfoCreditsEmails emails) {
     this.emails = emails;
@@ -66,6 +67,78 @@ public class SubAccountDetailsResponsePlanInfoCredits {
     this.emails = emails;
   }
 
+  public SubAccountDetailsResponsePlanInfoCredits sms(SubAccountDetailsResponsePlanInfoCreditsSms sms) {
+    this.sms = sms;
+    return this;
+  }
+
+   /**
+   * Get sms
+   * @return sms
+  **/
+  @ApiModelProperty(value = "")
+  public SubAccountDetailsResponsePlanInfoCreditsSms getSms() {
+    return sms;
+  }
+
+  public void setSms(SubAccountDetailsResponsePlanInfoCreditsSms sms) {
+    this.sms = sms;
+  }
+
+  public SubAccountDetailsResponsePlanInfoCredits wpSubscribers(SubAccountDetailsResponsePlanInfoCreditsWpSubscribers wpSubscribers) {
+    this.wpSubscribers = wpSubscribers;
+    return this;
+  }
+
+   /**
+   * Get wpSubscribers
+   * @return wpSubscribers
+  **/
+  @ApiModelProperty(value = "")
+  public SubAccountDetailsResponsePlanInfoCreditsWpSubscribers getWpSubscribers() {
+    return wpSubscribers;
+  }
+
+  public void setWpSubscribers(SubAccountDetailsResponsePlanInfoCreditsWpSubscribers wpSubscribers) {
+    this.wpSubscribers = wpSubscribers;
+  }
+
+  public SubAccountDetailsResponsePlanInfoCredits whatsapp(SubAccountDetailsResponsePlanInfoCreditsWhatsapp whatsapp) {
+    this.whatsapp = whatsapp;
+    return this;
+  }
+
+   /**
+   * Get whatsapp
+   * @return whatsapp
+  **/
+  @ApiModelProperty(value = "")
+  public SubAccountDetailsResponsePlanInfoCreditsWhatsapp getWhatsapp() {
+    return whatsapp;
+  }
+
+  public void setWhatsapp(SubAccountDetailsResponsePlanInfoCreditsWhatsapp whatsapp) {
+    this.whatsapp = whatsapp;
+  }
+
+  public SubAccountDetailsResponsePlanInfoCredits externalFeeds(SubAccountDetailsResponsePlanInfoCreditsExternalFeeds externalFeeds) {
+    this.externalFeeds = externalFeeds;
+    return this;
+  }
+
+   /**
+   * Get externalFeeds
+   * @return externalFeeds
+  **/
+  @ApiModelProperty(value = "")
+  public SubAccountDetailsResponsePlanInfoCreditsExternalFeeds getExternalFeeds() {
+    return externalFeeds;
+  }
+
+  public void setExternalFeeds(SubAccountDetailsResponsePlanInfoCreditsExternalFeeds externalFeeds) {
+    this.externalFeeds = externalFeeds;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -76,13 +149,16 @@ public class SubAccountDetailsResponsePlanInfoCredits {
     return false;
   }
     SubAccountDetailsResponsePlanInfoCredits subAccountDetailsResponsePlanInfoCredits = (SubAccountDetailsResponsePlanInfoCredits) o;
-    return ObjectUtils.equals(this.sms, subAccountDetailsResponsePlanInfoCredits.sms) &&
-    ObjectUtils.equals(this.emails, subAccountDetailsResponsePlanInfoCredits.emails);
+    return ObjectUtils.equals(this.emails, subAccountDetailsResponsePlanInfoCredits.emails) &&
+    ObjectUtils.equals(this.sms, subAccountDetailsResponsePlanInfoCredits.sms) &&
+    ObjectUtils.equals(this.wpSubscribers, subAccountDetailsResponsePlanInfoCredits.wpSubscribers) &&
+    ObjectUtils.equals(this.whatsapp, subAccountDetailsResponsePlanInfoCredits.whatsapp) &&
+    ObjectUtils.equals(this.externalFeeds, subAccountDetailsResponsePlanInfoCredits.externalFeeds);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(sms, emails);
+    return ObjectUtils.hashCodeMulti(emails, sms, wpSubscribers, whatsapp, externalFeeds);
   }
 
 
@@ -91,8 +167,11 @@ public class SubAccountDetailsResponsePlanInfoCredits {
     StringBuilder sb = new StringBuilder();
     sb.append("class SubAccountDetailsResponsePlanInfoCredits {\n");
     
-    sb.append("    sms: ").append(toIndentedString(sms)).append("\n");
     sb.append("    emails: ").append(toIndentedString(emails)).append("\n");
+    sb.append("    sms: ").append(toIndentedString(sms)).append("\n");
+    sb.append("    wpSubscribers: ").append(toIndentedString(wpSubscribers)).append("\n");
+    sb.append("    whatsapp: ").append(toIndentedString(whatsapp)).append("\n");
+    sb.append("    externalFeeds: ").append(toIndentedString(externalFeeds)).append("\n");
     sb.append("}");
     return sb.toString();
   }

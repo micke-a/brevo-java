@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,23 +13,32 @@
 
 package brevoModel;
 
-import com.google.gson.annotations.SerializedName;
-import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.ObjectUtils;
-
+import brevoModel.UpdateAttributeEnumeration;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * UpdateAttribute
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class UpdateAttribute {
   @SerializedName("value")
   private String value = null;
 
   @SerializedName("enumeration")
   private List<UpdateAttributeEnumeration> enumeration = null;
+
+  @SerializedName("multiCategoryOptions")
+  private List<String> multiCategoryOptions = null;
 
   public UpdateAttribute value(String value) {
     this.value = value;
@@ -63,16 +72,42 @@ public class UpdateAttribute {
   }
 
    /**
-   * List of the values and labels that the attribute can take. Use only if the attribute&#39;s category is \&quot;category\&quot;. For example, [{\&quot;value\&quot;:1, \&quot;label\&quot;:\&quot;male\&quot;}, {\&quot;value\&quot;:2, \&quot;label\&quot;:\&quot;female\&quot;}]
+   * List of the values and labels that the attribute can take. Use only if the attribute&#39;s category is &quot;category&quot;. None of the category options can exceed max 200 characters. For example, [{&quot;value&quot;:1, &quot;label&quot;:&quot;male&quot;}, {&quot;value&quot;:2, &quot;label&quot;:&quot;female&quot;}]
    * @return enumeration
   **/
-  @ApiModelProperty(value = "List of the values and labels that the attribute can take. Use only if the attribute's category is \"category\". For example, [{\"value\":1, \"label\":\"male\"}, {\"value\":2, \"label\":\"female\"}]")
+  @ApiModelProperty(value = "List of the values and labels that the attribute can take. Use only if the attribute's category is \"category\". None of the category options can exceed max 200 characters. For example, [{\"value\":1, \"label\":\"male\"}, {\"value\":2, \"label\":\"female\"}]")
   public List<UpdateAttributeEnumeration> getEnumeration() {
     return enumeration;
   }
 
   public void setEnumeration(List<UpdateAttributeEnumeration> enumeration) {
     this.enumeration = enumeration;
+  }
+
+  public UpdateAttribute multiCategoryOptions(List<String> multiCategoryOptions) {
+    this.multiCategoryOptions = multiCategoryOptions;
+    return this;
+  }
+
+  public UpdateAttribute addMultiCategoryOptionsItem(String multiCategoryOptionsItem) {
+    if (this.multiCategoryOptions == null) {
+      this.multiCategoryOptions = new ArrayList<String>();
+    }
+    this.multiCategoryOptions.add(multiCategoryOptionsItem);
+    return this;
+  }
+
+   /**
+   * Use this option to add multiple-choice attributes options only if the attribute&#39;s category is &quot;normal&quot;. **This option is specifically designed for updating multiple-choice attributes. None of the multicategory options can exceed max 200 characters **. For example: **[&quot;USA&quot;,&quot;INDIA&quot;]** 
+   * @return multiCategoryOptions
+  **/
+  @ApiModelProperty(value = "Use this option to add multiple-choice attributes options only if the attribute's category is \"normal\". **This option is specifically designed for updating multiple-choice attributes. None of the multicategory options can exceed max 200 characters **. For example: **[\"USA\",\"INDIA\"]** ")
+  public List<String> getMultiCategoryOptions() {
+    return multiCategoryOptions;
+  }
+
+  public void setMultiCategoryOptions(List<String> multiCategoryOptions) {
+    this.multiCategoryOptions = multiCategoryOptions;
   }
 
 
@@ -86,12 +121,13 @@ public class UpdateAttribute {
   }
     UpdateAttribute updateAttribute = (UpdateAttribute) o;
     return ObjectUtils.equals(this.value, updateAttribute.value) &&
-    ObjectUtils.equals(this.enumeration, updateAttribute.enumeration);
+    ObjectUtils.equals(this.enumeration, updateAttribute.enumeration) &&
+    ObjectUtils.equals(this.multiCategoryOptions, updateAttribute.multiCategoryOptions);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(value, enumeration);
+    return ObjectUtils.hashCodeMulti(value, enumeration, multiCategoryOptions);
   }
 
 
@@ -102,6 +138,7 @@ public class UpdateAttribute {
     
     sb.append("    value: ").append(toIndentedString(value)).append("\n");
     sb.append("    enumeration: ").append(toIndentedString(enumeration)).append("\n");
+    sb.append("    multiCategoryOptions: ").append(toIndentedString(multiCategoryOptions)).append("\n");
     sb.append("}");
     return sb.toString();
   }

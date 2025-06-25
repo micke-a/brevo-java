@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,132 +13,69 @@
 
 package brevoModel;
 
-import com.google.gson.annotations.SerializedName;
-import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.ObjectUtils;
-
+import brevoModel.CorporateuseremailpermissionsPrivileges;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Body5
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class Body5 {
-  @SerializedName("linkContactIds")
-  private List<Long> linkContactIds = null;
+  @SerializedName("all_features_access")
+  private Boolean allFeaturesAccess = null;
 
-  @SerializedName("unlinkContactIds")
-  private List<Long> unlinkContactIds = null;
+  @SerializedName("privileges")
+  private List<CorporateuseremailpermissionsPrivileges> privileges = new ArrayList<CorporateuseremailpermissionsPrivileges>();
 
-  @SerializedName("linkDealsIds")
-  private List<String> linkDealsIds = null;
-
-  @SerializedName("unlinkDealsIds")
-  private List<String> unlinkDealsIds = null;
-
-  public Body5 linkContactIds(List<Long> linkContactIds) {
-    this.linkContactIds = linkContactIds;
-    return this;
-  }
-
-  public Body5 addLinkContactIdsItem(Long linkContactIdsItem) {
-    if (this.linkContactIds == null) {
-      this.linkContactIds = new ArrayList<Long>();
-    }
-    this.linkContactIds.add(linkContactIdsItem);
+  public Body5 allFeaturesAccess(Boolean allFeaturesAccess) {
+    this.allFeaturesAccess = allFeaturesAccess;
     return this;
   }
 
    /**
-   * Contact ids for contacts to be linked with company
-   * @return linkContactIds
+   * All access to the features
+   * @return allFeaturesAccess
   **/
-  @ApiModelProperty(example = "[1,2,3]", value = "Contact ids for contacts to be linked with company")
-  public List<Long> getLinkContactIds() {
-    return linkContactIds;
+  @ApiModelProperty(example = "true", required = true, value = "All access to the features")
+  public Boolean isAllFeaturesAccess() {
+    return allFeaturesAccess;
   }
 
-  public void setLinkContactIds(List<Long> linkContactIds) {
-    this.linkContactIds = linkContactIds;
+  public void setAllFeaturesAccess(Boolean allFeaturesAccess) {
+    this.allFeaturesAccess = allFeaturesAccess;
   }
 
-  public Body5 unlinkContactIds(List<Long> unlinkContactIds) {
-    this.unlinkContactIds = unlinkContactIds;
+  public Body5 privileges(List<CorporateuseremailpermissionsPrivileges> privileges) {
+    this.privileges = privileges;
     return this;
   }
 
-  public Body5 addUnlinkContactIdsItem(Long unlinkContactIdsItem) {
-    if (this.unlinkContactIds == null) {
-      this.unlinkContactIds = new ArrayList<Long>();
-    }
-    this.unlinkContactIds.add(unlinkContactIdsItem);
+  public Body5 addPrivilegesItem(CorporateuseremailpermissionsPrivileges privilegesItem) {
+    this.privileges.add(privilegesItem);
     return this;
   }
 
    /**
-   * Contact ids for contacts to be unlinked from company
-   * @return unlinkContactIds
+   * Get privileges
+   * @return privileges
   **/
-  @ApiModelProperty(example = "[4,5,6]", value = "Contact ids for contacts to be unlinked from company")
-  public List<Long> getUnlinkContactIds() {
-    return unlinkContactIds;
+  @ApiModelProperty(required = true, value = "")
+  public List<CorporateuseremailpermissionsPrivileges> getPrivileges() {
+    return privileges;
   }
 
-  public void setUnlinkContactIds(List<Long> unlinkContactIds) {
-    this.unlinkContactIds = unlinkContactIds;
-  }
-
-  public Body5 linkDealsIds(List<String> linkDealsIds) {
-    this.linkDealsIds = linkDealsIds;
-    return this;
-  }
-
-  public Body5 addLinkDealsIdsItem(String linkDealsIdsItem) {
-    if (this.linkDealsIds == null) {
-      this.linkDealsIds = new ArrayList<String>();
-    }
-    this.linkDealsIds.add(linkDealsIdsItem);
-    return this;
-  }
-
-   /**
-   * Deals ids for deals to be linked with company
-   * @return linkDealsIds
-  **/
-  @ApiModelProperty(example = "[\"61a5ce58c5d4795761045990\",\"61a5ce58c5d4795761045991\",\"61a5ce58c5d4795761045992\"]", value = "Deals ids for deals to be linked with company")
-  public List<String> getLinkDealsIds() {
-    return linkDealsIds;
-  }
-
-  public void setLinkDealsIds(List<String> linkDealsIds) {
-    this.linkDealsIds = linkDealsIds;
-  }
-
-  public Body5 unlinkDealsIds(List<String> unlinkDealsIds) {
-    this.unlinkDealsIds = unlinkDealsIds;
-    return this;
-  }
-
-  public Body5 addUnlinkDealsIdsItem(String unlinkDealsIdsItem) {
-    if (this.unlinkDealsIds == null) {
-      this.unlinkDealsIds = new ArrayList<String>();
-    }
-    this.unlinkDealsIds.add(unlinkDealsIdsItem);
-    return this;
-  }
-
-   /**
-   * Deals ids for deals to be unlinked from company
-   * @return unlinkDealsIds
-  **/
-  @ApiModelProperty(example = "[\"61a5ce58c5d4795761045994\",\"61a5ce58c5d479576104595\",\"61a5ce58c5d4795761045996\"]", value = "Deals ids for deals to be unlinked from company")
-  public List<String> getUnlinkDealsIds() {
-    return unlinkDealsIds;
-  }
-
-  public void setUnlinkDealsIds(List<String> unlinkDealsIds) {
-    this.unlinkDealsIds = unlinkDealsIds;
+  public void setPrivileges(List<CorporateuseremailpermissionsPrivileges> privileges) {
+    this.privileges = privileges;
   }
 
 
@@ -151,15 +88,13 @@ public class Body5 {
     return false;
   }
     Body5 body5 = (Body5) o;
-    return ObjectUtils.equals(this.linkContactIds, body5.linkContactIds) &&
-    ObjectUtils.equals(this.unlinkContactIds, body5.unlinkContactIds) &&
-    ObjectUtils.equals(this.linkDealsIds, body5.linkDealsIds) &&
-    ObjectUtils.equals(this.unlinkDealsIds, body5.unlinkDealsIds);
+    return ObjectUtils.equals(this.allFeaturesAccess, body5.allFeaturesAccess) &&
+    ObjectUtils.equals(this.privileges, body5.privileges);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(linkContactIds, unlinkContactIds, linkDealsIds, unlinkDealsIds);
+    return ObjectUtils.hashCodeMulti(allFeaturesAccess, privileges);
   }
 
 
@@ -168,10 +103,8 @@ public class Body5 {
     StringBuilder sb = new StringBuilder();
     sb.append("class Body5 {\n");
     
-    sb.append("    linkContactIds: ").append(toIndentedString(linkContactIds)).append("\n");
-    sb.append("    unlinkContactIds: ").append(toIndentedString(unlinkContactIds)).append("\n");
-    sb.append("    linkDealsIds: ").append(toIndentedString(linkDealsIds)).append("\n");
-    sb.append("    unlinkDealsIds: ").append(toIndentedString(unlinkDealsIds)).append("\n");
+    sb.append("    allFeaturesAccess: ").append(toIndentedString(allFeaturesAccess)).append("\n");
+    sb.append("    privileges: ").append(toIndentedString(privileges)).append("\n");
     sb.append("}");
     return sb.toString();
   }

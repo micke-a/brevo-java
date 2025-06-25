@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -21,6 +21,16 @@ import okhttp3.Interceptor;
 import okhttp3.Response;
 
 import java.io.IOException;
+
+
+import brevoModel.Body13;
+import brevoModel.Body14;
+import brevoModel.ErrorModel;
+import brevoModel.InlineResponse2012;
+import brevoModel.Task;
+import brevoModel.TaskList;
+import brevoModel.TaskTypes;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,7 +61,7 @@ public class TasksApi {
      * @param filterType Filter by task type (ID) (optional)
      * @param filterStatus Filter by task status (optional)
      * @param filterDate Filter by date (optional)
-     * @param filterAssignTo Filter by the \&quot;assignTo\&quot; ID. You can utilize account emails for the \&quot;assignTo\&quot; attribute. (optional)
+     * @param filterAssignTo Filter by the &quot;assignTo&quot; ID. You can utilize account emails for the &quot;assignTo&quot; attribute. (optional)
      * @param filterContacts Filter by contact ids (optional)
      * @param filterDeals Filter by deals ids (optional)
      * @param filterCompanies Filter by companies ids (optional)
@@ -148,7 +158,7 @@ public class TasksApi {
      * @param filterType Filter by task type (ID) (optional)
      * @param filterStatus Filter by task status (optional)
      * @param filterDate Filter by date (optional)
-     * @param filterAssignTo Filter by the \&quot;assignTo\&quot; ID. You can utilize account emails for the \&quot;assignTo\&quot; attribute. (optional)
+     * @param filterAssignTo Filter by the &quot;assignTo&quot; ID. You can utilize account emails for the &quot;assignTo&quot; attribute. (optional)
      * @param filterContacts Filter by contact ids (optional)
      * @param filterDeals Filter by deals ids (optional)
      * @param filterCompanies Filter by companies ids (optional)
@@ -172,7 +182,7 @@ public class TasksApi {
      * @param filterType Filter by task type (ID) (optional)
      * @param filterStatus Filter by task status (optional)
      * @param filterDate Filter by date (optional)
-     * @param filterAssignTo Filter by the \&quot;assignTo\&quot; ID. You can utilize account emails for the \&quot;assignTo\&quot; attribute. (optional)
+     * @param filterAssignTo Filter by the &quot;assignTo&quot; ID. You can utilize account emails for the &quot;assignTo&quot; attribute. (optional)
      * @param filterContacts Filter by contact ids (optional)
      * @param filterDeals Filter by deals ids (optional)
      * @param filterCompanies Filter by companies ids (optional)
@@ -197,7 +207,7 @@ public class TasksApi {
      * @param filterType Filter by task type (ID) (optional)
      * @param filterStatus Filter by task status (optional)
      * @param filterDate Filter by date (optional)
-     * @param filterAssignTo Filter by the \&quot;assignTo\&quot; ID. You can utilize account emails for the \&quot;assignTo\&quot; attribute. (optional)
+     * @param filterAssignTo Filter by the &quot;assignTo&quot; ID. You can utilize account emails for the &quot;assignTo&quot; attribute. (optional)
      * @param filterContacts Filter by contact ids (optional)
      * @param filterDeals Filter by deals ids (optional)
      * @param filterCompanies Filter by companies ids (optional)
@@ -488,7 +498,7 @@ public class TasksApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call crmTasksIdPatchCall(String id, Body10 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call crmTasksIdPatchCall(String id, Body14 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -531,7 +541,7 @@ public class TasksApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call crmTasksIdPatchValidateBeforeCall(String id, Body10 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call crmTasksIdPatchValidateBeforeCall(String id, Body14 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'id' is set
         if (id == null) {
@@ -556,7 +566,7 @@ public class TasksApi {
      * @param body Updated task details. (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public void crmTasksIdPatch(String id, Body10 body) throws ApiException {
+    public void crmTasksIdPatch(String id, Body14 body) throws ApiException {
         crmTasksIdPatchWithHttpInfo(id, body);
     }
 
@@ -568,7 +578,7 @@ public class TasksApi {
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Void> crmTasksIdPatchWithHttpInfo(String id, Body10 body) throws ApiException {
+    public ApiResponse<Void> crmTasksIdPatchWithHttpInfo(String id, Body14 body) throws ApiException {
         Call call = crmTasksIdPatchValidateBeforeCall(id, body, null, null);
         return apiClient.execute(call);
     }
@@ -582,7 +592,7 @@ public class TasksApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call crmTasksIdPatchAsync(String id, Body10 body, final ApiCallback<Void> callback) throws ApiException {
+    public Call crmTasksIdPatchAsync(String id, Body14 body, final ApiCallback<Void> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -615,7 +625,7 @@ public class TasksApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call crmTasksPostCall(Body9 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call crmTasksPostCall(Body13 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = body;
 
         // create path and map variables
@@ -657,7 +667,7 @@ public class TasksApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call crmTasksPostValidateBeforeCall(Body9 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call crmTasksPostValidateBeforeCall(Body13 body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'body' is set
         if (body == null) {
@@ -677,7 +687,7 @@ public class TasksApi {
      * @return InlineResponse2012
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2012 crmTasksPost(Body9 body) throws ApiException {
+    public InlineResponse2012 crmTasksPost(Body13 body) throws ApiException {
         ApiResponse<InlineResponse2012> resp = crmTasksPostWithHttpInfo(body);
         return resp.getData();
     }
@@ -689,7 +699,7 @@ public class TasksApi {
      * @return ApiResponse&lt;InlineResponse2012&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2012> crmTasksPostWithHttpInfo(Body9 body) throws ApiException {
+    public ApiResponse<InlineResponse2012> crmTasksPostWithHttpInfo(Body13 body) throws ApiException {
         Call call = crmTasksPostValidateBeforeCall(body, null, null);
         Type localVarReturnType = new TypeToken<InlineResponse2012>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -703,7 +713,7 @@ public class TasksApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call crmTasksPostAsync(Body9 body, final ApiCallback<InlineResponse2012> callback) throws ApiException {
+    public Call crmTasksPostAsync(Body13 body, final ApiCallback<InlineResponse2012> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;

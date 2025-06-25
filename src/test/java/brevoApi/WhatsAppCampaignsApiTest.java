@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -16,7 +16,11 @@ package brevoApi;
 import brevo.ApiException;
 import brevoModel.*;
 import org.junit.Ignore;
-import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * API tests for WhatsAppCampaignsApi
@@ -26,11 +30,11 @@ public class WhatsAppCampaignsApiTest {
 
     private final WhatsAppCampaignsApi api = new WhatsAppCampaignsApi();
 
-    
+
     /**
      * Create and Send a WhatsApp campaign
      *
-     * 
+     *
      *
      * @throws ApiException
      *          if the Api call fails
@@ -42,11 +46,11 @@ public class WhatsAppCampaignsApiTest {
 
         // TODO: test validations
     }
-    
+
     /**
      * Create a WhatsApp template
      *
-     * 
+     *
      *
      * @throws ApiException
      *          if the Api call fails
@@ -58,11 +62,11 @@ public class WhatsAppCampaignsApiTest {
 
         // TODO: test validations
     }
-    
+
     /**
      * Delete a WhatsApp campaign
      *
-     * 
+     *
      *
      * @throws ApiException
      *          if the Api call fails
@@ -74,11 +78,11 @@ public class WhatsAppCampaignsApiTest {
 
         // TODO: test validations
     }
-    
+
     /**
      * Get a WhatsApp campaign
      *
-     * 
+     *
      *
      * @throws ApiException
      *          if the Api call fails
@@ -90,11 +94,11 @@ public class WhatsAppCampaignsApiTest {
 
         // TODO: test validations
     }
-    
+
     /**
      * Return all your created WhatsApp campaigns
      *
-     * 
+     *
      *
      * @throws ApiException
      *          if the Api call fails
@@ -110,11 +114,11 @@ public class WhatsAppCampaignsApiTest {
 
         // TODO: test validations
     }
-    
+
     /**
      * Get your WhatsApp API account information
      *
-     * 
+     *
      *
      * @throws ApiException
      *          if the Api call fails
@@ -125,11 +129,11 @@ public class WhatsAppCampaignsApiTest {
 
         // TODO: test validations
     }
-    
+
     /**
      * Return all your created WhatsApp templates
      *
-     * 
+     *
      *
      * @throws ApiException
      *          if the Api call fails
@@ -146,11 +150,11 @@ public class WhatsAppCampaignsApiTest {
 
         // TODO: test validations
     }
-    
+
     /**
      * Send your WhatsApp template for approval
      *
-     * 
+     *
      *
      * @throws ApiException
      *          if the Api call fails
@@ -162,11 +166,11 @@ public class WhatsAppCampaignsApiTest {
 
         // TODO: test validations
     }
-    
+
     /**
      * Update a WhatsApp campaign
      *
-     * 
+     *
      *
      * @throws ApiException
      *          if the Api call fails
@@ -179,5 +183,5 @@ public class WhatsAppCampaignsApiTest {
 
         // TODO: test validations
     }
-    
+
 }

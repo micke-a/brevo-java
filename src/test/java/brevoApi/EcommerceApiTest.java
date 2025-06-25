@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -16,10 +16,11 @@ package brevoApi;
 import brevo.ApiException;
 import brevoModel.*;
 import org.junit.Ignore;
-import org.junit.Test;
 
-import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * API tests for EcommerceApi
@@ -29,7 +30,7 @@ public class EcommerceApiTest {
 
     private final EcommerceApi api = new EcommerceApi();
 
-    
+
     /**
      * Create orders in batch
      *
@@ -45,7 +46,7 @@ public class EcommerceApiTest {
 
         // TODO: test validations
     }
-    
+
     /**
      * Managing the status of the order
      *
@@ -61,11 +62,11 @@ public class EcommerceApiTest {
 
         // TODO: test validations
     }
-    
+
     /**
      * Create categories in batch
      *
-     * 
+     *
      *
      * @throws ApiException
      *          if the Api call fails
@@ -77,11 +78,11 @@ public class EcommerceApiTest {
 
         // TODO: test validations
     }
-    
+
     /**
      * Create products in batch
      *
-     * 
+     *
      *
      * @throws ApiException
      *          if the Api call fails
@@ -93,11 +94,11 @@ public class EcommerceApiTest {
 
         // TODO: test validations
     }
-    
+
     /**
      * Create/Update a category
      *
-     * 
+     *
      *
      * @throws ApiException
      *          if the Api call fails
@@ -109,11 +110,11 @@ public class EcommerceApiTest {
 
         // TODO: test validations
     }
-    
+
     /**
      * Create/Update a product
      *
-     * 
+     *
      *
      * @throws ApiException
      *          if the Api call fails
@@ -125,7 +126,7 @@ public class EcommerceApiTest {
 
         // TODO: test validations
     }
-    
+
     /**
      * Activate the eCommerce app
      *
@@ -140,63 +141,81 @@ public class EcommerceApiTest {
 
         // TODO: test validations
     }
-    
+
     /**
-     * Get detailed attribution metrics for a single Brevo campaign
+     * Get detailed attribution metrics for a single Brevo campaign or workflow
      *
-     * 
+     *
      *
      * @throws ApiException
      *          if the Api call fails
      */
     @Test
     public void ecommerceAttributionMetricsConversionSourceConversionSourceIdGetTest() throws ApiException {
-        Object conversionSource = null;
-        Object conversionSourceId = null;
-        api.ecommerceAttributionMetricsConversionSourceConversionSourceIdGet(conversionSource, conversionSourceId);
+        String conversionSource = null;
+        String conversionSourceId = null;
+        InlineResponse2007 response = api.ecommerceAttributionMetricsConversionSourceConversionSourceIdGet(conversionSource, conversionSourceId);
 
         // TODO: test validations
     }
-    
+
     /**
-     * Get attribution metrics for one or more Brevo campaigns
+     * Get attribution metrics for one or more Brevo campaigns or workflows
      *
-     * 
+     *
      *
      * @throws ApiException
      *          if the Api call fails
      */
     @Test
     public void ecommerceAttributionMetricsGetTest() throws ApiException {
-        Object periodFrom = null;
-        Object periodTo = null;
-        Object emailCampaignId = null;
-        api.ecommerceAttributionMetricsGet(periodFrom, periodTo, emailCampaignId);
+        OffsetDateTime periodFrom = null;
+        OffsetDateTime periodTo = null;
+        List<String> emailCampaignId = null;
+        List<String> smsCampaignId = null;
+        List<String> automationWorkflowEmailId = null;
+        List<String> automationWorkflowSmsId = null;
+        InlineResponse2006 response = api.ecommerceAttributionMetricsGet(periodFrom, periodTo, emailCampaignId, smsCampaignId, automationWorkflowEmailId, automationWorkflowSmsId);
 
         // TODO: test validations
     }
-    
+
     /**
-     * Get attributed product sales for a single Brevo campaign
+     * Get attributed product sales for a single Brevo campaign or workflow
      *
-     * 
+     *
      *
      * @throws ApiException
      *          if the Api call fails
      */
     @Test
     public void ecommerceAttributionProductsConversionSourceConversionSourceIdGetTest() throws ApiException {
-        Object conversionSource = null;
-        Object conversionSourceId = null;
-        api.ecommerceAttributionProductsConversionSourceConversionSourceIdGet(conversionSource, conversionSourceId);
+        String conversionSource = null;
+        String conversionSourceId = null;
+        InlineResponse2008 response = api.ecommerceAttributionProductsConversionSourceConversionSourceIdGet(conversionSource, conversionSourceId);
 
         // TODO: test validations
     }
-    
+
+    /**
+     * Get the ISO 4217 compliant display currency code for your Brevo account
+     *
+     *
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void ecommerceConfigDisplayCurrencyGetTest() throws ApiException {
+        InlineResponse2005 response = api.ecommerceConfigDisplayCurrencyGet();
+
+        // TODO: test validations
+    }
+
     /**
      * Return all your categories
      *
-     * 
+     *
      *
      * @throws ApiException
      *          if the Api call fails
@@ -214,11 +233,11 @@ public class EcommerceApiTest {
 
         // TODO: test validations
     }
-    
+
     /**
      * Get a category details
      *
-     * 
+     *
      *
      * @throws ApiException
      *          if the Api call fails
@@ -230,7 +249,7 @@ public class EcommerceApiTest {
 
         // TODO: test validations
     }
-    
+
     /**
      * Get order details
      *
@@ -250,11 +269,11 @@ public class EcommerceApiTest {
 
         // TODO: test validations
     }
-    
+
     /**
      * Get a product&#39;s details
      *
-     * 
+     *
      *
      * @throws ApiException
      *          if the Api call fails
@@ -266,11 +285,11 @@ public class EcommerceApiTest {
 
         // TODO: test validations
     }
-    
+
     /**
      * Return all your products
      *
-     * 
+     *
      *
      * @throws ApiException
      *          if the Api call fails
@@ -295,5 +314,21 @@ public class EcommerceApiTest {
 
         // TODO: test validations
     }
-    
+
+    /**
+     * Set the ISO 4217 compliant display currency code for your Brevo account
+     *
+     *
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void setConfigDisplayCurrencyTest() throws ApiException {
+        SetConfigDisplayCurrency setConfigDisplayCurrency = null;
+        SetConfigDisplayCurrency response = api.setConfigDisplayCurrency(setConfigDisplayCurrency);
+
+        // TODO: test validations
+    }
+
 }

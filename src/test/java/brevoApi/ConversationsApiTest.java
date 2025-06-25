@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -14,9 +14,20 @@
 package brevoApi;
 
 import brevo.ApiException;
-import brevoModel.*;
-import org.junit.Ignore;
+import brevoModel.Body15;
+import brevoModel.Body16;
+import brevoModel.Body17;
+import brevoModel.Body18;
+import brevoModel.Body19;
+import brevoModel.ConversationsMessage;
+import brevoModel.ErrorModel;
 import org.junit.Test;
+import org.junit.Ignore;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * API tests for ConversationsApi
@@ -37,7 +48,7 @@ public class ConversationsApiTest {
      */
     @Test
     public void conversationsAgentOnlinePingPostTest() throws ApiException {
-        Body15 body = null;
+        Body19 body = null;
         api.conversationsAgentOnlinePingPost(body);
 
         // TODO: test validations
@@ -86,7 +97,7 @@ public class ConversationsApiTest {
     @Test
     public void conversationsMessagesIdPutTest() throws ApiException {
         String id = null;
-        Body12 body = null;
+        Body16 body = null;
         ConversationsMessage response = api.conversationsMessagesIdPut(id, body);
 
         // TODO: test validations
@@ -102,7 +113,7 @@ public class ConversationsApiTest {
      */
     @Test
     public void conversationsMessagesPostTest() throws ApiException {
-        Body11 body = null;
+        Body15 body = null;
         ConversationsMessage response = api.conversationsMessagesPost(body);
 
         // TODO: test validations
@@ -151,7 +162,7 @@ public class ConversationsApiTest {
     @Test
     public void conversationsPushedMessagesIdPutTest() throws ApiException {
         String id = null;
-        Body14 body = null;
+        Body18 body = null;
         ConversationsMessage response = api.conversationsPushedMessagesIdPut(id, body);
 
         // TODO: test validations
@@ -167,7 +178,7 @@ public class ConversationsApiTest {
      */
     @Test
     public void conversationsPushedMessagesPostTest() throws ApiException {
-        Body13 body = null;
+        Body17 body = null;
         ConversationsMessage response = api.conversationsPushedMessagesPost(body);
 
         // TODO: test validations

@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,20 +13,22 @@
 
 package brevoModel;
 
+import org.apache.commons.lang3.ObjectUtils;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.ObjectUtils;
-
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * CreateSubAccount
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class CreateSubAccount {
   @SerializedName("companyName")
   private String companyName = null;
@@ -94,6 +96,9 @@ public class CreateSubAccount {
 
   @SerializedName("timezone")
   private String timezone = null;
+
+  @SerializedName("groupIds")
+  private List<String> groupIds = null;
 
   public CreateSubAccount companyName(String companyName) {
     this.companyName = companyName;
@@ -167,6 +172,32 @@ public class CreateSubAccount {
     this.timezone = timezone;
   }
 
+  public CreateSubAccount groupIds(List<String> groupIds) {
+    this.groupIds = groupIds;
+    return this;
+  }
+
+  public CreateSubAccount addGroupIdsItem(String groupIdsItem) {
+    if (this.groupIds == null) {
+      this.groupIds = new ArrayList<String>();
+    }
+    this.groupIds.add(groupIdsItem);
+    return this;
+  }
+
+   /**
+   * Set the group(s) for the sub-account
+   * @return groupIds
+  **/
+  @ApiModelProperty(value = "Set the group(s) for the sub-account")
+  public List<String> getGroupIds() {
+    return groupIds;
+  }
+
+  public void setGroupIds(List<String> groupIds) {
+    this.groupIds = groupIds;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -180,12 +211,13 @@ public class CreateSubAccount {
     return ObjectUtils.equals(this.companyName, createSubAccount.companyName) &&
     ObjectUtils.equals(this.email, createSubAccount.email) &&
     ObjectUtils.equals(this.language, createSubAccount.language) &&
-    ObjectUtils.equals(this.timezone, createSubAccount.timezone);
+    ObjectUtils.equals(this.timezone, createSubAccount.timezone) &&
+    ObjectUtils.equals(this.groupIds, createSubAccount.groupIds);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(companyName, email, language, timezone);
+    return ObjectUtils.hashCodeMulti(companyName, email, language, timezone, groupIds);
   }
 
 
@@ -198,6 +230,7 @@ public class CreateSubAccount {
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    language: ").append(toIndentedString(language)).append("\n");
     sb.append("    timezone: ").append(toIndentedString(timezone)).append("\n");
+    sb.append("    groupIds: ").append(toIndentedString(groupIds)).append("\n");
     sb.append("}");
     return sb.toString();
   }

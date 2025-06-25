@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,19 +13,37 @@
 
 package brevoModel;
 
+import org.apache.commons.lang3.ObjectUtils;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.ObjectUtils;
+import java.io.IOException;
+import java.math.BigDecimal;
 
 /**
  * Credit details to update
  */
 @ApiModel(description = "Credit details to update")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class SubAccountUpdatePlanRequestCredits {
   @SerializedName("email")
   private Long email = null;
+
+  @SerializedName("sms")
+  private Float sms = null;
+
+  @SerializedName("wpSubscribers")
+  private Long wpSubscribers = null;
+
+  @SerializedName("externalFeeds")
+  private BigDecimal externalFeeds = null;
+
+  @SerializedName("whatsapp")
+  private Float whatsapp = null;
 
   public SubAccountUpdatePlanRequestCredits email(Long email) {
     this.email = email;
@@ -33,16 +51,88 @@ public class SubAccountUpdatePlanRequestCredits {
   }
 
    /**
-   * Number of email credits
+   * Number of email credits | Pass the value -1 for unlimited emails in ENTv2 only
    * @return email
   **/
-  @ApiModelProperty(value = "Number of email credits")
+  @ApiModelProperty(value = "Number of email credits | Pass the value -1 for unlimited emails in ENTv2 only")
   public Long getEmail() {
     return email;
   }
 
   public void setEmail(Long email) {
     this.email = email;
+  }
+
+  public SubAccountUpdatePlanRequestCredits sms(Float sms) {
+    this.sms = sms;
+    return this;
+  }
+
+   /**
+   * Number of SMS credits | Pass the value -1 for unlimited SMS in ENTv2 only
+   * @return sms
+  **/
+  @ApiModelProperty(value = "Number of SMS credits | Pass the value -1 for unlimited SMS in ENTv2 only")
+  public Float getSms() {
+    return sms;
+  }
+
+  public void setSms(Float sms) {
+    this.sms = sms;
+  }
+
+  public SubAccountUpdatePlanRequestCredits wpSubscribers(Long wpSubscribers) {
+    this.wpSubscribers = wpSubscribers;
+    return this;
+  }
+
+   /**
+   * Number of Push credits, possible value is 0 and -1 | available in ENT-v2 only
+   * @return wpSubscribers
+  **/
+  @ApiModelProperty(value = "Number of Push credits, possible value is 0 and -1 | available in ENT-v2 only")
+  public Long getWpSubscribers() {
+    return wpSubscribers;
+  }
+
+  public void setWpSubscribers(Long wpSubscribers) {
+    this.wpSubscribers = wpSubscribers;
+  }
+
+  public SubAccountUpdatePlanRequestCredits externalFeeds(BigDecimal externalFeeds) {
+    this.externalFeeds = externalFeeds;
+    return this;
+  }
+
+   /**
+   * Number of externalFeeds credits, possible values are 0 or 1 |available in ENTv2 only
+   * @return externalFeeds
+  **/
+  @ApiModelProperty(value = "Number of externalFeeds credits, possible values are 0 or 1 |available in ENTv2 only")
+  public BigDecimal getExternalFeeds() {
+    return externalFeeds;
+  }
+
+  public void setExternalFeeds(BigDecimal externalFeeds) {
+    this.externalFeeds = externalFeeds;
+  }
+
+  public SubAccountUpdatePlanRequestCredits whatsapp(Float whatsapp) {
+    this.whatsapp = whatsapp;
+    return this;
+  }
+
+   /**
+   * Number of whatsapp credits | Pass the value -1 for unlimited whatsapp in ENTv2 only
+   * @return whatsapp
+  **/
+  @ApiModelProperty(value = "Number of whatsapp credits | Pass the value -1 for unlimited whatsapp in ENTv2 only")
+  public Float getWhatsapp() {
+    return whatsapp;
+  }
+
+  public void setWhatsapp(Float whatsapp) {
+    this.whatsapp = whatsapp;
   }
 
 
@@ -55,12 +145,16 @@ public class SubAccountUpdatePlanRequestCredits {
     return false;
   }
     SubAccountUpdatePlanRequestCredits subAccountUpdatePlanRequestCredits = (SubAccountUpdatePlanRequestCredits) o;
-    return ObjectUtils.equals(this.email, subAccountUpdatePlanRequestCredits.email);
+    return ObjectUtils.equals(this.email, subAccountUpdatePlanRequestCredits.email) &&
+    ObjectUtils.equals(this.sms, subAccountUpdatePlanRequestCredits.sms) &&
+    ObjectUtils.equals(this.wpSubscribers, subAccountUpdatePlanRequestCredits.wpSubscribers) &&
+    ObjectUtils.equals(this.externalFeeds, subAccountUpdatePlanRequestCredits.externalFeeds) &&
+    ObjectUtils.equals(this.whatsapp, subAccountUpdatePlanRequestCredits.whatsapp);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(email);
+    return ObjectUtils.hashCodeMulti(email, sms, wpSubscribers, externalFeeds, whatsapp);
   }
 
 
@@ -70,6 +164,10 @@ public class SubAccountUpdatePlanRequestCredits {
     sb.append("class SubAccountUpdatePlanRequestCredits {\n");
     
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
+    sb.append("    sms: ").append(toIndentedString(sms)).append("\n");
+    sb.append("    wpSubscribers: ").append(toIndentedString(wpSubscribers)).append("\n");
+    sb.append("    externalFeeds: ").append(toIndentedString(externalFeeds)).append("\n");
+    sb.append("    whatsapp: ").append(toIndentedString(whatsapp)).append("\n");
     sb.append("}");
     return sb.toString();
   }

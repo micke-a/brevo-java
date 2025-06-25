@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,13 +13,15 @@
 
 package brevoModel;
 
+import org.apache.commons.lang3.ObjectUtils;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.ObjectUtils;
+import java.io.IOException;
 import org.threeten.bp.LocalDate;
 
 import java.io.IOException;
@@ -27,7 +29,7 @@ import java.io.IOException;
 /**
  * GetAccountPlan
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class GetAccountPlan {
   /**
    * Displays the plan type of the user
@@ -40,9 +42,7 @@ public class GetAccountPlan {
     
     SUBSCRIPTION("subscription"),
     
-    SMS("sms"),
-    
-    RESELLER("reseller");
+    SMS("sms");
 
     private String value;
 
@@ -86,7 +86,7 @@ public class GetAccountPlan {
   private TypeEnum type = null;
 
   /**
-   * This is the type of the credit, \&quot;Send Limit\&quot; is one of the possible types of credit of a user. \&quot;Send Limit\&quot; implies the total number of emails you can send to the subscribers in your account.
+   * This is the type of the credit, &quot;Send Limit&quot; is one of the possible types of credit of a user. &quot;Send Limit&quot; implies the total number of emails you can send to the subscribers in your account.
    */
   @JsonAdapter(CreditsTypeEnum.Adapter.class)
   public enum CreditsTypeEnum {
@@ -142,9 +142,6 @@ public class GetAccountPlan {
   @SerializedName("endDate")
   private LocalDate endDate = null;
 
-  @SerializedName("userLimit")
-  private Integer userLimit = null;
-
   public GetAccountPlan type(TypeEnum type) {
     this.type = type;
     return this;
@@ -169,7 +166,7 @@ public class GetAccountPlan {
   }
 
    /**
-   * This is the type of the credit, \&quot;Send Limit\&quot; is one of the possible types of credit of a user. \&quot;Send Limit\&quot; implies the total number of emails you can send to the subscribers in your account.
+   * This is the type of the credit, &quot;Send Limit&quot; is one of the possible types of credit of a user. &quot;Send Limit&quot; implies the total number of emails you can send to the subscribers in your account.
    * @return creditsType
   **/
   @ApiModelProperty(example = "sendLimit", required = true, value = "This is the type of the credit, \"Send Limit\" is one of the possible types of credit of a user. \"Send Limit\" implies the total number of emails you can send to the subscribers in your account.")
@@ -205,10 +202,10 @@ public class GetAccountPlan {
   }
 
    /**
-   * Date of the period from which the plan will start (only available for \&quot;subscription\&quot; and \&quot;reseller\&quot; plan type)
+   * Date of the period from which the plan will start (only available for &quot;subscription&quot; plan type)
    * @return startDate
   **/
-  @ApiModelProperty(example = "2016-12-31", value = "Date of the period from which the plan will start (only available for \"subscription\" and \"reseller\" plan type)")
+  @ApiModelProperty(example = "2016-12-31", value = "Date of the period from which the plan will start (only available for \"subscription\" plan type)")
   public LocalDate getStartDate() {
     return startDate;
   }
@@ -223,34 +220,16 @@ public class GetAccountPlan {
   }
 
    /**
-   * Date of the period from which the plan will end (only available for \&quot;subscription\&quot; and \&quot;reseller\&quot; plan type)
+   * Date of the period from which the plan will end (only available for &quot;subscription&quot; plan type)
    * @return endDate
   **/
-  @ApiModelProperty(example = "2017-01-31", value = "Date of the period from which the plan will end (only available for \"subscription\" and \"reseller\" plan type)")
+  @ApiModelProperty(example = "2017-01-31", value = "Date of the period from which the plan will end (only available for \"subscription\" plan type)")
   public LocalDate getEndDate() {
     return endDate;
   }
 
   public void setEndDate(LocalDate endDate) {
     this.endDate = endDate;
-  }
-
-  public GetAccountPlan userLimit(Integer userLimit) {
-    this.userLimit = userLimit;
-    return this;
-  }
-
-   /**
-   * Only in case of reseller account. It implies the total number of child accounts you can add to your account.
-   * @return userLimit
-  **/
-  @ApiModelProperty(example = "10", value = "Only in case of reseller account. It implies the total number of child accounts you can add to your account.")
-  public Integer getUserLimit() {
-    return userLimit;
-  }
-
-  public void setUserLimit(Integer userLimit) {
-    this.userLimit = userLimit;
   }
 
 
@@ -267,13 +246,12 @@ public class GetAccountPlan {
     ObjectUtils.equals(this.creditsType, getAccountPlan.creditsType) &&
     ObjectUtils.equals(this.credits, getAccountPlan.credits) &&
     ObjectUtils.equals(this.startDate, getAccountPlan.startDate) &&
-    ObjectUtils.equals(this.endDate, getAccountPlan.endDate) &&
-    ObjectUtils.equals(this.userLimit, getAccountPlan.userLimit);
+    ObjectUtils.equals(this.endDate, getAccountPlan.endDate);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(type, creditsType, credits, startDate, endDate, userLimit);
+    return ObjectUtils.hashCodeMulti(type, creditsType, credits, startDate, endDate);
   }
 
 
@@ -287,7 +265,6 @@ public class GetAccountPlan {
     sb.append("    credits: ").append(toIndentedString(credits)).append("\n");
     sb.append("    startDate: ").append(toIndentedString(startDate)).append("\n");
     sb.append("    endDate: ").append(toIndentedString(endDate)).append("\n");
-    sb.append("    userLimit: ").append(toIndentedString(userLimit)).append("\n");
     sb.append("}");
     return sb.toString();
   }

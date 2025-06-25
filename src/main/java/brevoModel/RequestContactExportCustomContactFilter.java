@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,6 +13,7 @@
 
 package brevoModel;
 
+import org.apache.commons.lang3.ObjectUtils;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -20,15 +21,13 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.ObjectUtils;
-
 import java.io.IOException;
 
 /**
  * Set the filter for the contacts to be exported.
  */
 @ApiModel(description = "Set the filter for the contacts to be exported.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class RequestContactExportCustomContactFilter {
   /**
    * Mandatory if neither actionForEmailCampaigns nor actionForSmsCampaigns is passed. This will export the contacts on the basis of provided action applied on contacts as per the list id. * allContacts - Fetch the list of all contacts for a particular list. * subscribed &amp; unsubscribed - Fetch the list of subscribed / unsubscribed (blacklisted via any means) contacts for a particular list. * unsubscribedPerList - Fetch the list of contacts that are unsubscribed from a particular list only. 
@@ -199,6 +198,9 @@ public class RequestContactExportCustomContactFilter {
   @SerializedName("listId")
   private Long listId = null;
 
+  @SerializedName("segmentId")
+  private Long segmentId = null;
+
   @SerializedName("emailCampaignId")
   private Long emailCampaignId = null;
 
@@ -265,16 +267,34 @@ public class RequestContactExportCustomContactFilter {
   }
 
    /**
-   * Mandatory if actionForContacts is passed, ignored otherwise. Id of the list for which the corresponding action shall be applied in the filter.
+   * ID of the list. This is mandatory if actionForContacts is specified and segmentId is not provided. Either segmentId or listId must be included.
    * @return listId
   **/
-  @ApiModelProperty(example = "2", value = "Mandatory if actionForContacts is passed, ignored otherwise. Id of the list for which the corresponding action shall be applied in the filter.")
+  @ApiModelProperty(example = "2", value = "ID of the list. This is mandatory if actionForContacts is specified and segmentId is not provided. Either segmentId or listId must be included.")
   public Long getListId() {
     return listId;
   }
 
   public void setListId(Long listId) {
     this.listId = listId;
+  }
+
+  public RequestContactExportCustomContactFilter segmentId(Long segmentId) {
+    this.segmentId = segmentId;
+    return this;
+  }
+
+   /**
+   * ID of the segment. This is mandatory if actionForContacts is specified and listId is not provided. Either segmentId or listId must be included. 
+   * @return segmentId
+  **/
+  @ApiModelProperty(example = "2", value = "ID of the segment. This is mandatory if actionForContacts is specified and listId is not provided. Either segmentId or listId must be included. ")
+  public Long getSegmentId() {
+    return segmentId;
+  }
+
+  public void setSegmentId(Long segmentId) {
+    this.segmentId = segmentId;
   }
 
   public RequestContactExportCustomContactFilter emailCampaignId(Long emailCampaignId) {
@@ -327,13 +347,14 @@ public class RequestContactExportCustomContactFilter {
     ObjectUtils.equals(this.actionForEmailCampaigns, requestContactExportCustomContactFilter.actionForEmailCampaigns) &&
     ObjectUtils.equals(this.actionForSmsCampaigns, requestContactExportCustomContactFilter.actionForSmsCampaigns) &&
     ObjectUtils.equals(this.listId, requestContactExportCustomContactFilter.listId) &&
+    ObjectUtils.equals(this.segmentId, requestContactExportCustomContactFilter.segmentId) &&
     ObjectUtils.equals(this.emailCampaignId, requestContactExportCustomContactFilter.emailCampaignId) &&
     ObjectUtils.equals(this.smsCampaignId, requestContactExportCustomContactFilter.smsCampaignId);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(actionForContacts, actionForEmailCampaigns, actionForSmsCampaigns, listId, emailCampaignId, smsCampaignId);
+    return ObjectUtils.hashCodeMulti(actionForContacts, actionForEmailCampaigns, actionForSmsCampaigns, listId, segmentId, emailCampaignId, smsCampaignId);
   }
 
 
@@ -346,6 +367,7 @@ public class RequestContactExportCustomContactFilter {
     sb.append("    actionForEmailCampaigns: ").append(toIndentedString(actionForEmailCampaigns)).append("\n");
     sb.append("    actionForSmsCampaigns: ").append(toIndentedString(actionForSmsCampaigns)).append("\n");
     sb.append("    listId: ").append(toIndentedString(listId)).append("\n");
+    sb.append("    segmentId: ").append(toIndentedString(segmentId)).append("\n");
     sb.append("    emailCampaignId: ").append(toIndentedString(emailCampaignId)).append("\n");
     sb.append("    smsCampaignId: ").append(toIndentedString(smsCampaignId)).append("\n");
     sb.append("}");

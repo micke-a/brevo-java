@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -14,9 +14,20 @@
 package brevoApi;
 
 import brevo.ApiException;
-import brevoModel.*;
-import org.junit.Ignore;
+import brevoModel.Body13;
+import brevoModel.Body14;
+import brevoModel.ErrorModel;
+import brevoModel.InlineResponse2012;
+import brevoModel.Task;
+import brevoModel.TaskList;
+import brevoModel.TaskTypes;
 import org.junit.Test;
+import org.junit.Ignore;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * API tests for TasksApi
@@ -98,7 +109,7 @@ public class TasksApiTest {
     @Test
     public void crmTasksIdPatchTest() throws ApiException {
         String id = null;
-        Body10 body = null;
+        Body14 body = null;
         api.crmTasksIdPatch(id, body);
 
         // TODO: test validations
@@ -114,7 +125,7 @@ public class TasksApiTest {
      */
     @Test
     public void crmTasksPostTest() throws ApiException {
-        Body9 body = null;
+        Body13 body = null;
         InlineResponse2012 response = api.crmTasksPost(body);
 
         // TODO: test validations

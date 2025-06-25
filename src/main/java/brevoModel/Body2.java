@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,42 +13,68 @@
 
 package brevoModel;
 
-import com.google.gson.annotations.SerializedName;
-import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.ObjectUtils;
-
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Body2
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class Body2 {
-  @SerializedName("subAccountIds")
-  private List<Long> subAccountIds = new ArrayList<Long>();
+  @SerializedName("ip")
+  private String ip = null;
 
-  public Body2 subAccountIds(List<Long> subAccountIds) {
-    this.subAccountIds = subAccountIds;
-    return this;
-  }
+  @SerializedName("ids")
+  private List<Long> ids = new ArrayList<Long>();
 
-  public Body2 addSubAccountIdsItem(Long subAccountIdsItem) {
-    this.subAccountIds.add(subAccountIdsItem);
+  public Body2 ip(String ip) {
+    this.ip = ip;
     return this;
   }
 
    /**
-   * List of sub-account ids
-   * @return subAccountIds
+   * IP Address
+   * @return ip
   **/
-  @ApiModelProperty(example = "[423432,234323,87678]", required = true, value = "List of sub-account ids")
-  public List<Long> getSubAccountIds() {
-    return subAccountIds;
+  @ApiModelProperty(example = "103.11.32.88", required = true, value = "IP Address")
+  public String getIp() {
+    return ip;
   }
 
-  public void setSubAccountIds(List<Long> subAccountIds) {
-    this.subAccountIds = subAccountIds;
+  public void setIp(String ip) {
+    this.ip = ip;
+  }
+
+  public Body2 ids(List<Long> ids) {
+    this.ids = ids;
+    return this;
+  }
+
+  public Body2 addIdsItem(Long idsItem) {
+    this.ids.add(idsItem);
+    return this;
+  }
+
+   /**
+   * Pass the list of sub-account Ids to be dissociated from the IP address
+   * @return ids
+  **/
+  @ApiModelProperty(example = "[234322,325553,893432]", required = true, value = "Pass the list of sub-account Ids to be dissociated from the IP address")
+  public List<Long> getIds() {
+    return ids;
+  }
+
+  public void setIds(List<Long> ids) {
+    this.ids = ids;
   }
 
 
@@ -61,12 +87,13 @@ public class Body2 {
     return false;
   }
     Body2 body2 = (Body2) o;
-    return ObjectUtils.equals(this.subAccountIds, body2.subAccountIds);
+    return ObjectUtils.equals(this.ip, body2.ip) &&
+    ObjectUtils.equals(this.ids, body2.ids);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(subAccountIds);
+    return ObjectUtils.hashCodeMulti(ip, ids);
   }
 
 
@@ -75,7 +102,8 @@ public class Body2 {
     StringBuilder sb = new StringBuilder();
     sb.append("class Body2 {\n");
     
-    sb.append("    subAccountIds: ").append(toIndentedString(subAccountIds)).append("\n");
+    sb.append("    ip: ").append(toIndentedString(ip)).append("\n");
+    sb.append("    ids: ").append(toIndentedString(ids)).append("\n");
     sb.append("}");
     return sb.toString();
   }

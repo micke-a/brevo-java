@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -21,6 +21,38 @@ import okhttp3.Interceptor;
 import okhttp3.Response;
 
 import java.io.IOException;
+
+
+import brevoModel.AddContactToList;
+import brevoModel.ContactErrorModel;
+import brevoModel.CreateAttribute;
+import brevoModel.CreateContact;
+import brevoModel.CreateDoiContact;
+import brevoModel.CreateList;
+import brevoModel.CreateModel;
+import brevoModel.CreateUpdateContactModel;
+import brevoModel.CreateUpdateFolder;
+import brevoModel.CreatedProcessId;
+import brevoModel.ErrorModel;
+import brevoModel.GetAttributes;
+import brevoModel.GetContactCampaignStats;
+import brevoModel.GetContacts;
+import brevoModel.GetExtendedContactDetails;
+import brevoModel.GetExtendedList;
+import brevoModel.GetFolder;
+import brevoModel.GetFolderLists;
+import brevoModel.GetFolders;
+import brevoModel.GetLists;
+import brevoModel.GetSegments;
+import brevoModel.PostContactInfo;
+import brevoModel.RemoveContactFromList;
+import brevoModel.RequestContactExport;
+import brevoModel.RequestContactImport;
+import brevoModel.UpdateAttribute;
+import brevoModel.UpdateBatchContacts;
+import brevoModel.UpdateContact;
+import brevoModel.UpdateList;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,7 +81,7 @@ public class ContactsApi {
     /**
      * Build call for addContactToList
      * @param listId Id of the list (required)
-     * @param contactEmails Emails addresses OR IDs of the contacts (required)
+     * @param contactEmails Emails addresses OR IDs OR EXT_ID attributes of the contacts (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
@@ -120,7 +152,7 @@ public class ContactsApi {
      * Add existing contacts to a list
      * 
      * @param listId Id of the list (required)
-     * @param contactEmails Emails addresses OR IDs of the contacts (required)
+     * @param contactEmails Emails addresses OR IDs OR EXT_ID attributes of the contacts (required)
      * @return PostContactInfo
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -133,7 +165,7 @@ public class ContactsApi {
      * Add existing contacts to a list
      * 
      * @param listId Id of the list (required)
-     * @param contactEmails Emails addresses OR IDs of the contacts (required)
+     * @param contactEmails Emails addresses OR IDs OR EXT_ID attributes of the contacts (required)
      * @return ApiResponse&lt;PostContactInfo&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -147,7 +179,7 @@ public class ContactsApi {
      * Add existing contacts to a list (asynchronously)
      * 
      * @param listId Id of the list (required)
-     * @param contactEmails Emails addresses OR IDs of the contacts (required)
+     * @param contactEmails Emails addresses OR IDs OR EXT_ID attributes of the contacts (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -381,7 +413,7 @@ public class ContactsApi {
 
     /**
      * Create a contact
-     * 
+     * Creates new contacts on Brevo. Contacts can be created by passing either - &lt;br&gt;&lt;br&gt; 1. email address of the contact (email_id),  &lt;br&gt; 2. phone number of the contact (to be passed as &quot;SMS&quot; field in &quot;attributes&quot; along with proper country code), For example- {&quot;SMS&quot;:&quot;+91xxxxxxxxxx&quot;} or {&quot;SMS&quot;:&quot;0091xxxxxxxxxx&quot;} &lt;br&gt; 3. ext_id &lt;br&gt;
      * @param createContact Values to create a contact (required)
      * @return CreateUpdateContactModel
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -393,7 +425,7 @@ public class ContactsApi {
 
     /**
      * Create a contact
-     * 
+     * Creates new contacts on Brevo. Contacts can be created by passing either - &lt;br&gt;&lt;br&gt; 1. email address of the contact (email_id),  &lt;br&gt; 2. phone number of the contact (to be passed as &quot;SMS&quot; field in &quot;attributes&quot; along with proper country code), For example- {&quot;SMS&quot;:&quot;+91xxxxxxxxxx&quot;} or {&quot;SMS&quot;:&quot;0091xxxxxxxxxx&quot;} &lt;br&gt; 3. ext_id &lt;br&gt;
      * @param createContact Values to create a contact (required)
      * @return ApiResponse&lt;CreateUpdateContactModel&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -406,7 +438,7 @@ public class ContactsApi {
 
     /**
      * Create a contact (asynchronously)
-     * 
+     * Creates new contacts on Brevo. Contacts can be created by passing either - &lt;br&gt;&lt;br&gt; 1. email address of the contact (email_id),  &lt;br&gt; 2. phone number of the contact (to be passed as &quot;SMS&quot; field in &quot;attributes&quot; along with proper country code), For example- {&quot;SMS&quot;:&quot;+91xxxxxxxxxx&quot;} or {&quot;SMS&quot;:&quot;0091xxxxxxxxxx&quot;} &lt;br&gt; 3. ext_id &lt;br&gt;
      * @param createContact Values to create a contact (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
@@ -931,13 +963,14 @@ public class ContactsApi {
     }
     /**
      * Build call for deleteContact
-     * @param identifier Email (urlencoded) OR ID of the contact (required)
+     * @param identifier Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) (required)
+     * @param identifierType email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call deleteContactCall(String identifier, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call deleteContactCall(String identifier, String identifierType, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -946,6 +979,8 @@ public class ContactsApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        if (identifierType != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("identifierType", identifierType));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -980,7 +1015,7 @@ public class ContactsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call deleteContactValidateBeforeCall(String identifier, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call deleteContactValidateBeforeCall(String identifier, String identifierType, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'identifier' is set
         if (identifier == null) {
@@ -988,42 +1023,45 @@ public class ContactsApi {
         }
         
 
-        Call call = deleteContactCall(identifier, progressListener, progressRequestListener);
+        Call call = deleteContactCall(identifier, identifierType, progressListener, progressRequestListener);
         return call;
 
     }
 
     /**
      * Delete a contact
-     * 
-     * @param identifier Email (urlencoded) OR ID of the contact (required)
+     * There are 2 ways to delete a contact &lt;br&gt;&lt;br&gt; Option 1- https://api.brevo.com/v3/contacts/{identifier} &lt;br&gt;&lt;br&gt; Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType&#x3D;{} &lt;br&gt; &lt;br&gt; Option 1 only works if identifierType is email_id (for EMAIL) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL and ID of the contact.   &lt;br&gt;&lt;br&gt; Option 2 works for all identifierType, use email_id for EMAIL attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute.
+     * @param identifier Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) (required)
+     * @param identifierType email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute (optional)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public void deleteContact(String identifier) throws ApiException {
-        deleteContactWithHttpInfo(identifier);
+    public void deleteContact(String identifier, String identifierType) throws ApiException {
+        deleteContactWithHttpInfo(identifier, identifierType);
     }
 
     /**
      * Delete a contact
-     * 
-     * @param identifier Email (urlencoded) OR ID of the contact (required)
+     * There are 2 ways to delete a contact &lt;br&gt;&lt;br&gt; Option 1- https://api.brevo.com/v3/contacts/{identifier} &lt;br&gt;&lt;br&gt; Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType&#x3D;{} &lt;br&gt; &lt;br&gt; Option 1 only works if identifierType is email_id (for EMAIL) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL and ID of the contact.   &lt;br&gt;&lt;br&gt; Option 2 works for all identifierType, use email_id for EMAIL attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute.
+     * @param identifier Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) (required)
+     * @param identifierType email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute (optional)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Void> deleteContactWithHttpInfo(String identifier) throws ApiException {
-        Call call = deleteContactValidateBeforeCall(identifier, null, null);
+    public ApiResponse<Void> deleteContactWithHttpInfo(String identifier, String identifierType) throws ApiException {
+        Call call = deleteContactValidateBeforeCall(identifier, identifierType, null, null);
         return apiClient.execute(call);
     }
 
     /**
      * Delete a contact (asynchronously)
-     * 
-     * @param identifier Email (urlencoded) OR ID of the contact (required)
+     * There are 2 ways to delete a contact &lt;br&gt;&lt;br&gt; Option 1- https://api.brevo.com/v3/contacts/{identifier} &lt;br&gt;&lt;br&gt; Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType&#x3D;{} &lt;br&gt; &lt;br&gt; Option 1 only works if identifierType is email_id (for EMAIL) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL and ID of the contact.   &lt;br&gt;&lt;br&gt; Option 2 works for all identifierType, use email_id for EMAIL attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute.
+     * @param identifier Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) (required)
+     * @param identifierType email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call deleteContactAsync(String identifier, final ApiCallback<Void> callback) throws ApiException {
+    public Call deleteContactAsync(String identifier, String identifierType, final ApiCallback<Void> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1044,7 +1082,7 @@ public class ContactsApi {
             };
         }
 
-        Call call = deleteContactValidateBeforeCall(identifier, progressListener, progressRequestListener);
+        Call call = deleteContactValidateBeforeCall(identifier, identifierType, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }
@@ -1287,6 +1325,145 @@ public class ContactsApi {
         return call;
     }
     /**
+     * Build call for deleteMultiAttributeOptions
+     * @param attributeType Type of the attribute (required)
+     * @param multipleChoiceAttribute Name of the existing multiple-choice attribute (required)
+     * @param multipleChoiceAttributeOption Name of the existing multiple-choice attribute option that you want to delete (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public Call deleteMultiAttributeOptionsCall(String attributeType, String multipleChoiceAttribute, String multipleChoiceAttributeOption, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/contacts/attributes/{attributeType}/{multipleChoiceAttribute}/{multipleChoiceAttributeOption}"
+            .replaceAll("\\{" + "attributeType" + "\\}", apiClient.escapeString(attributeType.toString()))
+            .replaceAll("\\{" + "multipleChoiceAttribute" + "\\}", apiClient.escapeString(multipleChoiceAttribute.toString()))
+            .replaceAll("\\{" + "multipleChoiceAttributeOption" + "\\}", apiClient.escapeString(multipleChoiceAttributeOption.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
+                @Override
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "api-key", "partner-key" };
+        return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private Call deleteMultiAttributeOptionsValidateBeforeCall(String attributeType, String multipleChoiceAttribute, String multipleChoiceAttributeOption, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'attributeType' is set
+        if (attributeType == null) {
+            throw new ApiException("Missing the required parameter 'attributeType' when calling deleteMultiAttributeOptions(Async)");
+        }
+        
+        // verify the required parameter 'multipleChoiceAttribute' is set
+        if (multipleChoiceAttribute == null) {
+            throw new ApiException("Missing the required parameter 'multipleChoiceAttribute' when calling deleteMultiAttributeOptions(Async)");
+        }
+        
+        // verify the required parameter 'multipleChoiceAttributeOption' is set
+        if (multipleChoiceAttributeOption == null) {
+            throw new ApiException("Missing the required parameter 'multipleChoiceAttributeOption' when calling deleteMultiAttributeOptions(Async)");
+        }
+        
+
+        Call call = deleteMultiAttributeOptionsCall(attributeType, multipleChoiceAttribute, multipleChoiceAttributeOption, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Delete a multiple-choice attribute option
+     * 
+     * @param attributeType Type of the attribute (required)
+     * @param multipleChoiceAttribute Name of the existing multiple-choice attribute (required)
+     * @param multipleChoiceAttributeOption Name of the existing multiple-choice attribute option that you want to delete (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public void deleteMultiAttributeOptions(String attributeType, String multipleChoiceAttribute, String multipleChoiceAttributeOption) throws ApiException {
+        deleteMultiAttributeOptionsWithHttpInfo(attributeType, multipleChoiceAttribute, multipleChoiceAttributeOption);
+    }
+
+    /**
+     * Delete a multiple-choice attribute option
+     * 
+     * @param attributeType Type of the attribute (required)
+     * @param multipleChoiceAttribute Name of the existing multiple-choice attribute (required)
+     * @param multipleChoiceAttributeOption Name of the existing multiple-choice attribute option that you want to delete (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<Void> deleteMultiAttributeOptionsWithHttpInfo(String attributeType, String multipleChoiceAttribute, String multipleChoiceAttributeOption) throws ApiException {
+        Call call = deleteMultiAttributeOptionsValidateBeforeCall(attributeType, multipleChoiceAttribute, multipleChoiceAttributeOption, null, null);
+        return apiClient.execute(call);
+    }
+
+    /**
+     * Delete a multiple-choice attribute option (asynchronously)
+     * 
+     * @param attributeType Type of the attribute (required)
+     * @param multipleChoiceAttribute Name of the existing multiple-choice attribute (required)
+     * @param multipleChoiceAttributeOption Name of the existing multiple-choice attribute option that you want to delete (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public Call deleteMultiAttributeOptionsAsync(String attributeType, String multipleChoiceAttribute, String multipleChoiceAttributeOption, final ApiCallback<Void> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        Call call = deleteMultiAttributeOptionsValidateBeforeCall(attributeType, multipleChoiceAttribute, multipleChoiceAttributeOption, progressListener, progressRequestListener);
+        apiClient.executeAsync(call, callback);
+        return call;
+    }
+    /**
      * Build call for getAttributes
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
@@ -1401,7 +1578,8 @@ public class ContactsApi {
     }
     /**
      * Build call for getContactInfo
-     * @param identifier Email (urlencoded) OR ID of the contact OR its SMS attribute value (required)
+     * @param identifier Email (urlencoded) OR ID of the contact OR its SMS attribute value OR EXT_ID attribute (urlencoded) (required)
+     * @param identifierType email_id for Email, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute (optional)
      * @param startDate **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be lower than equal to endDate  (optional)
      * @param endDate **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be greater than equal to startDate.  (optional)
      * @param progressListener Progress listener
@@ -1409,7 +1587,7 @@ public class ContactsApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call getContactInfoCall(String identifier, String startDate, String endDate, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call getContactInfoCall(String identifier, String identifierType, String startDate, String endDate, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -1418,6 +1596,8 @@ public class ContactsApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        if (identifierType != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("identifierType", identifierType));
         if (startDate != null)
         localVarQueryParams.addAll(apiClient.parameterToPair("startDate", startDate));
         if (endDate != null)
@@ -1456,7 +1636,7 @@ public class ContactsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call getContactInfoValidateBeforeCall(String identifier, String startDate, String endDate, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call getContactInfoValidateBeforeCall(String identifier, String identifierType, String startDate, String endDate, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'identifier' is set
         if (identifier == null) {
@@ -1464,51 +1644,54 @@ public class ContactsApi {
         }
         
 
-        Call call = getContactInfoCall(identifier, startDate, endDate, progressListener, progressRequestListener);
+        Call call = getContactInfoCall(identifier, identifierType, startDate, endDate, progressListener, progressRequestListener);
         return call;
 
     }
 
     /**
      * Get a contact&#39;s details
-     * Along with the contact details, this endpoint will show the statistics of contact for the recent 90 days by default. To fetch the earlier statistics, please use Get contact campaign stats (https://developers.brevo.com/reference/contacts-7#getcontactstats) endpoint with the appropriate date ranges.
-     * @param identifier Email (urlencoded) OR ID of the contact OR its SMS attribute value (required)
+     * There are 2 ways to get a contact &lt;br&gt;&lt;br&gt; Option 1- https://api.brevo.com/v3/contacts/{identifier} &lt;br&gt;&lt;br&gt; Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType&#x3D;{} &lt;br&gt; &lt;br&gt; Option 1 only works if identifierType is email_id (for EMAIL), phone_id (for SMS) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL, SMS and ID of the contact.   &lt;br&gt;&lt;br&gt; Option 2 works for all identifierType, use email_id for EMAIL attribute, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute &lt;br&gt;&lt;br&gt;Along with the contact details, this endpoint will show the statistics of contact for the recent 90 days by default. To fetch the earlier statistics, please use Get contact campaign stats &#x60;&#x60;https://developers.brevo.com/reference/contacts-7#getcontactstats&#x60;&#x60; endpoint with the appropriate date ranges.
+     * @param identifier Email (urlencoded) OR ID of the contact OR its SMS attribute value OR EXT_ID attribute (urlencoded) (required)
+     * @param identifierType email_id for Email, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute (optional)
      * @param startDate **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be lower than equal to endDate  (optional)
      * @param endDate **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be greater than equal to startDate.  (optional)
      * @return GetExtendedContactDetails
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public GetExtendedContactDetails getContactInfo(String identifier, String startDate, String endDate) throws ApiException {
-        ApiResponse<GetExtendedContactDetails> resp = getContactInfoWithHttpInfo(identifier, startDate, endDate);
+    public GetExtendedContactDetails getContactInfo(String identifier, String identifierType, String startDate, String endDate) throws ApiException {
+        ApiResponse<GetExtendedContactDetails> resp = getContactInfoWithHttpInfo(identifier, identifierType, startDate, endDate);
         return resp.getData();
     }
 
     /**
      * Get a contact&#39;s details
-     * Along with the contact details, this endpoint will show the statistics of contact for the recent 90 days by default. To fetch the earlier statistics, please use Get contact campaign stats (https://developers.brevo.com/reference/contacts-7#getcontactstats) endpoint with the appropriate date ranges.
-     * @param identifier Email (urlencoded) OR ID of the contact OR its SMS attribute value (required)
+     * There are 2 ways to get a contact &lt;br&gt;&lt;br&gt; Option 1- https://api.brevo.com/v3/contacts/{identifier} &lt;br&gt;&lt;br&gt; Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType&#x3D;{} &lt;br&gt; &lt;br&gt; Option 1 only works if identifierType is email_id (for EMAIL), phone_id (for SMS) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL, SMS and ID of the contact.   &lt;br&gt;&lt;br&gt; Option 2 works for all identifierType, use email_id for EMAIL attribute, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute &lt;br&gt;&lt;br&gt;Along with the contact details, this endpoint will show the statistics of contact for the recent 90 days by default. To fetch the earlier statistics, please use Get contact campaign stats &#x60;&#x60;https://developers.brevo.com/reference/contacts-7#getcontactstats&#x60;&#x60; endpoint with the appropriate date ranges.
+     * @param identifier Email (urlencoded) OR ID of the contact OR its SMS attribute value OR EXT_ID attribute (urlencoded) (required)
+     * @param identifierType email_id for Email, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute (optional)
      * @param startDate **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be lower than equal to endDate  (optional)
      * @param endDate **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be greater than equal to startDate.  (optional)
      * @return ApiResponse&lt;GetExtendedContactDetails&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<GetExtendedContactDetails> getContactInfoWithHttpInfo(String identifier, String startDate, String endDate) throws ApiException {
-        Call call = getContactInfoValidateBeforeCall(identifier, startDate, endDate, null, null);
+    public ApiResponse<GetExtendedContactDetails> getContactInfoWithHttpInfo(String identifier, String identifierType, String startDate, String endDate) throws ApiException {
+        Call call = getContactInfoValidateBeforeCall(identifier, identifierType, startDate, endDate, null, null);
         Type localVarReturnType = new TypeToken<GetExtendedContactDetails>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
      * Get a contact&#39;s details (asynchronously)
-     * Along with the contact details, this endpoint will show the statistics of contact for the recent 90 days by default. To fetch the earlier statistics, please use Get contact campaign stats (https://developers.brevo.com/reference/contacts-7#getcontactstats) endpoint with the appropriate date ranges.
-     * @param identifier Email (urlencoded) OR ID of the contact OR its SMS attribute value (required)
+     * There are 2 ways to get a contact &lt;br&gt;&lt;br&gt; Option 1- https://api.brevo.com/v3/contacts/{identifier} &lt;br&gt;&lt;br&gt; Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType&#x3D;{} &lt;br&gt; &lt;br&gt; Option 1 only works if identifierType is email_id (for EMAIL), phone_id (for SMS) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL, SMS and ID of the contact.   &lt;br&gt;&lt;br&gt; Option 2 works for all identifierType, use email_id for EMAIL attribute, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute &lt;br&gt;&lt;br&gt;Along with the contact details, this endpoint will show the statistics of contact for the recent 90 days by default. To fetch the earlier statistics, please use Get contact campaign stats &#x60;&#x60;https://developers.brevo.com/reference/contacts-7#getcontactstats&#x60;&#x60; endpoint with the appropriate date ranges.
+     * @param identifier Email (urlencoded) OR ID of the contact OR its SMS attribute value OR EXT_ID attribute (urlencoded) (required)
+     * @param identifierType email_id for Email, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute (optional)
      * @param startDate **Mandatory if endDate is used.** Starting date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be lower than equal to endDate  (optional)
      * @param endDate **Mandatory if startDate is used.** Ending date (YYYY-MM-DD) of the statistic events specific to campaigns. Must be greater than equal to startDate.  (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call getContactInfoAsync(String identifier, String startDate, String endDate, final ApiCallback<GetExtendedContactDetails> callback) throws ApiException {
+    public Call getContactInfoAsync(String identifier, String identifierType, String startDate, String endDate, final ApiCallback<GetExtendedContactDetails> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1529,7 +1712,7 @@ public class ContactsApi {
             };
         }
 
-        Call call = getContactInfoValidateBeforeCall(identifier, startDate, endDate, progressListener, progressRequestListener);
+        Call call = getContactInfoValidateBeforeCall(identifier, identifierType, startDate, endDate, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<GetExtendedContactDetails>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -1678,12 +1861,13 @@ public class ContactsApi {
      * @param sort Sort the results in the ascending/descending order of record creation. Default order is **descending** if &#x60;sort&#x60; is not passed (optional, default to desc)
      * @param segmentId Id of the segment. **Either listIds or segmentId can be passed.** (optional)
      * @param listIds Ids of the list. **Either listIds or segmentId can be passed.** (optional)
+     * @param filter Filter the contacts on the basis of attributes. **Allowed operator: equals. For multiple-choice options, the filter will apply an AND condition between the options. For category attributes, the filter will work with both id and value. (e.g. filter&#x3D;equals(FIRSTNAME,&quot;Antoine&quot;), filter&#x3D;equals(B1, true), filter&#x3D;equals(DOB, &quot;1989-11-23&quot;), filter&#x3D;equals(GENDER, &quot;1&quot;), filter&#x3D;equals(GENDER, &quot;MALE&quot;), filter&#x3D;equals(COUNTRY,&quot;USA, INDIA&quot;)**  (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call getContactsCall(Long limit, Long offset, String modifiedSince, String createdSince, String sort, Long segmentId, List<Long> listIds, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call getContactsCall(Long limit, Long offset, String modifiedSince, String createdSince, String sort, Long segmentId, List<Long> listIds, String filter, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -1705,6 +1889,8 @@ public class ContactsApi {
         localVarQueryParams.addAll(apiClient.parameterToPair("segmentId", segmentId));
         if (listIds != null)
         localVarCollectionQueryParams.addAll(apiClient.parameterToPairs("csv", "listIds", listIds));
+        if (filter != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("filter", filter));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -1739,10 +1925,10 @@ public class ContactsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call getContactsValidateBeforeCall(Long limit, Long offset, String modifiedSince, String createdSince, String sort, Long segmentId, List<Long> listIds, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call getContactsValidateBeforeCall(Long limit, Long offset, String modifiedSince, String createdSince, String sort, Long segmentId, List<Long> listIds, String filter, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
 
-        Call call = getContactsCall(limit, offset, modifiedSince, createdSince, sort, segmentId, listIds, progressListener, progressRequestListener);
+        Call call = getContactsCall(limit, offset, modifiedSince, createdSince, sort, segmentId, listIds, filter, progressListener, progressRequestListener);
         return call;
 
     }
@@ -1757,11 +1943,12 @@ public class ContactsApi {
      * @param sort Sort the results in the ascending/descending order of record creation. Default order is **descending** if &#x60;sort&#x60; is not passed (optional, default to desc)
      * @param segmentId Id of the segment. **Either listIds or segmentId can be passed.** (optional)
      * @param listIds Ids of the list. **Either listIds or segmentId can be passed.** (optional)
+     * @param filter Filter the contacts on the basis of attributes. **Allowed operator: equals. For multiple-choice options, the filter will apply an AND condition between the options. For category attributes, the filter will work with both id and value. (e.g. filter&#x3D;equals(FIRSTNAME,&quot;Antoine&quot;), filter&#x3D;equals(B1, true), filter&#x3D;equals(DOB, &quot;1989-11-23&quot;), filter&#x3D;equals(GENDER, &quot;1&quot;), filter&#x3D;equals(GENDER, &quot;MALE&quot;), filter&#x3D;equals(COUNTRY,&quot;USA, INDIA&quot;)**  (optional)
      * @return GetContacts
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public GetContacts getContacts(Long limit, Long offset, String modifiedSince, String createdSince, String sort, Long segmentId, List<Long> listIds) throws ApiException {
-        ApiResponse<GetContacts> resp = getContactsWithHttpInfo(limit, offset, modifiedSince, createdSince, sort, segmentId, listIds);
+    public GetContacts getContacts(Long limit, Long offset, String modifiedSince, String createdSince, String sort, Long segmentId, List<Long> listIds, String filter) throws ApiException {
+        ApiResponse<GetContacts> resp = getContactsWithHttpInfo(limit, offset, modifiedSince, createdSince, sort, segmentId, listIds, filter);
         return resp.getData();
     }
 
@@ -1775,11 +1962,12 @@ public class ContactsApi {
      * @param sort Sort the results in the ascending/descending order of record creation. Default order is **descending** if &#x60;sort&#x60; is not passed (optional, default to desc)
      * @param segmentId Id of the segment. **Either listIds or segmentId can be passed.** (optional)
      * @param listIds Ids of the list. **Either listIds or segmentId can be passed.** (optional)
+     * @param filter Filter the contacts on the basis of attributes. **Allowed operator: equals. For multiple-choice options, the filter will apply an AND condition between the options. For category attributes, the filter will work with both id and value. (e.g. filter&#x3D;equals(FIRSTNAME,&quot;Antoine&quot;), filter&#x3D;equals(B1, true), filter&#x3D;equals(DOB, &quot;1989-11-23&quot;), filter&#x3D;equals(GENDER, &quot;1&quot;), filter&#x3D;equals(GENDER, &quot;MALE&quot;), filter&#x3D;equals(COUNTRY,&quot;USA, INDIA&quot;)**  (optional)
      * @return ApiResponse&lt;GetContacts&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<GetContacts> getContactsWithHttpInfo(Long limit, Long offset, String modifiedSince, String createdSince, String sort, Long segmentId, List<Long> listIds) throws ApiException {
-        Call call = getContactsValidateBeforeCall(limit, offset, modifiedSince, createdSince, sort, segmentId, listIds, null, null);
+    public ApiResponse<GetContacts> getContactsWithHttpInfo(Long limit, Long offset, String modifiedSince, String createdSince, String sort, Long segmentId, List<Long> listIds, String filter) throws ApiException {
+        Call call = getContactsValidateBeforeCall(limit, offset, modifiedSince, createdSince, sort, segmentId, listIds, filter, null, null);
         Type localVarReturnType = new TypeToken<GetContacts>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -1794,11 +1982,12 @@ public class ContactsApi {
      * @param sort Sort the results in the ascending/descending order of record creation. Default order is **descending** if &#x60;sort&#x60; is not passed (optional, default to desc)
      * @param segmentId Id of the segment. **Either listIds or segmentId can be passed.** (optional)
      * @param listIds Ids of the list. **Either listIds or segmentId can be passed.** (optional)
+     * @param filter Filter the contacts on the basis of attributes. **Allowed operator: equals. For multiple-choice options, the filter will apply an AND condition between the options. For category attributes, the filter will work with both id and value. (e.g. filter&#x3D;equals(FIRSTNAME,&quot;Antoine&quot;), filter&#x3D;equals(B1, true), filter&#x3D;equals(DOB, &quot;1989-11-23&quot;), filter&#x3D;equals(GENDER, &quot;1&quot;), filter&#x3D;equals(GENDER, &quot;MALE&quot;), filter&#x3D;equals(COUNTRY,&quot;USA, INDIA&quot;)**  (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call getContactsAsync(Long limit, Long offset, String modifiedSince, String createdSince, String sort, Long segmentId, List<Long> listIds, final ApiCallback<GetContacts> callback) throws ApiException {
+    public Call getContactsAsync(Long limit, Long offset, String modifiedSince, String createdSince, String sort, Long segmentId, List<Long> listIds, String filter, final ApiCallback<GetContacts> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1819,7 +2008,7 @@ public class ContactsApi {
             };
         }
 
-        Call call = getContactsValidateBeforeCall(limit, offset, modifiedSince, createdSince, sort, segmentId, listIds, progressListener, progressRequestListener);
+        Call call = getContactsValidateBeforeCall(limit, offset, modifiedSince, createdSince, sort, segmentId, listIds, filter, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<GetContacts>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -2237,8 +2426,8 @@ public class ContactsApi {
     }
     /**
      * Build call for getFolders
-     * @param limit Number of documents per page (required)
-     * @param offset Index of the first document of the page (required)
+     * @param limit Number of documents per page (optional, default to 10)
+     * @param offset Index of the first document of the page (optional, default to 0)
      * @param sort Sort the results in the ascending/descending order of record creation. Default order is **descending** if &#x60;sort&#x60; is not passed (optional, default to desc)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
@@ -2295,16 +2484,6 @@ public class ContactsApi {
     @SuppressWarnings("rawtypes")
     private Call getFoldersValidateBeforeCall(Long limit, Long offset, String sort, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
-        // verify the required parameter 'limit' is set
-        if (limit == null) {
-            throw new ApiException("Missing the required parameter 'limit' when calling getFolders(Async)");
-        }
-        
-        // verify the required parameter 'offset' is set
-        if (offset == null) {
-            throw new ApiException("Missing the required parameter 'offset' when calling getFolders(Async)");
-        }
-        
 
         Call call = getFoldersCall(limit, offset, sort, progressListener, progressRequestListener);
         return call;
@@ -2314,8 +2493,8 @@ public class ContactsApi {
     /**
      * Get all folders
      * 
-     * @param limit Number of documents per page (required)
-     * @param offset Index of the first document of the page (required)
+     * @param limit Number of documents per page (optional, default to 10)
+     * @param offset Index of the first document of the page (optional, default to 0)
      * @param sort Sort the results in the ascending/descending order of record creation. Default order is **descending** if &#x60;sort&#x60; is not passed (optional, default to desc)
      * @return GetFolders
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -2328,8 +2507,8 @@ public class ContactsApi {
     /**
      * Get all folders
      * 
-     * @param limit Number of documents per page (required)
-     * @param offset Index of the first document of the page (required)
+     * @param limit Number of documents per page (optional, default to 10)
+     * @param offset Index of the first document of the page (optional, default to 0)
      * @param sort Sort the results in the ascending/descending order of record creation. Default order is **descending** if &#x60;sort&#x60; is not passed (optional, default to desc)
      * @return ApiResponse&lt;GetFolders&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -2343,8 +2522,8 @@ public class ContactsApi {
     /**
      * Get all folders (asynchronously)
      * 
-     * @param limit Number of documents per page (required)
-     * @param offset Index of the first document of the page (required)
+     * @param limit Number of documents per page (optional, default to 10)
+     * @param offset Index of the first document of the page (optional, default to 0)
      * @param sort Sort the results in the ascending/descending order of record creation. Default order is **descending** if &#x60;sort&#x60; is not passed (optional, default to desc)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
@@ -2908,7 +3087,7 @@ public class ContactsApi {
     /**
      * Build call for removeContactFromList
      * @param listId Id of the list (required)
-     * @param contactEmails Emails addresses OR IDs of the contacts (required)
+     * @param contactEmails Emails addresses OR IDs OR EXT_ID attributes of the contacts (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
@@ -2979,7 +3158,7 @@ public class ContactsApi {
      * Delete a contact from a list
      * 
      * @param listId Id of the list (required)
-     * @param contactEmails Emails addresses OR IDs of the contacts (required)
+     * @param contactEmails Emails addresses OR IDs OR EXT_ID attributes of the contacts (required)
      * @return PostContactInfo
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -2992,7 +3171,7 @@ public class ContactsApi {
      * Delete a contact from a list
      * 
      * @param listId Id of the list (required)
-     * @param contactEmails Emails addresses OR IDs of the contacts (required)
+     * @param contactEmails Emails addresses OR IDs OR EXT_ID attributes of the contacts (required)
      * @return ApiResponse&lt;PostContactInfo&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -3006,7 +3185,7 @@ public class ContactsApi {
      * Delete a contact from a list (asynchronously)
      * 
      * @param listId Id of the list (required)
-     * @param contactEmails Emails addresses OR IDs of the contacts (required)
+     * @param contactEmails Emails addresses OR IDs OR EXT_ID attributes of the contacts (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -3417,14 +3596,15 @@ public class ContactsApi {
     }
     /**
      * Build call for updateContact
-     * @param identifier Email (urlencoded) OR ID of the contact (required)
+     * @param identifier Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) OR its SMS attribute value OR its WHATSAPP attribute value OR its LANDLINE attribute value (required)
      * @param updateContact Values to update a contact (required)
+     * @param identifierType email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call updateContactCall(String identifier, UpdateContact updateContact, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call updateContactCall(String identifier, UpdateContact updateContact, String identifierType, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = updateContact;
 
         // create path and map variables
@@ -3433,6 +3613,8 @@ public class ContactsApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        if (identifierType != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("identifierType", identifierType));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -3467,7 +3649,7 @@ public class ContactsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call updateContactValidateBeforeCall(String identifier, UpdateContact updateContact, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call updateContactValidateBeforeCall(String identifier, UpdateContact updateContact, String identifierType, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'identifier' is set
         if (identifier == null) {
@@ -3480,45 +3662,48 @@ public class ContactsApi {
         }
         
 
-        Call call = updateContactCall(identifier, updateContact, progressListener, progressRequestListener);
+        Call call = updateContactCall(identifier, updateContact, identifierType, progressListener, progressRequestListener);
         return call;
 
     }
 
     /**
      * Update a contact
-     * 
-     * @param identifier Email (urlencoded) OR ID of the contact (required)
+     * There are 2 ways to update a contact &lt;br&gt;&lt;br&gt; Option 1- https://api.brevo.com/v3/contacts/{identifier} &lt;br&gt;&lt;br&gt; Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType&#x3D;{} &lt;br&gt; &lt;br&gt; Option 1 only works if identifierType is email_id (for EMAIL) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL and ID of the contact.   &lt;br&gt;&lt;br&gt; Option 2 works for all identifierType, use email_id for EMAIL attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute
+     * @param identifier Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) OR its SMS attribute value OR its WHATSAPP attribute value OR its LANDLINE attribute value (required)
      * @param updateContact Values to update a contact (required)
+     * @param identifierType email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute (optional)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public void updateContact(String identifier, UpdateContact updateContact) throws ApiException {
-        updateContactWithHttpInfo(identifier, updateContact);
+    public void updateContact(String identifier, UpdateContact updateContact, String identifierType) throws ApiException {
+        updateContactWithHttpInfo(identifier, updateContact, identifierType);
     }
 
     /**
      * Update a contact
-     * 
-     * @param identifier Email (urlencoded) OR ID of the contact (required)
+     * There are 2 ways to update a contact &lt;br&gt;&lt;br&gt; Option 1- https://api.brevo.com/v3/contacts/{identifier} &lt;br&gt;&lt;br&gt; Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType&#x3D;{} &lt;br&gt; &lt;br&gt; Option 1 only works if identifierType is email_id (for EMAIL) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL and ID of the contact.   &lt;br&gt;&lt;br&gt; Option 2 works for all identifierType, use email_id for EMAIL attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute
+     * @param identifier Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) OR its SMS attribute value OR its WHATSAPP attribute value OR its LANDLINE attribute value (required)
      * @param updateContact Values to update a contact (required)
+     * @param identifierType email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute (optional)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Void> updateContactWithHttpInfo(String identifier, UpdateContact updateContact) throws ApiException {
-        Call call = updateContactValidateBeforeCall(identifier, updateContact, null, null);
+    public ApiResponse<Void> updateContactWithHttpInfo(String identifier, UpdateContact updateContact, String identifierType) throws ApiException {
+        Call call = updateContactValidateBeforeCall(identifier, updateContact, identifierType, null, null);
         return apiClient.execute(call);
     }
 
     /**
      * Update a contact (asynchronously)
-     * 
-     * @param identifier Email (urlencoded) OR ID of the contact (required)
+     * There are 2 ways to update a contact &lt;br&gt;&lt;br&gt; Option 1- https://api.brevo.com/v3/contacts/{identifier} &lt;br&gt;&lt;br&gt; Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType&#x3D;{} &lt;br&gt; &lt;br&gt; Option 1 only works if identifierType is email_id (for EMAIL) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL and ID of the contact.   &lt;br&gt;&lt;br&gt; Option 2 works for all identifierType, use email_id for EMAIL attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute
+     * @param identifier Email (urlencoded) OR ID of the contact OR EXT_ID attribute (urlencoded) OR its SMS attribute value OR its WHATSAPP attribute value OR its LANDLINE attribute value (required)
      * @param updateContact Values to update a contact (required)
+     * @param identifierType email_id for Email, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call updateContactAsync(String identifier, UpdateContact updateContact, final ApiCallback<Void> callback) throws ApiException {
+    public Call updateContactAsync(String identifier, UpdateContact updateContact, String identifierType, final ApiCallback<Void> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -3539,7 +3724,7 @@ public class ContactsApi {
             };
         }
 
-        Call call = updateContactValidateBeforeCall(identifier, updateContact, progressListener, progressRequestListener);
+        Call call = updateContactValidateBeforeCall(identifier, updateContact, identifierType, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }

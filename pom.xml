@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.brevo</groupId>
     <artifactId>brevo</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
 
     <name>brevo</name>
@@ -175,7 +175,7 @@
                             <goal>sign</goal>
                         </goals>
                         <configuration>
-                            <keyname>0xDA283DCC</keyname>
+                            <keyname>0x94153518</keyname>
                             <gpgArguments>
                                 <arg>--pinentry-mode</arg>
                                 <arg>loopback</arg>

@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,17 +13,22 @@
 
 package brevoModel;
 
-import com.google.gson.annotations.SerializedName;
-import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.ObjectUtils;
-
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Body8
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class Body8 {
   @SerializedName("linkContactIds")
   private List<Long> linkContactIds = null;
@@ -31,11 +36,11 @@ public class Body8 {
   @SerializedName("unlinkContactIds")
   private List<Long> unlinkContactIds = null;
 
-  @SerializedName("linkCompanyIds")
-  private List<String> linkCompanyIds = null;
+  @SerializedName("linkDealsIds")
+  private List<String> linkDealsIds = null;
 
-  @SerializedName("unlinkCompanyIds")
-  private List<String> unlinkCompanyIds = null;
+  @SerializedName("unlinkDealsIds")
+  private List<String> unlinkDealsIds = null;
 
   public Body8 linkContactIds(List<Long> linkContactIds) {
     this.linkContactIds = linkContactIds;
@@ -51,10 +56,10 @@ public class Body8 {
   }
 
    /**
-   * Contact ids for contacts to be linked with deal
+   * Contact ids for contacts to be linked with company
    * @return linkContactIds
   **/
-  @ApiModelProperty(example = "[1,2,3]", value = "Contact ids for contacts to be linked with deal")
+  @ApiModelProperty(example = "[1,2,3]", value = "Contact ids for contacts to be linked with company")
   public List<Long> getLinkContactIds() {
     return linkContactIds;
   }
@@ -77,10 +82,10 @@ public class Body8 {
   }
 
    /**
-   * Contact ids for contacts to be unlinked from deal
+   * Contact ids for contacts to be unlinked from company
    * @return unlinkContactIds
   **/
-  @ApiModelProperty(example = "[4,5,6]", value = "Contact ids for contacts to be unlinked from deal")
+  @ApiModelProperty(example = "[4,5,6]", value = "Contact ids for contacts to be unlinked from company")
   public List<Long> getUnlinkContactIds() {
     return unlinkContactIds;
   }
@@ -89,56 +94,56 @@ public class Body8 {
     this.unlinkContactIds = unlinkContactIds;
   }
 
-  public Body8 linkCompanyIds(List<String> linkCompanyIds) {
-    this.linkCompanyIds = linkCompanyIds;
+  public Body8 linkDealsIds(List<String> linkDealsIds) {
+    this.linkDealsIds = linkDealsIds;
     return this;
   }
 
-  public Body8 addLinkCompanyIdsItem(String linkCompanyIdsItem) {
-    if (this.linkCompanyIds == null) {
-      this.linkCompanyIds = new ArrayList<String>();
+  public Body8 addLinkDealsIdsItem(String linkDealsIdsItem) {
+    if (this.linkDealsIds == null) {
+      this.linkDealsIds = new ArrayList<String>();
     }
-    this.linkCompanyIds.add(linkCompanyIdsItem);
+    this.linkDealsIds.add(linkDealsIdsItem);
     return this;
   }
 
    /**
-   * Company ids to be linked with deal
-   * @return linkCompanyIds
+   * Deals ids for deals to be linked with company
+   * @return linkDealsIds
   **/
-  @ApiModelProperty(example = "[\"61a5ce58c5d4795761045990\",\"61a5ce58c5d4795761045991\",\"61a5ce58c5d4795761045992\"]", value = "Company ids to be linked with deal")
-  public List<String> getLinkCompanyIds() {
-    return linkCompanyIds;
+  @ApiModelProperty(example = "[\"61a5ce58c5d4795761045990\",\"61a5ce58c5d4795761045991\",\"61a5ce58c5d4795761045992\"]", value = "Deals ids for deals to be linked with company")
+  public List<String> getLinkDealsIds() {
+    return linkDealsIds;
   }
 
-  public void setLinkCompanyIds(List<String> linkCompanyIds) {
-    this.linkCompanyIds = linkCompanyIds;
+  public void setLinkDealsIds(List<String> linkDealsIds) {
+    this.linkDealsIds = linkDealsIds;
   }
 
-  public Body8 unlinkCompanyIds(List<String> unlinkCompanyIds) {
-    this.unlinkCompanyIds = unlinkCompanyIds;
+  public Body8 unlinkDealsIds(List<String> unlinkDealsIds) {
+    this.unlinkDealsIds = unlinkDealsIds;
     return this;
   }
 
-  public Body8 addUnlinkCompanyIdsItem(String unlinkCompanyIdsItem) {
-    if (this.unlinkCompanyIds == null) {
-      this.unlinkCompanyIds = new ArrayList<String>();
+  public Body8 addUnlinkDealsIdsItem(String unlinkDealsIdsItem) {
+    if (this.unlinkDealsIds == null) {
+      this.unlinkDealsIds = new ArrayList<String>();
     }
-    this.unlinkCompanyIds.add(unlinkCompanyIdsItem);
+    this.unlinkDealsIds.add(unlinkDealsIdsItem);
     return this;
   }
 
    /**
-   * Company ids to be unlinked from deal
-   * @return unlinkCompanyIds
+   * Deals ids for deals to be unlinked from company
+   * @return unlinkDealsIds
   **/
-  @ApiModelProperty(example = "[\"61a5ce58c5d4795761045994\",\"61a5ce58c5d479576104595\",\"61a5ce58c5d4795761045996\"]", value = "Company ids to be unlinked from deal")
-  public List<String> getUnlinkCompanyIds() {
-    return unlinkCompanyIds;
+  @ApiModelProperty(example = "[\"61a5ce58c5d4795761045994\",\"61a5ce58c5d479576104595\",\"61a5ce58c5d4795761045996\"]", value = "Deals ids for deals to be unlinked from company")
+  public List<String> getUnlinkDealsIds() {
+    return unlinkDealsIds;
   }
 
-  public void setUnlinkCompanyIds(List<String> unlinkCompanyIds) {
-    this.unlinkCompanyIds = unlinkCompanyIds;
+  public void setUnlinkDealsIds(List<String> unlinkDealsIds) {
+    this.unlinkDealsIds = unlinkDealsIds;
   }
 
 
@@ -153,13 +158,13 @@ public class Body8 {
     Body8 body8 = (Body8) o;
     return ObjectUtils.equals(this.linkContactIds, body8.linkContactIds) &&
     ObjectUtils.equals(this.unlinkContactIds, body8.unlinkContactIds) &&
-    ObjectUtils.equals(this.linkCompanyIds, body8.linkCompanyIds) &&
-    ObjectUtils.equals(this.unlinkCompanyIds, body8.unlinkCompanyIds);
+    ObjectUtils.equals(this.linkDealsIds, body8.linkDealsIds) &&
+    ObjectUtils.equals(this.unlinkDealsIds, body8.unlinkDealsIds);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(linkContactIds, unlinkContactIds, linkCompanyIds, unlinkCompanyIds);
+    return ObjectUtils.hashCodeMulti(linkContactIds, unlinkContactIds, linkDealsIds, unlinkDealsIds);
   }
 
 
@@ -170,8 +175,8 @@ public class Body8 {
     
     sb.append("    linkContactIds: ").append(toIndentedString(linkContactIds)).append("\n");
     sb.append("    unlinkContactIds: ").append(toIndentedString(unlinkContactIds)).append("\n");
-    sb.append("    linkCompanyIds: ").append(toIndentedString(linkCompanyIds)).append("\n");
-    sb.append("    unlinkCompanyIds: ").append(toIndentedString(unlinkCompanyIds)).append("\n");
+    sb.append("    linkDealsIds: ").append(toIndentedString(linkDealsIds)).append("\n");
+    sb.append("    unlinkDealsIds: ").append(toIndentedString(unlinkDealsIds)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,76 +13,47 @@
 
 package brevoModel;
 
-import com.google.gson.annotations.SerializedName;
-import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.ObjectUtils;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Body4
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class Body4 {
-  @SerializedName("name")
-  private String name = null;
+  @SerializedName("subAccountIds")
+  private List<Long> subAccountIds = new ArrayList<Long>();
 
-  @SerializedName("attributes")
-  private Object attributes = null;
+  public Body4 subAccountIds(List<Long> subAccountIds) {
+    this.subAccountIds = subAccountIds;
+    return this;
+  }
 
-  @SerializedName("countryCode")
-  private Long countryCode = null;
-
-  public Body4 name(String name) {
-    this.name = name;
+  public Body4 addSubAccountIdsItem(Long subAccountIdsItem) {
+    this.subAccountIds.add(subAccountIdsItem);
     return this;
   }
 
    /**
-   * Name of company
-   * @return name
+   * List of sub-account ids
+   * @return subAccountIds
   **/
-  @ApiModelProperty(example = "company", value = "Name of company")
-  public String getName() {
-    return name;
+  @ApiModelProperty(example = "[423432,234323,87678]", required = true, value = "List of sub-account ids")
+  public List<Long> getSubAccountIds() {
+    return subAccountIds;
   }
 
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public Body4 attributes(Object attributes) {
-    this.attributes = attributes;
-    return this;
-  }
-
-   /**
-   * Attributes for company update
-   * @return attributes
-  **/
-  @ApiModelProperty(example = "{\"category\":\"label_2\",\"domain\":\"xyz\",\"date\":\"2022-05-04T00:00:00+05:30\",\"industry\":\"flipkart\",\"number_of_contacts\":1,\"number_of_employees\":100,\"owner\":\"5b1a17d914b73d35a76ca0c7\",\"phone_number\":\"81718441912\",\"revenue\":10000.34222}", value = "Attributes for company update")
-  public Object getAttributes() {
-    return attributes;
-  }
-
-  public void setAttributes(Object attributes) {
-    this.attributes = attributes;
-  }
-
-  public Body4 countryCode(Long countryCode) {
-    this.countryCode = countryCode;
-    return this;
-  }
-
-   /**
-   * Country code if phone_number is passed in attributes.
-   * @return countryCode
-  **/
-  @ApiModelProperty(example = "91", value = "Country code if phone_number is passed in attributes.")
-  public Long getCountryCode() {
-    return countryCode;
-  }
-
-  public void setCountryCode(Long countryCode) {
-    this.countryCode = countryCode;
+  public void setSubAccountIds(List<Long> subAccountIds) {
+    this.subAccountIds = subAccountIds;
   }
 
 
@@ -95,14 +66,12 @@ public class Body4 {
     return false;
   }
     Body4 body4 = (Body4) o;
-    return ObjectUtils.equals(this.name, body4.name) &&
-    ObjectUtils.equals(this.attributes, body4.attributes) &&
-    ObjectUtils.equals(this.countryCode, body4.countryCode);
+    return ObjectUtils.equals(this.subAccountIds, body4.subAccountIds);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(name, attributes, countryCode);
+    return ObjectUtils.hashCodeMulti(subAccountIds);
   }
 
 
@@ -111,9 +80,7 @@ public class Body4 {
     StringBuilder sb = new StringBuilder();
     sb.append("class Body4 {\n");
     
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    attributes: ").append(toIndentedString(attributes)).append("\n");
-    sb.append("    countryCode: ").append(toIndentedString(countryCode)).append("\n");
+    sb.append("    subAccountIds: ").append(toIndentedString(subAccountIds)).append("\n");
     sb.append("}");
     return sb.toString();
   }

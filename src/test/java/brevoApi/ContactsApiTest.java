@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -18,7 +18,10 @@ import brevoModel.*;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * API tests for ContactsApi
@@ -67,7 +70,7 @@ public class ContactsApiTest {
     /**
      * Create a contact
      *
-     * 
+     * Creates new contacts on Brevo. Contacts can be created by passing either - &lt;br&gt;&lt;br&gt; 1. email address of the contact (email_id),  &lt;br&gt; 2. phone number of the contact (to be passed as &quot;SMS&quot; field in &quot;attributes&quot; along with proper country code), For example- {&quot;SMS&quot;:&quot;+91xxxxxxxxxx&quot;} or {&quot;SMS&quot;:&quot;0091xxxxxxxxxx&quot;} &lt;br&gt; 3. ext_id &lt;br&gt;
      *
      * @throws ApiException
      *          if the Api call fails
@@ -148,7 +151,7 @@ public class ContactsApiTest {
     /**
      * Delete a contact
      *
-     * 
+     * There are 2 ways to delete a contact &lt;br&gt;&lt;br&gt; Option 1- https://api.brevo.com/v3/contacts/{identifier} &lt;br&gt;&lt;br&gt; Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType&#x3D;{} &lt;br&gt; &lt;br&gt; Option 1 only works if identifierType is email_id (for EMAIL) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL and ID of the contact.   &lt;br&gt;&lt;br&gt; Option 2 works for all identifierType, use email_id for EMAIL attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute.
      *
      * @throws ApiException
      *          if the Api call fails
@@ -156,7 +159,8 @@ public class ContactsApiTest {
     @Test
     public void deleteContactTest() throws ApiException {
         String identifier = null;
-        api.deleteContact(identifier);
+        String identifierType = null;
+        api.deleteContact(identifier, identifierType);
 
         // TODO: test validations
     }
@@ -194,6 +198,24 @@ public class ContactsApiTest {
     }
     
     /**
+     * Delete a multiple-choice attribute option
+     *
+     * 
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void deleteMultiAttributeOptionsTest() throws ApiException {
+        String attributeType = null;
+        String multipleChoiceAttribute = null;
+        String multipleChoiceAttributeOption = null;
+        api.deleteMultiAttributeOptions(attributeType, multipleChoiceAttribute, multipleChoiceAttributeOption);
+
+        // TODO: test validations
+    }
+    
+    /**
      * List all attributes
      *
      * 
@@ -211,7 +233,7 @@ public class ContactsApiTest {
     /**
      * Get a contact&#39;s details
      *
-     * Along with the contact details, this endpoint will show the statistics of contact for the recent 90 days by default. To fetch the earlier statistics, please use Get contact campaign stats (https://developers.brevo.com/reference/contacts-7#getcontactstats) endpoint with the appropriate date ranges.
+     * There are 2 ways to get a contact &lt;br&gt;&lt;br&gt; Option 1- https://api.brevo.com/v3/contacts/{identifier} &lt;br&gt;&lt;br&gt; Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType&#x3D;{} &lt;br&gt; &lt;br&gt; Option 1 only works if identifierType is email_id (for EMAIL), phone_id (for SMS) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL, SMS and ID of the contact.   &lt;br&gt;&lt;br&gt; Option 2 works for all identifierType, use email_id for EMAIL attribute, phone_id for SMS attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE_NUMBER attribute &lt;br&gt;&lt;br&gt;Along with the contact details, this endpoint will show the statistics of contact for the recent 90 days by default. To fetch the earlier statistics, please use Get contact campaign stats &#x60;&#x60;https://developers.brevo.com/reference/contacts-7#getcontactstats&#x60;&#x60; endpoint with the appropriate date ranges.
      *
      * @throws ApiException
      *          if the Api call fails
@@ -219,9 +241,10 @@ public class ContactsApiTest {
     @Test
     public void getContactInfoTest() throws ApiException {
         String identifier = null;
+        String identifierType = null;
         String startDate = null;
         String endDate = null;
-        GetExtendedContactDetails response = api.getContactInfo(identifier, startDate, endDate);
+        GetExtendedContactDetails response = api.getContactInfo(identifier, identifierType, startDate, endDate);
 
         // TODO: test validations
     }
@@ -261,7 +284,8 @@ public class ContactsApiTest {
         String sort = null;
         Long segmentId = null;
         List<Long> listIds = null;
-        GetContacts response = api.getContacts(limit, offset, modifiedSince, createdSince, sort, segmentId, listIds);
+        String filter = null;
+        GetContacts response = api.getContacts(limit, offset, modifiedSince, createdSince, sort, segmentId, listIds, filter);
 
         // TODO: test validations
     }
@@ -479,7 +503,7 @@ public class ContactsApiTest {
     /**
      * Update a contact
      *
-     * 
+     * There are 2 ways to update a contact &lt;br&gt;&lt;br&gt; Option 1- https://api.brevo.com/v3/contacts/{identifier} &lt;br&gt;&lt;br&gt; Option 2- https://api.brevo.com/v3/contacts/{identifier}?identifierType&#x3D;{} &lt;br&gt; &lt;br&gt; Option 1 only works if identifierType is email_id (for EMAIL) or contact_id (for ID of the contact),where you can directly pass the value of EMAIL and ID of the contact.   &lt;br&gt;&lt;br&gt; Option 2 works for all identifierType, use email_id for EMAIL attribute, contact_id for ID of the contact, ext_id for EXT_ID attribute, phone_id for SMS attribute, whatsapp_id for WHATSAPP attribute, landline_number_id for LANDLINE attribute
      *
      * @throws ApiException
      *          if the Api call fails
@@ -488,7 +512,8 @@ public class ContactsApiTest {
     public void updateContactTest() throws ApiException {
         String identifier = null;
         UpdateContact updateContact = null;
-        api.updateContact(identifier, updateContact);
+        String identifierType = null;
+        api.updateContact(identifier, updateContact, identifierType);
 
         // TODO: test validations
     }

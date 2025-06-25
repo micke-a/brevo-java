@@ -21,6 +21,7 @@ Method | HTTP request | Description
 [**getTransacBlockedContacts**](TransactionalEmailsApi.md#getTransacBlockedContacts) | **GET** /smtp/blockedContacts | Get the list of blocked or unsubscribed transactional contacts
 [**getTransacEmailContent**](TransactionalEmailsApi.md#getTransacEmailContent) | **GET** /smtp/emails/{uuid} | Get the personalized content of a sent transactional email
 [**getTransacEmailsList**](TransactionalEmailsApi.md#getTransacEmailsList) | **GET** /smtp/emails | Get the list of transactional emails on the basis of allowed filters
+[**postPreviewSmtpEmailTemplates**](TransactionalEmailsApi.md#postPreviewSmtpEmailTemplates) | **POST** /smtp/template/preview | Generate the rendered preview of transactional template
 [**sendTestTemplate**](TransactionalEmailsApi.md#sendTestTemplate) | **POST** /smtp/templates/{templateId}/sendTest | Send a template to your test list
 [**sendTransacEmail**](TransactionalEmailsApi.md#sendTransacEmail) | **POST** /smtp/email | Send a transactional email
 [**smtpBlockedContactsEmailDelete**](TransactionalEmailsApi.md#smtpBlockedContactsEmailDelete) | **DELETE** /smtp/blockedContacts/{email} | Unblock or resubscribe a transactional contact
@@ -1116,6 +1117,65 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetTransacEmailsList**](GetTransacEmailsList.md)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="postPreviewSmtpEmailTemplates"></a>
+# **postPreviewSmtpEmailTemplates**
+> TemplatePreview postPreviewSmtpEmailTemplates(fetchTemplatePreview)
+
+Generate the rendered preview of transactional template
+
+### Example
+```java
+// Import classes:
+//import brevo.ApiClient;
+//import brevo.ApiException;
+//import brevo.Configuration;
+//import brevo.auth.*;
+//import brevoApi.TransactionalEmailsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: api-key
+ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("api-key");
+apiKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: partner-key
+ApiKeyAuth partnerKey = (ApiKeyAuth) defaultClient.getAuthentication("partner-key");
+partnerKey.setApiKey("YOUR PARTNER KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//partnerKey.setApiKeyPrefix("Token");
+
+TransactionalEmailsApi apiInstance = new TransactionalEmailsApi();
+FetchTemplatePreview fetchTemplatePreview = new FetchTemplatePreview(); // FetchTemplatePreview | Values to fetch Template preview
+try {
+    TemplatePreview result = apiInstance.postPreviewSmtpEmailTemplates(fetchTemplatePreview);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling TransactionalEmailsApi#postPreviewSmtpEmailTemplates");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **fetchTemplatePreview** | [**FetchTemplatePreview**](FetchTemplatePreview.md)| Values to fetch Template preview |
+
+### Return type
+
+[**TemplatePreview**](TemplatePreview.md)
 
 ### Authorization
 

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **email** | **String** | Email address for the organization | 
 **language** | [**LanguageEnum**](#LanguageEnum) | Set the language of the sub-account |  [optional]
 **timezone** | **String** | Set the timezone of the sub-account |  [optional]
+**groupIds** | **List&lt;String&gt;** | Set the group(s) for the sub-account |  [optional]
 
 
 <a name="LanguageEnum"></a>

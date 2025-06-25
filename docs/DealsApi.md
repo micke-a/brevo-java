@@ -5,10 +5,12 @@ All URIs are relative to *https://api.brevo.com/v3*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**crmAttributesDealsGet**](DealsApi.md#crmAttributesDealsGet) | **GET** /crm/attributes/deals | Get deal attributes
+[**crmAttributesPost**](DealsApi.md#crmAttributesPost) | **POST** /crm/attributes | Create a deal/company attribute
 [**crmDealsGet**](DealsApi.md#crmDealsGet) | **GET** /crm/deals | Get all deals
 [**crmDealsIdDelete**](DealsApi.md#crmDealsIdDelete) | **DELETE** /crm/deals/{id} | Delete a deal
 [**crmDealsIdGet**](DealsApi.md#crmDealsIdGet) | **GET** /crm/deals/{id} | Get a deal
 [**crmDealsIdPatch**](DealsApi.md#crmDealsIdPatch) | **PATCH** /crm/deals/{id} | Update a deal
+[**crmDealsImportPost**](DealsApi.md#crmDealsImportPost) | **POST** /crm/deals/import | Import deals(creation and updation)
 [**crmDealsLinkUnlinkIdPatch**](DealsApi.md#crmDealsLinkUnlinkIdPatch) | **PATCH** /crm/deals/link-unlink/{id} | Link and Unlink a deal with contacts and companies
 [**crmDealsPost**](DealsApi.md#crmDealsPost) | **POST** /crm/deals | Create a deal
 [**crmPipelineDetailsAllGet**](DealsApi.md#crmPipelineDetailsAllGet) | **GET** /crm/pipeline/details/all | Get all pipelines
@@ -71,9 +73,68 @@ This endpoint does not need any parameter.
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+<a name="crmAttributesPost"></a>
+# **crmAttributesPost**
+> InlineResponse2003 crmAttributesPost(body)
+
+Create a deal/company attribute
+
+### Example
+```java
+// Import classes:
+//import brevo.ApiClient;
+//import brevo.ApiException;
+//import brevo.Configuration;
+//import brevo.auth.*;
+//import brevoApi.DealsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: api-key
+ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("api-key");
+apiKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: partner-key
+ApiKeyAuth partnerKey = (ApiKeyAuth) defaultClient.getAuthentication("partner-key");
+partnerKey.setApiKey("YOUR PARTNER KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//partnerKey.setApiKeyPrefix("Token");
+
+DealsApi apiInstance = new DealsApi();
+Body9 body = new Body9(); // Body9 | Attribute creation data for company
+try {
+    InlineResponse2003 result = apiInstance.crmAttributesPost(body);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DealsApi#crmAttributesPost");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**Body9**](Body9.md)| Attribute creation data for company |
+
+### Return type
+
+[**InlineResponse2003**](InlineResponse2003.md)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
 <a name="crmDealsGet"></a>
 # **crmDealsGet**
-> DealsList crmDealsGet(filtersAttributesDealName, filtersLinkedCompaniesIds, filtersLinkedContactsIds, offset, limit, sort, sortBy)
+> DealsList crmDealsGet(filtersAttributesDealName, filtersLinkedCompaniesIds, filtersLinkedContactsIds, modifiedSince, createdSince, offset, limit, sort, sortBy)
 
 Get all deals
 
@@ -104,12 +165,14 @@ DealsApi apiInstance = new DealsApi();
 String filtersAttributesDealName = "filtersAttributesDealName_example"; // String | Filter by attributes. If you have a filter for the owner on your end, please send it as filters[attributes.deal_owner] and utilize the account email for the filtering.
 String filtersLinkedCompaniesIds = "filtersLinkedCompaniesIds_example"; // String | Filter by linked companies ids
 String filtersLinkedContactsIds = "filtersLinkedContactsIds_example"; // String | Filter by linked companies ids
+String modifiedSince = "modifiedSince_example"; // String | Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
+String createdSince = "createdSince_example"; // String | Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result.
 Long offset = 789L; // Long | Index of the first document of the page
 Long limit = 50L; // Long | Number of documents per page
 String sort = "sort_example"; // String | Sort the results in the ascending/descending order. Default order is **descending** by creation if `sort` is not passed
 String sortBy = "sortBy_example"; // String | The field used to sort field names.
 try {
-    DealsList result = apiInstance.crmDealsGet(filtersAttributesDealName, filtersLinkedCompaniesIds, filtersLinkedContactsIds, offset, limit, sort, sortBy);
+    DealsList result = apiInstance.crmDealsGet(filtersAttributesDealName, filtersLinkedCompaniesIds, filtersLinkedContactsIds, modifiedSince, createdSince, offset, limit, sort, sortBy);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DealsApi#crmDealsGet");
@@ -124,6 +187,8 @@ Name | Type | Description  | Notes
  **filtersAttributesDealName** | **String**| Filter by attributes. If you have a filter for the owner on your end, please send it as filters[attributes.deal_owner] and utilize the account email for the filtering. | [optional]
  **filtersLinkedCompaniesIds** | **String**| Filter by linked companies ids | [optional]
  **filtersLinkedContactsIds** | **String**| Filter by linked companies ids | [optional]
+ **modifiedSince** | **String**| Filter (urlencoded) the contacts modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result. | [optional]
+ **createdSince** | **String**| Filter (urlencoded) the contacts created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). Prefer to pass your timezone in date-time format for accurate result. | [optional]
  **offset** | **Long**| Index of the first document of the page | [optional]
  **limit** | **Long**| Number of documents per page | [optional] [default to 50]
  **sort** | **String**| Sort the results in the ascending/descending order. Default order is **descending** by creation if &#x60;sort&#x60; is not passed | [optional] [enum: asc, desc]
@@ -290,7 +355,7 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 
 DealsApi apiInstance = new DealsApi();
 String id = "id_example"; // String | 
-Body7 body = new Body7(); // Body7 | Updated deal details.
+Body11 body = new Body11(); // Body11 | Updated deal details.
 try {
     apiInstance.crmDealsIdPatch(id, body);
 } catch (ApiException e) {
@@ -304,7 +369,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**|  |
- **body** | [**Body7**](Body7.md)| Updated deal details. |
+ **body** | [**Body11**](Body11.md)| Updated deal details. |
 
 ### Return type
 
@@ -317,6 +382,69 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="crmDealsImportPost"></a>
+# **crmDealsImportPost**
+> InlineResponse2004 crmDealsImportPost(file, mapping)
+
+Import deals(creation and updation)
+
+Import deals from a CSV file with mapping options.
+
+### Example
+```java
+// Import classes:
+//import brevo.ApiClient;
+//import brevo.ApiException;
+//import brevo.Configuration;
+//import brevo.auth.*;
+//import brevoApi.DealsApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: api-key
+ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("api-key");
+apiKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: partner-key
+ApiKeyAuth partnerKey = (ApiKeyAuth) defaultClient.getAuthentication("partner-key");
+partnerKey.setApiKey("YOUR PARTNER KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//partnerKey.setApiKeyPrefix("Token");
+
+DealsApi apiInstance = new DealsApi();
+File file = new File("/path/to/file.txt"); // File | The CSV file to upload.The file should have the first row as the mapping attribute. Some default attribute names are (a) deal_id [brevo mongoID to update deals] (b) associated_contact (c) associated_company (f) any other attribute with internal name 
+String mapping = "mapping_example"; // String | The mapping options in Json format.   json    {       \"link_entities\": true, // Determines whether to link related entities during the import process       \"unlink_entities\": false, //Determines whether to unlink related entities during the import process.       \"update_existing_records\": true, // Determines whether to update based on deal ID or treat every row as create       \"unset_empty_attributes\": false // Determines whether unset a specific attribute during update if values input is blank     } 
+try {
+    InlineResponse2004 result = apiInstance.crmDealsImportPost(file, mapping);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling DealsApi#crmDealsImportPost");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **file** | **File**| The CSV file to upload.The file should have the first row as the mapping attribute. Some default attribute names are (a) deal_id [brevo mongoID to update deals] (b) associated_contact (c) associated_company (f) any other attribute with internal name  |
+ **mapping** | **String**| The mapping options in JSON format.   json    {       &quot;link_entities&quot;: true, // Determines whether to link related entities during the import process       &quot;unlink_entities&quot;: false, //Determines whether to unlink related entities during the import process.       &quot;update_existing_records&quot;: true, // Determines whether to update based on deal ID or treat every row as create       &quot;unset_empty_attributes&quot;: false // Determines whether unset a specific attribute during update if values input is blank     }  |
+
+### Return type
+
+[**InlineResponse2004**](InlineResponse2004.md)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
 <a name="crmDealsLinkUnlinkIdPatch"></a>
@@ -350,7 +478,7 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 
 DealsApi apiInstance = new DealsApi();
 String id = "id_example"; // String | 
-Body8 body = new Body8(); // Body8 | Linked / Unlinked contacts and companies ids.
+Body12 body = new Body12(); // Body12 | Linked / Unlinked contacts and companies ids.
 try {
     apiInstance.crmDealsLinkUnlinkIdPatch(id, body);
 } catch (ApiException e) {
@@ -364,7 +492,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**|  |
- **body** | [**Body8**](Body8.md)| Linked / Unlinked contacts and companies ids. |
+ **body** | [**Body12**](Body12.md)| Linked / Unlinked contacts and companies ids. |
 
 ### Return type
 
@@ -409,7 +537,7 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 //partnerKey.setApiKeyPrefix("Token");
 
 DealsApi apiInstance = new DealsApi();
-Body6 body = new Body6(); // Body6 | Deal create data.
+Body10 body = new Body10(); // Body10 | Deal create data.
 try {
     InlineResponse2011 result = apiInstance.crmDealsPost(body);
     System.out.println(result);
@@ -423,7 +551,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Body6**](Body6.md)| Deal create data. |
+ **body** | [**Body10**](Body10.md)| Deal create data. |
 
 ### Return type
 

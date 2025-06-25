@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **status** | [**StatusEnum**](#StatusEnum) | Status of the payment request. | 
 **_configuration** | [**ModelConfiguration**](ModelConfiguration.md) |  |  [optional]
 **contactId** | **Long** | Brevo ID of the contact requested to pay.  |  [optional]
+**numberOfRemindersSent** | **Long** | number of reminders sent.  |  [optional]
 **cart** | [**Cart**](Cart.md) |  | 
 **notification** | [**Notification**](Notification.md) |  | 
 

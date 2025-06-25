@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,17 +13,23 @@
 
 package brevoModel;
 
-import com.google.gson.annotations.SerializedName;
-import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.ObjectUtils;
-
+import brevoModel.RequestContactExportCustomContactFilter;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * RequestContactExport
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2024-04-17T12:57:43.398+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
 public class RequestContactExport {
   @SerializedName("exportAttributes")
   private List<String> exportAttributes = null;
@@ -33,6 +39,18 @@ public class RequestContactExport {
 
   @SerializedName("notifyUrl")
   private String notifyUrl = null;
+
+  @SerializedName("disableNotification")
+  private Boolean disableNotification = false;
+
+  @SerializedName("exportMandatoryAttributes")
+  private Boolean exportMandatoryAttributes = true;
+
+  @SerializedName("exportSubscriptionStatus")
+  private List<String> exportSubscriptionStatus = null;
+
+  @SerializedName("exportMetadata")
+  private List<String> exportMetadata = null;
 
   public RequestContactExport exportAttributes(List<String> exportAttributes) {
     this.exportAttributes = exportAttributes;
@@ -48,10 +66,10 @@ public class RequestContactExport {
   }
 
    /**
-   * List of all the attributes that you want to export. These attributes must be present in your contact database. For example, [&#39;fname&#39;, &#39;lname&#39;, &#39;email&#39;].
+   * List of all the attributes that you want to export. These attributes must be present in your contact database. It is required if exportMandatoryAttributes is set false. For example, [&#39;fname&#39;, &#39;lname&#39;, &#39;email&#39;].
    * @return exportAttributes
   **/
-  @ApiModelProperty(value = "List of all the attributes that you want to export. These attributes must be present in your contact database. For example, ['fname', 'lname', 'email'].")
+  @ApiModelProperty(value = "List of all the attributes that you want to export. These attributes must be present in your contact database. It is required if exportMandatoryAttributes is set false. For example, ['fname', 'lname', 'email'].")
   public List<String> getExportAttributes() {
     return exportAttributes;
   }
@@ -96,6 +114,94 @@ public class RequestContactExport {
     this.notifyUrl = notifyUrl;
   }
 
+  public RequestContactExport disableNotification(Boolean disableNotification) {
+    this.disableNotification = disableNotification;
+    return this;
+  }
+
+   /**
+   * To avoid generating the email notification upon contact export, pass **true**
+   * @return disableNotification
+  **/
+  @ApiModelProperty(example = "false", value = "To avoid generating the email notification upon contact export, pass **true**")
+  public Boolean isDisableNotification() {
+    return disableNotification;
+  }
+
+  public void setDisableNotification(Boolean disableNotification) {
+    this.disableNotification = disableNotification;
+  }
+
+  public RequestContactExport exportMandatoryAttributes(Boolean exportMandatoryAttributes) {
+    this.exportMandatoryAttributes = exportMandatoryAttributes;
+    return this;
+  }
+
+   /**
+   * To export mandatory attributes like EMAIL, ADDED_TIME, MODIFIED_TIME
+   * @return exportMandatoryAttributes
+  **/
+  @ApiModelProperty(example = "false", value = "To export mandatory attributes like EMAIL, ADDED_TIME, MODIFIED_TIME")
+  public Boolean isExportMandatoryAttributes() {
+    return exportMandatoryAttributes;
+  }
+
+  public void setExportMandatoryAttributes(Boolean exportMandatoryAttributes) {
+    this.exportMandatoryAttributes = exportMandatoryAttributes;
+  }
+
+  public RequestContactExport exportSubscriptionStatus(List<String> exportSubscriptionStatus) {
+    this.exportSubscriptionStatus = exportSubscriptionStatus;
+    return this;
+  }
+
+  public RequestContactExport addExportSubscriptionStatusItem(String exportSubscriptionStatusItem) {
+    if (this.exportSubscriptionStatus == null) {
+      this.exportSubscriptionStatus = new ArrayList<String>();
+    }
+    this.exportSubscriptionStatus.add(exportSubscriptionStatusItem);
+    return this;
+  }
+
+   /**
+   * Export subscription status of contacts for email &amp; sms marketting. Pass email_marketing to obtain the marketing email subscription status &amp; sms_marketing to retrieve the marketing SMS status of the contact.
+   * @return exportSubscriptionStatus
+  **/
+  @ApiModelProperty(value = "Export subscription status of contacts for email & sms marketting. Pass email_marketing to obtain the marketing email subscription status & sms_marketing to retrieve the marketing SMS status of the contact.")
+  public List<String> getExportSubscriptionStatus() {
+    return exportSubscriptionStatus;
+  }
+
+  public void setExportSubscriptionStatus(List<String> exportSubscriptionStatus) {
+    this.exportSubscriptionStatus = exportSubscriptionStatus;
+  }
+
+  public RequestContactExport exportMetadata(List<String> exportMetadata) {
+    this.exportMetadata = exportMetadata;
+    return this;
+  }
+
+  public RequestContactExport addExportMetadataItem(String exportMetadataItem) {
+    if (this.exportMetadata == null) {
+      this.exportMetadata = new ArrayList<String>();
+    }
+    this.exportMetadata.add(exportMetadataItem);
+    return this;
+  }
+
+   /**
+   * Export metadata of contacts such as _listIds, ADDED_TIME, MODIFIED_TIME.
+   * @return exportMetadata
+  **/
+  @ApiModelProperty(value = "Export metadata of contacts such as _listIds, ADDED_TIME, MODIFIED_TIME.")
+  public List<String> getExportMetadata() {
+    return exportMetadata;
+  }
+
+  public void setExportMetadata(List<String> exportMetadata) {
+    this.exportMetadata = exportMetadata;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -108,12 +214,16 @@ public class RequestContactExport {
     RequestContactExport requestContactExport = (RequestContactExport) o;
     return ObjectUtils.equals(this.exportAttributes, requestContactExport.exportAttributes) &&
     ObjectUtils.equals(this.customContactFilter, requestContactExport.customContactFilter) &&
-    ObjectUtils.equals(this.notifyUrl, requestContactExport.notifyUrl);
+    ObjectUtils.equals(this.notifyUrl, requestContactExport.notifyUrl) &&
+    ObjectUtils.equals(this.disableNotification, requestContactExport.disableNotification) &&
+    ObjectUtils.equals(this.exportMandatoryAttributes, requestContactExport.exportMandatoryAttributes) &&
+    ObjectUtils.equals(this.exportSubscriptionStatus, requestContactExport.exportSubscriptionStatus) &&
+    ObjectUtils.equals(this.exportMetadata, requestContactExport.exportMetadata);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(exportAttributes, customContactFilter, notifyUrl);
+    return ObjectUtils.hashCodeMulti(exportAttributes, customContactFilter, notifyUrl, disableNotification, exportMandatoryAttributes, exportSubscriptionStatus, exportMetadata);
   }
 
 
@@ -125,6 +235,10 @@ public class RequestContactExport {
     sb.append("    exportAttributes: ").append(toIndentedString(exportAttributes)).append("\n");
     sb.append("    customContactFilter: ").append(toIndentedString(customContactFilter)).append("\n");
     sb.append("    notifyUrl: ").append(toIndentedString(notifyUrl)).append("\n");
+    sb.append("    disableNotification: ").append(toIndentedString(disableNotification)).append("\n");
+    sb.append("    exportMandatoryAttributes: ").append(toIndentedString(exportMandatoryAttributes)).append("\n");
+    sb.append("    exportSubscriptionStatus: ").append(toIndentedString(exportSubscriptionStatus)).append("\n");
+    sb.append("    exportMetadata: ").append(toIndentedString(exportMetadata)).append("\n");
     sb.append("}");
     return sb.toString();
   }

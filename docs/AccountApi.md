@@ -65,7 +65,7 @@ This endpoint does not need any parameter.
 
 <a name="getAccountActivity"></a>
 # **getAccountActivity**
-> GetAccountActivity getAccountActivity(startDate, endDate, limit, offset)
+> GetAccountActivity getAccountActivity(startDate, endDate, email, limit, offset)
 
 Get user activity logs
 
@@ -95,10 +95,11 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 AccountApi apiInstance = new AccountApi();
 String startDate = "startDate_example"; // String | Mandatory if endDate is used. Enter start date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. Additionally, you can retrieve activity logs from the past 12 months from the date of your search.
 String endDate = "endDate_example"; // String | Mandatory if startDate is used. Enter end date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month.
+String email = "email_example"; // String | Enter the user's email address to filter their activity in the account.
 Long limit = 10L; // Long | Number of documents per page
 Long offset = 0L; // Long | Index of the first document in the page.
 try {
-    GetAccountActivity result = apiInstance.getAccountActivity(startDate, endDate, limit, offset);
+    GetAccountActivity result = apiInstance.getAccountActivity(startDate, endDate, email, limit, offset);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling AccountApi#getAccountActivity");
@@ -112,6 +113,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **startDate** | **String**| Mandatory if endDate is used. Enter start date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. Additionally, you can retrieve activity logs from the past 12 months from the date of your search. | [optional]
  **endDate** | **String**| Mandatory if startDate is used. Enter end date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. | [optional]
+ **email** | **String**| Enter the user&#39;s email address to filter their activity in the account. | [optional]
  **limit** | **Long**| Number of documents per page | [optional] [default to 10]
  **offset** | **Long**| Index of the first document in the page. | [optional] [default to 0]
 

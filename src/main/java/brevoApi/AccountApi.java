@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -13,7 +13,21 @@
 
 package brevoApi;
 
-import brevo.*;
+import brevo.ApiCallback;
+import brevo.ApiClient;
+import brevo.ApiException;
+import brevo.ApiResponse;
+import brevo.Configuration;
+import brevo.Pair;
+import brevo.ProgressRequestBody;
+import brevo.ProgressResponseBody;
+
+import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
+
+
+import brevoModel.ErrorModel;
 import brevoModel.GetAccount;
 import brevoModel.GetAccountActivity;
 import com.google.gson.reflect.TypeToken;
@@ -164,6 +178,7 @@ public class AccountApi {
      * Build call for getAccountActivity
      * @param startDate Mandatory if endDate is used. Enter start date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. Additionally, you can retrieve activity logs from the past 12 months from the date of your search. (optional)
      * @param endDate Mandatory if startDate is used. Enter end date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. (optional)
+     * @param email Enter the user&#39;s email address to filter their activity in the account. (optional)
      * @param limit Number of documents per page (optional, default to 10)
      * @param offset Index of the first document in the page. (optional, default to 0)
      * @param progressListener Progress listener
@@ -171,7 +186,7 @@ public class AccountApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call getAccountActivityCall(String startDate, String endDate, Long limit, Long offset, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call getAccountActivityCall(String startDate, String endDate, String email, Long limit, Long offset, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -183,6 +198,8 @@ public class AccountApi {
         localVarQueryParams.addAll(apiClient.parameterToPair("startDate", startDate));
         if (endDate != null)
         localVarQueryParams.addAll(apiClient.parameterToPair("endDate", endDate));
+        if (email != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("email", email));
         if (limit != null)
         localVarQueryParams.addAll(apiClient.parameterToPair("limit", limit));
         if (offset != null)
@@ -221,10 +238,10 @@ public class AccountApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call getAccountActivityValidateBeforeCall(String startDate, String endDate, Long limit, Long offset, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call getAccountActivityValidateBeforeCall(String startDate, String endDate, String email, Long limit, Long offset, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
 
-        Call call = getAccountActivityCall(startDate, endDate, limit, offset, progressListener, progressRequestListener);
+        Call call = getAccountActivityCall(startDate, endDate, email, limit, offset, progressListener, progressRequestListener);
         return call;
 
     }
@@ -234,13 +251,14 @@ public class AccountApi {
      * 
      * @param startDate Mandatory if endDate is used. Enter start date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. Additionally, you can retrieve activity logs from the past 12 months from the date of your search. (optional)
      * @param endDate Mandatory if startDate is used. Enter end date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. (optional)
+     * @param email Enter the user&#39;s email address to filter their activity in the account. (optional)
      * @param limit Number of documents per page (optional, default to 10)
      * @param offset Index of the first document in the page. (optional, default to 0)
      * @return GetAccountActivity
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public GetAccountActivity getAccountActivity(String startDate, String endDate, Long limit, Long offset) throws ApiException {
-        ApiResponse<GetAccountActivity> resp = getAccountActivityWithHttpInfo(startDate, endDate, limit, offset);
+    public GetAccountActivity getAccountActivity(String startDate, String endDate, String email, Long limit, Long offset) throws ApiException {
+        ApiResponse<GetAccountActivity> resp = getAccountActivityWithHttpInfo(startDate, endDate, email, limit, offset);
         return resp.getData();
     }
 
@@ -249,13 +267,14 @@ public class AccountApi {
      * 
      * @param startDate Mandatory if endDate is used. Enter start date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. Additionally, you can retrieve activity logs from the past 12 months from the date of your search. (optional)
      * @param endDate Mandatory if startDate is used. Enter end date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. (optional)
+     * @param email Enter the user&#39;s email address to filter their activity in the account. (optional)
      * @param limit Number of documents per page (optional, default to 10)
      * @param offset Index of the first document in the page. (optional, default to 0)
      * @return ApiResponse&lt;GetAccountActivity&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<GetAccountActivity> getAccountActivityWithHttpInfo(String startDate, String endDate, Long limit, Long offset) throws ApiException {
-        Call call = getAccountActivityValidateBeforeCall(startDate, endDate, limit, offset, null, null);
+    public ApiResponse<GetAccountActivity> getAccountActivityWithHttpInfo(String startDate, String endDate, String email, Long limit, Long offset) throws ApiException {
+        Call call = getAccountActivityValidateBeforeCall(startDate, endDate, email, limit, offset, null, null);
         Type localVarReturnType = new TypeToken<GetAccountActivity>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -265,13 +284,14 @@ public class AccountApi {
      * 
      * @param startDate Mandatory if endDate is used. Enter start date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. Additionally, you can retrieve activity logs from the past 12 months from the date of your search. (optional)
      * @param endDate Mandatory if startDate is used. Enter end date in UTC date (YYYY-MM-DD) format to filter the activity in your account. Maximum time period that can be selected is one month. (optional)
+     * @param email Enter the user&#39;s email address to filter their activity in the account. (optional)
      * @param limit Number of documents per page (optional, default to 10)
      * @param offset Index of the first document in the page. (optional, default to 0)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call getAccountActivityAsync(String startDate, String endDate, Long limit, Long offset, final ApiCallback<GetAccountActivity> callback) throws ApiException {
+    public Call getAccountActivityAsync(String startDate, String endDate, String email, Long limit, Long offset, final ApiCallback<GetAccountActivity> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -292,7 +312,7 @@ public class AccountApi {
             };
         }
 
-        Call call = getAccountActivityValidateBeforeCall(startDate, endDate, limit, offset, progressListener, progressRequestListener);
+        Call call = getAccountActivityValidateBeforeCall(startDate, endDate, email, limit, offset, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<GetAccountActivity>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
