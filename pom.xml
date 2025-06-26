@@ -175,7 +175,7 @@
                             <goal>sign</goal>
                         </goals>
                         <configuration>
-                            <keyname>0x94153518</keyname>
+                            <keyname>0xDA283DCC</keyname>
                             <gpgArguments>
                                 <arg>--pinentry-mode</arg>
                                 <arg>loopback</arg>
