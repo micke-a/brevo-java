@@ -15,7 +15,7 @@ package brevoApi;
 
 import brevo.ApiException;
 import brevoModel.*;
-import org.junit.Ignore;
+import org.junit.*;
 import java.util.ArrayList;
 import org.junit.Test;
 import java.util.HashMap;

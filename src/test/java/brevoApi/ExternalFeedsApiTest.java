@@ -22,7 +22,7 @@ import brevoModel.InlineResponse2015;
 import org.threeten.bp.LocalDate;
 import brevoModel.UpdateExternalFeed;
 import org.junit.Test;
-import org.junit.Ignore;
+import org.junit.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;

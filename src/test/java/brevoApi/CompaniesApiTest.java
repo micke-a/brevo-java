@@ -28,7 +28,7 @@ import brevoModel.InlineResponse2003;
 import brevoModel.InlineResponse2004;
 import brevoModel.InlineResponse400;
 import org.junit.Test;
-import org.junit.Ignore;
+import org.junit.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;

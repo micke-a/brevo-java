@@ -20,7 +20,7 @@ import brevoModel.FileData;
 import brevoModel.FileDownloadableLink;
 import brevoModel.FileList;
 import org.junit.Test;
-import org.junit.Ignore;
+import org.junit.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
