@@ -23,7 +23,7 @@ import brevoModel.GetSendersList;
 import brevoModel.Otp;
 import brevoModel.UpdateSender;
 import org.junit.Test;
-import org.junit.Ignore;
+import org.junit.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;

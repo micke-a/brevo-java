@@ -21,7 +21,7 @@ import brevoModel.Inviteuser;
 import brevoModel.PutRevokeUserPermission;
 import brevoModel.Putresendcancelinvitation;
 import org.junit.Test;
-import org.junit.Ignore;
+import org.junit.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;

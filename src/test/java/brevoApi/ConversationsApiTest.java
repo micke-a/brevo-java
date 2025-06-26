@@ -22,7 +22,7 @@ import brevoModel.Body19;
 import brevoModel.ConversationsMessage;
 import brevoModel.ErrorModel;
 import org.junit.Test;
-import org.junit.Ignore;
+import org.junit.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;

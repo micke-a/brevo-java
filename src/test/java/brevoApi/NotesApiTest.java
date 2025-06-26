@@ -20,7 +20,7 @@ import brevoModel.NoteData;
 import brevoModel.NoteId;
 import brevoModel.NoteList;
 import org.junit.Test;
-import org.junit.Ignore;
+import org.junit.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;

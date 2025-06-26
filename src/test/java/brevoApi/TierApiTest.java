@@ -26,7 +26,7 @@ import brevoModel.TierRequestPutPayload;
 import java.util.UUID;
 import brevoModel.UpdateTierGroupRequest;
 import org.junit.Test;
-import org.junit.Ignore;
+import org.junit.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
