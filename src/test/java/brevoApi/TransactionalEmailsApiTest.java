@@ -16,7 +16,6 @@ package brevoApi;
 import brevo.ApiException;
 import brevoModel.*;
 import org.junit.*;
-import org.junit.Test;
 import org.threeten.bp.LocalDate;
 
 import java.util.ArrayList;
