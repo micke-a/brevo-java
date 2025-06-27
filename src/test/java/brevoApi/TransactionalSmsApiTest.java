@@ -16,7 +16,6 @@ package brevoApi;
 import brevo.ApiException;
 import brevoModel.*;
 import org.junit.*;
-import org.junit.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -90,6 +89,21 @@ public class TransactionalSmsApiTest {
         String tag = null;
         String sort = null;
         GetTransacSmsReport response = api.getTransacSmsReport(startDate, endDate, days, tag, sort);
+
+        // TODO: test validations
+    }
+
+    /**
+     * Send SMS message asynchronously to a mobile number
+     *
+     * 
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void sendAsyncTransactionalSmsTest() throws ApiException {
+        api.sendAsyncTransactionalSms();
 
         // TODO: test validations
     }
