@@ -109,6 +109,21 @@ public class TransactionalSmsApiTest {
     }
     
     /**
+     * Send SMS message asynchronously to a mobile number
+     *
+     * 
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void sendAsyncTransactionalSmsTest() throws ApiException {
+        api.sendAsyncTransactionalSms();
+
+        // TODO: test validations
+    }
+    
+    /**
      * Send SMS message to a mobile number
      *
      * 
