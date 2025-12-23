@@ -29,7 +29,7 @@ import java.util.List;
  * Custom attributes for the report email.
  */
 @ApiModel(description = "Custom attributes for the report email.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class SendReportEmail {
   @SerializedName("to")
   private List<String> to = new ArrayList<String>();

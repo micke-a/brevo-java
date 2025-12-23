@@ -26,48 +26,27 @@ import java.io.IOException;
 /**
  * InlineResponse2001
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class InlineResponse2001 {
-  @SerializedName("id")
-  private String id = null;
+  @SerializedName("message")
+  private String message = null;
 
-  @SerializedName("groupName")
-  private String groupName = null;
-
-  public InlineResponse2001 id(String id) {
-    this.id = id;
+  public InlineResponse2001 message(String message) {
+    this.message = message;
     return this;
   }
 
    /**
-   * Unique id of the group
-   * @return id
+   * Get message
+   * @return message
   **/
-  @ApiModelProperty(value = "Unique id of the group")
-  public String getId() {
-    return id;
+  @ApiModelProperty(value = "")
+  public String getMessage() {
+    return message;
   }
 
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public InlineResponse2001 groupName(String groupName) {
-    this.groupName = groupName;
-    return this;
-  }
-
-   /**
-   * The name of the group of sub-accounts
-   * @return groupName
-  **/
-  @ApiModelProperty(value = "The name of the group of sub-accounts")
-  public String getGroupName() {
-    return groupName;
-  }
-
-  public void setGroupName(String groupName) {
-    this.groupName = groupName;
+  public void setMessage(String message) {
+    this.message = message;
   }
 
 
@@ -80,13 +59,12 @@ public class InlineResponse2001 {
     return false;
   }
     InlineResponse2001 inlineResponse2001 = (InlineResponse2001) o;
-    return ObjectUtils.equals(this.id, inlineResponse2001.id) &&
-    ObjectUtils.equals(this.groupName, inlineResponse2001.groupName);
+    return ObjectUtils.equals(this.message, inlineResponse2001.message);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(id, groupName);
+    return ObjectUtils.hashCodeMulti(message);
   }
 
 
@@ -95,8 +73,7 @@ public class InlineResponse2001 {
     StringBuilder sb = new StringBuilder();
     sb.append("class InlineResponse2001 {\n");
     
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    groupName: ").append(toIndentedString(groupName)).append("\n");
+    sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("}");
     return sb.toString();
   }

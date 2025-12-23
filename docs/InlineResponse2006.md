@@ -4,8 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**results** | [**List&lt;ConversionSourceMetrics&gt;**](ConversionSourceMetrics.md) | List of conversion attribution metrics | 
-**totals** | [**InlineResponse2006Totals**](InlineResponse2006Totals.md) |  | 
+**code** | **String** | ISO 4217 compliant display currency code | 
 
 
 

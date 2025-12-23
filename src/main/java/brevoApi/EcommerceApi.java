@@ -23,14 +23,12 @@ import brevo.ProgressRequestBody;
 import brevo.ProgressResponseBody;
 
 import com.google.gson.reflect.TypeToken;
-import okhttp3.Call;
-import okhttp3.Interceptor;
-import okhttp3.Response;
 
 import java.io.IOException;
 
 
 import java.math.BigDecimal;
+import brevoModel.ContactIdentifiers;
 import brevoModel.CreateCategoryModel;
 import brevoModel.CreateProductModel;
 import brevoModel.CreateUpdateBatchCategory;
@@ -40,6 +38,7 @@ import brevoModel.CreateUpdateBatchProductsModel;
 import brevoModel.CreateUpdateCategory;
 import brevoModel.CreateUpdateProduct;
 import brevoModel.ErrorModel;
+import brevoModel.ErrorModelWithStatus;
 import brevoModel.GetCategories;
 import brevoModel.GetCategoryDetails;
 import brevoModel.GetOrders;
@@ -49,6 +48,7 @@ import brevoModel.InlineResponse2005;
 import brevoModel.InlineResponse2006;
 import brevoModel.InlineResponse2007;
 import brevoModel.InlineResponse2008;
+import brevoModel.InlineResponse2009;
 import okhttp3.*;
 import org.threeten.bp.OffsetDateTime;
 import brevoModel.Order;
@@ -313,6 +313,144 @@ public class EcommerceApi {
         }
 
         Call call = createOrderValidateBeforeCall(order, progressListener, progressRequestListener);
+        apiClient.executeAsync(call, callback);
+        return call;
+    }
+    /**
+     * Build call for createProductAlert
+     * @param id Product ID (required)
+     * @param type Alert type (required)
+     * @param contactIdentifiers Contact identifier to associate the alert with (at least one is required). Priority is given to &#x60;ext_id&#x60; &gt; &#x60;email&#x60; &gt; &#x60;sms&#x60; (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public Call createProductAlertCall(String id, String type, ContactIdentifiers contactIdentifiers, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = contactIdentifiers;
+
+        // create path and map variables
+        String localVarPath = "/products/{id}/alerts/{type}"
+            .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()))
+            .replaceAll("\\{" + "type" + "\\}", apiClient.escapeString(type.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
+                @Override
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "api-key", "partner-key" };
+        return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private Call createProductAlertValidateBeforeCall(String id, String type, ContactIdentifiers contactIdentifiers, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'id' is set
+        if (id == null) {
+            throw new ApiException("Missing the required parameter 'id' when calling createProductAlert(Async)");
+        }
+        
+        // verify the required parameter 'type' is set
+        if (type == null) {
+            throw new ApiException("Missing the required parameter 'type' when calling createProductAlert(Async)");
+        }
+        
+        // verify the required parameter 'contactIdentifiers' is set
+        if (contactIdentifiers == null) {
+            throw new ApiException("Missing the required parameter 'contactIdentifiers' when calling createProductAlert(Async)");
+        }
+        
+
+        Call call = createProductAlertCall(id, type, contactIdentifiers, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Create a product alert for a contact
+     * 
+     * @param id Product ID (required)
+     * @param type Alert type (required)
+     * @param contactIdentifiers Contact identifier to associate the alert with (at least one is required). Priority is given to &#x60;ext_id&#x60; &gt; &#x60;email&#x60; &gt; &#x60;sms&#x60; (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public void createProductAlert(String id, String type, ContactIdentifiers contactIdentifiers) throws ApiException {
+        createProductAlertWithHttpInfo(id, type, contactIdentifiers);
+    }
+
+    /**
+     * Create a product alert for a contact
+     * 
+     * @param id Product ID (required)
+     * @param type Alert type (required)
+     * @param contactIdentifiers Contact identifier to associate the alert with (at least one is required). Priority is given to &#x60;ext_id&#x60; &gt; &#x60;email&#x60; &gt; &#x60;sms&#x60; (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<Void> createProductAlertWithHttpInfo(String id, String type, ContactIdentifiers contactIdentifiers) throws ApiException {
+        Call call = createProductAlertValidateBeforeCall(id, type, contactIdentifiers, null, null);
+        return apiClient.execute(call);
+    }
+
+    /**
+     * Create a product alert for a contact (asynchronously)
+     * 
+     * @param id Product ID (required)
+     * @param type Alert type (required)
+     * @param contactIdentifiers Contact identifier to associate the alert with (at least one is required). Priority is given to &#x60;ext_id&#x60; &gt; &#x60;email&#x60; &gt; &#x60;sms&#x60; (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public Call createProductAlertAsync(String id, String type, ContactIdentifiers contactIdentifiers, final ApiCallback<Void> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        Call call = createProductAlertValidateBeforeCall(id, type, contactIdentifiers, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }
@@ -989,11 +1127,11 @@ public class EcommerceApi {
      * 
      * @param conversionSource The Brevo campaign type or workflow type for which data will be retrieved (required)
      * @param conversionSourceId The Brevo campaign or automation workflow id for which data will be retrieved (required)
-     * @return InlineResponse2007
+     * @return InlineResponse2008
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2007 ecommerceAttributionMetricsConversionSourceConversionSourceIdGet(String conversionSource, String conversionSourceId) throws ApiException {
-        ApiResponse<InlineResponse2007> resp = ecommerceAttributionMetricsConversionSourceConversionSourceIdGetWithHttpInfo(conversionSource, conversionSourceId);
+    public InlineResponse2008 ecommerceAttributionMetricsConversionSourceConversionSourceIdGet(String conversionSource, String conversionSourceId) throws ApiException {
+        ApiResponse<InlineResponse2008> resp = ecommerceAttributionMetricsConversionSourceConversionSourceIdGetWithHttpInfo(conversionSource, conversionSourceId);
         return resp.getData();
     }
 
@@ -1002,12 +1140,12 @@ public class EcommerceApi {
      * 
      * @param conversionSource The Brevo campaign type or workflow type for which data will be retrieved (required)
      * @param conversionSourceId The Brevo campaign or automation workflow id for which data will be retrieved (required)
-     * @return ApiResponse&lt;InlineResponse2007&gt;
+     * @return ApiResponse&lt;InlineResponse2008&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2007> ecommerceAttributionMetricsConversionSourceConversionSourceIdGetWithHttpInfo(String conversionSource, String conversionSourceId) throws ApiException {
+    public ApiResponse<InlineResponse2008> ecommerceAttributionMetricsConversionSourceConversionSourceIdGetWithHttpInfo(String conversionSource, String conversionSourceId) throws ApiException {
         Call call = ecommerceAttributionMetricsConversionSourceConversionSourceIdGetValidateBeforeCall(conversionSource, conversionSourceId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2007>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2008>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -1020,7 +1158,7 @@ public class EcommerceApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call ecommerceAttributionMetricsConversionSourceConversionSourceIdGetAsync(String conversionSource, String conversionSourceId, final ApiCallback<InlineResponse2007> callback) throws ApiException {
+    public Call ecommerceAttributionMetricsConversionSourceConversionSourceIdGetAsync(String conversionSource, String conversionSourceId, final ApiCallback<InlineResponse2008> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1042,7 +1180,7 @@ public class EcommerceApi {
         }
 
         Call call = ecommerceAttributionMetricsConversionSourceConversionSourceIdGetValidateBeforeCall(conversionSource, conversionSourceId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2007>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2008>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -1130,11 +1268,11 @@ public class EcommerceApi {
      * @param smsCampaignId The SMS campaign ID(s) to get metrics for (optional)
      * @param automationWorkflowEmailId The automation workflow ID(s) to get email attribution metrics for (optional)
      * @param automationWorkflowSmsId The automation workflow ID(s) to get SMS attribution metrics for (optional)
-     * @return InlineResponse2006
+     * @return InlineResponse2007
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2006 ecommerceAttributionMetricsGet(OffsetDateTime periodFrom, OffsetDateTime periodTo, List<String> emailCampaignId, List<String> smsCampaignId, List<String> automationWorkflowEmailId, List<String> automationWorkflowSmsId) throws ApiException {
-        ApiResponse<InlineResponse2006> resp = ecommerceAttributionMetricsGetWithHttpInfo(periodFrom, periodTo, emailCampaignId, smsCampaignId, automationWorkflowEmailId, automationWorkflowSmsId);
+    public InlineResponse2007 ecommerceAttributionMetricsGet(OffsetDateTime periodFrom, OffsetDateTime periodTo, List<String> emailCampaignId, List<String> smsCampaignId, List<String> automationWorkflowEmailId, List<String> automationWorkflowSmsId) throws ApiException {
+        ApiResponse<InlineResponse2007> resp = ecommerceAttributionMetricsGetWithHttpInfo(periodFrom, periodTo, emailCampaignId, smsCampaignId, automationWorkflowEmailId, automationWorkflowSmsId);
         return resp.getData();
     }
 
@@ -1147,12 +1285,12 @@ public class EcommerceApi {
      * @param smsCampaignId The SMS campaign ID(s) to get metrics for (optional)
      * @param automationWorkflowEmailId The automation workflow ID(s) to get email attribution metrics for (optional)
      * @param automationWorkflowSmsId The automation workflow ID(s) to get SMS attribution metrics for (optional)
-     * @return ApiResponse&lt;InlineResponse2006&gt;
+     * @return ApiResponse&lt;InlineResponse2007&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2006> ecommerceAttributionMetricsGetWithHttpInfo(OffsetDateTime periodFrom, OffsetDateTime periodTo, List<String> emailCampaignId, List<String> smsCampaignId, List<String> automationWorkflowEmailId, List<String> automationWorkflowSmsId) throws ApiException {
+    public ApiResponse<InlineResponse2007> ecommerceAttributionMetricsGetWithHttpInfo(OffsetDateTime periodFrom, OffsetDateTime periodTo, List<String> emailCampaignId, List<String> smsCampaignId, List<String> automationWorkflowEmailId, List<String> automationWorkflowSmsId) throws ApiException {
         Call call = ecommerceAttributionMetricsGetValidateBeforeCall(periodFrom, periodTo, emailCampaignId, smsCampaignId, automationWorkflowEmailId, automationWorkflowSmsId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2006>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2007>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -1169,7 +1307,7 @@ public class EcommerceApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call ecommerceAttributionMetricsGetAsync(OffsetDateTime periodFrom, OffsetDateTime periodTo, List<String> emailCampaignId, List<String> smsCampaignId, List<String> automationWorkflowEmailId, List<String> automationWorkflowSmsId, final ApiCallback<InlineResponse2006> callback) throws ApiException {
+    public Call ecommerceAttributionMetricsGetAsync(OffsetDateTime periodFrom, OffsetDateTime periodTo, List<String> emailCampaignId, List<String> smsCampaignId, List<String> automationWorkflowEmailId, List<String> automationWorkflowSmsId, final ApiCallback<InlineResponse2007> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1191,7 +1329,7 @@ public class EcommerceApi {
         }
 
         Call call = ecommerceAttributionMetricsGetValidateBeforeCall(periodFrom, periodTo, emailCampaignId, smsCampaignId, automationWorkflowEmailId, automationWorkflowSmsId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2006>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2007>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -1271,11 +1409,11 @@ public class EcommerceApi {
      * 
      * @param conversionSource The Brevo campaign or automation workflow type for which data will be retrieved (required)
      * @param conversionSourceId The Brevo campaign or automation workflow id for which data will be retrieved (required)
-     * @return InlineResponse2008
+     * @return InlineResponse2009
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2008 ecommerceAttributionProductsConversionSourceConversionSourceIdGet(String conversionSource, String conversionSourceId) throws ApiException {
-        ApiResponse<InlineResponse2008> resp = ecommerceAttributionProductsConversionSourceConversionSourceIdGetWithHttpInfo(conversionSource, conversionSourceId);
+    public InlineResponse2009 ecommerceAttributionProductsConversionSourceConversionSourceIdGet(String conversionSource, String conversionSourceId) throws ApiException {
+        ApiResponse<InlineResponse2009> resp = ecommerceAttributionProductsConversionSourceConversionSourceIdGetWithHttpInfo(conversionSource, conversionSourceId);
         return resp.getData();
     }
 
@@ -1284,12 +1422,12 @@ public class EcommerceApi {
      * 
      * @param conversionSource The Brevo campaign or automation workflow type for which data will be retrieved (required)
      * @param conversionSourceId The Brevo campaign or automation workflow id for which data will be retrieved (required)
-     * @return ApiResponse&lt;InlineResponse2008&gt;
+     * @return ApiResponse&lt;InlineResponse2009&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2008> ecommerceAttributionProductsConversionSourceConversionSourceIdGetWithHttpInfo(String conversionSource, String conversionSourceId) throws ApiException {
+    public ApiResponse<InlineResponse2009> ecommerceAttributionProductsConversionSourceConversionSourceIdGetWithHttpInfo(String conversionSource, String conversionSourceId) throws ApiException {
         Call call = ecommerceAttributionProductsConversionSourceConversionSourceIdGetValidateBeforeCall(conversionSource, conversionSourceId, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2008>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2009>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -1302,7 +1440,7 @@ public class EcommerceApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call ecommerceAttributionProductsConversionSourceConversionSourceIdGetAsync(String conversionSource, String conversionSourceId, final ApiCallback<InlineResponse2008> callback) throws ApiException {
+    public Call ecommerceAttributionProductsConversionSourceConversionSourceIdGetAsync(String conversionSource, String conversionSourceId, final ApiCallback<InlineResponse2009> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1324,7 +1462,7 @@ public class EcommerceApi {
         }
 
         Call call = ecommerceAttributionProductsConversionSourceConversionSourceIdGetValidateBeforeCall(conversionSource, conversionSourceId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2008>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2009>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -1388,23 +1526,23 @@ public class EcommerceApi {
     /**
      * Get the ISO 4217 compliant display currency code for your Brevo account
      * 
-     * @return InlineResponse2005
+     * @return InlineResponse2006
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2005 ecommerceConfigDisplayCurrencyGet() throws ApiException {
-        ApiResponse<InlineResponse2005> resp = ecommerceConfigDisplayCurrencyGetWithHttpInfo();
+    public InlineResponse2006 ecommerceConfigDisplayCurrencyGet() throws ApiException {
+        ApiResponse<InlineResponse2006> resp = ecommerceConfigDisplayCurrencyGetWithHttpInfo();
         return resp.getData();
     }
 
     /**
      * Get the ISO 4217 compliant display currency code for your Brevo account
      * 
-     * @return ApiResponse&lt;InlineResponse2005&gt;
+     * @return ApiResponse&lt;InlineResponse2006&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2005> ecommerceConfigDisplayCurrencyGetWithHttpInfo() throws ApiException {
+    public ApiResponse<InlineResponse2006> ecommerceConfigDisplayCurrencyGetWithHttpInfo() throws ApiException {
         Call call = ecommerceConfigDisplayCurrencyGetValidateBeforeCall(null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2005>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2006>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -1415,7 +1553,7 @@ public class EcommerceApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call ecommerceConfigDisplayCurrencyGetAsync(final ApiCallback<InlineResponse2005> callback) throws ApiException {
+    public Call ecommerceConfigDisplayCurrencyGetAsync(final ApiCallback<InlineResponse2006> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1437,7 +1575,7 @@ public class EcommerceApi {
         }
 
         Call call = ecommerceConfigDisplayCurrencyGetValidateBeforeCall(progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2005>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2006>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -1450,12 +1588,13 @@ public class EcommerceApi {
      * @param name Filter by category name (optional)
      * @param modifiedSince Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
      * @param createdSince Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
+     * @param isDeleted Filter categories by their deletion status. If &#x60;false&#x60; is passed, only categories that are not deleted will be returned.  (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call getCategoriesCall(Long limit, Long offset, String sort, List<String> ids, String name, String modifiedSince, String createdSince, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call getCategoriesCall(Long limit, Long offset, String sort, List<String> ids, String name, String modifiedSince, String createdSince, Object isDeleted, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -1477,6 +1616,8 @@ public class EcommerceApi {
         localVarQueryParams.addAll(apiClient.parameterToPair("modifiedSince", modifiedSince));
         if (createdSince != null)
         localVarQueryParams.addAll(apiClient.parameterToPair("createdSince", createdSince));
+        if (isDeleted != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("isDeleted", isDeleted));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -1511,10 +1652,10 @@ public class EcommerceApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call getCategoriesValidateBeforeCall(Long limit, Long offset, String sort, List<String> ids, String name, String modifiedSince, String createdSince, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call getCategoriesValidateBeforeCall(Long limit, Long offset, String sort, List<String> ids, String name, String modifiedSince, String createdSince, Object isDeleted, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
 
-        Call call = getCategoriesCall(limit, offset, sort, ids, name, modifiedSince, createdSince, progressListener, progressRequestListener);
+        Call call = getCategoriesCall(limit, offset, sort, ids, name, modifiedSince, createdSince, isDeleted, progressListener, progressRequestListener);
         return call;
 
     }
@@ -1529,11 +1670,12 @@ public class EcommerceApi {
      * @param name Filter by category name (optional)
      * @param modifiedSince Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
      * @param createdSince Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
+     * @param isDeleted Filter categories by their deletion status. If &#x60;false&#x60; is passed, only categories that are not deleted will be returned.  (optional)
      * @return GetCategories
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public GetCategories getCategories(Long limit, Long offset, String sort, List<String> ids, String name, String modifiedSince, String createdSince) throws ApiException {
-        ApiResponse<GetCategories> resp = getCategoriesWithHttpInfo(limit, offset, sort, ids, name, modifiedSince, createdSince);
+    public GetCategories getCategories(Long limit, Long offset, String sort, List<String> ids, String name, String modifiedSince, String createdSince, Object isDeleted) throws ApiException {
+        ApiResponse<GetCategories> resp = getCategoriesWithHttpInfo(limit, offset, sort, ids, name, modifiedSince, createdSince, isDeleted);
         return resp.getData();
     }
 
@@ -1547,11 +1689,12 @@ public class EcommerceApi {
      * @param name Filter by category name (optional)
      * @param modifiedSince Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
      * @param createdSince Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
+     * @param isDeleted Filter categories by their deletion status. If &#x60;false&#x60; is passed, only categories that are not deleted will be returned.  (optional)
      * @return ApiResponse&lt;GetCategories&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<GetCategories> getCategoriesWithHttpInfo(Long limit, Long offset, String sort, List<String> ids, String name, String modifiedSince, String createdSince) throws ApiException {
-        Call call = getCategoriesValidateBeforeCall(limit, offset, sort, ids, name, modifiedSince, createdSince, null, null);
+    public ApiResponse<GetCategories> getCategoriesWithHttpInfo(Long limit, Long offset, String sort, List<String> ids, String name, String modifiedSince, String createdSince, Object isDeleted) throws ApiException {
+        Call call = getCategoriesValidateBeforeCall(limit, offset, sort, ids, name, modifiedSince, createdSince, isDeleted, null, null);
         Type localVarReturnType = new TypeToken<GetCategories>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -1566,11 +1709,12 @@ public class EcommerceApi {
      * @param name Filter by category name (optional)
      * @param modifiedSince Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
      * @param createdSince Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
+     * @param isDeleted Filter categories by their deletion status. If &#x60;false&#x60; is passed, only categories that are not deleted will be returned.  (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call getCategoriesAsync(Long limit, Long offset, String sort, List<String> ids, String name, String modifiedSince, String createdSince, final ApiCallback<GetCategories> callback) throws ApiException {
+    public Call getCategoriesAsync(Long limit, Long offset, String sort, List<String> ids, String name, String modifiedSince, String createdSince, Object isDeleted, final ApiCallback<GetCategories> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1591,7 +1735,7 @@ public class EcommerceApi {
             };
         }
 
-        Call call = getCategoriesValidateBeforeCall(limit, offset, sort, ids, name, modifiedSince, createdSince, progressListener, progressRequestListener);
+        Call call = getCategoriesValidateBeforeCall(limit, offset, sort, ids, name, modifiedSince, createdSince, isDeleted, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<GetCategories>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -2001,12 +2145,13 @@ public class EcommerceApi {
      * @param categories Filter by category ids (optional)
      * @param modifiedSince Filter (urlencoded) the orders modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
      * @param createdSince Filter (urlencoded) the orders created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
+     * @param isDeleted Filter products by their deletion status. If &#x60;false&#x60; is passed, only products that are not deleted will be returned.  (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call getProductsCall(Long limit, Long offset, String sort, List<String> ids, String name, BigDecimal priceLte, BigDecimal priceGte, BigDecimal priceLt, BigDecimal priceGt, BigDecimal priceEq, BigDecimal priceNe, List<String> categories, String modifiedSince, String createdSince, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call getProductsCall(Long limit, Long offset, String sort, List<String> ids, String name, BigDecimal priceLte, BigDecimal priceGte, BigDecimal priceLt, BigDecimal priceGt, BigDecimal priceEq, BigDecimal priceNe, List<String> categories, String modifiedSince, String createdSince, Object isDeleted, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -2042,6 +2187,8 @@ public class EcommerceApi {
         localVarQueryParams.addAll(apiClient.parameterToPair("modifiedSince", modifiedSince));
         if (createdSince != null)
         localVarQueryParams.addAll(apiClient.parameterToPair("createdSince", createdSince));
+        if (isDeleted != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("isDeleted", isDeleted));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -2076,10 +2223,10 @@ public class EcommerceApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call getProductsValidateBeforeCall(Long limit, Long offset, String sort, List<String> ids, String name, BigDecimal priceLte, BigDecimal priceGte, BigDecimal priceLt, BigDecimal priceGt, BigDecimal priceEq, BigDecimal priceNe, List<String> categories, String modifiedSince, String createdSince, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call getProductsValidateBeforeCall(Long limit, Long offset, String sort, List<String> ids, String name, BigDecimal priceLte, BigDecimal priceGte, BigDecimal priceLt, BigDecimal priceGt, BigDecimal priceEq, BigDecimal priceNe, List<String> categories, String modifiedSince, String createdSince, Object isDeleted, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
 
-        Call call = getProductsCall(limit, offset, sort, ids, name, priceLte, priceGte, priceLt, priceGt, priceEq, priceNe, categories, modifiedSince, createdSince, progressListener, progressRequestListener);
+        Call call = getProductsCall(limit, offset, sort, ids, name, priceLte, priceGte, priceLt, priceGt, priceEq, priceNe, categories, modifiedSince, createdSince, isDeleted, progressListener, progressRequestListener);
         return call;
 
     }
@@ -2101,11 +2248,12 @@ public class EcommerceApi {
      * @param categories Filter by category ids (optional)
      * @param modifiedSince Filter (urlencoded) the orders modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
      * @param createdSince Filter (urlencoded) the orders created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
+     * @param isDeleted Filter products by their deletion status. If &#x60;false&#x60; is passed, only products that are not deleted will be returned.  (optional)
      * @return GetProducts
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public GetProducts getProducts(Long limit, Long offset, String sort, List<String> ids, String name, BigDecimal priceLte, BigDecimal priceGte, BigDecimal priceLt, BigDecimal priceGt, BigDecimal priceEq, BigDecimal priceNe, List<String> categories, String modifiedSince, String createdSince) throws ApiException {
-        ApiResponse<GetProducts> resp = getProductsWithHttpInfo(limit, offset, sort, ids, name, priceLte, priceGte, priceLt, priceGt, priceEq, priceNe, categories, modifiedSince, createdSince);
+    public GetProducts getProducts(Long limit, Long offset, String sort, List<String> ids, String name, BigDecimal priceLte, BigDecimal priceGte, BigDecimal priceLt, BigDecimal priceGt, BigDecimal priceEq, BigDecimal priceNe, List<String> categories, String modifiedSince, String createdSince, Object isDeleted) throws ApiException {
+        ApiResponse<GetProducts> resp = getProductsWithHttpInfo(limit, offset, sort, ids, name, priceLte, priceGte, priceLt, priceGt, priceEq, priceNe, categories, modifiedSince, createdSince, isDeleted);
         return resp.getData();
     }
 
@@ -2126,11 +2274,12 @@ public class EcommerceApi {
      * @param categories Filter by category ids (optional)
      * @param modifiedSince Filter (urlencoded) the orders modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
      * @param createdSince Filter (urlencoded) the orders created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
+     * @param isDeleted Filter products by their deletion status. If &#x60;false&#x60; is passed, only products that are not deleted will be returned.  (optional)
      * @return ApiResponse&lt;GetProducts&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<GetProducts> getProductsWithHttpInfo(Long limit, Long offset, String sort, List<String> ids, String name, BigDecimal priceLte, BigDecimal priceGte, BigDecimal priceLt, BigDecimal priceGt, BigDecimal priceEq, BigDecimal priceNe, List<String> categories, String modifiedSince, String createdSince) throws ApiException {
-        Call call = getProductsValidateBeforeCall(limit, offset, sort, ids, name, priceLte, priceGte, priceLt, priceGt, priceEq, priceNe, categories, modifiedSince, createdSince, null, null);
+    public ApiResponse<GetProducts> getProductsWithHttpInfo(Long limit, Long offset, String sort, List<String> ids, String name, BigDecimal priceLte, BigDecimal priceGte, BigDecimal priceLt, BigDecimal priceGt, BigDecimal priceEq, BigDecimal priceNe, List<String> categories, String modifiedSince, String createdSince, Object isDeleted) throws ApiException {
+        Call call = getProductsValidateBeforeCall(limit, offset, sort, ids, name, priceLte, priceGte, priceLt, priceGt, priceEq, priceNe, categories, modifiedSince, createdSince, isDeleted, null, null);
         Type localVarReturnType = new TypeToken<GetProducts>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -2152,11 +2301,12 @@ public class EcommerceApi {
      * @param categories Filter by category ids (optional)
      * @param modifiedSince Filter (urlencoded) the orders modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
      * @param createdSince Filter (urlencoded) the orders created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  (optional)
+     * @param isDeleted Filter products by their deletion status. If &#x60;false&#x60; is passed, only products that are not deleted will be returned.  (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call getProductsAsync(Long limit, Long offset, String sort, List<String> ids, String name, BigDecimal priceLte, BigDecimal priceGte, BigDecimal priceLt, BigDecimal priceGt, BigDecimal priceEq, BigDecimal priceNe, List<String> categories, String modifiedSince, String createdSince, final ApiCallback<GetProducts> callback) throws ApiException {
+    public Call getProductsAsync(Long limit, Long offset, String sort, List<String> ids, String name, BigDecimal priceLte, BigDecimal priceGte, BigDecimal priceLt, BigDecimal priceGt, BigDecimal priceEq, BigDecimal priceNe, List<String> categories, String modifiedSince, String createdSince, Object isDeleted, final ApiCallback<GetProducts> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -2177,7 +2327,7 @@ public class EcommerceApi {
             };
         }
 
-        Call call = getProductsValidateBeforeCall(limit, offset, sort, ids, name, priceLte, priceGte, priceLt, priceGt, priceEq, priceNe, categories, modifiedSince, createdSince, progressListener, progressRequestListener);
+        Call call = getProductsValidateBeforeCall(limit, offset, sort, ids, name, priceLte, priceGte, priceLt, priceGt, priceEq, priceNe, categories, modifiedSince, createdSince, isDeleted, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<GetProducts>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

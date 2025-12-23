@@ -27,7 +27,7 @@ import java.io.IOException;
  * Payload for setting transaction or amount-based limits on a balance.
  */
 @ApiModel(description = "Payload for setting transaction or amount-based limits on a balance.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class CreateBalanceLimitPayload {
   /**
    * Defines whether the limit applies to transaction count or amount.

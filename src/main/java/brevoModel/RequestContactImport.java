@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * RequestContactImport
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class RequestContactImport {
   @SerializedName("fileUrl")
   private String fileUrl = null;
@@ -115,7 +115,7 @@ public class RequestContactImport {
   }
 
    /**
-   * **Mandatory if fileUrl and fileBody is not defined.** Json content to be imported. **Maximum allowed json body size is 10MB** . However we recommend a safe limit of around 8 MB to avoid the issues caused due to increase of json body size while parsing. Please use fileUrl instead to import bigger files.
+   * **Mandatory if fileUrl and fileBody is not defined.** Json content to be imported. **Maximum allowed json body size is 10MB** . However we recommend a safe limit of around 8 MB to avoid the issues caused due to increase of json body size while parsing. Please use fileUrl instead to import bigger files. 
    * @return jsonBody
   **/
   @ApiModelProperty(value = "**Mandatory if fileUrl and fileBody is not defined.** Json content to be imported. **Maximum allowed json body size is 10MB** . However we recommend a safe limit of around 8 MB to avoid the issues caused due to increase of json body size while parsing. Please use fileUrl instead to import bigger files. ")

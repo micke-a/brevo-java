@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * RequestContactExport
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class RequestContactExport {
   @SerializedName("exportAttributes")
   private List<String> exportAttributes = null;
@@ -51,6 +51,9 @@ public class RequestContactExport {
 
   @SerializedName("exportMetadata")
   private List<String> exportMetadata = null;
+
+  @SerializedName("exportDateInUTC")
+  private Boolean exportDateInUTC = false;
 
   public RequestContactExport exportAttributes(List<String> exportAttributes) {
     this.exportAttributes = exportAttributes;
@@ -202,6 +205,24 @@ public class RequestContactExport {
     this.exportMetadata = exportMetadata;
   }
 
+  public RequestContactExport exportDateInUTC(Boolean exportDateInUTC) {
+    this.exportDateInUTC = exportDateInUTC;
+    return this;
+  }
+
+   /**
+   * Specifies whether the date fields createdAt, modifiedAt in the exported data should be returned in UTC format.
+   * @return exportDateInUTC
+  **/
+  @ApiModelProperty(example = "true", value = "Specifies whether the date fields createdAt, modifiedAt in the exported data should be returned in UTC format.")
+  public Boolean isExportDateInUTC() {
+    return exportDateInUTC;
+  }
+
+  public void setExportDateInUTC(Boolean exportDateInUTC) {
+    this.exportDateInUTC = exportDateInUTC;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -218,12 +239,13 @@ public class RequestContactExport {
     ObjectUtils.equals(this.disableNotification, requestContactExport.disableNotification) &&
     ObjectUtils.equals(this.exportMandatoryAttributes, requestContactExport.exportMandatoryAttributes) &&
     ObjectUtils.equals(this.exportSubscriptionStatus, requestContactExport.exportSubscriptionStatus) &&
-    ObjectUtils.equals(this.exportMetadata, requestContactExport.exportMetadata);
+    ObjectUtils.equals(this.exportMetadata, requestContactExport.exportMetadata) &&
+    ObjectUtils.equals(this.exportDateInUTC, requestContactExport.exportDateInUTC);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(exportAttributes, customContactFilter, notifyUrl, disableNotification, exportMandatoryAttributes, exportSubscriptionStatus, exportMetadata);
+    return ObjectUtils.hashCodeMulti(exportAttributes, customContactFilter, notifyUrl, disableNotification, exportMandatoryAttributes, exportSubscriptionStatus, exportMetadata, exportDateInUTC);
   }
 
 
@@ -239,6 +261,7 @@ public class RequestContactExport {
     sb.append("    exportMandatoryAttributes: ").append(toIndentedString(exportMandatoryAttributes)).append("\n");
     sb.append("    exportSubscriptionStatus: ").append(toIndentedString(exportSubscriptionStatus)).append("\n");
     sb.append("    exportMetadata: ").append(toIndentedString(exportMetadata)).append("\n");
+    sb.append("    exportDateInUTC: ").append(toIndentedString(exportDateInUTC)).append("\n");
     sb.append("}");
     return sb.toString();
   }

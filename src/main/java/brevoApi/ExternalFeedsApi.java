@@ -16,9 +16,13 @@ package brevoApi;
 import brevo.*;
 import brevoModel.*;
 import com.google.gson.reflect.TypeToken;
-import okhttp3.Call;
-import okhttp3.Interceptor;
-import okhttp3.Response;
+
+import brevoModel.CreateExternalFeed;
+import brevoModel.ErrorModel;
+import brevoModel.GetAllExternalFeeds;
+import brevoModel.GetExternalFeedByUUID;
+import brevoModel.InlineResponse2015;
+import okhttp3.*;
 import org.threeten.bp.LocalDate;
 import brevoModel.UpdateExternalFeed;
 

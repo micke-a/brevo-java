@@ -29,7 +29,7 @@ import java.util.List;
  * Segment ids and List ids to include/exclude from campaign
  */
 @ApiModel(description = "Segment ids and List ids to include/exclude from campaign")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class UpdateEmailCampaignRecipients {
   @SerializedName("exclusionListIds")
   private List<Long> exclusionListIds = null;

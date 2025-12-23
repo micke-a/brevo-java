@@ -22,6 +22,7 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +31,7 @@ import java.util.Map;
 /**
  * CreateUpdateProducts
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class CreateUpdateProducts {
   @SerializedName("id")
   private String id = null;
@@ -64,6 +65,9 @@ public class CreateUpdateProducts {
 
   @SerializedName("isDeleted")
   private Boolean isDeleted = null;
+
+  @SerializedName("stock")
+  private BigDecimal stock = null;
 
   public CreateUpdateProducts id(String id) {
     this.id = id;
@@ -279,6 +283,24 @@ public class CreateUpdateProducts {
     this.isDeleted = isDeleted;
   }
 
+  public CreateUpdateProducts stock(BigDecimal stock) {
+    this.stock = stock;
+    return this;
+  }
+
+   /**
+   * Current stock value of the product from the shop&#39;s database
+   * @return stock
+  **/
+  @ApiModelProperty(example = "100.0", value = "Current stock value of the product from the shop's database")
+  public BigDecimal getStock() {
+    return stock;
+  }
+
+  public void setStock(BigDecimal stock) {
+    this.stock = stock;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -299,12 +321,13 @@ public class CreateUpdateProducts {
     ObjectUtils.equals(this.parentId, createUpdateProducts.parentId) &&
     ObjectUtils.equals(this.metaInfo, createUpdateProducts.metaInfo) &&
     ObjectUtils.equals(this.deletedAt, createUpdateProducts.deletedAt) &&
-    ObjectUtils.equals(this.isDeleted, createUpdateProducts.isDeleted);
+    ObjectUtils.equals(this.isDeleted, createUpdateProducts.isDeleted) &&
+    ObjectUtils.equals(this.stock, createUpdateProducts.stock);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(id, name, url, imageUrl, sku, price, categories, parentId, metaInfo, deletedAt, isDeleted);
+    return ObjectUtils.hashCodeMulti(id, name, url, imageUrl, sku, price, categories, parentId, metaInfo, deletedAt, isDeleted, stock);
   }
 
 
@@ -324,6 +347,7 @@ public class CreateUpdateProducts {
     sb.append("    metaInfo: ").append(toIndentedString(metaInfo)).append("\n");
     sb.append("    deletedAt: ").append(toIndentedString(deletedAt)).append("\n");
     sb.append("    isDeleted: ").append(toIndentedString(isDeleted)).append("\n");
+    sb.append("    stock: ").append(toIndentedString(stock)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -29,7 +29,7 @@ import java.util.List;
  * Note data to be saved
  */
 @ApiModel(description = "Note data to be saved")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class NoteData {
   @SerializedName("text")
   private String text = null;
@@ -42,6 +42,9 @@ public class NoteData {
 
   @SerializedName("companyIds")
   private List<String> companyIds = null;
+
+  @SerializedName("isPinned")
+  private Boolean isPinned = null;
 
   public NoteData text(String text) {
     this.text = text;
@@ -139,6 +142,24 @@ public class NoteData {
     this.companyIds = companyIds;
   }
 
+  public NoteData isPinned(Boolean isPinned) {
+    this.isPinned = isPinned;
+    return this;
+  }
+
+   /**
+   * When creating a note, set it to &quot;true&quot; to pin it. Otherwise, the default value of &quot;false&quot; will be applied.
+   * @return isPinned
+  **/
+  @ApiModelProperty(example = "true", value = "When creating a note, set it to \"true\" to pin it. Otherwise, the default value of \"false\" will be applied.")
+  public Boolean isIsPinned() {
+    return isPinned;
+  }
+
+  public void setIsPinned(Boolean isPinned) {
+    this.isPinned = isPinned;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -152,12 +173,13 @@ public class NoteData {
     return ObjectUtils.equals(this.text, noteData.text) &&
     ObjectUtils.equals(this.contactIds, noteData.contactIds) &&
     ObjectUtils.equals(this.dealIds, noteData.dealIds) &&
-    ObjectUtils.equals(this.companyIds, noteData.companyIds);
+    ObjectUtils.equals(this.companyIds, noteData.companyIds) &&
+    ObjectUtils.equals(this.isPinned, noteData.isPinned);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(text, contactIds, dealIds, companyIds);
+    return ObjectUtils.hashCodeMulti(text, contactIds, dealIds, companyIds, isPinned);
   }
 
 
@@ -170,6 +192,7 @@ public class NoteData {
     sb.append("    contactIds: ").append(toIndentedString(contactIds)).append("\n");
     sb.append("    dealIds: ").append(toIndentedString(dealIds)).append("\n");
     sb.append("    companyIds: ").append(toIndentedString(companyIds)).append("\n");
+    sb.append("    isPinned: ").append(toIndentedString(isPinned)).append("\n");
     sb.append("}");
     return sb.toString();
   }

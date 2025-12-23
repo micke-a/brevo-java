@@ -34,7 +34,7 @@ import java.util.Map;
 /**
  * SendSmtpEmailMessageVersions
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class SendSmtpEmailMessageVersions {
   @SerializedName("to")
   private List<SendSmtpEmailTo1> to = new ArrayList<SendSmtpEmailTo1>();
@@ -59,6 +59,9 @@ public class SendSmtpEmailMessageVersions {
 
   @SerializedName("textContent")
   private String textContent = null;
+
+  @SerializedName("headers")
+  private Object headers = null;
 
   public SendSmtpEmailMessageVersions to(List<SendSmtpEmailTo1> to) {
     this.to = to;
@@ -233,6 +236,24 @@ public class SendSmtpEmailMessageVersions {
     this.textContent = textContent;
   }
 
+  public SendSmtpEmailMessageVersions headers(Object headers) {
+    this.headers = headers;
+    return this;
+  }
+
+   /**
+   * Pass the set of custom headers (not the standard headers) that shall be sent along the mail headers in the original email. &#39;sender.ip&#39; header can be set (only for dedicated ip users) to mention the IP to be used for sending transactional emails. Headers are allowed in &#x60;This-Case-Only&#x60; (i.e. words separated by hyphen with first letter of each word in capital letter), they will be converted to such case styling if not in this format in the request payload. For example, &#x60;{&quot;sender.ip&quot;:&quot;1.2.3.4&quot;, &quot;X-Mailin-custom&quot;:&quot;some_custom_header&quot;, &quot;idempotencyKey&quot;:&quot;abc-123&quot;}&#x60;.
+   * @return headers
+  **/
+  @ApiModelProperty(example = "{\"X-Mailin-custom\":\"some_custom_header\"}", value = "Pass the set of custom headers (not the standard headers) that shall be sent along the mail headers in the original email. 'sender.ip' header can be set (only for dedicated ip users) to mention the IP to be used for sending transactional emails. Headers are allowed in `This-Case-Only` (i.e. words separated by hyphen with first letter of each word in capital letter), they will be converted to such case styling if not in this format in the request payload. For example, `{\"sender.ip\":\"1.2.3.4\", \"X-Mailin-custom\":\"some_custom_header\", \"idempotencyKey\":\"abc-123\"}`.")
+  public Object getHeaders() {
+    return headers;
+  }
+
+  public void setHeaders(Object headers) {
+    this.headers = headers;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -250,12 +271,13 @@ public class SendSmtpEmailMessageVersions {
     ObjectUtils.equals(this.replyTo, sendSmtpEmailMessageVersions.replyTo) &&
     ObjectUtils.equals(this.subject, sendSmtpEmailMessageVersions.subject) &&
     ObjectUtils.equals(this.htmlContent, sendSmtpEmailMessageVersions.htmlContent) &&
-    ObjectUtils.equals(this.textContent, sendSmtpEmailMessageVersions.textContent);
+    ObjectUtils.equals(this.textContent, sendSmtpEmailMessageVersions.textContent) &&
+    ObjectUtils.equals(this.headers, sendSmtpEmailMessageVersions.headers);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(to, params, bcc, cc, replyTo, subject, htmlContent, textContent);
+    return ObjectUtils.hashCodeMulti(to, params, bcc, cc, replyTo, subject, htmlContent, textContent, headers);
   }
 
 
@@ -272,6 +294,7 @@ public class SendSmtpEmailMessageVersions {
     sb.append("    subject: ").append(toIndentedString(subject)).append("\n");
     sb.append("    htmlContent: ").append(toIndentedString(htmlContent)).append("\n");
     sb.append("    textContent: ").append(toIndentedString(textContent)).append("\n");
+    sb.append("    headers: ").append(toIndentedString(headers)).append("\n");
     sb.append("}");
     return sb.toString();
   }

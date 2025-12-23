@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**createBatchOrder**](EcommerceApi.md#createBatchOrder) | **POST** /orders/status/batch | Create orders in batch
 [**createOrder**](EcommerceApi.md#createOrder) | **POST** /orders/status | Managing the status of the order
+[**createProductAlert**](EcommerceApi.md#createProductAlert) | **POST** /products/{id}/alerts/{type} | Create a product alert for a contact
 [**createUpdateBatchCategory**](EcommerceApi.md#createUpdateBatchCategory) | **POST** /categories/batch | Create categories in batch
 [**createUpdateBatchProducts**](EcommerceApi.md#createUpdateBatchProducts) | **POST** /products/batch | Create products in batch
 [**createUpdateCategory**](EcommerceApi.md#createUpdateCategory) | **POST** /categories | Create/Update a category
@@ -129,6 +130,68 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **order** | [**Order**](Order.md)|  |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="createProductAlert"></a>
+# **createProductAlert**
+> createProductAlert(id, type, contactIdentifiers)
+
+Create a product alert for a contact
+
+### Example
+```java
+// Import classes:
+//import brevo.ApiClient;
+//import brevo.ApiException;
+//import brevo.Configuration;
+//import brevo.auth.*;
+//import brevoApi.EcommerceApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: api-key
+ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("api-key");
+apiKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//apiKey.setApiKeyPrefix("Token");
+
+// Configure API key authorization: partner-key
+ApiKeyAuth partnerKey = (ApiKeyAuth) defaultClient.getAuthentication("partner-key");
+partnerKey.setApiKey("YOUR PARTNER KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//partnerKey.setApiKeyPrefix("Token");
+
+EcommerceApi apiInstance = new EcommerceApi();
+String id = "id_example"; // String | Product ID
+String type = "type_example"; // String | Alert type
+ContactIdentifiers contactIdentifiers = new ContactIdentifiers(); // ContactIdentifiers | Contact identifier to associate the alert with (at least one is required). Priority is given to `ext_id` > `email` > `sms`
+try {
+    apiInstance.createProductAlert(id, type, contactIdentifiers);
+} catch (ApiException e) {
+    System.err.println("Exception when calling EcommerceApi#createProductAlert");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **String**| Product ID |
+ **type** | **String**| Alert type | [enum: back_in_stock]
+ **contactIdentifiers** | [**ContactIdentifiers**](ContactIdentifiers.md)| Contact identifier to associate the alert with (at least one is required). Priority is given to &#x60;ext_id&#x60; &gt; &#x60;email&#x60; &gt; &#x60;sms&#x60; |
 
 ### Return type
 
@@ -437,7 +500,7 @@ null (empty response body)
 
 <a name="ecommerceAttributionMetricsConversionSourceConversionSourceIdGet"></a>
 # **ecommerceAttributionMetricsConversionSourceConversionSourceIdGet**
-> InlineResponse2007 ecommerceAttributionMetricsConversionSourceConversionSourceIdGet(conversionSource, conversionSourceId)
+> InlineResponse2008 ecommerceAttributionMetricsConversionSourceConversionSourceIdGet(conversionSource, conversionSourceId)
 
 Get detailed attribution metrics for a single Brevo campaign or workflow
 
@@ -468,7 +531,7 @@ EcommerceApi apiInstance = new EcommerceApi();
 String conversionSource = "conversionSource_example"; // String | The Brevo campaign type or workflow type for which data will be retrieved
 String conversionSourceId = "conversionSourceId_example"; // String | The Brevo campaign or automation workflow id for which data will be retrieved
 try {
-    InlineResponse2007 result = apiInstance.ecommerceAttributionMetricsConversionSourceConversionSourceIdGet(conversionSource, conversionSourceId);
+    InlineResponse2008 result = apiInstance.ecommerceAttributionMetricsConversionSourceConversionSourceIdGet(conversionSource, conversionSourceId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling EcommerceApi#ecommerceAttributionMetricsConversionSourceConversionSourceIdGet");
@@ -485,7 +548,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2007**](InlineResponse2007.md)
+[**InlineResponse2008**](InlineResponse2008.md)
 
 ### Authorization
 
@@ -498,7 +561,7 @@ Name | Type | Description  | Notes
 
 <a name="ecommerceAttributionMetricsGet"></a>
 # **ecommerceAttributionMetricsGet**
-> InlineResponse2006 ecommerceAttributionMetricsGet(periodFrom, periodTo, emailCampaignId, smsCampaignId, automationWorkflowEmailId, automationWorkflowSmsId)
+> InlineResponse2007 ecommerceAttributionMetricsGet(periodFrom, periodTo, emailCampaignId, smsCampaignId, automationWorkflowEmailId, automationWorkflowSmsId)
 
 Get attribution metrics for one or more Brevo campaigns or workflows
 
@@ -533,7 +596,7 @@ List<String> smsCampaignId = Arrays.asList("smsCampaignId_example"); // List<Str
 List<String> automationWorkflowEmailId = Arrays.asList("automationWorkflowEmailId_example"); // List<String> | The automation workflow ID(s) to get email attribution metrics for
 List<String> automationWorkflowSmsId = Arrays.asList("automationWorkflowSmsId_example"); // List<String> | The automation workflow ID(s) to get SMS attribution metrics for
 try {
-    InlineResponse2006 result = apiInstance.ecommerceAttributionMetricsGet(periodFrom, periodTo, emailCampaignId, smsCampaignId, automationWorkflowEmailId, automationWorkflowSmsId);
+    InlineResponse2007 result = apiInstance.ecommerceAttributionMetricsGet(periodFrom, periodTo, emailCampaignId, smsCampaignId, automationWorkflowEmailId, automationWorkflowSmsId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling EcommerceApi#ecommerceAttributionMetricsGet");
@@ -554,7 +617,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2006**](InlineResponse2006.md)
+[**InlineResponse2007**](InlineResponse2007.md)
 
 ### Authorization
 
@@ -567,7 +630,7 @@ Name | Type | Description  | Notes
 
 <a name="ecommerceAttributionProductsConversionSourceConversionSourceIdGet"></a>
 # **ecommerceAttributionProductsConversionSourceConversionSourceIdGet**
-> InlineResponse2008 ecommerceAttributionProductsConversionSourceConversionSourceIdGet(conversionSource, conversionSourceId)
+> InlineResponse2009 ecommerceAttributionProductsConversionSourceConversionSourceIdGet(conversionSource, conversionSourceId)
 
 Get attributed product sales for a single Brevo campaign or workflow
 
@@ -598,7 +661,7 @@ EcommerceApi apiInstance = new EcommerceApi();
 String conversionSource = "conversionSource_example"; // String | The Brevo campaign or automation workflow type for which data will be retrieved
 String conversionSourceId = "conversionSourceId_example"; // String | The Brevo campaign or automation workflow id for which data will be retrieved
 try {
-    InlineResponse2008 result = apiInstance.ecommerceAttributionProductsConversionSourceConversionSourceIdGet(conversionSource, conversionSourceId);
+    InlineResponse2009 result = apiInstance.ecommerceAttributionProductsConversionSourceConversionSourceIdGet(conversionSource, conversionSourceId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling EcommerceApi#ecommerceAttributionProductsConversionSourceConversionSourceIdGet");
@@ -615,7 +678,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2008**](InlineResponse2008.md)
+[**InlineResponse2009**](InlineResponse2009.md)
 
 ### Authorization
 
@@ -628,7 +691,7 @@ Name | Type | Description  | Notes
 
 <a name="ecommerceConfigDisplayCurrencyGet"></a>
 # **ecommerceConfigDisplayCurrencyGet**
-> InlineResponse2005 ecommerceConfigDisplayCurrencyGet()
+> InlineResponse2006 ecommerceConfigDisplayCurrencyGet()
 
 Get the ISO 4217 compliant display currency code for your Brevo account
 
@@ -657,7 +720,7 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 
 EcommerceApi apiInstance = new EcommerceApi();
 try {
-    InlineResponse2005 result = apiInstance.ecommerceConfigDisplayCurrencyGet();
+    InlineResponse2006 result = apiInstance.ecommerceConfigDisplayCurrencyGet();
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling EcommerceApi#ecommerceConfigDisplayCurrencyGet");
@@ -670,7 +733,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse2005**](InlineResponse2005.md)
+[**InlineResponse2006**](InlineResponse2006.md)
 
 ### Authorization
 
@@ -683,7 +746,7 @@ This endpoint does not need any parameter.
 
 <a name="getCategories"></a>
 # **getCategories**
-> GetCategories getCategories(limit, offset, sort, ids, name, modifiedSince, createdSince)
+> GetCategories getCategories(limit, offset, sort, ids, name, modifiedSince, createdSince, isDeleted)
 
 Return all your categories
 
@@ -718,8 +781,9 @@ List<String> ids = Arrays.asList("ids_example"); // List<String> | Filter by cat
 String name = "name_example"; // String | Filter by category name
 String modifiedSince = "modifiedSince_example"; // String | Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.** 
 String createdSince = "createdSince_example"; // String | Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.** 
+Object isDeleted = null; // Object | Filter categories by their deletion status. If `false` is passed, only categories that are not deleted will be returned. 
 try {
-    GetCategories result = apiInstance.getCategories(limit, offset, sort, ids, name, modifiedSince, createdSince);
+    GetCategories result = apiInstance.getCategories(limit, offset, sort, ids, name, modifiedSince, createdSince, isDeleted);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling EcommerceApi#getCategories");
@@ -738,6 +802,7 @@ Name | Type | Description  | Notes
  **name** | **String**| Filter by category name | [optional]
  **modifiedSince** | **String**| Filter (urlencoded) the categories modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  | [optional]
  **createdSince** | **String**| Filter (urlencoded) the categories created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  | [optional]
+ **isDeleted** | [**Object**](.md)| Filter categories by their deletion status. If &#x60;false&#x60; is passed, only categories that are not deleted will be returned.  | [optional]
 
 ### Return type
 
@@ -941,7 +1006,7 @@ Name | Type | Description  | Notes
 
 <a name="getProducts"></a>
 # **getProducts**
-> GetProducts getProducts(limit, offset, sort, ids, name, priceLte, priceGte, priceLt, priceGt, priceEq, priceNe, categories, modifiedSince, createdSince)
+> GetProducts getProducts(limit, offset, sort, ids, name, priceLte, priceGte, priceLt, priceGt, priceEq, priceNe, categories, modifiedSince, createdSince, isDeleted)
 
 Return all your products
 
@@ -983,8 +1048,9 @@ BigDecimal priceNe = new BigDecimal(); // BigDecimal | Price filter for products
 List<String> categories = Arrays.asList("categories_example"); // List<String> | Filter by category ids
 String modifiedSince = "modifiedSince_example"; // String | Filter (urlencoded) the orders modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.** 
 String createdSince = "createdSince_example"; // String | Filter (urlencoded) the orders created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.** 
+Object isDeleted = null; // Object | Filter products by their deletion status. If `false` is passed, only products that are not deleted will be returned. 
 try {
-    GetProducts result = apiInstance.getProducts(limit, offset, sort, ids, name, priceLte, priceGte, priceLt, priceGt, priceEq, priceNe, categories, modifiedSince, createdSince);
+    GetProducts result = apiInstance.getProducts(limit, offset, sort, ids, name, priceLte, priceGte, priceLt, priceGt, priceEq, priceNe, categories, modifiedSince, createdSince, isDeleted);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling EcommerceApi#getProducts");
@@ -1010,6 +1076,7 @@ Name | Type | Description  | Notes
  **categories** | [**List&lt;String&gt;**](String.md)| Filter by category ids | [optional]
  **modifiedSince** | **String**| Filter (urlencoded) the orders modified after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  | [optional]
  **createdSince** | **String**| Filter (urlencoded) the orders created after a given UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ). **Prefer to pass your timezone in date-time format for accurate result.**  | [optional]
+ **isDeleted** | [**Object**](.md)| Filter products by their deletion status. If &#x60;false&#x60; is passed, only products that are not deleted will be returned.  | [optional]
 
 ### Return type
 

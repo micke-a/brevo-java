@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** | Unique ID of the created attribute | 
+**id** | **String** | Unique company id | 
 
 
 

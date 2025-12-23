@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **exportMandatoryAttributes** | **Boolean** | To export mandatory attributes like EMAIL, ADDED_TIME, MODIFIED_TIME |  [optional]
 **exportSubscriptionStatus** | **List&lt;String&gt;** | Export subscription status of contacts for email &amp; sms marketting. Pass email_marketing to obtain the marketing email subscription status &amp; sms_marketing to retrieve the marketing SMS status of the contact. |  [optional]
 **exportMetadata** | **List&lt;String&gt;** | Export metadata of contacts such as _listIds, ADDED_TIME, MODIFIED_TIME. |  [optional]
+**exportDateInUTC** | **Boolean** | Specifies whether the date fields createdAt, modifiedAt in the exported data should be returned in UTC format. |  [optional]
 
 
 

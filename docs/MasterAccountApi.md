@@ -1247,7 +1247,7 @@ null (empty response body)
 
 <a name="corporateUserInvitationActionEmailPut"></a>
 # **corporateUserInvitationActionEmailPut**
-> InlineResponse200 corporateUserInvitationActionEmailPut(action, email)
+> InlineResponse2001 corporateUserInvitationActionEmailPut(action, email)
 
 Resend / cancel admin user invitation
 
@@ -1280,7 +1280,7 @@ MasterAccountApi apiInstance = new MasterAccountApi();
 String action = "action_example"; // String | Action to be performed (cancel / resend)
 String email = "email_example"; // String | Email address of the recipient
 try {
-    InlineResponse200 result = apiInstance.corporateUserInvitationActionEmailPut(action, email);
+    InlineResponse2001 result = apiInstance.corporateUserInvitationActionEmailPut(action, email);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling MasterAccountApi#corporateUserInvitationActionEmailPut");
@@ -1297,7 +1297,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse200**](InlineResponse200.md)
+[**InlineResponse2001**](InlineResponse2001.md)
 
 ### Authorization
 
@@ -1437,11 +1437,11 @@ Name | Type | Description  | Notes
 
 <a name="getCorporateInvitedUsersList"></a>
 # **getCorporateInvitedUsersList**
-> GetCorporateInvitedUsersList getCorporateInvitedUsersList()
+> GetCorporateInvitedUsersList getCorporateInvitedUsersList(type, offset, limit)
 
 Get the list of all admin users
 
-This endpoint allows you to list all Admin users of your Admin account
+This endpoint allows you to list all Admin users of your Admin account. You can filter users by type (active or pending) and paginate results using offset and limit.
 
 ### Example
 ```java
@@ -1467,8 +1467,11 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 //partnerKey.setApiKeyPrefix("Token");
 
 MasterAccountApi apiInstance = new MasterAccountApi();
+Object type = null; // Object | User type (active | pending). This is required if offset is provided for limited result.
+Object offset = null; // Object | Page number for the result set. This is optional, default value will be the 1st page.
+Object limit = null; // Object | Number of users to be displayed on each page. This is optional, the default limit is 20, but max allowed limit is 100.
 try {
-    GetCorporateInvitedUsersList result = apiInstance.getCorporateInvitedUsersList();
+    GetCorporateInvitedUsersList result = apiInstance.getCorporateInvitedUsersList(type, offset, limit);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling MasterAccountApi#getCorporateInvitedUsersList");
@@ -1477,7 +1480,12 @@ try {
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **type** | [**Object**](.md)| User type (active | pending). This is required if offset is provided for limited result. | [optional]
+ **offset** | [**Object**](.md)| Page number for the result set. This is optional, default value will be the 1st page. | [optional]
+ **limit** | [**Object**](.md)| Number of users to be displayed on each page. This is optional, the default limit is 20, but max allowed limit is 100. | [optional]
 
 ### Return type
 
@@ -1555,7 +1563,7 @@ Name | Type | Description  | Notes
 
 <a name="getSubAccountGroups"></a>
 # **getSubAccountGroups**
-> List&lt;InlineResponse2001&gt; getSubAccountGroups()
+> List&lt;InlineResponse2002&gt; getSubAccountGroups()
 
 Get the list of groups
 
@@ -1586,7 +1594,7 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 
 MasterAccountApi apiInstance = new MasterAccountApi();
 try {
-    List<InlineResponse2001> result = apiInstance.getSubAccountGroups();
+    List<InlineResponse2002> result = apiInstance.getSubAccountGroups();
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling MasterAccountApi#getSubAccountGroups");
@@ -1599,7 +1607,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List&lt;InlineResponse2001&gt;**](InlineResponse2001.md)
+[**List&lt;InlineResponse2002&gt;**](InlineResponse2002.md)
 
 ### Authorization
 

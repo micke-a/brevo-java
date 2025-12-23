@@ -26,27 +26,27 @@ import java.io.IOException;
 /**
  * InlineResponse2005
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class InlineResponse2005 {
-  @SerializedName("code")
-  private String code = null;
+  @SerializedName("processId")
+  private Integer processId = null;
 
-  public InlineResponse2005 code(String code) {
-    this.code = code;
+  public InlineResponse2005 processId(Integer processId) {
+    this.processId = processId;
     return this;
   }
 
    /**
-   * ISO 4217 compliant display currency code
-   * @return code
+   * The ID of the import process
+   * @return processId
   **/
-  @ApiModelProperty(example = "EUR", required = true, value = "ISO 4217 compliant display currency code")
-  public String getCode() {
-    return code;
+  @ApiModelProperty(example = "50", value = "The ID of the import process")
+  public Integer getProcessId() {
+    return processId;
   }
 
-  public void setCode(String code) {
-    this.code = code;
+  public void setProcessId(Integer processId) {
+    this.processId = processId;
   }
 
 
@@ -59,12 +59,12 @@ public class InlineResponse2005 {
     return false;
   }
     InlineResponse2005 inlineResponse2005 = (InlineResponse2005) o;
-    return ObjectUtils.equals(this.code, inlineResponse2005.code);
+    return ObjectUtils.equals(this.processId, inlineResponse2005.processId);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(code);
+    return ObjectUtils.hashCodeMulti(processId);
   }
 
 
@@ -73,7 +73,7 @@ public class InlineResponse2005 {
     StringBuilder sb = new StringBuilder();
     sb.append("class InlineResponse2005 {\n");
     
-    sb.append("    code: ").append(toIndentedString(code)).append("\n");
+    sb.append("    processId: ").append(toIndentedString(processId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

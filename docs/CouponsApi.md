@@ -254,7 +254,7 @@ Name | Type | Description  | Notes
 
 <a name="updateCouponCollection"></a>
 # **updateCouponCollection**
-> InlineResponse2009 updateCouponCollection(id, updateCouponCollection)
+> InlineResponse20010 updateCouponCollection(id, updateCouponCollection)
 
 Update a coupon collection by id
 
@@ -285,7 +285,7 @@ CouponsApi apiInstance = new CouponsApi();
 String id = "id_example"; // String | Id of the collection to update
 UpdateCouponCollection updateCouponCollection = new UpdateCouponCollection(); // UpdateCouponCollection | Values to update the coupon collection
 try {
-    InlineResponse2009 result = apiInstance.updateCouponCollection(id, updateCouponCollection);
+    InlineResponse20010 result = apiInstance.updateCouponCollection(id, updateCouponCollection);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling CouponsApi#updateCouponCollection");
@@ -302,7 +302,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2009**](InlineResponse2009.md)
+[**InlineResponse20010**](InlineResponse20010.md)
 
 ### Authorization
 

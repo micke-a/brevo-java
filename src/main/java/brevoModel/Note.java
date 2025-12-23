@@ -30,7 +30,7 @@ import org.threeten.bp.OffsetDateTime;
  * Note Details
  */
 @ApiModel(description = "Note Details")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class Note {
   @SerializedName("id")
   private String id = null;
@@ -52,6 +52,9 @@ public class Note {
 
   @SerializedName("updatedAt")
   private OffsetDateTime updatedAt = null;
+
+  @SerializedName("pinnedAt")
+  private OffsetDateTime pinnedAt = null;
 
   public Note id(String id) {
     this.id = id;
@@ -195,6 +198,24 @@ public class Note {
     this.updatedAt = updatedAt;
   }
 
+  public Note pinnedAt(OffsetDateTime pinnedAt) {
+    this.pinnedAt = pinnedAt;
+    return this;
+  }
+
+   /**
+   * Note pinned date/time
+   * @return pinnedAt
+  **/
+  @ApiModelProperty(example = "2017-05-01T17:05:03.000Z", value = "Note pinned date/time")
+  public OffsetDateTime getPinnedAt() {
+    return pinnedAt;
+  }
+
+  public void setPinnedAt(OffsetDateTime pinnedAt) {
+    this.pinnedAt = pinnedAt;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -211,12 +232,13 @@ public class Note {
     ObjectUtils.equals(this.dealIds, note.dealIds) &&
     ObjectUtils.equals(this.authorId, note.authorId) &&
     ObjectUtils.equals(this.createdAt, note.createdAt) &&
-    ObjectUtils.equals(this.updatedAt, note.updatedAt);
+    ObjectUtils.equals(this.updatedAt, note.updatedAt) &&
+    ObjectUtils.equals(this.pinnedAt, note.pinnedAt);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(id, text, contactIds, dealIds, authorId, createdAt, updatedAt);
+    return ObjectUtils.hashCodeMulti(id, text, contactIds, dealIds, authorId, createdAt, updatedAt, pinnedAt);
   }
 
 
@@ -232,6 +254,7 @@ public class Note {
     sb.append("    authorId: ").append(toIndentedString(authorId)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
+    sb.append("    pinnedAt: ").append(toIndentedString(pinnedAt)).append("\n");
     sb.append("}");
     return sb.toString();
   }

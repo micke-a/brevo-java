@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **updateEnabled** | **Boolean** | Facilitate to update the existing category in the same request (updateEnabled &#x3D; true) |  [optional]
 **deletedAt** | **String** | UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) of the product deleted from the shop&#39;s database |  [optional]
 **isDeleted** | **Boolean** | product deleted from the shop&#39;s database |  [optional]
+**stock** | [**BigDecimal**](BigDecimal.md) | Current stock value of the product from the shop&#39;s database |  [optional]
 
 
 

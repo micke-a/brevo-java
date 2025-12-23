@@ -16,9 +16,6 @@ package brevoApi;
 import brevo.*;
 import brevoModel.*;
 import com.google.gson.reflect.TypeToken;
-import okhttp3.Call;
-import okhttp3.Interceptor;
-import okhttp3.Response;
 
 import java.io.IOException;
 
@@ -30,6 +27,7 @@ import brevoModel.InlineResponse2012;
 import brevoModel.Task;
 import brevoModel.TaskList;
 import brevoModel.TaskTypes;
+import okhttp3.*;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

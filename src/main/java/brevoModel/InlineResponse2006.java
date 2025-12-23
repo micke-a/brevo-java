@@ -14,8 +14,6 @@
 package brevoModel;
 
 import org.apache.commons.lang3.ObjectUtils;
-import brevoModel.ConversionSourceMetrics;
-import brevoModel.InlineResponse2006Totals;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -24,59 +22,31 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * InlineResponse2006
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class InlineResponse2006 {
-  @SerializedName("results")
-  private List<ConversionSourceMetrics> results = new ArrayList<ConversionSourceMetrics>();
+  @SerializedName("code")
+  private String code = null;
 
-  @SerializedName("totals")
-  private InlineResponse2006Totals totals = null;
-
-  public InlineResponse2006 results(List<ConversionSourceMetrics> results) {
-    this.results = results;
-    return this;
-  }
-
-  public InlineResponse2006 addResultsItem(ConversionSourceMetrics resultsItem) {
-    this.results.add(resultsItem);
+  public InlineResponse2006 code(String code) {
+    this.code = code;
     return this;
   }
 
    /**
-   * List of conversion attribution metrics
-   * @return results
+   * ISO 4217 compliant display currency code
+   * @return code
   **/
-  @ApiModelProperty(example = "[{\"id\":\"sale1\",\"conversionSource\":\"email_campaign\",\"ordersCount\":300,\"revenue\":900,\"averageBasket\":3.0},{\"id\":\"sale2\",\"conversionSource\":\"email_campaign\",\"ordersCount\":200,\"revenue\":800,\"averageBasket\":4.0}]", required = true, value = "List of conversion attribution metrics")
-  public List<ConversionSourceMetrics> getResults() {
-    return results;
+  @ApiModelProperty(example = "EUR", required = true, value = "ISO 4217 compliant display currency code")
+  public String getCode() {
+    return code;
   }
 
-  public void setResults(List<ConversionSourceMetrics> results) {
-    this.results = results;
-  }
-
-  public InlineResponse2006 totals(InlineResponse2006Totals totals) {
-    this.totals = totals;
-    return this;
-  }
-
-   /**
-   * Get totals
-   * @return totals
-  **/
-  @ApiModelProperty(required = true, value = "")
-  public InlineResponse2006Totals getTotals() {
-    return totals;
-  }
-
-  public void setTotals(InlineResponse2006Totals totals) {
-    this.totals = totals;
+  public void setCode(String code) {
+    this.code = code;
   }
 
 
@@ -89,13 +59,12 @@ public class InlineResponse2006 {
     return false;
   }
     InlineResponse2006 inlineResponse2006 = (InlineResponse2006) o;
-    return ObjectUtils.equals(this.results, inlineResponse2006.results) &&
-    ObjectUtils.equals(this.totals, inlineResponse2006.totals);
+    return ObjectUtils.equals(this.code, inlineResponse2006.code);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(results, totals);
+    return ObjectUtils.hashCodeMulti(code);
   }
 
 
@@ -104,8 +73,7 @@ public class InlineResponse2006 {
     StringBuilder sb = new StringBuilder();
     sb.append("class InlineResponse2006 {\n");
     
-    sb.append("    results: ").append(toIndentedString(results)).append("\n");
-    sb.append("    totals: ").append(toIndentedString(totals)).append("\n");
+    sb.append("    code: ").append(toIndentedString(code)).append("\n");
     sb.append("}");
     return sb.toString();
   }

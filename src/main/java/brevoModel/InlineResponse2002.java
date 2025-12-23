@@ -24,13 +24,15 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * Created company id
+ * InlineResponse2002
  */
-@ApiModel(description = "Created company id")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class InlineResponse2002 {
   @SerializedName("id")
   private String id = null;
+
+  @SerializedName("groupName")
+  private String groupName = null;
 
   public InlineResponse2002 id(String id) {
     this.id = id;
@@ -38,16 +40,34 @@ public class InlineResponse2002 {
   }
 
    /**
-   * Unique company id
+   * Unique id of the group
    * @return id
   **/
-  @ApiModelProperty(example = "61a5cd07ca1347c82306ad06", required = true, value = "Unique company id")
+  @ApiModelProperty(value = "Unique id of the group")
   public String getId() {
     return id;
   }
 
   public void setId(String id) {
     this.id = id;
+  }
+
+  public InlineResponse2002 groupName(String groupName) {
+    this.groupName = groupName;
+    return this;
+  }
+
+   /**
+   * The name of the group of sub-accounts
+   * @return groupName
+  **/
+  @ApiModelProperty(value = "The name of the group of sub-accounts")
+  public String getGroupName() {
+    return groupName;
+  }
+
+  public void setGroupName(String groupName) {
+    this.groupName = groupName;
   }
 
 
@@ -60,12 +80,13 @@ public class InlineResponse2002 {
     return false;
   }
     InlineResponse2002 inlineResponse2002 = (InlineResponse2002) o;
-    return ObjectUtils.equals(this.id, inlineResponse2002.id);
+    return ObjectUtils.equals(this.id, inlineResponse2002.id) &&
+    ObjectUtils.equals(this.groupName, inlineResponse2002.groupName);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(id);
+    return ObjectUtils.hashCodeMulti(id, groupName);
   }
 
 
@@ -75,6 +96,7 @@ public class InlineResponse2002 {
     sb.append("class InlineResponse2002 {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    groupName: ").append(toIndentedString(groupName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

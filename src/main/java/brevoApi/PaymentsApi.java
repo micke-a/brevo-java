@@ -19,10 +19,7 @@ import brevoModel.CreatePaymentRequest;
 import brevoModel.CreatePaymentResponse;
 import brevoModel.ErrorModel;
 import brevoModel.GetPaymentRequest;
-import com.google.gson.reflect.TypeToken;
-import okhttp3.Call;
-import okhttp3.Interceptor;
-import okhttp3.Response;
+import okhttp3.*;
 
 import java.io.IOException;
 import java.lang.reflect.Type;

@@ -14,8 +14,8 @@
 package brevoModel;
 
 import org.apache.commons.lang3.ObjectUtils;
-import brevoModel.GetWebhookAuth;
-import brevoModel.GetWebhookHeaders;
+import brevoModel.CreateWebhookAuth;
+import brevoModel.UpdateWebhookHeaders;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * UpdateWebhook
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class UpdateWebhook {
   @SerializedName("url")
   private String url = null;
@@ -125,10 +125,10 @@ public class UpdateWebhook {
   private Boolean batched = null;
 
   @SerializedName("auth")
-  private GetWebhookAuth auth = null;
+  private CreateWebhookAuth auth = null;
 
   @SerializedName("headers")
-  private List<GetWebhookHeaders> headers = null;
+  private List<UpdateWebhookHeaders> headers = null;
 
   public UpdateWebhook url(String url) {
     this.url = url;
@@ -228,7 +228,7 @@ public class UpdateWebhook {
     this.batched = batched;
   }
 
-  public UpdateWebhook auth(GetWebhookAuth auth) {
+  public UpdateWebhook auth(CreateWebhookAuth auth) {
     this.auth = auth;
     return this;
   }
@@ -238,37 +238,37 @@ public class UpdateWebhook {
    * @return auth
   **/
   @ApiModelProperty(value = "")
-  public GetWebhookAuth getAuth() {
+  public CreateWebhookAuth getAuth() {
     return auth;
   }
 
-  public void setAuth(GetWebhookAuth auth) {
+  public void setAuth(CreateWebhookAuth auth) {
     this.auth = auth;
   }
 
-  public UpdateWebhook headers(List<GetWebhookHeaders> headers) {
+  public UpdateWebhook headers(List<UpdateWebhookHeaders> headers) {
     this.headers = headers;
     return this;
   }
 
-  public UpdateWebhook addHeadersItem(GetWebhookHeaders headersItem) {
+  public UpdateWebhook addHeadersItem(UpdateWebhookHeaders headersItem) {
     if (this.headers == null) {
-      this.headers = new ArrayList<GetWebhookHeaders>();
+      this.headers = new ArrayList<UpdateWebhookHeaders>();
     }
     this.headers.add(headersItem);
     return this;
   }
 
    /**
-   * Custom headers to be send with webhooks
+   * The headers sent with the request to the webhook. Header format: &quot;headers&quot;: [{ &quot;key&quot;: &quot;cf-secret&quot;,&quot;value&quot;: &quot;test-header-value&quot;}] 
    * @return headers
   **/
-  @ApiModelProperty(value = "Custom headers to be send with webhooks")
-  public List<GetWebhookHeaders> getHeaders() {
+  @ApiModelProperty(example = "[{\"key\":\"cf-secret\",\"value\":\"test-header-value\"},{\"key\":\"x-api-key\",\"value\":\"abc123\"}]", value = "The headers sent with the request to the webhook. Header format: \"headers\": [{ \"key\": \"cf-secret\",\"value\": \"test-header-value\"}] ")
+  public List<UpdateWebhookHeaders> getHeaders() {
     return headers;
   }
 
-  public void setHeaders(List<GetWebhookHeaders> headers) {
+  public void setHeaders(List<UpdateWebhookHeaders> headers) {
     this.headers = headers;
   }
 

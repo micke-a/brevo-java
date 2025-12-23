@@ -27,7 +27,7 @@ import java.io.IOException;
  * To create a new list and import the contacts into it, pass the listName and an optional folderId.
  */
 @ApiModel(description = "To create a new list and import the contacts into it, pass the listName and an optional folderId.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class RequestContactImportNewList {
   @SerializedName("listName")
   private String listName = null;

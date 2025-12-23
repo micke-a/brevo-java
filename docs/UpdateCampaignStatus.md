@@ -16,6 +16,7 @@ ARCHIVE | &quot;archive&quot;
 DARCHIVE | &quot;darchive&quot;
 SENT | &quot;sent&quot;
 QUEUED | &quot;queued&quot;
+CANCEL | &quot;cancel&quot;
 REPLICATE | &quot;replicate&quot;
 REPLICATETEMPLATE | &quot;replicateTemplate&quot;
 DRAFT | &quot;draft&quot;

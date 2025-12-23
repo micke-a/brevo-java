@@ -27,7 +27,7 @@ import java.io.IOException;
  * Features details to update
  */
 @ApiModel(description = "Features details to update")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class SubAccountUpdatePlanRequestFeatures {
   @SerializedName("users")
   private Long users = null;

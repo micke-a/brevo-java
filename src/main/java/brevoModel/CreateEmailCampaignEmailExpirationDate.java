@@ -28,7 +28,7 @@ import java.math.BigDecimal;
  * To reduce your carbon footprint, set an expiration date for your email. If supported, it will be automatically deleted from the recipient’s inbox, saving storage space and energy. Learn more about setting an email expiration date. For reference , &#x60;&#x60;https://help.brevo.com/hc/en-us/articles/4413566705298-Create-an-email-campaign&#x60;&#x60;
  */
 @ApiModel(description = "To reduce your carbon footprint, set an expiration date for your email. If supported, it will be automatically deleted from the recipient’s inbox, saving storage space and energy. Learn more about setting an email expiration date. For reference , ``https://help.brevo.com/hc/en-us/articles/4413566705298-Create-an-email-campaign``")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class CreateEmailCampaignEmailExpirationDate {
   @SerializedName("duration")
   private BigDecimal duration = null;

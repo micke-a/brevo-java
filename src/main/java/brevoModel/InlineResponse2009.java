@@ -14,6 +14,7 @@
 package brevoModel;
 
 import org.apache.commons.lang3.ObjectUtils;
+import brevoModel.ConversionSourceProduct;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,73 +23,38 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * InlineResponse2009
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class InlineResponse2009 {
-  @SerializedName("id")
-  private String id = null;
+  @SerializedName("products")
+  private List<ConversionSourceProduct> products = new ArrayList<ConversionSourceProduct>();
 
-  @SerializedName("name")
-  private String name = null;
+  public InlineResponse2009 products(List<ConversionSourceProduct> products) {
+    this.products = products;
+    return this;
+  }
 
-  @SerializedName("defaultCoupon")
-  private String defaultCoupon = null;
-
-  public InlineResponse2009 id(String id) {
-    this.id = id;
+  public InlineResponse2009 addProductsItem(ConversionSourceProduct productsItem) {
+    this.products.add(productsItem);
     return this;
   }
 
    /**
-   * The id of the collection
-   * @return id
+   * List of attributed products
+   * @return products
   **/
-  @ApiModelProperty(example = "23befbae-1505-47a8-bd27-e30ef739f32c", required = true, value = "The id of the collection")
-  public String getId() {
-    return id;
+  @ApiModelProperty(required = true, value = "List of attributed products")
+  public List<ConversionSourceProduct> getProducts() {
+    return products;
   }
 
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public InlineResponse2009 name(String name) {
-    this.name = name;
-    return this;
-  }
-
-   /**
-   * The name of the collection
-   * @return name
-  **/
-  @ApiModelProperty(example = "SummerPromotions", required = true, value = "The name of the collection")
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public InlineResponse2009 defaultCoupon(String defaultCoupon) {
-    this.defaultCoupon = defaultCoupon;
-    return this;
-  }
-
-   /**
-   * The default coupon of the collection
-   * @return defaultCoupon
-  **/
-  @ApiModelProperty(example = "10 OFF", value = "The default coupon of the collection")
-  public String getDefaultCoupon() {
-    return defaultCoupon;
-  }
-
-  public void setDefaultCoupon(String defaultCoupon) {
-    this.defaultCoupon = defaultCoupon;
+  public void setProducts(List<ConversionSourceProduct> products) {
+    this.products = products;
   }
 
 
@@ -101,14 +67,12 @@ public class InlineResponse2009 {
     return false;
   }
     InlineResponse2009 inlineResponse2009 = (InlineResponse2009) o;
-    return ObjectUtils.equals(this.id, inlineResponse2009.id) &&
-    ObjectUtils.equals(this.name, inlineResponse2009.name) &&
-    ObjectUtils.equals(this.defaultCoupon, inlineResponse2009.defaultCoupon);
+    return ObjectUtils.equals(this.products, inlineResponse2009.products);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(id, name, defaultCoupon);
+    return ObjectUtils.hashCodeMulti(products);
   }
 
 
@@ -117,9 +81,7 @@ public class InlineResponse2009 {
     StringBuilder sb = new StringBuilder();
     sb.append("class InlineResponse2009 {\n");
     
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    defaultCoupon: ").append(toIndentedString(defaultCoupon)).append("\n");
+    sb.append("    products: ").append(toIndentedString(products)).append("\n");
     sb.append("}");
     return sb.toString();
   }

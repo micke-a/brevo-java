@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * GetAttributesAttributes
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class GetAttributesAttributes {
   @SerializedName("name")
   private String name = null;
@@ -103,7 +103,11 @@ public class GetAttributesAttributes {
     
     ID("id"),
     
-    BOOLEAN("boolean");
+    BOOLEAN("boolean"),
+    
+    MULTIPLE_CHOICE("multiple-choice"),
+    
+    USER("user");
 
     private String value;
 
@@ -151,6 +155,9 @@ public class GetAttributesAttributes {
 
   @SerializedName("calculatedValue")
   private String calculatedValue = null;
+
+  @SerializedName("multiCategoryOptions")
+  private List<String> multiCategoryOptions = null;
 
   public GetAttributesAttributes name(String name) {
     this.name = name;
@@ -250,6 +257,32 @@ public class GetAttributesAttributes {
     this.calculatedValue = calculatedValue;
   }
 
+  public GetAttributesAttributes multiCategoryOptions(List<String> multiCategoryOptions) {
+    this.multiCategoryOptions = multiCategoryOptions;
+    return this;
+  }
+
+  public GetAttributesAttributes addMultiCategoryOptionsItem(String multiCategoryOptionsItem) {
+    if (this.multiCategoryOptions == null) {
+      this.multiCategoryOptions = new ArrayList<String>();
+    }
+    this.multiCategoryOptions.add(multiCategoryOptionsItem);
+    return this;
+  }
+
+   /**
+   * Parameter only available for &quot;multiple-choice&quot; type attributes.
+   * @return multiCategoryOptions
+  **/
+  @ApiModelProperty(value = "Parameter only available for \"multiple-choice\" type attributes.")
+  public List<String> getMultiCategoryOptions() {
+    return multiCategoryOptions;
+  }
+
+  public void setMultiCategoryOptions(List<String> multiCategoryOptions) {
+    this.multiCategoryOptions = multiCategoryOptions;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -264,12 +297,13 @@ public class GetAttributesAttributes {
     ObjectUtils.equals(this.category, getAttributesAttributes.category) &&
     ObjectUtils.equals(this.type, getAttributesAttributes.type) &&
     ObjectUtils.equals(this.enumeration, getAttributesAttributes.enumeration) &&
-    ObjectUtils.equals(this.calculatedValue, getAttributesAttributes.calculatedValue);
+    ObjectUtils.equals(this.calculatedValue, getAttributesAttributes.calculatedValue) &&
+    ObjectUtils.equals(this.multiCategoryOptions, getAttributesAttributes.multiCategoryOptions);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(name, category, type, enumeration, calculatedValue);
+    return ObjectUtils.hashCodeMulti(name, category, type, enumeration, calculatedValue, multiCategoryOptions);
   }
 
 
@@ -283,6 +317,7 @@ public class GetAttributesAttributes {
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    enumeration: ").append(toIndentedString(enumeration)).append("\n");
     sb.append("    calculatedValue: ").append(toIndentedString(calculatedValue)).append("\n");
+    sb.append("    multiCategoryOptions: ").append(toIndentedString(multiCategoryOptions)).append("\n");
     sb.append("}");
     return sb.toString();
   }

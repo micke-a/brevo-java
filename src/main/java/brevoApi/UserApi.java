@@ -16,9 +16,6 @@ package brevoApi;
 import brevo.*;
 import brevoModel.*;
 import com.google.gson.reflect.TypeToken;
-import okhttp3.Call;
-import okhttp3.Interceptor;
-import okhttp3.Response;
 
 import java.io.IOException;
 
@@ -29,6 +26,7 @@ import brevoModel.GetUserPermission;
 import brevoModel.Inviteuser;
 import brevoModel.PutRevokeUserPermission;
 import brevoModel.Putresendcancelinvitation;
+import okhttp3.*;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

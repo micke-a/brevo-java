@@ -16,9 +16,6 @@ package brevoApi;
 import brevo.*;
 import brevoModel.*;
 import com.google.gson.reflect.TypeToken;
-import okhttp3.Call;
-import okhttp3.Interceptor;
-import okhttp3.Response;
 
 import java.io.IOException;
 
@@ -41,6 +38,7 @@ import brevoModel.GetCorporateUserPermission;
 import brevoModel.GetSsoToken;
 import brevoModel.InlineResponse200;
 import brevoModel.InlineResponse2001;
+import brevoModel.InlineResponse2002;
 import brevoModel.InlineResponse201;
 import brevoModel.InviteAdminUser;
 import brevoModel.MasterDetailsResponse;
@@ -51,6 +49,7 @@ import brevoModel.SubAccountDetailsResponse;
 import brevoModel.SubAccountUpdatePlanRequest;
 import brevoModel.SubAccountsResponse;
 import brevoModel.SubAccountsUpdatePlanRequest;
+import okhttp3.*;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -2602,11 +2601,11 @@ public class MasterAccountApi {
      * This endpoint will allow the user to: - Resend an admin user invitation - Cancel an admin user invitation 
      * @param action Action to be performed (cancel / resend) (required)
      * @param email Email address of the recipient (required)
-     * @return InlineResponse200
+     * @return InlineResponse2001
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse200 corporateUserInvitationActionEmailPut(String action, String email) throws ApiException {
-        ApiResponse<InlineResponse200> resp = corporateUserInvitationActionEmailPutWithHttpInfo(action, email);
+    public InlineResponse2001 corporateUserInvitationActionEmailPut(String action, String email) throws ApiException {
+        ApiResponse<InlineResponse2001> resp = corporateUserInvitationActionEmailPutWithHttpInfo(action, email);
         return resp.getData();
     }
 
@@ -2615,12 +2614,12 @@ public class MasterAccountApi {
      * This endpoint will allow the user to: - Resend an admin user invitation - Cancel an admin user invitation 
      * @param action Action to be performed (cancel / resend) (required)
      * @param email Email address of the recipient (required)
-     * @return ApiResponse&lt;InlineResponse200&gt;
+     * @return ApiResponse&lt;InlineResponse2001&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse200> corporateUserInvitationActionEmailPutWithHttpInfo(String action, String email) throws ApiException {
+    public ApiResponse<InlineResponse2001> corporateUserInvitationActionEmailPutWithHttpInfo(String action, String email) throws ApiException {
         Call call = corporateUserInvitationActionEmailPutValidateBeforeCall(action, email, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse200>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2001>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -2633,7 +2632,7 @@ public class MasterAccountApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call corporateUserInvitationActionEmailPutAsync(String action, String email, final ApiCallback<InlineResponse200> callback) throws ApiException {
+    public Call corporateUserInvitationActionEmailPutAsync(String action, String email, final ApiCallback<InlineResponse2001> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -2655,7 +2654,7 @@ public class MasterAccountApi {
         }
 
         Call call = corporateUserInvitationActionEmailPutValidateBeforeCall(action, email, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse200>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2001>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -2923,12 +2922,15 @@ public class MasterAccountApi {
     }
     /**
      * Build call for getCorporateInvitedUsersList
+     * @param type User type (active | pending). This is required if offset is provided for limited result. (optional)
+     * @param offset Page number for the result set. This is optional, default value will be the 1st page. (optional)
+     * @param limit Number of users to be displayed on each page. This is optional, the default limit is 20, but max allowed limit is 100. (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call getCorporateInvitedUsersListCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call getCorporateInvitedUsersListCall(Object type, Object offset, Object limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -2936,6 +2938,12 @@ public class MasterAccountApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        if (type != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("type", type));
+        if (offset != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("offset", offset));
+        if (limit != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("limit", limit));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -2970,45 +2978,54 @@ public class MasterAccountApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call getCorporateInvitedUsersListValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call getCorporateInvitedUsersListValidateBeforeCall(Object type, Object offset, Object limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
 
-        Call call = getCorporateInvitedUsersListCall(progressListener, progressRequestListener);
+        Call call = getCorporateInvitedUsersListCall(type, offset, limit, progressListener, progressRequestListener);
         return call;
 
     }
 
     /**
      * Get the list of all admin users
-     * This endpoint allows you to list all Admin users of your Admin account
+     * This endpoint allows you to list all Admin users of your Admin account. You can filter users by type (active or pending) and paginate results using offset and limit.
+     * @param type User type (active | pending). This is required if offset is provided for limited result. (optional)
+     * @param offset Page number for the result set. This is optional, default value will be the 1st page. (optional)
+     * @param limit Number of users to be displayed on each page. This is optional, the default limit is 20, but max allowed limit is 100. (optional)
      * @return GetCorporateInvitedUsersList
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public GetCorporateInvitedUsersList getCorporateInvitedUsersList() throws ApiException {
-        ApiResponse<GetCorporateInvitedUsersList> resp = getCorporateInvitedUsersListWithHttpInfo();
+    public GetCorporateInvitedUsersList getCorporateInvitedUsersList(Object type, Object offset, Object limit) throws ApiException {
+        ApiResponse<GetCorporateInvitedUsersList> resp = getCorporateInvitedUsersListWithHttpInfo(type, offset, limit);
         return resp.getData();
     }
 
     /**
      * Get the list of all admin users
-     * This endpoint allows you to list all Admin users of your Admin account
+     * This endpoint allows you to list all Admin users of your Admin account. You can filter users by type (active or pending) and paginate results using offset and limit.
+     * @param type User type (active | pending). This is required if offset is provided for limited result. (optional)
+     * @param offset Page number for the result set. This is optional, default value will be the 1st page. (optional)
+     * @param limit Number of users to be displayed on each page. This is optional, the default limit is 20, but max allowed limit is 100. (optional)
      * @return ApiResponse&lt;GetCorporateInvitedUsersList&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<GetCorporateInvitedUsersList> getCorporateInvitedUsersListWithHttpInfo() throws ApiException {
-        Call call = getCorporateInvitedUsersListValidateBeforeCall(null, null);
+    public ApiResponse<GetCorporateInvitedUsersList> getCorporateInvitedUsersListWithHttpInfo(Object type, Object offset, Object limit) throws ApiException {
+        Call call = getCorporateInvitedUsersListValidateBeforeCall(type, offset, limit, null, null);
         Type localVarReturnType = new TypeToken<GetCorporateInvitedUsersList>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
      * Get the list of all admin users (asynchronously)
-     * This endpoint allows you to list all Admin users of your Admin account
+     * This endpoint allows you to list all Admin users of your Admin account. You can filter users by type (active or pending) and paginate results using offset and limit.
+     * @param type User type (active | pending). This is required if offset is provided for limited result. (optional)
+     * @param offset Page number for the result set. This is optional, default value will be the 1st page. (optional)
+     * @param limit Number of users to be displayed on each page. This is optional, the default limit is 20, but max allowed limit is 100. (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call getCorporateInvitedUsersListAsync(final ApiCallback<GetCorporateInvitedUsersList> callback) throws ApiException {
+    public Call getCorporateInvitedUsersListAsync(Object type, Object offset, Object limit, final ApiCallback<GetCorporateInvitedUsersList> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -3029,7 +3046,7 @@ public class MasterAccountApi {
             };
         }
 
-        Call call = getCorporateInvitedUsersListValidateBeforeCall(progressListener, progressRequestListener);
+        Call call = getCorporateInvitedUsersListValidateBeforeCall(type, offset, limit, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<GetCorporateInvitedUsersList>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -3217,23 +3234,23 @@ public class MasterAccountApi {
     /**
      * Get the list of groups
      * This endpoint allows you to list all groups created on your Admin account.
-     * @return List&lt;InlineResponse2001&gt;
+     * @return List&lt;InlineResponse2002&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public List<InlineResponse2001> getSubAccountGroups() throws ApiException {
-        ApiResponse<List<InlineResponse2001>> resp = getSubAccountGroupsWithHttpInfo();
+    public List<InlineResponse2002> getSubAccountGroups() throws ApiException {
+        ApiResponse<List<InlineResponse2002>> resp = getSubAccountGroupsWithHttpInfo();
         return resp.getData();
     }
 
     /**
      * Get the list of groups
      * This endpoint allows you to list all groups created on your Admin account.
-     * @return ApiResponse&lt;List&lt;InlineResponse2001&gt;&gt;
+     * @return ApiResponse&lt;List&lt;InlineResponse2002&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<List<InlineResponse2001>> getSubAccountGroupsWithHttpInfo() throws ApiException {
+    public ApiResponse<List<InlineResponse2002>> getSubAccountGroupsWithHttpInfo() throws ApiException {
         Call call = getSubAccountGroupsValidateBeforeCall(null, null);
-        Type localVarReturnType = new TypeToken<List<InlineResponse2001>>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<InlineResponse2002>>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -3244,7 +3261,7 @@ public class MasterAccountApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call getSubAccountGroupsAsync(final ApiCallback<List<InlineResponse2001>> callback) throws ApiException {
+    public Call getSubAccountGroupsAsync(final ApiCallback<List<InlineResponse2002>> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -3266,7 +3283,7 @@ public class MasterAccountApi {
         }
 
         Call call = getSubAccountGroupsValidateBeforeCall(progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<List<InlineResponse2001>>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<InlineResponse2002>>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }

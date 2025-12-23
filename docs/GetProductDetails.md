@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **metaInfo** | **Object** | Meta data of product such as description, vendor, producer, stock level, etc. |  [optional]
 **s3ThumbEditor** | **String** | S3 thumbnail url of original image in 600x400 dimension for editor section | 
 **isDeleted** | **Boolean** | product deleted from the shop&#39;s database |  [optional]
+**stock** | [**BigDecimal**](BigDecimal.md) | Current stock value of the product from the shop&#39;s database |  [optional]
 
 
 

@@ -24,9 +24,10 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * InlineResponse2003
+ * Created company id
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@ApiModel(description = "Created company id")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class InlineResponse2003 {
   @SerializedName("id")
   private String id = null;
@@ -37,10 +38,10 @@ public class InlineResponse2003 {
   }
 
    /**
-   * Unique ID of the created attribute
+   * Unique company id
    * @return id
   **/
-  @ApiModelProperty(example = "61a5cd07ca1347c82306ad07", required = true, value = "Unique ID of the created attribute")
+  @ApiModelProperty(example = "61a5cd07ca1347c82306ad06", required = true, value = "Unique company id")
   public String getId() {
     return id;
   }

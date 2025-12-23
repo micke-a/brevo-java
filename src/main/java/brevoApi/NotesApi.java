@@ -18,10 +18,7 @@ import brevoModel.Note;
 import brevoModel.NoteData;
 import brevoModel.NoteId;
 import brevoModel.NoteList;
-import com.google.gson.reflect.TypeToken;
-import okhttp3.Call;
-import okhttp3.Interceptor;
-import okhttp3.Response;
+import okhttp3.*;
 
 import java.io.IOException;
 import java.lang.reflect.Type;

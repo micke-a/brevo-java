@@ -16,9 +16,6 @@ package brevoApi;
 import brevo.*;
 import brevoModel.*;
 import com.google.gson.reflect.TypeToken;
-import okhttp3.Call;
-import okhttp3.Interceptor;
-import okhttp3.Response;
 
 import java.io.IOException;
 
@@ -34,10 +31,12 @@ import brevoModel.ErrorModel;
 import java.io.File;
 import brevoModel.InlineResponse2003;
 import brevoModel.InlineResponse2004;
+import brevoModel.InlineResponse2005;
 import brevoModel.InlineResponse2011;
 import brevoModel.InlineResponse400;
 import brevoModel.Pipeline;
 import brevoModel.Pipelines;
+import okhttp3.*;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -244,11 +243,11 @@ public class DealsApi {
      * Create a deal/company attribute
      * 
      * @param body Attribute creation data for company (required)
-     * @return InlineResponse2003
+     * @return InlineResponse2004
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2003 crmAttributesPost(Body9 body) throws ApiException {
-        ApiResponse<InlineResponse2003> resp = crmAttributesPostWithHttpInfo(body);
+    public InlineResponse2004 crmAttributesPost(Body9 body) throws ApiException {
+        ApiResponse<InlineResponse2004> resp = crmAttributesPostWithHttpInfo(body);
         return resp.getData();
     }
 
@@ -256,12 +255,12 @@ public class DealsApi {
      * Create a deal/company attribute
      * 
      * @param body Attribute creation data for company (required)
-     * @return ApiResponse&lt;InlineResponse2003&gt;
+     * @return ApiResponse&lt;InlineResponse2004&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2003> crmAttributesPostWithHttpInfo(Body9 body) throws ApiException {
+    public ApiResponse<InlineResponse2004> crmAttributesPostWithHttpInfo(Body9 body) throws ApiException {
         Call call = crmAttributesPostValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2003>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2004>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -273,7 +272,7 @@ public class DealsApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call crmAttributesPostAsync(Body9 body, final ApiCallback<InlineResponse2003> callback) throws ApiException {
+    public Call crmAttributesPostAsync(Body9 body, final ApiCallback<InlineResponse2004> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -295,7 +294,7 @@ public class DealsApi {
         }
 
         Call call = crmAttributesPostValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2003>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2004>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -914,11 +913,11 @@ public class DealsApi {
      * Import deals from a CSV file with mapping options.
      * @param file The CSV file to upload.The file should have the first row as the mapping attribute. Some default attribute names are (a) deal_id [brevo mongoID to update deals] (b) associated_contact (c) associated_company (f) any other attribute with internal name  (required)
      * @param mapping The mapping options in Json format.   json    {       &quot;link_entities&quot;: true, // Determines whether to link related entities during the import process       &quot;unlink_entities&quot;: false, //Determines whether to unlink related entities during the import process.       &quot;update_existing_records&quot;: true, // Determines whether to update based on deal ID or treat every row as create       &quot;unset_empty_attributes&quot;: false // Determines whether unset a specific attribute during update if values input is blank     }  (required)
-     * @return InlineResponse2004
+     * @return InlineResponse2005
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2004 crmDealsImportPost(File file, String mapping) throws ApiException {
-        ApiResponse<InlineResponse2004> resp = crmDealsImportPostWithHttpInfo(file, mapping);
+    public InlineResponse2005 crmDealsImportPost(File file, String mapping) throws ApiException {
+        ApiResponse<InlineResponse2005> resp = crmDealsImportPostWithHttpInfo(file, mapping);
         return resp.getData();
     }
 
@@ -927,12 +926,12 @@ public class DealsApi {
      * Import deals from a CSV file with mapping options.
      * @param file The CSV file to upload.The file should have the first row as the mapping attribute. Some default attribute names are (a) deal_id [brevo mongoID to update deals] (b) associated_contact (c) associated_company (f) any other attribute with internal name  (required)
      * @param mapping The mapping options in Json format.   json    {       &quot;link_entities&quot;: true, // Determines whether to link related entities during the import process       &quot;unlink_entities&quot;: false, //Determines whether to unlink related entities during the import process.       &quot;update_existing_records&quot;: true, // Determines whether to update based on deal ID or treat every row as create       &quot;unset_empty_attributes&quot;: false // Determines whether unset a specific attribute during update if values input is blank     }  (required)
-     * @return ApiResponse&lt;InlineResponse2004&gt;
+     * @return ApiResponse&lt;InlineResponse2005&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2004> crmDealsImportPostWithHttpInfo(File file, String mapping) throws ApiException {
+    public ApiResponse<InlineResponse2005> crmDealsImportPostWithHttpInfo(File file, String mapping) throws ApiException {
         Call call = crmDealsImportPostValidateBeforeCall(file, mapping, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2004>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2005>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -945,7 +944,7 @@ public class DealsApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call crmDealsImportPostAsync(File file, String mapping, final ApiCallback<InlineResponse2004> callback) throws ApiException {
+    public Call crmDealsImportPostAsync(File file, String mapping, final ApiCallback<InlineResponse2005> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -967,7 +966,7 @@ public class DealsApi {
         }
 
         Call call = crmDealsImportPostValidateBeforeCall(file, mapping, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2004>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2005>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }

@@ -31,7 +31,7 @@ import org.threeten.bp.OffsetDateTime;
 /**
  * MainOrderPayload
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class MainOrderPayload {
   @SerializedName("amount")
   private BigDecimal amount = null;

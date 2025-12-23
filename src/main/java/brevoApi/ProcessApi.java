@@ -14,14 +14,15 @@
 package brevoApi;
 
 import brevo.*;
-import brevoModel.GetProcess;
-import brevoModel.GetProcesses;
+import brevoModel.*;
 import com.google.gson.reflect.TypeToken;
-import okhttp3.Call;
-import okhttp3.Interceptor;
-import okhttp3.Response;
 
 import java.io.IOException;
+
+
+
+import okhttp3.*;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
