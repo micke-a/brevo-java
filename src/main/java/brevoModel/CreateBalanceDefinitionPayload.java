@@ -29,7 +29,7 @@ import org.threeten.bp.LocalDate;
  * Payload for creating a new balance definition, specifying expiration rules, rounding strategies, and constraints.
  */
 @ApiModel(description = "Payload for creating a new balance definition, specifying expiration rules, rounding strategies, and constraints.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class CreateBalanceDefinitionPayload {
   /**
    * Defines when the balance expires within the selected duration.

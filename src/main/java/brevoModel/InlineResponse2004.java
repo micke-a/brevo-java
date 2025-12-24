@@ -26,27 +26,27 @@ import java.io.IOException;
 /**
  * InlineResponse2004
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class InlineResponse2004 {
-  @SerializedName("processId")
-  private Integer processId = null;
+  @SerializedName("id")
+  private String id = null;
 
-  public InlineResponse2004 processId(Integer processId) {
-    this.processId = processId;
+  public InlineResponse2004 id(String id) {
+    this.id = id;
     return this;
   }
 
    /**
-   * The ID of the import process
-   * @return processId
+   * Unique ID of the created attribute
+   * @return id
   **/
-  @ApiModelProperty(example = "50", value = "The ID of the import process")
-  public Integer getProcessId() {
-    return processId;
+  @ApiModelProperty(example = "61a5cd07ca1347c82306ad07", required = true, value = "Unique ID of the created attribute")
+  public String getId() {
+    return id;
   }
 
-  public void setProcessId(Integer processId) {
-    this.processId = processId;
+  public void setId(String id) {
+    this.id = id;
   }
 
 
@@ -59,12 +59,12 @@ public class InlineResponse2004 {
     return false;
   }
     InlineResponse2004 inlineResponse2004 = (InlineResponse2004) o;
-    return ObjectUtils.equals(this.processId, inlineResponse2004.processId);
+    return ObjectUtils.equals(this.id, inlineResponse2004.id);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(processId);
+    return ObjectUtils.hashCodeMulti(id);
   }
 
 
@@ -73,7 +73,7 @@ public class InlineResponse2004 {
     StringBuilder sb = new StringBuilder();
     sb.append("class InlineResponse2004 {\n");
     
-    sb.append("    processId: ").append(toIndentedString(processId)).append("\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("}");
     return sb.toString();
   }

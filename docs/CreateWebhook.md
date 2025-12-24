@@ -11,8 +11,7 @@ Name | Type | Description | Notes
 **channel** | [**ChannelEnum**](#ChannelEnum) | channel of webhook |  [optional]
 **domain** | **String** | Inbound domain of webhook, required in case of event type &#x60;inbound&#x60; |  [optional]
 **batched** | **Boolean** | To send batched webhooks |  [optional]
-**auth** | [**GetWebhookAuth**](GetWebhookAuth.md) |  |  [optional]
-**headers** | [**List&lt;GetWebhookHeaders&gt;**](GetWebhookHeaders.md) | Custom headers to be send with webhooks |  [optional]
+**auth** | [**CreateWebhookAuth**](CreateWebhookAuth.md) |  |  [optional]
 
 
 <a name="List<EventsEnum>"></a>

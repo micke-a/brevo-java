@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **String** | ISO 4217 compliant display currency code | 
+**processId** | **Integer** | The ID of the import process |  [optional]
 
 
 

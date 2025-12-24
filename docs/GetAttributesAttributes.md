@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **type** | [**TypeEnum**](#TypeEnum) | Type of the attribute |  [optional]
 **enumeration** | [**List&lt;GetAttributesEnumeration&gt;**](GetAttributesEnumeration.md) | Parameter only available for &quot;category&quot; type attributes. |  [optional]
 **calculatedValue** | **String** | Calculated value formula |  [optional]
+**multiCategoryOptions** | **List&lt;String&gt;** | Parameter only available for &quot;multiple-choice&quot; type attributes. |  [optional]
 
 
 <a name="CategoryEnum"></a>
@@ -31,6 +32,8 @@ DATE | &quot;date&quot;
 FLOAT | &quot;float&quot;
 ID | &quot;id&quot;
 BOOLEAN | &quot;boolean&quot;
+MULTIPLE_CHOICE | &quot;multiple-choice&quot;
+USER | &quot;user&quot;
 
 
 

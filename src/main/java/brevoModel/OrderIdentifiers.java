@@ -27,7 +27,7 @@ import java.io.IOException;
  * Identifies the contact associated with the order.
  */
 @ApiModel(description = "Identifies the contact associated with the order.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class OrderIdentifiers {
   @SerializedName("ext_id")
   private String extId = null;

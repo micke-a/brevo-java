@@ -16,9 +16,8 @@ package brevoApi;
 import brevo.*;
 import brevoModel.*;
 import com.google.gson.reflect.TypeToken;
-import okhttp3.Call;
-import okhttp3.Interceptor;
-import okhttp3.Response;
+
+import okhttp3.*;
 import org.threeten.bp.LocalDate;
 import brevoModel.PostSendFailed;
 import brevoModel.ScheduleSmtpEmail;
@@ -2827,7 +2826,7 @@ public class TransactionalEmailsApi {
     }
     /**
      * Build call for smtpLogIdentifierDelete
-     * @param identifier MessageId or Email of the transactional log(s) to delete (required)
+     * @param identifier MessageId of the transactional log(s) to delete (required)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
@@ -2892,7 +2891,7 @@ public class TransactionalEmailsApi {
     /**
      * Delete an SMTP transactional log
      * 
-     * @param identifier MessageId or Email of the transactional log(s) to delete (required)
+     * @param identifier MessageId of the transactional log(s) to delete (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public void smtpLogIdentifierDelete(String identifier) throws ApiException {
@@ -2902,7 +2901,7 @@ public class TransactionalEmailsApi {
     /**
      * Delete an SMTP transactional log
      * 
-     * @param identifier MessageId or Email of the transactional log(s) to delete (required)
+     * @param identifier MessageId of the transactional log(s) to delete (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
@@ -2914,7 +2913,7 @@ public class TransactionalEmailsApi {
     /**
      * Delete an SMTP transactional log (asynchronously)
      * 
-     * @param identifier MessageId or Email of the transactional log(s) to delete (required)
+     * @param identifier MessageId of the transactional log(s) to delete (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object

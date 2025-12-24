@@ -14,6 +14,7 @@
 package brevoModel;
 
 import org.apache.commons.lang3.ObjectUtils;
+import brevoModel.InlineResponse200Templates;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -22,31 +23,62 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * InlineResponse200
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class InlineResponse200 {
-  @SerializedName("message")
-  private String message = null;
+  @SerializedName("count")
+  private Long count = null;
 
-  public InlineResponse200 message(String message) {
-    this.message = message;
+  @SerializedName("templates")
+  private List<InlineResponse200Templates> templates = null;
+
+  public InlineResponse200 count(Long count) {
+    this.count = count;
     return this;
   }
 
    /**
-   * Get message
-   * @return message
+   * Count of transactional sms templates
+   * @return count
   **/
-  @ApiModelProperty(value = "")
-  public String getMessage() {
-    return message;
+  @ApiModelProperty(example = "1", value = "Count of transactional sms templates")
+  public Long getCount() {
+    return count;
   }
 
-  public void setMessage(String message) {
-    this.message = message;
+  public void setCount(Long count) {
+    this.count = count;
+  }
+
+  public InlineResponse200 templates(List<InlineResponse200Templates> templates) {
+    this.templates = templates;
+    return this;
+  }
+
+  public InlineResponse200 addTemplatesItem(InlineResponse200Templates templatesItem) {
+    if (this.templates == null) {
+      this.templates = new ArrayList<InlineResponse200Templates>();
+    }
+    this.templates.add(templatesItem);
+    return this;
+  }
+
+   /**
+   * Get templates
+   * @return templates
+  **/
+  @ApiModelProperty(value = "")
+  public List<InlineResponse200Templates> getTemplates() {
+    return templates;
+  }
+
+  public void setTemplates(List<InlineResponse200Templates> templates) {
+    this.templates = templates;
   }
 
 
@@ -59,12 +91,13 @@ public class InlineResponse200 {
     return false;
   }
     InlineResponse200 inlineResponse200 = (InlineResponse200) o;
-    return ObjectUtils.equals(this.message, inlineResponse200.message);
+    return ObjectUtils.equals(this.count, inlineResponse200.count) &&
+    ObjectUtils.equals(this.templates, inlineResponse200.templates);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(message);
+    return ObjectUtils.hashCodeMulti(count, templates);
   }
 
 
@@ -73,7 +106,8 @@ public class InlineResponse200 {
     StringBuilder sb = new StringBuilder();
     sb.append("class InlineResponse200 {\n");
     
-    sb.append("    message: ").append(toIndentedString(message)).append("\n");
+    sb.append("    count: ").append(toIndentedString(count)).append("\n");
+    sb.append("    templates: ").append(toIndentedString(templates)).append("\n");
     sb.append("}");
     return sb.toString();
   }

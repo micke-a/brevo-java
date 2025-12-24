@@ -16,9 +16,6 @@ package brevoApi;
 import brevo.*;
 import brevoModel.*;
 import com.google.gson.reflect.TypeToken;
-import okhttp3.Call;
-import okhttp3.Interceptor;
-import okhttp3.Response;
 
 import java.io.IOException;
 
@@ -35,7 +32,9 @@ import java.io.File;
 import brevoModel.InlineResponse2002;
 import brevoModel.InlineResponse2003;
 import brevoModel.InlineResponse2004;
+import brevoModel.InlineResponse2005;
 import brevoModel.InlineResponse400;
+import okhttp3.*;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -681,11 +680,11 @@ public class CompaniesApi {
      * Import companies from a CSV file with mapping options.
      * @param file The CSV file to upload.The file should have the first row as the mapping attribute. Some default attribute names are (a) company_id [brevo mongoID to update deals] (b) associated_contact (c) associated_deal (f) any other attribute with internal name  (required)
      * @param mapping The mapping options in Json format.   json    {       &quot;link_entities&quot;: true, // Determines whether to link related entities during the import process       &quot;unlink_entities&quot;: false, //Determines whether to unlink related entities during the import process.       &quot;update_existing_records&quot;: true, // Determines whether to update based on company ID or treat every row as create       &quot;unset_empty_attributes&quot;: false // Determines whether unset a specific attribute during update if values input is blank       &quot;use_company_identifier&quot;: false // Determines whether to use company name as identifier     }  (required)
-     * @return InlineResponse2004
+     * @return InlineResponse2005
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2004 companiesImportPost(File file, String mapping) throws ApiException {
-        ApiResponse<InlineResponse2004> resp = companiesImportPostWithHttpInfo(file, mapping);
+    public InlineResponse2005 companiesImportPost(File file, String mapping) throws ApiException {
+        ApiResponse<InlineResponse2005> resp = companiesImportPostWithHttpInfo(file, mapping);
         return resp.getData();
     }
 
@@ -694,12 +693,12 @@ public class CompaniesApi {
      * Import companies from a CSV file with mapping options.
      * @param file The CSV file to upload.The file should have the first row as the mapping attribute. Some default attribute names are (a) company_id [brevo mongoID to update deals] (b) associated_contact (c) associated_deal (f) any other attribute with internal name  (required)
      * @param mapping The mapping options in Json format.   json    {       &quot;link_entities&quot;: true, // Determines whether to link related entities during the import process       &quot;unlink_entities&quot;: false, //Determines whether to unlink related entities during the import process.       &quot;update_existing_records&quot;: true, // Determines whether to update based on company ID or treat every row as create       &quot;unset_empty_attributes&quot;: false // Determines whether unset a specific attribute during update if values input is blank       &quot;use_company_identifier&quot;: false // Determines whether to use company name as identifier     }  (required)
-     * @return ApiResponse&lt;InlineResponse2004&gt;
+     * @return ApiResponse&lt;InlineResponse2005&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2004> companiesImportPostWithHttpInfo(File file, String mapping) throws ApiException {
+    public ApiResponse<InlineResponse2005> companiesImportPostWithHttpInfo(File file, String mapping) throws ApiException {
         Call call = companiesImportPostValidateBeforeCall(file, mapping, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2004>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2005>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -712,7 +711,7 @@ public class CompaniesApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call companiesImportPostAsync(File file, String mapping, final ApiCallback<InlineResponse2004> callback) throws ApiException {
+    public Call companiesImportPostAsync(File file, String mapping, final ApiCallback<InlineResponse2005> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -734,7 +733,7 @@ public class CompaniesApi {
         }
 
         Call call = companiesImportPostValidateBeforeCall(file, mapping, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2004>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2005>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -933,11 +932,11 @@ public class CompaniesApi {
      * Create a company
      * 
      * @param body Company create data. (required)
-     * @return InlineResponse2002
+     * @return InlineResponse2003
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2002 companiesPost(Body6 body) throws ApiException {
-        ApiResponse<InlineResponse2002> resp = companiesPostWithHttpInfo(body);
+    public InlineResponse2003 companiesPost(Body6 body) throws ApiException {
+        ApiResponse<InlineResponse2003> resp = companiesPostWithHttpInfo(body);
         return resp.getData();
     }
 
@@ -945,12 +944,12 @@ public class CompaniesApi {
      * Create a company
      * 
      * @param body Company create data. (required)
-     * @return ApiResponse&lt;InlineResponse2002&gt;
+     * @return ApiResponse&lt;InlineResponse2003&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2002> companiesPostWithHttpInfo(Body6 body) throws ApiException {
+    public ApiResponse<InlineResponse2003> companiesPostWithHttpInfo(Body6 body) throws ApiException {
         Call call = companiesPostValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2002>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2003>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -962,7 +961,7 @@ public class CompaniesApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call companiesPostAsync(Body6 body, final ApiCallback<InlineResponse2002> callback) throws ApiException {
+    public Call companiesPostAsync(Body6 body, final ApiCallback<InlineResponse2003> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -984,7 +983,7 @@ public class CompaniesApi {
         }
 
         Call call = companiesPostValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2002>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2003>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -1168,11 +1167,11 @@ public class CompaniesApi {
      * Create a deal/company attribute
      * 
      * @param body Attribute creation data for company (required)
-     * @return InlineResponse2003
+     * @return InlineResponse2004
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2003 crmAttributesPost(Body9 body) throws ApiException {
-        ApiResponse<InlineResponse2003> resp = crmAttributesPostWithHttpInfo(body);
+    public InlineResponse2004 crmAttributesPost(Body9 body) throws ApiException {
+        ApiResponse<InlineResponse2004> resp = crmAttributesPostWithHttpInfo(body);
         return resp.getData();
     }
 
@@ -1180,12 +1179,12 @@ public class CompaniesApi {
      * Create a deal/company attribute
      * 
      * @param body Attribute creation data for company (required)
-     * @return ApiResponse&lt;InlineResponse2003&gt;
+     * @return ApiResponse&lt;InlineResponse2004&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2003> crmAttributesPostWithHttpInfo(Body9 body) throws ApiException {
+    public ApiResponse<InlineResponse2004> crmAttributesPostWithHttpInfo(Body9 body) throws ApiException {
         Call call = crmAttributesPostValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2003>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2004>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -1197,7 +1196,7 @@ public class CompaniesApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call crmAttributesPostAsync(Body9 body, final ApiCallback<InlineResponse2003> callback) throws ApiException {
+    public Call crmAttributesPostAsync(Body9 body, final ApiCallback<InlineResponse2004> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1219,7 +1218,7 @@ public class CompaniesApi {
         }
 
         Call call = crmAttributesPostValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2003>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse2004>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }

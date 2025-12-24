@@ -29,7 +29,7 @@ import java.util.List;
  * Task reminder date/time for a task
  */
 @ApiModel(description = "Task reminder date/time for a task")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class TaskReminder {
   @SerializedName("value")
   private Integer value = null;

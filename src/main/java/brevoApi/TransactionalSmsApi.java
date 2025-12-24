@@ -23,9 +23,6 @@ import brevo.ProgressRequestBody;
 import brevo.ProgressResponseBody;
 
 import com.google.gson.reflect.TypeToken;
-import okhttp3.Call;
-import okhttp3.Interceptor;
-import okhttp3.Response;
 
 import java.io.IOException;
 
@@ -35,6 +32,7 @@ import brevoModel.GetSmsEventReport;
 import brevoModel.GetTransacAggregatedSmsReport;
 import brevoModel.GetTransacSmsReport;
 import brevoModel.SendSms;
+import brevoModel.SendSmsAsync;
 import brevoModel.SendTransacSms;
 import okhttp3.*;
 
@@ -577,22 +575,25 @@ public class TransactionalSmsApi {
      * Send SMS message asynchronously to a mobile number
      *
      * @param sendTransacSms Values to send a transactional SMS (required)
+     * @return SendSmsAsync
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public void sendAsyncTransactionalSms(SendTransacSms sendTransacSms) throws ApiException {
-        sendAsyncTransactionalSmsWithHttpInfo(sendTransacSms);
+    public SendSmsAsync sendAsyncTransactionalSms(SendTransacSms sendTransacSms) throws ApiException {
+        ApiResponse<SendSmsAsync> resp = sendAsyncTransactionalSmsWithHttpInfo(sendTransacSms);
+        return resp.getData();
     }
 
     /**
      * Send SMS message asynchronously to a mobile number
      *
      * @param sendTransacSms Values to send a transactional SMS (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return ApiResponse&lt;SendSmsAsync&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Void> sendAsyncTransactionalSmsWithHttpInfo(SendTransacSms sendTransacSms) throws ApiException {
+    public ApiResponse<SendSmsAsync> sendAsyncTransactionalSmsWithHttpInfo(SendTransacSms sendTransacSms) throws ApiException {
         Call call = sendAsyncTransactionalSmsValidateBeforeCall(sendTransacSms, null, null);
-        return apiClient.execute(call);
+        Type localVarReturnType = new TypeToken<SendSmsAsync>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
     }
 
     /**
@@ -603,7 +604,7 @@ public class TransactionalSmsApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call sendAsyncTransactionalSmsAsync(SendTransacSms sendTransacSms, final ApiCallback<Void> callback) throws ApiException {
+    public Call sendAsyncTransactionalSmsAsync(SendTransacSms sendTransacSms, final ApiCallback<SendSmsAsync> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -625,7 +626,8 @@ public class TransactionalSmsApi {
         }
 
         Call call = sendAsyncTransactionalSmsValidateBeforeCall(sendTransacSms, progressListener, progressRequestListener);
-        apiClient.executeAsync(call, callback);
+        Type localVarReturnType = new TypeToken<SendSmsAsync>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
     /**

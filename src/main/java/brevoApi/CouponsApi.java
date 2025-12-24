@@ -16,9 +16,6 @@ package brevoApi;
 import brevo.*;
 import brevoModel.*;
 import com.google.gson.reflect.TypeToken;
-import okhttp3.Call;
-import okhttp3.Interceptor;
-import okhttp3.Response;
 
 import java.io.IOException;
 
@@ -27,9 +24,10 @@ import brevoModel.CreateCouponCollection;
 import brevoModel.CreateCoupons;
 import brevoModel.ErrorModel;
 import brevoModel.GetCouponCollection;
-import brevoModel.InlineResponse2009;
+import brevoModel.InlineResponse20010;
 import brevoModel.InlineResponse2013;
 import brevoModel.UpdateCouponCollection;
+import okhttp3.*;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -626,11 +624,11 @@ public class CouponsApi {
      * 
      * @param id Id of the collection to update (required)
      * @param updateCouponCollection Values to update the coupon collection (optional)
-     * @return InlineResponse2009
+     * @return InlineResponse20010
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public InlineResponse2009 updateCouponCollection(String id, UpdateCouponCollection updateCouponCollection) throws ApiException {
-        ApiResponse<InlineResponse2009> resp = updateCouponCollectionWithHttpInfo(id, updateCouponCollection);
+    public InlineResponse20010 updateCouponCollection(String id, UpdateCouponCollection updateCouponCollection) throws ApiException {
+        ApiResponse<InlineResponse20010> resp = updateCouponCollectionWithHttpInfo(id, updateCouponCollection);
         return resp.getData();
     }
 
@@ -639,12 +637,12 @@ public class CouponsApi {
      * 
      * @param id Id of the collection to update (required)
      * @param updateCouponCollection Values to update the coupon collection (optional)
-     * @return ApiResponse&lt;InlineResponse2009&gt;
+     * @return ApiResponse&lt;InlineResponse20010&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<InlineResponse2009> updateCouponCollectionWithHttpInfo(String id, UpdateCouponCollection updateCouponCollection) throws ApiException {
+    public ApiResponse<InlineResponse20010> updateCouponCollectionWithHttpInfo(String id, UpdateCouponCollection updateCouponCollection) throws ApiException {
         Call call = updateCouponCollectionValidateBeforeCall(id, updateCouponCollection, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse2009>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse20010>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -657,7 +655,7 @@ public class CouponsApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call updateCouponCollectionAsync(String id, UpdateCouponCollection updateCouponCollection, final ApiCallback<InlineResponse2009> callback) throws ApiException {
+    public Call updateCouponCollectionAsync(String id, UpdateCouponCollection updateCouponCollection, final ApiCallback<InlineResponse20010> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -679,7 +677,7 @@ public class CouponsApi {
         }
 
         Call call = updateCouponCollectionValidateBeforeCall(id, updateCouponCollection, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse2009>(){}.getType();
+        Type localVarReturnType = new TypeToken<InlineResponse20010>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }

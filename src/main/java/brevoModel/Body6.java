@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * Body6
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class Body6 {
   @SerializedName("name")
   private String name = null;
@@ -69,10 +69,10 @@ public class Body6 {
   }
 
    /**
-   * Attributes for company creation
+   * Attributes for company creation To assign owner of a Company you can send &#x60;owner&#x60; and utilize the account email or ID. 
    * @return attributes
   **/
-  @ApiModelProperty(example = "{\"domain\":\"https://example.com\",\"industry\":\"Fabric\",\"owner\":\"60e68d60582a3b006f524197\"}", value = "Attributes for company creation")
+  @ApiModelProperty(example = "{\"domain\":\"https://example.com\",\"industry\":\"Fabric\",\"owner\":\"60e68d60582a3b006f524197\"}", value = "Attributes for company creation To assign owner of a Company you can send `owner` and utilize the account email or ID. ")
   public Object getAttributes() {
     return attributes;
   }

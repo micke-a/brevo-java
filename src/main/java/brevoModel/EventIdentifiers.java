@@ -27,10 +27,13 @@ import java.io.IOException;
  * Identifies the contact associated with the event. At least one identifier is required.
  */
 @ApiModel(description = "Identifies the contact associated with the event. At least one identifier is required.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class EventIdentifiers {
   @SerializedName("email_id")
   private String emailId = null;
+
+  @SerializedName("contact_id")
+  private Long contactId = null;
 
   @SerializedName("phone_id")
   private String phoneId = null;
@@ -60,6 +63,24 @@ public class EventIdentifiers {
 
   public void setEmailId(String emailId) {
     this.emailId = emailId;
+  }
+
+  public EventIdentifiers contactId(Long contactId) {
+    this.contactId = contactId;
+    return this;
+  }
+
+   /**
+   * Internal unique contact ID. When present, this takes priority over all other identifiers for event attribution and contact resolution.
+   * @return contactId
+  **/
+  @ApiModelProperty(example = "211", value = "Internal unique contact ID. When present, this takes priority over all other identifiers for event attribution and contact resolution.")
+  public Long getContactId() {
+    return contactId;
+  }
+
+  public void setContactId(Long contactId) {
+    this.contactId = contactId;
   }
 
   public EventIdentifiers phoneId(String phoneId) {
@@ -145,6 +166,7 @@ public class EventIdentifiers {
   }
     EventIdentifiers eventIdentifiers = (EventIdentifiers) o;
     return ObjectUtils.equals(this.emailId, eventIdentifiers.emailId) &&
+    ObjectUtils.equals(this.contactId, eventIdentifiers.contactId) &&
     ObjectUtils.equals(this.phoneId, eventIdentifiers.phoneId) &&
     ObjectUtils.equals(this.whatsappId, eventIdentifiers.whatsappId) &&
     ObjectUtils.equals(this.landlineNumberId, eventIdentifiers.landlineNumberId) &&
@@ -153,7 +175,7 @@ public class EventIdentifiers {
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(emailId, phoneId, whatsappId, landlineNumberId, extId);
+    return ObjectUtils.hashCodeMulti(emailId, contactId, phoneId, whatsappId, landlineNumberId, extId);
   }
 
 
@@ -163,6 +185,7 @@ public class EventIdentifiers {
     sb.append("class EventIdentifiers {\n");
     
     sb.append("    emailId: ").append(toIndentedString(emailId)).append("\n");
+    sb.append("    contactId: ").append(toIndentedString(contactId)).append("\n");
     sb.append("    phoneId: ").append(toIndentedString(phoneId)).append("\n");
     sb.append("    whatsappId: ").append(toIndentedString(whatsappId)).append("\n");
     sb.append("    landlineNumberId: ").append(toIndentedString(landlineNumberId)).append("\n");

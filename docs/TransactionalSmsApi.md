@@ -220,7 +220,7 @@ Name | Type | Description  | Notes
 
 <a name="sendAsyncTransactionalSms"></a>
 # **sendAsyncTransactionalSms**
-> sendAsyncTransactionalSms()
+> SendSmsAsync sendAsyncTransactionalSms(sendTransacSms)
 
 Send SMS message asynchronously to a mobile number
 
@@ -248,8 +248,10 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 //partnerKey.setApiKeyPrefix("Token");
 
 TransactionalSmsApi apiInstance = new TransactionalSmsApi();
+SendTransacSms sendTransacSms = new SendTransacSms(); // SendTransacSms | Values to send a transactional SMS
 try {
-    apiInstance.sendAsyncTransactionalSms();
+    SendSmsAsync result = apiInstance.sendAsyncTransactionalSms(sendTransacSms);
+    System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling TransactionalSmsApi#sendAsyncTransactionalSms");
     e.printStackTrace();
@@ -257,11 +259,14 @@ try {
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sendTransacSms** | [**SendTransacSms**](SendTransacSms.md)| Values to send a transactional SMS |
 
 ### Return type
 
-null (empty response body)
+[**SendSmsAsync**](SendSmsAsync.md)
 
 ### Authorization
 

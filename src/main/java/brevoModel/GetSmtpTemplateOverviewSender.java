@@ -26,7 +26,7 @@ import java.io.IOException;
 /**
  * GetSmtpTemplateOverviewSender
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class GetSmtpTemplateOverviewSender {
   @SerializedName("name")
   private String name = null;

@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **events** | [**List&lt;EventsEnum&gt;**](#List&lt;EventsEnum&gt;) | - Events triggering the webhook. Possible values for **Transactional** type webhook: #### &#x60;sent&#x60; OR &#x60;request&#x60;, &#x60;delivered&#x60;, &#x60;hardBounce&#x60;, &#x60;softBounce&#x60;, &#x60;blocked&#x60;, &#x60;spam&#x60;, &#x60;invalid&#x60;, &#x60;deferred&#x60;, &#x60;click&#x60;, &#x60;opened&#x60;, &#x60;uniqueOpened&#x60; and &#x60;unsubscribed&#x60; - Possible values for **Marketing** type webhook: #### &#x60;spam&#x60;, &#x60;opened&#x60;, &#x60;click&#x60;, &#x60;hardBounce&#x60;, &#x60;softBounce&#x60;, &#x60;unsubscribed&#x60;, &#x60;listAddition&#x60; &amp; &#x60;delivered&#x60; - Possible values for **Inbound** type webhook: #### &#x60;inboundEmailProcessed&#x60;  |  [optional]
 **domain** | **String** | Inbound domain of webhook, used in case of event type &#x60;inbound&#x60; |  [optional]
 **batched** | **Boolean** | To send batched webhooks |  [optional]
-**auth** | [**GetWebhookAuth**](GetWebhookAuth.md) |  |  [optional]
-**headers** | [**List&lt;GetWebhookHeaders&gt;**](GetWebhookHeaders.md) | Custom headers to be send with webhooks |  [optional]
+**auth** | [**CreateWebhookAuth**](CreateWebhookAuth.md) |  |  [optional]
+**headers** | [**List&lt;UpdateWebhookHeaders&gt;**](UpdateWebhookHeaders.md) | The headers sent with the request to the webhook. Header format: &quot;headers&quot;: [{ &quot;key&quot;: &quot;cf-secret&quot;,&quot;value&quot;: &quot;test-header-value&quot;}]  |  [optional]
 
 
 <a name="List<EventsEnum>"></a>

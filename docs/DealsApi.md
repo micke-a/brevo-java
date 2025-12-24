@@ -75,7 +75,7 @@ This endpoint does not need any parameter.
 
 <a name="crmAttributesPost"></a>
 # **crmAttributesPost**
-> InlineResponse2003 crmAttributesPost(body)
+> InlineResponse2004 crmAttributesPost(body)
 
 Create a deal/company attribute
 
@@ -105,7 +105,7 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 DealsApi apiInstance = new DealsApi();
 Body9 body = new Body9(); // Body9 | Attribute creation data for company
 try {
-    InlineResponse2003 result = apiInstance.crmAttributesPost(body);
+    InlineResponse2004 result = apiInstance.crmAttributesPost(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DealsApi#crmAttributesPost");
@@ -121,7 +121,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**InlineResponse2004**](InlineResponse2004.md)
 
 ### Authorization
 
@@ -386,7 +386,7 @@ null (empty response body)
 
 <a name="crmDealsImportPost"></a>
 # **crmDealsImportPost**
-> InlineResponse2004 crmDealsImportPost(file, mapping)
+> InlineResponse2005 crmDealsImportPost(file, mapping)
 
 Import deals(creation and updation)
 
@@ -419,7 +419,7 @@ DealsApi apiInstance = new DealsApi();
 File file = new File("/path/to/file.txt"); // File | The CSV file to upload.The file should have the first row as the mapping attribute. Some default attribute names are (a) deal_id [brevo mongoID to update deals] (b) associated_contact (c) associated_company (f) any other attribute with internal name 
 String mapping = "mapping_example"; // String | The mapping options in Json format.   json    {       \"link_entities\": true, // Determines whether to link related entities during the import process       \"unlink_entities\": false, //Determines whether to unlink related entities during the import process.       \"update_existing_records\": true, // Determines whether to update based on deal ID or treat every row as create       \"unset_empty_attributes\": false // Determines whether unset a specific attribute during update if values input is blank     } 
 try {
-    InlineResponse2004 result = apiInstance.crmDealsImportPost(file, mapping);
+    InlineResponse2005 result = apiInstance.crmDealsImportPost(file, mapping);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling DealsApi#crmDealsImportPost");
@@ -432,11 +432,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **file** | **File**| The CSV file to upload.The file should have the first row as the mapping attribute. Some default attribute names are (a) deal_id [brevo mongoID to update deals] (b) associated_contact (c) associated_company (f) any other attribute with internal name  |
- **mapping** | **String**| The mapping options in JSON format.   json    {       &quot;link_entities&quot;: true, // Determines whether to link related entities during the import process       &quot;unlink_entities&quot;: false, //Determines whether to unlink related entities during the import process.       &quot;update_existing_records&quot;: true, // Determines whether to update based on deal ID or treat every row as create       &quot;unset_empty_attributes&quot;: false // Determines whether unset a specific attribute during update if values input is blank     }  |
+ **mapping** | **String**| The mapping options in Json format.   json    {       &quot;link_entities&quot;: true, // Determines whether to link related entities during the import process       &quot;unlink_entities&quot;: false, //Determines whether to unlink related entities during the import process.       &quot;update_existing_records&quot;: true, // Determines whether to update based on deal ID or treat every row as create       &quot;unset_empty_attributes&quot;: false // Determines whether unset a specific attribute during update if values input is blank     }  |
 
 ### Return type
 
-[**InlineResponse2004**](InlineResponse2004.md)
+[**InlineResponse2005**](InlineResponse2005.md)
 
 ### Authorization
 

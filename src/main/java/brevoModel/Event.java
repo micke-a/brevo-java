@@ -15,6 +15,7 @@ package brevoModel;
 
 import org.apache.commons.lang3.ObjectUtils;
 import brevoModel.EventIdentifiers;
+import brevoModel.EventObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -27,7 +28,7 @@ import java.io.IOException;
 /**
  * Event
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class Event {
   @SerializedName("event_name")
   private String eventName = null;
@@ -43,6 +44,9 @@ public class Event {
 
   @SerializedName("event_properties")
   private Object eventProperties = null;
+
+  @SerializedName("object")
+  private EventObject object = null;
 
   public Event eventName(String eventName) {
     this.eventName = eventName;
@@ -134,6 +138,24 @@ public class Event {
     this.eventProperties = eventProperties;
   }
 
+  public Event object(EventObject object) {
+    this.object = object;
+    return this;
+  }
+
+   /**
+   * Get object
+   * @return object
+  **/
+  @ApiModelProperty(value = "")
+  public EventObject getObject() {
+    return object;
+  }
+
+  public void setObject(EventObject object) {
+    this.object = object;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -148,12 +170,13 @@ public class Event {
     ObjectUtils.equals(this.eventDate, event.eventDate) &&
     ObjectUtils.equals(this.identifiers, event.identifiers) &&
     ObjectUtils.equals(this.contactProperties, event.contactProperties) &&
-    ObjectUtils.equals(this.eventProperties, event.eventProperties);
+    ObjectUtils.equals(this.eventProperties, event.eventProperties) &&
+    ObjectUtils.equals(this.object, event.object);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(eventName, eventDate, identifiers, contactProperties, eventProperties);
+    return ObjectUtils.hashCodeMulti(eventName, eventDate, identifiers, contactProperties, eventProperties, object);
   }
 
 
@@ -167,6 +190,7 @@ public class Event {
     sb.append("    identifiers: ").append(toIndentedString(identifiers)).append("\n");
     sb.append("    contactProperties: ").append(toIndentedString(contactProperties)).append("\n");
     sb.append("    eventProperties: ").append(toIndentedString(eventProperties)).append("\n");
+    sb.append("    object: ").append(toIndentedString(object)).append("\n");
     sb.append("}");
     return sb.toString();
   }

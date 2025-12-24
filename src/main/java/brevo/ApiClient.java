@@ -1,6 +1,6 @@
 /*
  * Brevo API
- * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity |
+ * Brevo provide a RESTFul API that can be used with any languages. With this API, you will be able to :   - Manage your campaigns and get the statistics   - Manage your contacts   - Send transactional Emails and SMS   - and much more...  You can download our wrappers at https://github.com/orgs/brevo  **Possible responses**   | Code | Message |   | :-------------: | ------------- |   | 200  | OK. Successful Request  |   | 201  | OK. Successful Creation |   | 202  | OK. Request accepted |   | 204  | OK. Successful Update/Deletion  |   | 400  | Error. Bad Request  |   | 401  | Error. Authentication Needed  |   | 402  | Error. Not enough credit, plan upgrade needed  |   | 403  | Error. Permission denied  |   | 404  | Error. Object does not exist |   | 405  | Error. Method not allowed  |   | 406  | Error. Not Acceptable  |   | 422  | Error. Unprocessable Entity | 
  *
  * OpenAPI spec version: 3.0.0
  * Contact: contact@brevo.com
@@ -438,7 +438,7 @@ public class ApiClient {
      * @return Api client
      */
     public ApiClient setConnectTimeout(int connectionTimeout) {
-        httpClient.newBuilder().connectTimeout(connectionTimeout, TimeUnit.MILLISECONDS).build();
+        httpClient.newBuilder().connectTimeout(connectionTimeout, TimeUnit.MILLISECONDS);
         return this;
     }
 
@@ -460,7 +460,7 @@ public class ApiClient {
      * @return Api client
      */
     public ApiClient setReadTimeout(int readTimeout) {
-        httpClient.newBuilder().readTimeout(readTimeout, TimeUnit.MILLISECONDS).build();
+        httpClient.newBuilder().readTimeout(readTimeout, TimeUnit.MILLISECONDS);
         return this;
     }
 
@@ -482,7 +482,7 @@ public class ApiClient {
      * @return Api client
      */
     public ApiClient setWriteTimeout(int writeTimeout) {
-        httpClient.newBuilder().writeTimeout(writeTimeout, TimeUnit.MILLISECONDS).build();
+        httpClient.newBuilder().writeTimeout(writeTimeout, TimeUnit.MILLISECONDS);
         return this;
     }
 
@@ -601,7 +601,6 @@ public class ApiClient {
      * APPLICATION/Json
      * application/vnd.company+json
      * "* / *" is also default to Json
-     *
      * @param mime MIME (Multipurpose Internet Mail Extensions)
      * @return True if the given MIME is Json, false otherwise.
      */
@@ -1155,25 +1154,17 @@ public class ApiClient {
             if (!verifyingSsl) {
                 TrustManager trustAll = new X509TrustManager() {
                     @Override
-                    public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-                    }
-
+                    public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {}
                     @Override
-                    public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-                    }
-
+                    public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {}
                     @Override
-                    public X509Certificate[] getAcceptedIssuers() {
-                        return null;
-                    }
+                    public X509Certificate[] getAcceptedIssuers() { return null; }
                 };
                 SSLContext sslContext = SSLContext.getInstance("TLS");
-                trustManagers = new TrustManager[]{trustAll};
+                trustManagers = new TrustManager[]{ trustAll };
                 hostnameVerifier = new HostnameVerifier() {
                     @Override
-                    public boolean verify(String hostname, SSLSession session) {
-                        return true;
-                    }
+                    public boolean verify(String hostname, SSLSession session) { return true; }
                 };
             } else if (sslCaCert != null) {
                 char[] password = null; // Any password will work.

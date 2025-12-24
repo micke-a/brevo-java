@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**processId** | **Integer** | The ID of the import process |  [optional]
+**id** | **String** | Unique ID of the created attribute | 
 
 
 

@@ -4,7 +4,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **String** |  |  [optional]
+**count** | **Long** | Count of transactional sms templates |  [optional]
+**templates** | [**List&lt;InlineResponse200Templates&gt;**](InlineResponse200Templates.md) |  |  [optional]
 
 
 

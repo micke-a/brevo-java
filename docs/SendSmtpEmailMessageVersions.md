@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **subject** | **String** | Custom subject specific to message version  |  [optional]
 **htmlContent** | **String** | HTML body of the message. **Mandatory if &#39;templateId&#39; is not passed, ignored if &#39;templateId&#39; is passed**  |  [optional]
 **textContent** | **String** | Plain Text body of the message. **Ignored if &#39;templateId&#39; is passed**  |  [optional]
+**headers** | **Object** | Pass the set of custom headers (not the standard headers) that shall be sent along the mail headers in the original email. &#39;sender.ip&#39; header can be set (only for dedicated ip users) to mention the IP to be used for sending transactional emails. Headers are allowed in &#x60;This-Case-Only&#x60; (i.e. words separated by hyphen with first letter of each word in capital letter), they will be converted to such case styling if not in this format in the request payload. For example, &#x60;{&quot;sender.ip&quot;:&quot;1.2.3.4&quot;, &quot;X-Mailin-custom&quot;:&quot;some_custom_header&quot;, &quot;idempotencyKey&quot;:&quot;abc-123&quot;}&#x60;. |  [optional]
 
 
 

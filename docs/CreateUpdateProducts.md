@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **metaInfo** | **Map&lt;String, String&gt;** | Meta data of product such as description, vendor, producer, stock level. The size of cumulative metaInfo shall not exceed **1000 KB**. Maximum length of metaInfo object can be 20. |  [optional]
 **deletedAt** | **String** | UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) of the product deleted from the shop&#39;s database |  [optional]
 **isDeleted** | **Boolean** | product deleted from the shop&#39;s database |  [optional]
+**stock** | [**BigDecimal**](BigDecimal.md) | Current stock value of the product from the shop&#39;s database |  [optional]
 
 
 

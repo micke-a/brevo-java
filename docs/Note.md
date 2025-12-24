@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **authorId** | **Object** | Account details of user which created the note |  [optional]
 **createdAt** | [**OffsetDateTime**] | Note created date/time |  [optional]
 **updatedAt** | [**OffsetDateTime**] | Note updated date/time |  [optional]
+**pinnedAt** | [**OffsetDateTime**] | Note pinned date/time |  [optional]
 
 
 

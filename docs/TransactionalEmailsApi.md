@@ -1393,7 +1393,7 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 //partnerKey.setApiKeyPrefix("Token");
 
 TransactionalEmailsApi apiInstance = new TransactionalEmailsApi();
-String identifier = "identifier_example"; // String | MessageId or Email of the transactional log(s) to delete
+String identifier = "identifier_example"; // String | MessageId of the transactional log(s) to delete
 try {
     apiInstance.smtpLogIdentifierDelete(identifier);
 } catch (ApiException e) {
@@ -1406,7 +1406,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **identifier** | **String**| MessageId or Email of the transactional log(s) to delete |
+ **identifier** | **String**| MessageId of the transactional log(s) to delete |
 
 ### Return type
 

@@ -15,6 +15,7 @@ package brevoModel;
 
 import org.apache.commons.lang3.ObjectUtils;
 import brevoModel.ConversionSourceMetrics;
+import brevoModel.InlineResponse2007Totals;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -23,53 +24,59 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * InlineResponse2007
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class InlineResponse2007 {
-  @SerializedName("ConversionSourceMetrics")
-  private ConversionSourceMetrics conversionSourceMetrics = null;
+  @SerializedName("results")
+  private List<ConversionSourceMetrics> results = new ArrayList<ConversionSourceMetrics>();
 
-  @SerializedName("newCustomersCount")
-  private BigDecimal newCustomersCount = null;
+  @SerializedName("totals")
+  private InlineResponse2007Totals totals = null;
 
-  public InlineResponse2007 conversionSourceMetrics(ConversionSourceMetrics conversionSourceMetrics) {
-    this.conversionSourceMetrics = conversionSourceMetrics;
+  public InlineResponse2007 results(List<ConversionSourceMetrics> results) {
+    this.results = results;
+    return this;
+  }
+
+  public InlineResponse2007 addResultsItem(ConversionSourceMetrics resultsItem) {
+    this.results.add(resultsItem);
     return this;
   }
 
    /**
-   * Get conversionSourceMetrics
-   * @return conversionSourceMetrics
+   * List of conversion attribution metrics
+   * @return results
   **/
-  @ApiModelProperty(value = "")
-  public ConversionSourceMetrics getConversionSourceMetrics() {
-    return conversionSourceMetrics;
+  @ApiModelProperty(example = "[{\"id\":\"sale1\",\"conversionSource\":\"email_campaign\",\"ordersCount\":300,\"revenue\":900,\"averageBasket\":3.0},{\"id\":\"sale2\",\"conversionSource\":\"email_campaign\",\"ordersCount\":200,\"revenue\":800,\"averageBasket\":4.0}]", required = true, value = "List of conversion attribution metrics")
+  public List<ConversionSourceMetrics> getResults() {
+    return results;
   }
 
-  public void setConversionSourceMetrics(ConversionSourceMetrics conversionSourceMetrics) {
-    this.conversionSourceMetrics = conversionSourceMetrics;
+  public void setResults(List<ConversionSourceMetrics> results) {
+    this.results = results;
   }
 
-  public InlineResponse2007 newCustomersCount(BigDecimal newCustomersCount) {
-    this.newCustomersCount = newCustomersCount;
+  public InlineResponse2007 totals(InlineResponse2007Totals totals) {
+    this.totals = totals;
     return this;
   }
 
    /**
-   * Get newCustomersCount
-   * @return newCustomersCount
+   * Get totals
+   * @return totals
   **/
   @ApiModelProperty(required = true, value = "")
-  public BigDecimal getNewCustomersCount() {
-    return newCustomersCount;
+  public InlineResponse2007Totals getTotals() {
+    return totals;
   }
 
-  public void setNewCustomersCount(BigDecimal newCustomersCount) {
-    this.newCustomersCount = newCustomersCount;
+  public void setTotals(InlineResponse2007Totals totals) {
+    this.totals = totals;
   }
 
 
@@ -82,13 +89,13 @@ public class InlineResponse2007 {
     return false;
   }
     InlineResponse2007 inlineResponse2007 = (InlineResponse2007) o;
-    return ObjectUtils.equals(this.conversionSourceMetrics, inlineResponse2007.conversionSourceMetrics) &&
-    ObjectUtils.equals(this.newCustomersCount, inlineResponse2007.newCustomersCount);
+    return ObjectUtils.equals(this.results, inlineResponse2007.results) &&
+    ObjectUtils.equals(this.totals, inlineResponse2007.totals);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(conversionSourceMetrics, newCustomersCount);
+    return ObjectUtils.hashCodeMulti(results, totals);
   }
 
 
@@ -97,8 +104,8 @@ public class InlineResponse2007 {
     StringBuilder sb = new StringBuilder();
     sb.append("class InlineResponse2007 {\n");
     
-    sb.append("    conversionSourceMetrics: ").append(toIndentedString(conversionSourceMetrics)).append("\n");
-    sb.append("    newCustomersCount: ").append(toIndentedString(newCustomersCount)).append("\n");
+    sb.append("    results: ").append(toIndentedString(results)).append("\n");
+    sb.append("    totals: ").append(toIndentedString(totals)).append("\n");
     sb.append("}");
     return sb.toString();
   }

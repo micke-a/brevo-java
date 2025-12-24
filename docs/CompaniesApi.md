@@ -270,7 +270,7 @@ Name | Type | Description  | Notes
 
 <a name="companiesImportPost"></a>
 # **companiesImportPost**
-> InlineResponse2004 companiesImportPost(file, mapping)
+> InlineResponse2005 companiesImportPost(file, mapping)
 
 Import companies(creation and updation)
 
@@ -303,7 +303,7 @@ CompaniesApi apiInstance = new CompaniesApi();
 File file = new File("/path/to/file.txt"); // File | The CSV file to upload.The file should have the first row as the mapping attribute. Some default attribute names are (a) company_id [brevo mongoID to update deals] (b) associated_contact (c) associated_deal (f) any other attribute with internal name 
 String mapping = "mapping_example"; // String | The mapping options in Json format.   json    {       \"link_entities\": true, // Determines whether to link related entities during the import process       \"unlink_entities\": false, //Determines whether to unlink related entities during the import process.       \"update_existing_records\": true, // Determines whether to update based on company ID or treat every row as create       \"unset_empty_attributes\": false // Determines whether unset a specific attribute during update if values input is blank       \"use_company_identifier\": false // Determines whether to use company name as identifier     } 
 try {
-    InlineResponse2004 result = apiInstance.companiesImportPost(file, mapping);
+    InlineResponse2005 result = apiInstance.companiesImportPost(file, mapping);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling CompaniesApi#companiesImportPost");
@@ -316,11 +316,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **file** | **File**| The CSV file to upload.The file should have the first row as the mapping attribute. Some default attribute names are (a) company_id [brevo mongoID to update deals] (b) associated_contact (c) associated_deal (f) any other attribute with internal name  |
- **mapping** | **String**| The mapping options in JSON format.   json    {       &quot;link_entities&quot;: true, // Determines whether to link related entities during the import process       &quot;unlink_entities&quot;: false, //Determines whether to unlink related entities during the import process.       &quot;update_existing_records&quot;: true, // Determines whether to update based on company ID or treat every row as create       &quot;unset_empty_attributes&quot;: false // Determines whether unset a specific attribute during update if values input is blank       &quot;use_company_identifier&quot;: false // Determines whether to use company name as identifier     }  |
+ **mapping** | **String**| The mapping options in Json format.   json    {       &quot;link_entities&quot;: true, // Determines whether to link related entities during the import process       &quot;unlink_entities&quot;: false, //Determines whether to unlink related entities during the import process.       &quot;update_existing_records&quot;: true, // Determines whether to update based on company ID or treat every row as create       &quot;unset_empty_attributes&quot;: false // Determines whether unset a specific attribute during update if values input is blank       &quot;use_company_identifier&quot;: false // Determines whether to use company name as identifier     }  |
 
 ### Return type
 
-[**InlineResponse2004**](InlineResponse2004.md)
+[**InlineResponse2005**](InlineResponse2005.md)
 
 ### Authorization
 
@@ -393,7 +393,7 @@ null (empty response body)
 
 <a name="companiesPost"></a>
 # **companiesPost**
-> InlineResponse2002 companiesPost(body)
+> InlineResponse2003 companiesPost(body)
 
 Create a company
 
@@ -423,7 +423,7 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 CompaniesApi apiInstance = new CompaniesApi();
 Body6 body = new Body6(); // Body6 | Company create data.
 try {
-    InlineResponse2002 result = apiInstance.companiesPost(body);
+    InlineResponse2003 result = apiInstance.companiesPost(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling CompaniesApi#companiesPost");
@@ -439,7 +439,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2002**](InlineResponse2002.md)
+[**InlineResponse2003**](InlineResponse2003.md)
 
 ### Authorization
 
@@ -507,7 +507,7 @@ This endpoint does not need any parameter.
 
 <a name="crmAttributesPost"></a>
 # **crmAttributesPost**
-> InlineResponse2003 crmAttributesPost(body)
+> InlineResponse2004 crmAttributesPost(body)
 
 Create a deal/company attribute
 
@@ -537,7 +537,7 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 CompaniesApi apiInstance = new CompaniesApi();
 Body9 body = new Body9(); // Body9 | Attribute creation data for company
 try {
-    InlineResponse2003 result = apiInstance.crmAttributesPost(body);
+    InlineResponse2004 result = apiInstance.crmAttributesPost(body);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling CompaniesApi#crmAttributesPost");
@@ -553,7 +553,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**InlineResponse2004**](InlineResponse2004.md)
 
 ### Authorization
 

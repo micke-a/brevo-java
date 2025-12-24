@@ -13,16 +13,26 @@
 
 package brevoApi;
 
-import brevo.*;
+import brevo.ApiCallback;
+import brevo.ApiClient;
+import brevo.ApiException;
+import brevo.ApiResponse;
+import brevo.Configuration;
+import brevo.Pair;
+import brevo.ProgressRequestBody;
+import brevo.ProgressResponseBody;
+
+import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
+
+
+import brevoModel.ErrorModel;
 import brevoModel.GetWhatsappEventReport;
 import brevoModel.InlineResponse2014;
 import brevoModel.SendWhatsappMessage;
-import com.google.gson.reflect.TypeToken;
-import okhttp3.Call;
-import okhttp3.Interceptor;
-import okhttp3.Response;
+import okhttp3.*;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;

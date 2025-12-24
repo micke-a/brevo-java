@@ -27,7 +27,7 @@ import java.io.IOException;
  * image info is passed in case the file is an image
  */
 @ApiModel(description = "image info is passed in case the file is an image")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class ConversationsMessageFileImageInfo {
   @SerializedName("width")
   private Long width = null;

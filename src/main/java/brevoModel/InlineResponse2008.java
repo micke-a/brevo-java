@@ -14,7 +14,7 @@
 package brevoModel;
 
 import org.apache.commons.lang3.ObjectUtils;
-import brevoModel.ConversionSourceProduct;
+import brevoModel.ConversionSourceMetrics;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -23,38 +23,53 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
 
 /**
  * InlineResponse2008
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class InlineResponse2008 {
-  @SerializedName("products")
-  private List<ConversionSourceProduct> products = new ArrayList<ConversionSourceProduct>();
+  @SerializedName("ConversionSourceMetrics")
+  private ConversionSourceMetrics conversionSourceMetrics = null;
 
-  public InlineResponse2008 products(List<ConversionSourceProduct> products) {
-    this.products = products;
-    return this;
-  }
+  @SerializedName("newCustomersCount")
+  private BigDecimal newCustomersCount = null;
 
-  public InlineResponse2008 addProductsItem(ConversionSourceProduct productsItem) {
-    this.products.add(productsItem);
+  public InlineResponse2008 conversionSourceMetrics(ConversionSourceMetrics conversionSourceMetrics) {
+    this.conversionSourceMetrics = conversionSourceMetrics;
     return this;
   }
 
    /**
-   * List of attributed products
-   * @return products
+   * Get conversionSourceMetrics
+   * @return conversionSourceMetrics
   **/
-  @ApiModelProperty(required = true, value = "List of attributed products")
-  public List<ConversionSourceProduct> getProducts() {
-    return products;
+  @ApiModelProperty(value = "")
+  public ConversionSourceMetrics getConversionSourceMetrics() {
+    return conversionSourceMetrics;
   }
 
-  public void setProducts(List<ConversionSourceProduct> products) {
-    this.products = products;
+  public void setConversionSourceMetrics(ConversionSourceMetrics conversionSourceMetrics) {
+    this.conversionSourceMetrics = conversionSourceMetrics;
+  }
+
+  public InlineResponse2008 newCustomersCount(BigDecimal newCustomersCount) {
+    this.newCustomersCount = newCustomersCount;
+    return this;
+  }
+
+   /**
+   * Get newCustomersCount
+   * @return newCustomersCount
+  **/
+  @ApiModelProperty(required = true, value = "")
+  public BigDecimal getNewCustomersCount() {
+    return newCustomersCount;
+  }
+
+  public void setNewCustomersCount(BigDecimal newCustomersCount) {
+    this.newCustomersCount = newCustomersCount;
   }
 
 
@@ -67,12 +82,13 @@ public class InlineResponse2008 {
     return false;
   }
     InlineResponse2008 inlineResponse2008 = (InlineResponse2008) o;
-    return ObjectUtils.equals(this.products, inlineResponse2008.products);
+    return ObjectUtils.equals(this.conversionSourceMetrics, inlineResponse2008.conversionSourceMetrics) &&
+    ObjectUtils.equals(this.newCustomersCount, inlineResponse2008.newCustomersCount);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(products);
+    return ObjectUtils.hashCodeMulti(conversionSourceMetrics, newCustomersCount);
   }
 
 
@@ -81,7 +97,8 @@ public class InlineResponse2008 {
     StringBuilder sb = new StringBuilder();
     sb.append("class InlineResponse2008 {\n");
     
-    sb.append("    products: ").append(toIndentedString(products)).append("\n");
+    sb.append("    conversionSourceMetrics: ").append(toIndentedString(conversionSourceMetrics)).append("\n");
+    sb.append("    newCustomersCount: ").append(toIndentedString(newCustomersCount)).append("\n");
     sb.append("}");
     return sb.toString();
   }

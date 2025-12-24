@@ -14,7 +14,6 @@
 package brevoModel;
 
 import org.apache.commons.lang3.ObjectUtils;
-import brevoModel.SendTransacSmsTag;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -27,16 +26,19 @@ import java.io.IOException;
 /**
  * SendTransacSms
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class SendTransacSms {
-  @SerializedName("sender")
-  private String sender = null;
+  @SerializedName("organisationPrefix")
+  private String organisationPrefix = null;
 
   @SerializedName("recipient")
   private String recipient = null;
 
-  @SerializedName("content")
-  private String content = null;
+  @SerializedName("sender")
+  private String sender = null;
+
+  @SerializedName("tag")
+  private String tag = null;
 
   /**
    * Type of the SMS. Marketing SMS messages are those sent typically with marketing content. Transactional SMS messages are sent to individuals and are triggered in response to some action, such as a sign-up, purchase, etc.
@@ -88,34 +90,34 @@ public class SendTransacSms {
   @SerializedName("type")
   private TypeEnum type = TypeEnum.TRANSACTIONAL;
 
-  @SerializedName("tag")
-  private SendTransacSmsTag tag = null;
+  @SerializedName("unicodeEnabled")
+  private Boolean unicodeEnabled = false;
 
   @SerializedName("webUrl")
   private String webUrl = null;
 
-  @SerializedName("unicodeEnabled")
-  private Boolean unicodeEnabled = false;
+  @SerializedName("templateId")
+  private Integer templateId = null;
 
-  @SerializedName("organisationPrefix")
-  private String organisationPrefix = null;
+  @SerializedName("content")
+  private String content = null;
 
-  public SendTransacSms sender(String sender) {
-    this.sender = sender;
+  public SendTransacSms organisationPrefix(String organisationPrefix) {
+    this.organisationPrefix = organisationPrefix;
     return this;
   }
 
    /**
-   * Name of the sender. **The number of characters is limited to 11 for alphanumeric characters and 15 for numeric characters**
-   * @return sender
+   * A recognizable prefix will ensure your audience knows who you are. Recommended by U.S. carriers. This will be added as your Brand Name before the message content. **Prefer verifying maximum length of 160 characters including this prefix in message content to avoid multiple sending of same sms.**
+   * @return organisationPrefix
   **/
-  @ApiModelProperty(example = "MyShop", required = true, value = "Name of the sender. **The number of characters is limited to 11 for alphanumeric characters and 15 for numeric characters**")
-  public String getSender() {
-    return sender;
+  @ApiModelProperty(example = "MyCompany", value = "A recognizable prefix will ensure your audience knows who you are. Recommended by U.S. carriers. This will be added as your Brand Name before the message content. **Prefer verifying maximum length of 160 characters including this prefix in message content to avoid multiple sending of same sms.**")
+  public String getOrganisationPrefix() {
+    return organisationPrefix;
   }
 
-  public void setSender(String sender) {
-    this.sender = sender;
+  public void setOrganisationPrefix(String organisationPrefix) {
+    this.organisationPrefix = organisationPrefix;
   }
 
   public SendTransacSms recipient(String recipient) {
@@ -136,22 +138,40 @@ public class SendTransacSms {
     this.recipient = recipient;
   }
 
-  public SendTransacSms content(String content) {
-    this.content = content;
+  public SendTransacSms sender(String sender) {
+    this.sender = sender;
     return this;
   }
 
    /**
-   * Content of the message. If more than 160 characters long, will be sent as multiple text messages
-   * @return content
+   * Name of the sender. **The number of characters is limited to 11 for alphanumeric characters and 15 for numeric characters** 
+   * @return sender
   **/
-  @ApiModelProperty(example = "Enter this code:CCJJG8 to validate your account", required = true, value = "Content of the message. If more than 160 characters long, will be sent as multiple text messages")
-  public String getContent() {
-    return content;
+  @ApiModelProperty(example = "MyShop", required = true, value = "Name of the sender. **The number of characters is limited to 11 for alphanumeric characters and 15 for numeric characters** ")
+  public String getSender() {
+    return sender;
   }
 
-  public void setContent(String content) {
-    this.content = content;
+  public void setSender(String sender) {
+    this.sender = sender;
+  }
+
+  public SendTransacSms tag(String tag) {
+    this.tag = tag;
+    return this;
+  }
+
+   /**
+   * Tag of the message. Can be a string or an array of strings (e.g., &quot;accountValidation&quot; or [&quot;tag1&quot;, &quot;tag2&quot;]).
+   * @return tag
+  **/
+  @ApiModelProperty(example = "accountValidation", value = "Tag of the message. Can be a string or an array of strings (e.g., \"accountValidation\" or [\"tag1\", \"tag2\"]).")
+  public String getTag() {
+    return tag;
+  }
+
+  public void setTag(String tag) {
+    this.tag = tag;
   }
 
   public SendTransacSms type(TypeEnum type) {
@@ -172,22 +192,22 @@ public class SendTransacSms {
     this.type = type;
   }
 
-  public SendTransacSms tag(SendTransacSmsTag tag) {
-    this.tag = tag;
+  public SendTransacSms unicodeEnabled(Boolean unicodeEnabled) {
+    this.unicodeEnabled = unicodeEnabled;
     return this;
   }
 
    /**
-   * Get tag
-   * @return tag
+   * Format of the message. It indicates whether the content should be treated as unicode or not. 
+   * @return unicodeEnabled
   **/
-  @ApiModelProperty(value = "")
-  public SendTransacSmsTag getTag() {
-    return tag;
+  @ApiModelProperty(example = "true", value = "Format of the message. It indicates whether the content should be treated as unicode or not. ")
+  public Boolean isUnicodeEnabled() {
+    return unicodeEnabled;
   }
 
-  public void setTag(SendTransacSmsTag tag) {
-    this.tag = tag;
+  public void setUnicodeEnabled(Boolean unicodeEnabled) {
+    this.unicodeEnabled = unicodeEnabled;
   }
 
   public SendTransacSms webUrl(String webUrl) {
@@ -208,40 +228,40 @@ public class SendTransacSms {
     this.webUrl = webUrl;
   }
 
-  public SendTransacSms unicodeEnabled(Boolean unicodeEnabled) {
-    this.unicodeEnabled = unicodeEnabled;
+  public SendTransacSms templateId(Integer templateId) {
+    this.templateId = templateId;
     return this;
   }
 
    /**
-   * Format of the message. It indicates whether the content should be treated as unicode or not.
-   * @return unicodeEnabled
+   * Template ID to send SMS with the template. When provided, overrides the content parameter. Either &#39;templateId&#39; or &#39;content&#39; must be provided, but not both.
+   * @return templateId
   **/
-  @ApiModelProperty(example = "true", value = "Format of the message. It indicates whether the content should be treated as unicode or not.")
-  public Boolean isUnicodeEnabled() {
-    return unicodeEnabled;
+  @ApiModelProperty(example = "123", value = "Template ID to send SMS with the template. When provided, overrides the content parameter. Either 'templateId' or 'content' must be provided, but not both.")
+  public Integer getTemplateId() {
+    return templateId;
   }
 
-  public void setUnicodeEnabled(Boolean unicodeEnabled) {
-    this.unicodeEnabled = unicodeEnabled;
+  public void setTemplateId(Integer templateId) {
+    this.templateId = templateId;
   }
 
-  public SendTransacSms organisationPrefix(String organisationPrefix) {
-    this.organisationPrefix = organisationPrefix;
+  public SendTransacSms content(String content) {
+    this.content = content;
     return this;
   }
 
    /**
-   * A recognizable prefix will ensure your audience knows who you are. Recommended by U.S. carriers. This will be added as your Brand Name before the message content. **Prefer verifying maximum length of 160 characters including this prefix in message content to avoid multiple sending of same sms.**
-   * @return organisationPrefix
+   * Content of the message. If more than **160 characters** long, will be sent as multiple text messages. Either &#39;templateId&#39; or &#39;content&#39; must be provided, but not both. Mandatory if &#39;templateId&#39; is not passed, ignored if &#39;templateId&#39; is passed. 
+   * @return content
   **/
-  @ApiModelProperty(example = "MyCompany", value = "A recognizable prefix will ensure your audience knows who you are. Recommended by U.S. carriers. This will be added as your Brand Name before the message content. **Prefer verifying maximum length of 160 characters including this prefix in message content to avoid multiple sending of same sms.**")
-  public String getOrganisationPrefix() {
-    return organisationPrefix;
+  @ApiModelProperty(example = "Enter this code:CCJJG8 to validate your account", value = "Content of the message. If more than **160 characters** long, will be sent as multiple text messages. Either 'templateId' or 'content' must be provided, but not both. Mandatory if 'templateId' is not passed, ignored if 'templateId' is passed. ")
+  public String getContent() {
+    return content;
   }
 
-  public void setOrganisationPrefix(String organisationPrefix) {
-    this.organisationPrefix = organisationPrefix;
+  public void setContent(String content) {
+    this.content = content;
   }
 
 
@@ -254,19 +274,20 @@ public class SendTransacSms {
     return false;
   }
     SendTransacSms sendTransacSms = (SendTransacSms) o;
-    return ObjectUtils.equals(this.sender, sendTransacSms.sender) &&
+    return ObjectUtils.equals(this.organisationPrefix, sendTransacSms.organisationPrefix) &&
     ObjectUtils.equals(this.recipient, sendTransacSms.recipient) &&
-    ObjectUtils.equals(this.content, sendTransacSms.content) &&
-    ObjectUtils.equals(this.type, sendTransacSms.type) &&
+    ObjectUtils.equals(this.sender, sendTransacSms.sender) &&
     ObjectUtils.equals(this.tag, sendTransacSms.tag) &&
-    ObjectUtils.equals(this.webUrl, sendTransacSms.webUrl) &&
+    ObjectUtils.equals(this.type, sendTransacSms.type) &&
     ObjectUtils.equals(this.unicodeEnabled, sendTransacSms.unicodeEnabled) &&
-    ObjectUtils.equals(this.organisationPrefix, sendTransacSms.organisationPrefix);
+    ObjectUtils.equals(this.webUrl, sendTransacSms.webUrl) &&
+    ObjectUtils.equals(this.templateId, sendTransacSms.templateId) &&
+    ObjectUtils.equals(this.content, sendTransacSms.content);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(sender, recipient, content, type, tag, webUrl, unicodeEnabled, organisationPrefix);
+    return ObjectUtils.hashCodeMulti(organisationPrefix, recipient, sender, tag, type, unicodeEnabled, webUrl, templateId, content);
   }
 
 
@@ -275,14 +296,15 @@ public class SendTransacSms {
     StringBuilder sb = new StringBuilder();
     sb.append("class SendTransacSms {\n");
     
-    sb.append("    sender: ").append(toIndentedString(sender)).append("\n");
-    sb.append("    recipient: ").append(toIndentedString(recipient)).append("\n");
-    sb.append("    content: ").append(toIndentedString(content)).append("\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    tag: ").append(toIndentedString(tag)).append("\n");
-    sb.append("    webUrl: ").append(toIndentedString(webUrl)).append("\n");
-    sb.append("    unicodeEnabled: ").append(toIndentedString(unicodeEnabled)).append("\n");
     sb.append("    organisationPrefix: ").append(toIndentedString(organisationPrefix)).append("\n");
+    sb.append("    recipient: ").append(toIndentedString(recipient)).append("\n");
+    sb.append("    sender: ").append(toIndentedString(sender)).append("\n");
+    sb.append("    tag: ").append(toIndentedString(tag)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    unicodeEnabled: ").append(toIndentedString(unicodeEnabled)).append("\n");
+    sb.append("    webUrl: ").append(toIndentedString(webUrl)).append("\n");
+    sb.append("    templateId: ").append(toIndentedString(templateId)).append("\n");
+    sb.append("    content: ").append(toIndentedString(content)).append("\n");
     sb.append("}");
     return sb.toString();
   }

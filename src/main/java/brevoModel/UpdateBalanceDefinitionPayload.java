@@ -28,7 +28,7 @@ import java.math.BigDecimal;
  * Payload for updating an existing balance definition, including expiry rules, rounding strategies, and constraints.
  */
 @ApiModel(description = "Payload for updating an existing balance definition, including expiry rules, rounding strategies, and constraints.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class UpdateBalanceDefinitionPayload {
   /**
    * Defines when the balance expires within the selected duration.

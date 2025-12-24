@@ -22,13 +22,14 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * GetProductDetails
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-06-17T10:38:30.728+05:30")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class GetProductDetails {
   @SerializedName("id")
   private String id = null;
@@ -74,6 +75,9 @@ public class GetProductDetails {
 
   @SerializedName("isDeleted")
   private Boolean isDeleted = null;
+
+  @SerializedName("stock")
+  private BigDecimal stock = null;
 
   public GetProductDetails id(String id) {
     this.id = id;
@@ -353,6 +357,24 @@ public class GetProductDetails {
     this.isDeleted = isDeleted;
   }
 
+  public GetProductDetails stock(BigDecimal stock) {
+    this.stock = stock;
+    return this;
+  }
+
+   /**
+   * Current stock value of the product from the shop&#39;s database
+   * @return stock
+  **/
+  @ApiModelProperty(example = "100.0", value = "Current stock value of the product from the shop's database")
+  public BigDecimal getStock() {
+    return stock;
+  }
+
+  public void setStock(BigDecimal stock) {
+    this.stock = stock;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -377,12 +399,13 @@ public class GetProductDetails {
     ObjectUtils.equals(this.s3ThumbAnalytics, getProductDetails.s3ThumbAnalytics) &&
     ObjectUtils.equals(this.metaInfo, getProductDetails.metaInfo) &&
     ObjectUtils.equals(this.s3ThumbEditor, getProductDetails.s3ThumbEditor) &&
-    ObjectUtils.equals(this.isDeleted, getProductDetails.isDeleted);
+    ObjectUtils.equals(this.isDeleted, getProductDetails.isDeleted) &&
+    ObjectUtils.equals(this.stock, getProductDetails.stock);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(id, name, createdAt, modifiedAt, url, imageUrl, sku, price, categories, parentId, s3Original, s3ThumbAnalytics, metaInfo, s3ThumbEditor, isDeleted);
+    return ObjectUtils.hashCodeMulti(id, name, createdAt, modifiedAt, url, imageUrl, sku, price, categories, parentId, s3Original, s3ThumbAnalytics, metaInfo, s3ThumbEditor, isDeleted, stock);
   }
 
 
@@ -406,6 +429,7 @@ public class GetProductDetails {
     sb.append("    metaInfo: ").append(toIndentedString(metaInfo)).append("\n");
     sb.append("    s3ThumbEditor: ").append(toIndentedString(s3ThumbEditor)).append("\n");
     sb.append("    isDeleted: ").append(toIndentedString(isDeleted)).append("\n");
+    sb.append("    stock: ").append(toIndentedString(stock)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -17,12 +17,16 @@ import brevo.*;
 import brevoModel.GetInboundEmailEvents;
 import brevoModel.GetInboundEmailEventsByUuid;
 import com.google.gson.reflect.TypeToken;
-import okhttp3.Call;
-import okhttp3.Interceptor;
-import okhttp3.Response;
-
 import java.io.File;
 import java.io.IOException;
+
+
+import brevoModel.ErrorModel;
+import java.io.File;
+import brevoModel.GetInboundEmailEvents;
+import brevoModel.GetInboundEmailEventsByUuid;
+import okhttp3.*;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;

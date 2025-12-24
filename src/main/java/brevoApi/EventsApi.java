@@ -15,9 +15,7 @@ package brevoApi;
 
 import brevo.*;
 import brevoModel.Event;
-import okhttp3.Call;
-import okhttp3.Interceptor;
-import okhttp3.Response;
+import okhttp3.*;
 
 import java.io.*;
 import java.lang.reflect.Type;
