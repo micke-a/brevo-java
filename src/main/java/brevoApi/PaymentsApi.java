@@ -19,6 +19,7 @@ import brevoModel.CreatePaymentRequest;
 import brevoModel.CreatePaymentResponse;
 import brevoModel.ErrorModel;
 import brevoModel.GetPaymentRequest;
+import com.google.gson.reflect.*;
 import okhttp3.*;
 
 import java.io.IOException;

@@ -17,6 +17,7 @@ import brevo.*;
 import brevoModel.FileData;
 import brevoModel.FileDownloadableLink;
 import brevoModel.FileList;
+import com.google.gson.reflect.*;
 import okhttp3.*;
 
 import java.io.File;
