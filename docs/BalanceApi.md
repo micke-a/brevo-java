@@ -1032,7 +1032,7 @@ Integer contactId = 0; // Integer | Contact ID
 UUID balanceDefinitionId = new UUID(); // UUID | Balance Definition ID
 Integer limit = 20; // Integer | Limit the number of records returned
 Integer offset = 0; // Integer | Skip a number of records
-String sortField = "created_at"; // String | Field to sort by
+String sortField = "createdAt"; // String | Field to sort by
 String sort = "desc"; // String | Sort order, either asc or desc
 List<String> filters = Arrays.asList("filters_example"); // List<String> | Filters to apply
 try {
@@ -1053,7 +1053,7 @@ Name | Type | Description  | Notes
  **balanceDefinitionId** | [**UUID**](.md)| Balance Definition ID |
  **limit** | **Integer**| Limit the number of records returned | [optional] [default to 20]
  **offset** | **Integer**| Skip a number of records | [optional] [default to 0]
- **sortField** | **String**| Field to sort by | [optional] [default to created_at] [enum: name, created_at, updated_at]
+ **sortField** | **String**| Field to sort by | [optional] [default to createdAt] [enum: createdAt]
  **sort** | **String**| Sort order, either asc or desc | [optional] [default to desc] [enum: asc, desc]
  **filters** | [**List&lt;String&gt;**](String.md)| Filters to apply | [optional]
 

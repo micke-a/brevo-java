@@ -22,23 +22,14 @@ import brevo.Pair;
 import brevo.ProgressRequestBody;
 import brevo.ProgressResponseBody;
 
+import brevoModel.*;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 
 
-import brevoModel.AddSubscriptionMemberPayload;
-import brevoModel.CreateLoyaltyProgramPayload;
-import brevoModel.CreateSubscriptionPayload;
-import brevoModel.ErrorResponse;
-import brevoModel.LoyaltyProgram;
-import brevoModel.LoyaltyProgramPage;
-import brevoModel.PatchLoyaltyProgramPayload;
-import brevoModel.Subscription;
-import brevoModel.SubscriptionHandlerInfo;
-import brevoModel.SubscriptionMember;
 import java.util.UUID;
-import brevoModel.UpdateLoyaltyProgramPayload;
+
 import okhttp3.*;
 
 import java.lang.reflect.Type;
@@ -835,6 +826,139 @@ public class ProgramApi {
 
         Call call = getParameterSubscriptionInfoValidateBeforeCall(pid, contactId, params, loyaltySubscriptionId, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<SubscriptionHandlerInfo>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
+        return call;
+    }
+    /**
+     * Build call for loyaltyConfigProgramsPidContactCidDelete
+     * @param pid Loyalty Program ID. A unique identifier for the loyalty program. (required)
+     * @param cid Contact ID. (required)
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public Call loyaltyConfigProgramsPidContactCidDeleteCall(Object pid, Object cid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/loyalty/config/programs/{pid}/contact/{cid}"
+            .replaceAll("\\{" + "pid" + "\\}", apiClient.escapeString(pid.toString()))
+            .replaceAll("\\{" + "cid" + "\\}", apiClient.escapeString(cid.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new Interceptor() {
+                @Override
+                public Response intercept(Interceptor.Chain chain) throws IOException {
+                    Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+
+        String[] localVarAuthNames = new String[] { "api-key", "partner-key" };
+        return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private Call loyaltyConfigProgramsPidContactCidDeleteValidateBeforeCall(Object pid, Object cid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        
+        // verify the required parameter 'pid' is set
+        if (pid == null) {
+            throw new ApiException("Missing the required parameter 'pid' when calling loyaltyConfigProgramsPidContactCidDelete(Async)");
+        }
+        
+        // verify the required parameter 'cid' is set
+        if (cid == null) {
+            throw new ApiException("Missing the required parameter 'cid' when calling loyaltyConfigProgramsPidContactCidDelete(Async)");
+        }
+        
+
+        Call call = loyaltyConfigProgramsPidContactCidDeleteCall(pid, cid, progressListener, progressRequestListener);
+        return call;
+
+    }
+
+    /**
+     * Delete subscription
+     * Delete subscription for a contact
+     * @param pid Loyalty Program ID. A unique identifier for the loyalty program. (required)
+     * @param cid Contact ID. (required)
+     * @return TransactionHistoryResp
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public TransactionHistoryResp loyaltyConfigProgramsPidContactCidDelete(Object pid, Object cid) throws ApiException {
+        ApiResponse<TransactionHistoryResp> resp = loyaltyConfigProgramsPidContactCidDeleteWithHttpInfo(pid, cid);
+        return resp.getData();
+    }
+
+    /**
+     * Delete subscription
+     * Delete subscription for a contact
+     * @param pid Loyalty Program ID. A unique identifier for the loyalty program. (required)
+     * @param cid Contact ID. (required)
+     * @return ApiResponse&lt;TransactionHistoryResp&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<TransactionHistoryResp> loyaltyConfigProgramsPidContactCidDeleteWithHttpInfo(Object pid, Object cid) throws ApiException {
+        Call call = loyaltyConfigProgramsPidContactCidDeleteValidateBeforeCall(pid, cid, null, null);
+        Type localVarReturnType = new TypeToken<TransactionHistoryResp>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
+    }
+
+    /**
+     * Delete subscription (asynchronously)
+     * Delete subscription for a contact
+     * @param pid Loyalty Program ID. A unique identifier for the loyalty program. (required)
+     * @param cid Contact ID. (required)
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public Call loyaltyConfigProgramsPidContactCidDeleteAsync(Object pid, Object cid, final ApiCallback<TransactionHistoryResp> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        Call call = loyaltyConfigProgramsPidContactCidDeleteValidateBeforeCall(pid, cid, progressListener, progressRequestListener);
+        Type localVarReturnType = new TypeToken<TransactionHistoryResp>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }

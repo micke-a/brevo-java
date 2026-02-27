@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**getLPList**](ProgramApi.md#getLPList) | **GET** /loyalty/config/programs | Get loyalty program list
 [**getLoyaltyProgramInfo**](ProgramApi.md#getLoyaltyProgramInfo) | **GET** /loyalty/config/programs/{pid} | Get loyalty program Info
 [**getParameterSubscriptionInfo**](ProgramApi.md#getParameterSubscriptionInfo) | **GET** /loyalty/config/programs/{pid}/account-info | Get Subscription Data
+[**loyaltyConfigProgramsPidContactCidDelete**](ProgramApi.md#loyaltyConfigProgramsPidContactCidDelete) | **DELETE** /loyalty/config/programs/{pid}/contact/{cid} | Delete subscription
 [**partiallyUpdateLoyaltyProgram**](ProgramApi.md#partiallyUpdateLoyaltyProgram) | **PATCH** /loyalty/config/programs/{pid} | Partially update loyalty program
 [**publishLoyaltyProgram**](ProgramApi.md#publishLoyaltyProgram) | **POST** /loyalty/config/programs/{pid}/publish | Publish loyalty program
 [**subscribeMemberToASubscription**](ProgramApi.md#subscribeMemberToASubscription) | **POST** /loyalty/config/programs/{pid}/subscription-members | Create subscription member
@@ -28,11 +29,11 @@ Creates loyalty program
 ### Example
 ```java
 // Import classes:
-//import brevo.ApiClient;
-//import brevo.ApiException;
-//import brevo.Configuration;
-//import brevo.auth.*;
-//import brevoApi.ProgramApi;
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.ProgramApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -40,7 +41,7 @@ ApiClient defaultClient = Configuration.getDefaultApiClient();
 ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("api-key");
 apiKey.setApiKey("YOUR API KEY");
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//apiKey.setApiKeyPrefix("Token");
+//api-key.setApiKeyPrefix("Token");
 
 // Configure API key authorization: partner-key
 ApiKeyAuth partnerKey = (ApiKeyAuth) defaultClient.getAuthentication("partner-key");
@@ -385,6 +386,69 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**SubscriptionHandlerInfo**](SubscriptionHandlerInfo.md)
+
+### Authorization
+
+[api-key](../README.md#api-key), [partner-key](../README.md#partner-key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="loyaltyConfigProgramsPidContactCidDelete"></a>
+# **loyaltyConfigProgramsPidContactCidDelete**
+> TransactionHistoryResp loyaltyConfigProgramsPidContactCidDelete(pid, cid)
+
+Delete subscription
+
+Delete subscription for a contact
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiClient;
+//import io.swagger.client.ApiException;
+//import io.swagger.client.Configuration;
+//import io.swagger.client.auth.*;
+//import io.swagger.client.api.ProgramApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure API key authorization: api-key
+ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("api-key");
+apiKey.setApiKey("YOUR API KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//api-key.setApiKeyPrefix("Token");
+
+// Configure API key authorization: partner-key
+ApiKeyAuth partnerKey = (ApiKeyAuth) defaultClient.getAuthentication("partner-key");
+partnerKey.setApiKey("YOUR PARTNER KEY");
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//partner-key.setApiKeyPrefix("Token");
+
+ProgramApi apiInstance = new ProgramApi();
+Object pid = null; // Object | Loyalty Program ID. A unique identifier for the loyalty program.
+Object cid = null; // Object | Contact ID.
+try {
+    TransactionHistoryResp result = apiInstance.loyaltyConfigProgramsPidContactCidDelete(pid, cid);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling ProgramApi#loyaltyConfigProgramsPidContactCidDelete");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **pid** | [**Object**](.md)| Loyalty Program ID. A unique identifier for the loyalty program. |
+ **cid** | [**Object**](.md)| Contact ID. |
+
+### Return type
+
+[**TransactionHistoryResp**](TransactionHistoryResp.md)
 
 ### Authorization
 
