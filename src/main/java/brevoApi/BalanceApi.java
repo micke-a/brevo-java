@@ -2159,7 +2159,7 @@ public class BalanceApi {
      * @param balanceDefinitionId Balance Definition ID (required)
      * @param limit Limit the number of records returned (optional, default to 20)
      * @param offset Skip a number of records (optional, default to 0)
-     * @param sortField Field to sort by (optional, default to created_at)
+     * @param sortField Field to sort by (optional, default to createdAt)
      * @param sort Sort order, either asc or desc (optional, default to desc)
      * @param filters Filters to apply (optional)
      * @param progressListener Progress listener
@@ -2181,13 +2181,13 @@ public class BalanceApi {
         if (offset != null)
         localVarQueryParams.addAll(apiClient.parameterToPair("offset", offset));
         if (sortField != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("sort_field", sortField));
+        localVarQueryParams.addAll(apiClient.parameterToPair("sortField", sortField));
         if (sort != null)
         localVarQueryParams.addAll(apiClient.parameterToPair("sort", sort));
         if (contactId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("contact_id", contactId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("contactId", contactId));
         if (balanceDefinitionId != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("balance_definition_id", balanceDefinitionId));
+        localVarQueryParams.addAll(apiClient.parameterToPair("balanceDefinitionId", balanceDefinitionId));
         if (filters != null)
         localVarCollectionQueryParams.addAll(apiClient.parameterToPairs("multi", "filters", filters));
 
@@ -2255,7 +2255,7 @@ public class BalanceApi {
      * @param balanceDefinitionId Balance Definition ID (required)
      * @param limit Limit the number of records returned (optional, default to 20)
      * @param offset Skip a number of records (optional, default to 0)
-     * @param sortField Field to sort by (optional, default to created_at)
+     * @param sortField Field to sort by (optional, default to createdAt)
      * @param sort Sort order, either asc or desc (optional, default to desc)
      * @param filters Filters to apply (optional)
      * @return TransactionHistoryResp
@@ -2274,7 +2274,7 @@ public class BalanceApi {
      * @param balanceDefinitionId Balance Definition ID (required)
      * @param limit Limit the number of records returned (optional, default to 20)
      * @param offset Skip a number of records (optional, default to 0)
-     * @param sortField Field to sort by (optional, default to created_at)
+     * @param sortField Field to sort by (optional, default to createdAt)
      * @param sort Sort order, either asc or desc (optional, default to desc)
      * @param filters Filters to apply (optional)
      * @return ApiResponse&lt;TransactionHistoryResp&gt;
@@ -2294,7 +2294,7 @@ public class BalanceApi {
      * @param balanceDefinitionId Balance Definition ID (required)
      * @param limit Limit the number of records returned (optional, default to 20)
      * @param offset Skip a number of records (optional, default to 0)
-     * @param sortField Field to sort by (optional, default to created_at)
+     * @param sortField Field to sort by (optional, default to createdAt)
      * @param sort Sort order, either asc or desc (optional, default to desc)
      * @param filters Filters to apply (optional)
      * @param callback The callback to be executed when the API call finishes

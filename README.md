@@ -276,6 +276,7 @@ Class | Method | HTTP request | Description
 *ProgramApi* | [**getLPList**](docs/ProgramApi.md#getLPList) | **GET** /loyalty/config/programs | Get loyalty program list
 *ProgramApi* | [**getLoyaltyProgramInfo**](docs/ProgramApi.md#getLoyaltyProgramInfo) | **GET** /loyalty/config/programs/{pid} | Get loyalty program Info
 *ProgramApi* | [**getParameterSubscriptionInfo**](docs/ProgramApi.md#getParameterSubscriptionInfo) | **GET** /loyalty/config/programs/{pid}/account-info | Get Subscription Data
+*ProgramApi* | [**loyaltyConfigProgramsPidContactCidDelete**](docs/ProgramApi.md#loyaltyConfigProgramsPidContactCidDelete) | **DELETE** /loyalty/config/programs/{pid}/contact/{cid} | Delete subscription
 *ProgramApi* | [**partiallyUpdateLoyaltyProgram**](docs/ProgramApi.md#partiallyUpdateLoyaltyProgram) | **PATCH** /loyalty/config/programs/{pid} | Partially update loyalty program
 *ProgramApi* | [**publishLoyaltyProgram**](docs/ProgramApi.md#publishLoyaltyProgram) | **POST** /loyalty/config/programs/{pid}/publish | Publish loyalty program
 *ProgramApi* | [**subscribeMemberToASubscription**](docs/ProgramApi.md#subscribeMemberToASubscription) | **POST** /loyalty/config/programs/{pid}/subscription-members | Create subscription member
