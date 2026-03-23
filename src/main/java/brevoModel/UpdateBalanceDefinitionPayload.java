@@ -23,6 +23,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Payload for updating an existing balance definition, including expiry rules, rounding strategies, and constraints.
@@ -312,7 +314,7 @@ public class UpdateBalanceDefinitionPayload {
   private BigDecimal maxDebitAmountLimit = null;
 
   @SerializedName("meta")
-  private Object meta = null;
+  private Map<String, Object> meta = null;
 
   @SerializedName("minAmount")
   private BigDecimal minAmount = null;
@@ -616,8 +618,16 @@ public class UpdateBalanceDefinitionPayload {
     this.maxDebitAmountLimit = maxDebitAmountLimit;
   }
 
-  public UpdateBalanceDefinitionPayload meta(Object meta) {
+  public UpdateBalanceDefinitionPayload meta(Map<String, Object> meta) {
     this.meta = meta;
+    return this;
+  }
+
+  public UpdateBalanceDefinitionPayload putMetaItem(String key, Object metaItem) {
+    if (this.meta == null) {
+      this.meta = new HashMap<String, Object>();
+    }
+    this.meta.put(key, metaItem);
     return this;
   }
 
@@ -626,11 +636,11 @@ public class UpdateBalanceDefinitionPayload {
    * @return meta
   **/
   @ApiModelProperty(value = "Optional metadata for the balance definition.")
-  public Object getMeta() {
+  public Map<String, Object> getMeta() {
     return meta;
   }
 
-  public void setMeta(Object meta) {
+  public void setMeta(Map<String, Object> meta) {
     this.meta = meta;
   }
 

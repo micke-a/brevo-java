@@ -1456,12 +1456,13 @@ public class BalanceApi {
     /**
      * Build call for getContactBalances
      * @param pid Loyalty Program Id (required)
+     * @param includeInternal Include balances tied to internal definitions. (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call getContactBalancesCall(UUID pid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call getContactBalancesCall(UUID pid, Boolean includeInternal, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -1470,6 +1471,8 @@ public class BalanceApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        if (includeInternal != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("includeInternal", includeInternal));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -1504,15 +1507,15 @@ public class BalanceApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call getContactBalancesValidateBeforeCall(UUID pid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        
+    private Call getContactBalancesValidateBeforeCall(UUID pid, Boolean includeInternal, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+
         // verify the required parameter 'pid' is set
         if (pid == null) {
             throw new ApiException("Missing the required parameter 'pid' when calling getContactBalances(Async)");
         }
-        
 
-        Call call = getContactBalancesCall(pid, progressListener, progressRequestListener);
+
+        Call call = getContactBalancesCall(pid, includeInternal, progressListener, progressRequestListener);
         return call;
 
     }
@@ -1521,11 +1524,12 @@ public class BalanceApi {
      * Get balance list
      * Returns balance list
      * @param pid Loyalty Program Id (required)
+     * @param includeInternal Include balances tied to internal definitions. (optional)
      * @return ContactBalancesResp
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ContactBalancesResp getContactBalances(UUID pid) throws ApiException {
-        ApiResponse<ContactBalancesResp> resp = getContactBalancesWithHttpInfo(pid);
+    public ContactBalancesResp getContactBalances(UUID pid, Boolean includeInternal) throws ApiException {
+        ApiResponse<ContactBalancesResp> resp = getContactBalancesWithHttpInfo(pid, includeInternal);
         return resp.getData();
     }
 
@@ -1533,11 +1537,12 @@ public class BalanceApi {
      * Get balance list
      * Returns balance list
      * @param pid Loyalty Program Id (required)
+     * @param includeInternal Include balances tied to internal definitions. (optional)
      * @return ApiResponse&lt;ContactBalancesResp&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<ContactBalancesResp> getContactBalancesWithHttpInfo(UUID pid) throws ApiException {
-        Call call = getContactBalancesValidateBeforeCall(pid, null, null);
+    public ApiResponse<ContactBalancesResp> getContactBalancesWithHttpInfo(UUID pid, Boolean includeInternal) throws ApiException {
+        Call call = getContactBalancesValidateBeforeCall(pid, includeInternal, null, null);
         Type localVarReturnType = new TypeToken<ContactBalancesResp>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -1546,11 +1551,12 @@ public class BalanceApi {
      * Get balance list (asynchronously)
      * Returns balance list
      * @param pid Loyalty Program Id (required)
+     * @param includeInternal Include balances tied to internal definitions. (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call getContactBalancesAsync(UUID pid, final ApiCallback<ContactBalancesResp> callback) throws ApiException {
+    public Call getContactBalancesAsync(UUID pid, Boolean includeInternal, final ApiCallback<ContactBalancesResp> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1571,7 +1577,7 @@ public class BalanceApi {
             };
         }
 
-        Call call = getContactBalancesValidateBeforeCall(pid, progressListener, progressRequestListener);
+        Call call = getContactBalancesValidateBeforeCall(pid, includeInternal, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<ContactBalancesResp>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -1580,12 +1586,13 @@ public class BalanceApi {
      * Build call for getSubscriptionBalances
      * @param cid Contact Id (required)
      * @param pid Loyalty Program Id (required)
+     * @param includeInternal Include balances tied to internal definitions. (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call getSubscriptionBalancesCall(String cid, UUID pid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call getSubscriptionBalancesCall(String cid, UUID pid, Boolean includeInternal, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -1595,6 +1602,8 @@ public class BalanceApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        if (includeInternal != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("includeInternal", includeInternal));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -1629,20 +1638,20 @@ public class BalanceApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call getSubscriptionBalancesValidateBeforeCall(String cid, UUID pid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        
+    private Call getSubscriptionBalancesValidateBeforeCall(String cid, UUID pid, Boolean includeInternal, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+
         // verify the required parameter 'cid' is set
         if (cid == null) {
             throw new ApiException("Missing the required parameter 'cid' when calling getSubscriptionBalances(Async)");
         }
-        
+
         // verify the required parameter 'pid' is set
         if (pid == null) {
             throw new ApiException("Missing the required parameter 'pid' when calling getSubscriptionBalances(Async)");
         }
-        
 
-        Call call = getSubscriptionBalancesCall(cid, pid, progressListener, progressRequestListener);
+
+        Call call = getSubscriptionBalancesCall(cid, pid, includeInternal, progressListener, progressRequestListener);
         return call;
 
     }
@@ -1652,11 +1661,12 @@ public class BalanceApi {
      * Returns subscription balances
      * @param cid Contact Id (required)
      * @param pid Loyalty Program Id (required)
+     * @param includeInternal Include balances tied to internal definitions. (optional)
      * @return ModelSubscriptionBalanceResp
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ModelSubscriptionBalanceResp getSubscriptionBalances(String cid, UUID pid) throws ApiException {
-        ApiResponse<ModelSubscriptionBalanceResp> resp = getSubscriptionBalancesWithHttpInfo(cid, pid);
+    public ModelSubscriptionBalanceResp getSubscriptionBalances(String cid, UUID pid, Boolean includeInternal) throws ApiException {
+        ApiResponse<ModelSubscriptionBalanceResp> resp = getSubscriptionBalancesWithHttpInfo(cid, pid, includeInternal);
         return resp.getData();
     }
 
@@ -1665,11 +1675,12 @@ public class BalanceApi {
      * Returns subscription balances
      * @param cid Contact Id (required)
      * @param pid Loyalty Program Id (required)
+     * @param includeInternal Include balances tied to internal definitions. (optional)
      * @return ApiResponse&lt;ModelSubscriptionBalanceResp&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<ModelSubscriptionBalanceResp> getSubscriptionBalancesWithHttpInfo(String cid, UUID pid) throws ApiException {
-        Call call = getSubscriptionBalancesValidateBeforeCall(cid, pid, null, null);
+    public ApiResponse<ModelSubscriptionBalanceResp> getSubscriptionBalancesWithHttpInfo(String cid, UUID pid, Boolean includeInternal) throws ApiException {
+        Call call = getSubscriptionBalancesValidateBeforeCall(cid, pid, includeInternal, null, null);
         Type localVarReturnType = new TypeToken<ModelSubscriptionBalanceResp>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -1679,11 +1690,12 @@ public class BalanceApi {
      * Returns subscription balances
      * @param cid Contact Id (required)
      * @param pid Loyalty Program Id (required)
+     * @param includeInternal Include balances tied to internal definitions. (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call getSubscriptionBalancesAsync(String cid, UUID pid, final ApiCallback<ModelSubscriptionBalanceResp> callback) throws ApiException {
+    public Call getSubscriptionBalancesAsync(String cid, UUID pid, Boolean includeInternal, final ApiCallback<ModelSubscriptionBalanceResp> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1704,7 +1716,7 @@ public class BalanceApi {
             };
         }
 
-        Call call = getSubscriptionBalancesValidateBeforeCall(cid, pid, progressListener, progressRequestListener);
+        Call call = getSubscriptionBalancesValidateBeforeCall(cid, pid, includeInternal, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<ModelSubscriptionBalanceResp>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -1718,12 +1730,13 @@ public class BalanceApi {
      * @param offset Offset (optional)
      * @param sortField Sort Field (optional)
      * @param sort Sort Order (optional)
+     * @param includeInternal Include Internal (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call loyaltyBalanceProgramsPidActiveBalanceGetCall(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call loyaltyBalanceProgramsPidActiveBalanceGetCall(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, Boolean includeInternal, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -1744,6 +1757,8 @@ public class BalanceApi {
         localVarQueryParams.addAll(apiClient.parameterToPair("contact_id", contactId));
         if (balanceDefinitionId != null)
         localVarQueryParams.addAll(apiClient.parameterToPair("balance_definition_id", balanceDefinitionId));
+        if (includeInternal != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("includeInternal", includeInternal));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -1778,7 +1793,7 @@ public class BalanceApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call loyaltyBalanceProgramsPidActiveBalanceGetValidateBeforeCall(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call loyaltyBalanceProgramsPidActiveBalanceGetValidateBeforeCall(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, Boolean includeInternal, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'pid' is set
         if (pid == null) {
@@ -1796,7 +1811,7 @@ public class BalanceApi {
         }
         
 
-        Call call = loyaltyBalanceProgramsPidActiveBalanceGetCall(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, progressListener, progressRequestListener);
+        Call call = loyaltyBalanceProgramsPidActiveBalanceGetCall(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, includeInternal, progressListener, progressRequestListener);
         return call;
 
     }
@@ -1811,11 +1826,12 @@ public class BalanceApi {
      * @param offset Offset (optional)
      * @param sortField Sort Field (optional)
      * @param sort Sort Order (optional)
+     * @param includeInternal Include Internal (optional)
      * @return BalanceLimit
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public BalanceLimit loyaltyBalanceProgramsPidActiveBalanceGet(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort) throws ApiException {
-        ApiResponse<BalanceLimit> resp = loyaltyBalanceProgramsPidActiveBalanceGetWithHttpInfo(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort);
+    public BalanceLimit loyaltyBalanceProgramsPidActiveBalanceGet(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, Boolean includeInternal) throws ApiException {
+        ApiResponse<BalanceLimit> resp = loyaltyBalanceProgramsPidActiveBalanceGetWithHttpInfo(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, includeInternal);
         return resp.getData();
     }
 
@@ -1829,11 +1845,12 @@ public class BalanceApi {
      * @param offset Offset (optional)
      * @param sortField Sort Field (optional)
      * @param sort Sort Order (optional)
+     * @param includeInternal Include Internal (optional)
      * @return ApiResponse&lt;BalanceLimit&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<BalanceLimit> loyaltyBalanceProgramsPidActiveBalanceGetWithHttpInfo(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort) throws ApiException {
-        Call call = loyaltyBalanceProgramsPidActiveBalanceGetValidateBeforeCall(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, null, null);
+    public ApiResponse<BalanceLimit> loyaltyBalanceProgramsPidActiveBalanceGetWithHttpInfo(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, Boolean includeInternal) throws ApiException {
+        Call call = loyaltyBalanceProgramsPidActiveBalanceGetValidateBeforeCall(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, includeInternal, null, null);
         Type localVarReturnType = new TypeToken<BalanceLimit>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -1848,11 +1865,12 @@ public class BalanceApi {
      * @param offset Offset (optional)
      * @param sortField Sort Field (optional)
      * @param sort Sort Order (optional)
+     * @param includeInternal Include Internal (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call loyaltyBalanceProgramsPidActiveBalanceGetAsync(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, final ApiCallback<BalanceLimit> callback) throws ApiException {
+    public Call loyaltyBalanceProgramsPidActiveBalanceGetAsync(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, Boolean includeInternal, final ApiCallback<BalanceLimit> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -1873,7 +1891,7 @@ public class BalanceApi {
             };
         }
 
-        Call call = loyaltyBalanceProgramsPidActiveBalanceGetValidateBeforeCall(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, progressListener, progressRequestListener);
+        Call call = loyaltyBalanceProgramsPidActiveBalanceGetValidateBeforeCall(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, includeInternal, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<BalanceLimit>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -2162,12 +2180,14 @@ public class BalanceApi {
      * @param sortField Field to sort by (optional, default to createdAt)
      * @param sort Sort order, either asc or desc (optional, default to desc)
      * @param filters Filters to apply (optional)
+     * @param status Transaction status filter (optional)
+     * @param transactionType Transaction type filter (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call loyaltyBalanceProgramsPidTransactionHistoryGetCall(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, List<String> filters, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call loyaltyBalanceProgramsPidTransactionHistoryGetCall(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, List<String> filters, String status, String transactionType, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -2190,6 +2210,10 @@ public class BalanceApi {
         localVarQueryParams.addAll(apiClient.parameterToPair("balanceDefinitionId", balanceDefinitionId));
         if (filters != null)
         localVarCollectionQueryParams.addAll(apiClient.parameterToPairs("multi", "filters", filters));
+        if (status != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("status", status));
+        if (transactionType != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("transactionType", transactionType));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -2224,25 +2248,25 @@ public class BalanceApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call loyaltyBalanceProgramsPidTransactionHistoryGetValidateBeforeCall(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, List<String> filters, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        
+    private Call loyaltyBalanceProgramsPidTransactionHistoryGetValidateBeforeCall(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, List<String> filters, String status, String transactionType, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+
         // verify the required parameter 'pid' is set
         if (pid == null) {
             throw new ApiException("Missing the required parameter 'pid' when calling loyaltyBalanceProgramsPidTransactionHistoryGet(Async)");
         }
-        
+
         // verify the required parameter 'contactId' is set
         if (contactId == null) {
             throw new ApiException("Missing the required parameter 'contactId' when calling loyaltyBalanceProgramsPidTransactionHistoryGet(Async)");
         }
-        
+
         // verify the required parameter 'balanceDefinitionId' is set
         if (balanceDefinitionId == null) {
             throw new ApiException("Missing the required parameter 'balanceDefinitionId' when calling loyaltyBalanceProgramsPidTransactionHistoryGet(Async)");
         }
-        
 
-        Call call = loyaltyBalanceProgramsPidTransactionHistoryGetCall(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters, progressListener, progressRequestListener);
+
+        Call call = loyaltyBalanceProgramsPidTransactionHistoryGetCall(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters, status, transactionType, progressListener, progressRequestListener);
         return call;
 
     }
@@ -2258,11 +2282,13 @@ public class BalanceApi {
      * @param sortField Field to sort by (optional, default to createdAt)
      * @param sort Sort order, either asc or desc (optional, default to desc)
      * @param filters Filters to apply (optional)
+     * @param status Transaction status filter: draft, completed, rejected, cancelled, expired (optional)
+     * @param transactionType Transaction type filter: credit, debit (optional)
      * @return TransactionHistoryResp
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public TransactionHistoryResp loyaltyBalanceProgramsPidTransactionHistoryGet(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, List<String> filters) throws ApiException {
-        ApiResponse<TransactionHistoryResp> resp = loyaltyBalanceProgramsPidTransactionHistoryGetWithHttpInfo(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters);
+    public TransactionHistoryResp loyaltyBalanceProgramsPidTransactionHistoryGet(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, List<String> filters, String status, String transactionType) throws ApiException {
+        ApiResponse<TransactionHistoryResp> resp = loyaltyBalanceProgramsPidTransactionHistoryGetWithHttpInfo(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters, status, transactionType);
         return resp.getData();
     }
 
@@ -2277,11 +2303,13 @@ public class BalanceApi {
      * @param sortField Field to sort by (optional, default to createdAt)
      * @param sort Sort order, either asc or desc (optional, default to desc)
      * @param filters Filters to apply (optional)
+     * @param status Transaction status filter: draft, completed, rejected, cancelled, expired (optional)
+     * @param transactionType Transaction type filter: credit, debit (optional)
      * @return ApiResponse&lt;TransactionHistoryResp&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<TransactionHistoryResp> loyaltyBalanceProgramsPidTransactionHistoryGetWithHttpInfo(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, List<String> filters) throws ApiException {
-        Call call = loyaltyBalanceProgramsPidTransactionHistoryGetValidateBeforeCall(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters, null, null);
+    public ApiResponse<TransactionHistoryResp> loyaltyBalanceProgramsPidTransactionHistoryGetWithHttpInfo(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, List<String> filters, String status, String transactionType) throws ApiException {
+        Call call = loyaltyBalanceProgramsPidTransactionHistoryGetValidateBeforeCall(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters, status, transactionType, null, null);
         Type localVarReturnType = new TypeToken<TransactionHistoryResp>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -2297,11 +2325,13 @@ public class BalanceApi {
      * @param sortField Field to sort by (optional, default to createdAt)
      * @param sort Sort order, either asc or desc (optional, default to desc)
      * @param filters Filters to apply (optional)
+     * @param status Transaction status filter: draft, completed, rejected, cancelled, expired (optional)
+     * @param transactionType Transaction type filter: credit, debit (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call loyaltyBalanceProgramsPidTransactionHistoryGetAsync(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, List<String> filters, final ApiCallback<TransactionHistoryResp> callback) throws ApiException {
+    public Call loyaltyBalanceProgramsPidTransactionHistoryGetAsync(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, List<String> filters, String status, String transactionType, final ApiCallback<TransactionHistoryResp> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -2322,7 +2352,7 @@ public class BalanceApi {
             };
         }
 
-        Call call = loyaltyBalanceProgramsPidTransactionHistoryGetValidateBeforeCall(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters, progressListener, progressRequestListener);
+        Call call = loyaltyBalanceProgramsPidTransactionHistoryGetValidateBeforeCall(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters, status, transactionType, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<TransactionHistoryResp>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

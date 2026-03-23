@@ -694,12 +694,13 @@ public class ProgramApi {
      * @param contactId Contact Id (optional)
      * @param params Filter List (optional)
      * @param loyaltySubscriptionId Loyalty Subscription Id (optional)
+     * @param includeInternal Include balances tied to internal definitions. (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call getParameterSubscriptionInfoCall(UUID pid, String contactId, String params, String loyaltySubscriptionId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call getParameterSubscriptionInfoCall(UUID pid, String contactId, String params, String loyaltySubscriptionId, Boolean includeInternal, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -714,6 +715,8 @@ public class ProgramApi {
         localVarQueryParams.addAll(apiClient.parameterToPair("params", params));
         if (loyaltySubscriptionId != null)
         localVarQueryParams.addAll(apiClient.parameterToPair("loyaltySubscriptionId", loyaltySubscriptionId));
+        if (includeInternal != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("includeInternal", includeInternal));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -748,15 +751,15 @@ public class ProgramApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call getParameterSubscriptionInfoValidateBeforeCall(UUID pid, String contactId, String params, String loyaltySubscriptionId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        
+    private Call getParameterSubscriptionInfoValidateBeforeCall(UUID pid, String contactId, String params, String loyaltySubscriptionId, Boolean includeInternal, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+
         // verify the required parameter 'pid' is set
         if (pid == null) {
             throw new ApiException("Missing the required parameter 'pid' when calling getParameterSubscriptionInfo(Async)");
         }
-        
 
-        Call call = getParameterSubscriptionInfoCall(pid, contactId, params, loyaltySubscriptionId, progressListener, progressRequestListener);
+
+        Call call = getParameterSubscriptionInfoCall(pid, contactId, params, loyaltySubscriptionId, includeInternal, progressListener, progressRequestListener);
         return call;
 
     }
@@ -768,11 +771,12 @@ public class ProgramApi {
      * @param contactId Contact Id (optional)
      * @param params Filter List (optional)
      * @param loyaltySubscriptionId Loyalty Subscription Id (optional)
+     * @param includeInternal Include balances tied to internal definitions. (optional)
      * @return SubscriptionHandlerInfo
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public SubscriptionHandlerInfo getParameterSubscriptionInfo(UUID pid, String contactId, String params, String loyaltySubscriptionId) throws ApiException {
-        ApiResponse<SubscriptionHandlerInfo> resp = getParameterSubscriptionInfoWithHttpInfo(pid, contactId, params, loyaltySubscriptionId);
+    public SubscriptionHandlerInfo getParameterSubscriptionInfo(UUID pid, String contactId, String params, String loyaltySubscriptionId, Boolean includeInternal) throws ApiException {
+        ApiResponse<SubscriptionHandlerInfo> resp = getParameterSubscriptionInfoWithHttpInfo(pid, contactId, params, loyaltySubscriptionId, includeInternal);
         return resp.getData();
     }
 
@@ -783,11 +787,12 @@ public class ProgramApi {
      * @param contactId Contact Id (optional)
      * @param params Filter List (optional)
      * @param loyaltySubscriptionId Loyalty Subscription Id (optional)
+     * @param includeInternal Include balances tied to internal definitions. (optional)
      * @return ApiResponse&lt;SubscriptionHandlerInfo&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<SubscriptionHandlerInfo> getParameterSubscriptionInfoWithHttpInfo(UUID pid, String contactId, String params, String loyaltySubscriptionId) throws ApiException {
-        Call call = getParameterSubscriptionInfoValidateBeforeCall(pid, contactId, params, loyaltySubscriptionId, null, null);
+    public ApiResponse<SubscriptionHandlerInfo> getParameterSubscriptionInfoWithHttpInfo(UUID pid, String contactId, String params, String loyaltySubscriptionId, Boolean includeInternal) throws ApiException {
+        Call call = getParameterSubscriptionInfoValidateBeforeCall(pid, contactId, params, loyaltySubscriptionId, includeInternal, null, null);
         Type localVarReturnType = new TypeToken<SubscriptionHandlerInfo>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -799,11 +804,12 @@ public class ProgramApi {
      * @param contactId Contact Id (optional)
      * @param params Filter List (optional)
      * @param loyaltySubscriptionId Loyalty Subscription Id (optional)
+     * @param includeInternal Include balances tied to internal definitions. (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call getParameterSubscriptionInfoAsync(UUID pid, String contactId, String params, String loyaltySubscriptionId, final ApiCallback<SubscriptionHandlerInfo> callback) throws ApiException {
+    public Call getParameterSubscriptionInfoAsync(UUID pid, String contactId, String params, String loyaltySubscriptionId, Boolean includeInternal, final ApiCallback<SubscriptionHandlerInfo> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -824,7 +830,7 @@ public class ProgramApi {
             };
         }
 
-        Call call = getParameterSubscriptionInfoValidateBeforeCall(pid, contactId, params, loyaltySubscriptionId, progressListener, progressRequestListener);
+        Call call = getParameterSubscriptionInfoValidateBeforeCall(pid, contactId, params, loyaltySubscriptionId, includeInternal, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<SubscriptionHandlerInfo>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
@@ -838,7 +844,7 @@ public class ProgramApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call loyaltyConfigProgramsPidContactCidDeleteCall(Object pid, Object cid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call loyaltyConfigProgramsPidContactCidDeleteCall(UUID pid, Integer cid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -882,18 +888,17 @@ public class ProgramApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call loyaltyConfigProgramsPidContactCidDeleteValidateBeforeCall(Object pid, Object cid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-        
+    private Call loyaltyConfigProgramsPidContactCidDeleteValidateBeforeCall(UUID pid, Integer cid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+
         // verify the required parameter 'pid' is set
         if (pid == null) {
             throw new ApiException("Missing the required parameter 'pid' when calling loyaltyConfigProgramsPidContactCidDelete(Async)");
         }
-        
+
         // verify the required parameter 'cid' is set
         if (cid == null) {
             throw new ApiException("Missing the required parameter 'cid' when calling loyaltyConfigProgramsPidContactCidDelete(Async)");
         }
-        
 
         Call call = loyaltyConfigProgramsPidContactCidDeleteCall(pid, cid, progressListener, progressRequestListener);
         return call;
@@ -908,7 +913,7 @@ public class ProgramApi {
      * @return TransactionHistoryResp
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public TransactionHistoryResp loyaltyConfigProgramsPidContactCidDelete(Object pid, Object cid) throws ApiException {
+    public TransactionHistoryResp loyaltyConfigProgramsPidContactCidDelete(UUID pid, Integer cid) throws ApiException {
         ApiResponse<TransactionHistoryResp> resp = loyaltyConfigProgramsPidContactCidDeleteWithHttpInfo(pid, cid);
         return resp.getData();
     }
@@ -921,7 +926,7 @@ public class ProgramApi {
      * @return ApiResponse&lt;TransactionHistoryResp&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<TransactionHistoryResp> loyaltyConfigProgramsPidContactCidDeleteWithHttpInfo(Object pid, Object cid) throws ApiException {
+    public ApiResponse<TransactionHistoryResp> loyaltyConfigProgramsPidContactCidDeleteWithHttpInfo(UUID pid, Integer cid) throws ApiException {
         Call call = loyaltyConfigProgramsPidContactCidDeleteValidateBeforeCall(pid, cid, null, null);
         Type localVarReturnType = new TypeToken<TransactionHistoryResp>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
@@ -936,7 +941,7 @@ public class ProgramApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call loyaltyConfigProgramsPidContactCidDeleteAsync(Object pid, Object cid, final ApiCallback<TransactionHistoryResp> callback) throws ApiException {
+    public Call loyaltyConfigProgramsPidContactCidDeleteAsync(UUID pid, Integer cid, final ApiCallback<TransactionHistoryResp> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;

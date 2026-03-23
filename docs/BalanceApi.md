@@ -672,7 +672,7 @@ Name | Type | Description  | Notes
 
 <a name="getContactBalances"></a>
 # **getContactBalances**
-> ContactBalancesResp getContactBalances(pid)
+> ContactBalancesResp getContactBalances(pid, includeInternal)
 
 Get balance list
 
@@ -703,8 +703,9 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 
 BalanceApi apiInstance = new BalanceApi();
 UUID pid = new UUID(); // UUID | Loyalty Program Id
+Boolean includeInternal = true; // Boolean | Include Internal
 try {
-    ContactBalancesResp result = apiInstance.getContactBalances(pid);
+    ContactBalancesResp result = apiInstance.getContactBalances(pid, includeInternal);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling BalanceApi#getContactBalances");
@@ -717,6 +718,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pid** | [**UUID**](.md)| Loyalty Program Id |
+ **includeInternal** | **Boolean**| Include Internal | [optional]
 
 ### Return type
 
@@ -733,7 +735,7 @@ Name | Type | Description  | Notes
 
 <a name="getSubscriptionBalances"></a>
 # **getSubscriptionBalances**
-> ModelSubscriptionBalanceResp getSubscriptionBalances(cid, pid)
+> ModelSubscriptionBalanceResp getSubscriptionBalances(cid, pid, includeInternal)
 
 Get subscription balances
 
@@ -765,8 +767,9 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 BalanceApi apiInstance = new BalanceApi();
 String cid = "cid_example"; // String | Contact Id
 UUID pid = new UUID(); // UUID | Loyalty Program Id
+Boolean includeInternal = true; // Boolean | Include Internal
 try {
-    ModelSubscriptionBalanceResp result = apiInstance.getSubscriptionBalances(cid, pid);
+    ModelSubscriptionBalanceResp result = apiInstance.getSubscriptionBalances(cid, pid, includeInternal);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling BalanceApi#getSubscriptionBalances");
@@ -780,6 +783,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cid** | **String**| Contact Id |
  **pid** | [**UUID**](.md)| Loyalty Program Id |
+ **includeInternal** | **Boolean**| Include Internal | [optional]
 
 ### Return type
 
@@ -796,7 +800,7 @@ Name | Type | Description  | Notes
 
 <a name="loyaltyBalanceProgramsPidActiveBalanceGet"></a>
 # **loyaltyBalanceProgramsPidActiveBalanceGet**
-> BalanceLimit loyaltyBalanceProgramsPidActiveBalanceGet(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort)
+> BalanceLimit loyaltyBalanceProgramsPidActiveBalanceGet(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, includeInternal)
 
 Get Active Balances API
 
@@ -833,8 +837,9 @@ Integer limit = 56; // Integer | Limit
 Integer offset = 56; // Integer | Offset
 String sortField = "sortField_example"; // String | Sort Field
 String sort = "sort_example"; // String | Sort Order
+Boolean includeInternal = true; // Boolean | Include Internal
 try {
-    BalanceLimit result = apiInstance.loyaltyBalanceProgramsPidActiveBalanceGet(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort);
+    BalanceLimit result = apiInstance.loyaltyBalanceProgramsPidActiveBalanceGet(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, includeInternal);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling BalanceApi#loyaltyBalanceProgramsPidActiveBalanceGet");
@@ -853,6 +858,7 @@ Name | Type | Description  | Notes
  **offset** | **Integer**| Offset | [optional]
  **sortField** | **String**| Sort Field | [optional]
  **sort** | **String**| Sort Order | [optional]
+ **includeInternal** | **Boolean**| Include Internal | [optional]
 
 ### Return type
 
@@ -997,7 +1003,7 @@ Name | Type | Description  | Notes
 
 <a name="loyaltyBalanceProgramsPidTransactionHistoryGet"></a>
 # **loyaltyBalanceProgramsPidTransactionHistoryGet**
-> TransactionHistoryResp loyaltyBalanceProgramsPidTransactionHistoryGet(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters)
+> TransactionHistoryResp loyaltyBalanceProgramsPidTransactionHistoryGet(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters, status, transactionType)
 
 Get Transaction History API
 
@@ -1035,8 +1041,10 @@ Integer offset = 0; // Integer | Skip a number of records
 String sortField = "createdAt"; // String | Field to sort by
 String sort = "desc"; // String | Sort order, either asc or desc
 List<String> filters = Arrays.asList("filters_example"); // List<String> | Filters to apply
+String status = "status_example"; // String | Filter by transaction status
+String transactionType = "transactionType_example"; // String | Filter by transaction type
 try {
-    TransactionHistoryResp result = apiInstance.loyaltyBalanceProgramsPidTransactionHistoryGet(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters);
+    TransactionHistoryResp result = apiInstance.loyaltyBalanceProgramsPidTransactionHistoryGet(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters, status, transactionType);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling BalanceApi#loyaltyBalanceProgramsPidTransactionHistoryGet");
@@ -1056,6 +1064,8 @@ Name | Type | Description  | Notes
  **sortField** | **String**| Field to sort by | [optional] [default to createdAt] [enum: createdAt]
  **sort** | **String**| Sort order, either asc or desc | [optional] [default to desc] [enum: asc, desc]
  **filters** | [**List&lt;String&gt;**](String.md)| Filters to apply | [optional]
+ **status** | **String**| Filter by transaction status | [optional]
+ **transactionType** | **String**| Filter by transaction type | [optional]
 
 ### Return type
 
