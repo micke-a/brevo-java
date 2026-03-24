@@ -16,6 +16,7 @@ package brevoModel;
 import org.apache.commons.lang3.ObjectUtils;
 import brevoModel.MemberContact;
 import brevoModel.SubscriptionAttributedReward;
+import brevoModel.SubscriptionBalances;
 import brevoModel.SubscriptionTier;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
@@ -34,7 +35,7 @@ import java.util.List;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2025-12-22T15:36:05.341+05:30")
 public class SubscriptionHandlerInfo {
   @SerializedName("balance")
-  private Object balance = null;
+  private SubscriptionBalances balance = null;
 
   @SerializedName("members")
   private List<MemberContact> members = null;
@@ -45,7 +46,7 @@ public class SubscriptionHandlerInfo {
   @SerializedName("tier")
   private List<SubscriptionTier> tier = null;
 
-  public SubscriptionHandlerInfo balance(Object balance) {
+  public SubscriptionHandlerInfo balance(SubscriptionBalances balance) {
     this.balance = balance;
     return this;
   }
@@ -55,11 +56,11 @@ public class SubscriptionHandlerInfo {
    * @return balance
   **/
   @ApiModelProperty(value = "Balance details for the subscription.")
-  public Object getBalance() {
+  public SubscriptionBalances getBalance() {
     return balance;
   }
 
-  public void setBalance(Object balance) {
+  public void setBalance(SubscriptionBalances balance) {
     this.balance = balance;
   }
 

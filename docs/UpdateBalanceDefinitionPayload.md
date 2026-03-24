@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **maxAmount** | [**BigDecimal**](BigDecimal.md) | Maximum allowable balance amount. |  [optional]
 **maxCreditAmountLimit** | [**BigDecimal**](BigDecimal.md) | Maximum credit allowed per operation. |  [optional]
 **maxDebitAmountLimit** | [**BigDecimal**](BigDecimal.md) | Maximum debit allowed per operation. |  [optional]
-**meta** | **Object** | Optional metadata for the balance definition. |  [optional]
+**meta** | **Map&lt;String, Object&gt;** | Optional metadata for the balance definition. |  [optional]
 **minAmount** | [**BigDecimal**](BigDecimal.md) | Minimum allowable balance amount. |  [optional]
 **name** | **String** | Name of the balance definition. | 
 **unit** | [**UnitEnum**](#UnitEnum) | Unit of balance measurement. | 

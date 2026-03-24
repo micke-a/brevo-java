@@ -331,7 +331,7 @@ Name | Type | Description  | Notes
 
 <a name="getParameterSubscriptionInfo"></a>
 # **getParameterSubscriptionInfo**
-> SubscriptionHandlerInfo getParameterSubscriptionInfo(pid, contactId, params, loyaltySubscriptionId)
+> SubscriptionHandlerInfo getParameterSubscriptionInfo(pid, contactId, params, loyaltySubscriptionId, includeInternal)
 
 Get Subscription Data
 
@@ -365,8 +365,9 @@ UUID pid = new UUID(); // UUID | Loyalty Program Id
 String contactId = "contactId_example"; // String | Contact Id
 String params = "params_example"; // String | Filter List
 String loyaltySubscriptionId = "loyaltySubscriptionId_example"; // String | Loyalty Subscription Id
+Boolean includeInternal = true; // Boolean | Include Internal
 try {
-    SubscriptionHandlerInfo result = apiInstance.getParameterSubscriptionInfo(pid, contactId, params, loyaltySubscriptionId);
+    SubscriptionHandlerInfo result = apiInstance.getParameterSubscriptionInfo(pid, contactId, params, loyaltySubscriptionId, includeInternal);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling ProgramApi#getParameterSubscriptionInfo");
@@ -382,6 +383,7 @@ Name | Type | Description  | Notes
  **contactId** | **String**| Contact Id | [optional]
  **params** | **String**| Filter List | [optional]
  **loyaltySubscriptionId** | **String**| Loyalty Subscription Id | [optional]
+ **includeInternal** | **Boolean**| Include Internal | [optional]
 
 ### Return type
 
@@ -428,8 +430,8 @@ partnerKey.setApiKey("YOUR PARTNER KEY");
 //partner-key.setApiKeyPrefix("Token");
 
 ProgramApi apiInstance = new ProgramApi();
-Object pid = null; // Object | Loyalty Program ID. A unique identifier for the loyalty program.
-Object cid = null; // Object | Contact ID.
+UUID pid = new UUID(); // UUID | Loyalty Program ID. A unique identifier for the loyalty program.
+Integer cid = 56; // Integer | Contact ID.
 try {
     TransactionHistoryResp result = apiInstance.loyaltyConfigProgramsPidContactCidDelete(pid, cid);
     System.out.println(result);
@@ -443,8 +445,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pid** | [**Object**](.md)| Loyalty Program ID. A unique identifier for the loyalty program. |
- **cid** | [**Object**](.md)| Contact ID. |
+ **pid** | [**UUID**](.md)| Loyalty Program ID. A unique identifier for the loyalty program. |
+ **cid** | **Integer**| Contact ID. |
 
 ### Return type
 

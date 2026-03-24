@@ -23,6 +23,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 import org.threeten.bp.LocalDate;
 
 /**
@@ -313,7 +315,7 @@ public class CreateBalanceDefinitionPayload {
   private BigDecimal maxDebitAmountLimit = null;
 
   @SerializedName("meta")
-  private Object meta = null;
+  private Map<String, Object> meta = null;
 
   @SerializedName("minAmount")
   private BigDecimal minAmount = null;
@@ -617,8 +619,16 @@ public class CreateBalanceDefinitionPayload {
     this.maxDebitAmountLimit = maxDebitAmountLimit;
   }
 
-  public CreateBalanceDefinitionPayload meta(Object meta) {
+  public CreateBalanceDefinitionPayload meta(Map<String, Object> meta) {
     this.meta = meta;
+    return this;
+  }
+
+  public CreateBalanceDefinitionPayload putMetaItem(String key, Object metaItem) {
+    if (this.meta == null) {
+      this.meta = new HashMap<String, Object>();
+    }
+    this.meta.put(key, metaItem);
     return this;
   }
 
@@ -627,11 +637,11 @@ public class CreateBalanceDefinitionPayload {
    * @return meta
   **/
   @ApiModelProperty(value = "Additional metadata for the balance definition.")
-  public Object getMeta() {
+  public Map<String, Object> getMeta() {
     return meta;
   }
 
-  public void setMeta(Object meta) {
+  public void setMeta(Map<String, Object> meta) {
     this.meta = meta;
   }
 

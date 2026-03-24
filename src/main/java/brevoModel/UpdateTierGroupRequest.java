@@ -23,7 +23,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -141,6 +143,9 @@ public class UpdateTierGroupRequest {
   @SerializedName("downgradeStrategy")
   private DowngradeStrategyEnum downgradeStrategy = DowngradeStrategyEnum.REAL_TIME;
 
+  @SerializedName("meta")
+  private Map<String, Object> meta = null;
+
   public UpdateTierGroupRequest name(String name) {
     this.name = name;
     return this;
@@ -218,6 +223,32 @@ public class UpdateTierGroupRequest {
     this.downgradeStrategy = downgradeStrategy;
   }
 
+  public UpdateTierGroupRequest meta(Map<String, Object> meta) {
+    this.meta = meta;
+    return this;
+  }
+
+  public UpdateTierGroupRequest putMetaItem(String key, Object metaItem) {
+    if (this.meta == null) {
+      this.meta = new HashMap<String, Object>();
+    }
+    this.meta.put(key, metaItem);
+    return this;
+  }
+
+   /**
+   * Additional metadata for the tier group
+   * @return meta
+  **/
+  @ApiModelProperty(value = "Additional metadata for the tier group")
+  public Map<String, Object> getMeta() {
+    return meta;
+  }
+
+  public void setMeta(Map<String, Object> meta) {
+    this.meta = meta;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -231,12 +262,13 @@ public class UpdateTierGroupRequest {
     return ObjectUtils.equals(this.name, updateTierGroupRequest.name) &&
     ObjectUtils.equals(this.tierOrder, updateTierGroupRequest.tierOrder) &&
     ObjectUtils.equals(this.upgradeStrategy, updateTierGroupRequest.upgradeStrategy) &&
-    ObjectUtils.equals(this.downgradeStrategy, updateTierGroupRequest.downgradeStrategy);
+    ObjectUtils.equals(this.downgradeStrategy, updateTierGroupRequest.downgradeStrategy) &&
+    ObjectUtils.equals(this.meta, updateTierGroupRequest.meta);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(name, tierOrder, upgradeStrategy, downgradeStrategy);
+    return ObjectUtils.hashCodeMulti(name, tierOrder, upgradeStrategy, downgradeStrategy, meta);
   }
 
 
@@ -244,11 +276,12 @@ public class UpdateTierGroupRequest {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class UpdateTierGroupRequest {\n");
-    
+
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    tierOrder: ").append(toIndentedString(tierOrder)).append("\n");
     sb.append("    upgradeStrategy: ").append(toIndentedString(upgradeStrategy)).append("\n");
     sb.append("    downgradeStrategy: ").append(toIndentedString(downgradeStrategy)).append("\n");
+    sb.append("    meta: ").append(toIndentedString(meta)).append("\n");
     sb.append("}");
     return sb.toString();
   }
