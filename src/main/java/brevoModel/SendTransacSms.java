@@ -22,6 +22,8 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * SendTransacSms
@@ -38,7 +40,7 @@ public class SendTransacSms {
   private String sender = null;
 
   @SerializedName("tag")
-  private String tag = null;
+  private SendTransacSmsTag tag = null;
 
   /**
    * Type of the SMS. Marketing SMS messages are those sent typically with marketing content. Transactional SMS messages are sent to individuals and are triggered in response to some action, such as a sign-up, purchase, etc.
@@ -102,6 +104,9 @@ public class SendTransacSms {
   @SerializedName("content")
   private String content = null;
 
+  @SerializedName("params")
+  private Map<String, Object> params = null;
+
   public SendTransacSms organisationPrefix(String organisationPrefix) {
     this.organisationPrefix = organisationPrefix;
     return this;
@@ -156,21 +161,21 @@ public class SendTransacSms {
     this.sender = sender;
   }
 
-  public SendTransacSms tag(String tag) {
+  public SendTransacSms tag(SendTransacSmsTag tag) {
     this.tag = tag;
     return this;
   }
 
    /**
-   * Tag of the message. Can be a string or an array of strings (e.g., &quot;accountValidation&quot; or [&quot;tag1&quot;, &quot;tag2&quot;]).
+   * Tag of the message
    * @return tag
   **/
-  @ApiModelProperty(example = "accountValidation", value = "Tag of the message. Can be a string or an array of strings (e.g., \"accountValidation\" or [\"tag1\", \"tag2\"]).")
-  public String getTag() {
+  @ApiModelProperty(example = "accountValidation | [\"tag1\", \"tag2\"]", value = "Tag of the message")
+  public SendTransacSmsTag getTag() {
     return tag;
   }
 
-  public void setTag(String tag) {
+  public void setTag(SendTransacSmsTag tag) {
     this.tag = tag;
   }
 
@@ -252,7 +257,7 @@ public class SendTransacSms {
   }
 
    /**
-   * Content of the message. If more than **160 characters** long, will be sent as multiple text messages. Either &#39;templateId&#39; or &#39;content&#39; must be provided, but not both. Mandatory if &#39;templateId&#39; is not passed, ignored if &#39;templateId&#39; is passed. 
+   * Content of the message. If more than **160 characters** long, will be sent as multiple text messages. Either &#39;templateId&#39; or &#39;content&#39; must be provided, but not both. Mandatory if &#39;templateId&#39; is not passed, ignored if &#39;templateId&#39; is passed.
    * @return content
   **/
   @ApiModelProperty(example = "Enter this code:CCJJG8 to validate your account", value = "Content of the message. If more than **160 characters** long, will be sent as multiple text messages. Either 'templateId' or 'content' must be provided, but not both. Mandatory if 'templateId' is not passed, ignored if 'templateId' is passed. ")
@@ -262,6 +267,32 @@ public class SendTransacSms {
 
   public void setContent(String content) {
     this.content = content;
+  }
+
+  public SendTransacSms params(Map<String, Object> params) {
+    this.params = params;
+    return this;
+  }
+
+  public SendTransacSms putParamsItem(String key, Object paramsItem) {
+    if (this.params == null) {
+      this.params = new HashMap<String, Object>();
+    }
+    this.params.put(key, paramsItem);
+    return this;
+  }
+
+   /**
+   * Pass the set of attributes to customize the template. For example, {&quot;FNAME&quot;:&quot;Joe&quot;, &quot;LNAME&quot;:&quot;Doe&quot;}. These are the placeholder variables in the template that will be replaced with the corresponding values passed in the params object. Applicable only if &#x60;templateId&#x60; is used.
+   * @return params
+  **/
+  @ApiModelProperty(example = "{\"FNAME\":\"Joe\",\"LNAME\":\"Doe\"}", value = "Pass the set of attributes to customize the template. For example, {\"FNAME\":\"Joe\", \"LNAME\":\"Doe\"}. These are the placeholder variables in the template that will be replaced with the corresponding values passed in the params object. Applicable only if `templateId` is used.")
+  public Map<String, Object> getParams() {
+    return params;
+  }
+
+  public void setParams(Map<String, Object> params) {
+    this.params = params;
   }
 
 
@@ -282,12 +313,13 @@ public class SendTransacSms {
     ObjectUtils.equals(this.unicodeEnabled, sendTransacSms.unicodeEnabled) &&
     ObjectUtils.equals(this.webUrl, sendTransacSms.webUrl) &&
     ObjectUtils.equals(this.templateId, sendTransacSms.templateId) &&
-    ObjectUtils.equals(this.content, sendTransacSms.content);
+    ObjectUtils.equals(this.content, sendTransacSms.content) &&
+    ObjectUtils.equals(this.params, sendTransacSms.params);
   }
 
   @Override
   public int hashCode() {
-    return ObjectUtils.hashCodeMulti(organisationPrefix, recipient, sender, tag, type, unicodeEnabled, webUrl, templateId, content);
+    return ObjectUtils.hashCodeMulti(organisationPrefix, recipient, sender, tag, type, unicodeEnabled, webUrl, templateId, content, params);
   }
 
 
@@ -305,6 +337,7 @@ public class SendTransacSms {
     sb.append("    webUrl: ").append(toIndentedString(webUrl)).append("\n");
     sb.append("    templateId: ").append(toIndentedString(templateId)).append("\n");
     sb.append("    content: ").append(toIndentedString(content)).append("\n");
+    sb.append("    params: ").append(toIndentedString(params)).append("\n");
     sb.append("}");
     return sb.toString();
   }
