@@ -2187,7 +2187,7 @@ public class BalanceApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public Call loyaltyBalanceProgramsPidTransactionHistoryGetCall(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, List<String> filters, String status, String transactionType, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public Call loyaltyBalanceProgramsPidTransactionHistoryGetCall(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, List<String> filters, Map<String, String> metadata, String status, String transactionType, String loyaltySubscriptionId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -2210,10 +2210,17 @@ public class BalanceApi {
         localVarQueryParams.addAll(apiClient.parameterToPair("balanceDefinitionId", balanceDefinitionId));
         if (filters != null)
         localVarCollectionQueryParams.addAll(apiClient.parameterToPairs("multi", "filters", filters));
+        if (metadata != null) {
+            for (Map.Entry<String, String> entry : metadata.entrySet()) {
+                localVarQueryParams.addAll(apiClient.parameterToPair("metadata[" + entry.getKey() + "]", entry.getValue()));
+            }
+        }
         if (status != null)
         localVarQueryParams.addAll(apiClient.parameterToPair("status", status));
         if (transactionType != null)
         localVarQueryParams.addAll(apiClient.parameterToPair("transactionType", transactionType));
+        if (loyaltySubscriptionId != null)
+        localVarQueryParams.addAll(apiClient.parameterToPair("loyaltySubscriptionId", loyaltySubscriptionId));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
 
@@ -2248,7 +2255,7 @@ public class BalanceApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private Call loyaltyBalanceProgramsPidTransactionHistoryGetValidateBeforeCall(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, List<String> filters, String status, String transactionType, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private Call loyaltyBalanceProgramsPidTransactionHistoryGetValidateBeforeCall(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, List<String> filters, Map<String, String> metadata, String status, String transactionType, String loyaltySubscriptionId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
 
         // verify the required parameter 'pid' is set
         if (pid == null) {
@@ -2266,7 +2273,7 @@ public class BalanceApi {
         }
 
 
-        Call call = loyaltyBalanceProgramsPidTransactionHistoryGetCall(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters, status, transactionType, progressListener, progressRequestListener);
+        Call call = loyaltyBalanceProgramsPidTransactionHistoryGetCall(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters, metadata, status, transactionType, loyaltySubscriptionId, progressListener, progressRequestListener);
         return call;
 
     }
@@ -2282,13 +2289,15 @@ public class BalanceApi {
      * @param sortField Field to sort by (optional, default to createdAt)
      * @param sort Sort order, either asc or desc (optional, default to desc)
      * @param filters Filters to apply (optional)
+     * @param metadata Filter transactions by metadata key-value pairs (optional)
      * @param status Transaction status filter: draft, completed, rejected, cancelled, expired (optional)
      * @param transactionType Transaction type filter: credit, debit (optional)
+     * @param loyaltySubscriptionId Loyalty Subscription ID filter (optional)
      * @return TransactionHistoryResp
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public TransactionHistoryResp loyaltyBalanceProgramsPidTransactionHistoryGet(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, List<String> filters, String status, String transactionType) throws ApiException {
-        ApiResponse<TransactionHistoryResp> resp = loyaltyBalanceProgramsPidTransactionHistoryGetWithHttpInfo(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters, status, transactionType);
+    public TransactionHistoryResp loyaltyBalanceProgramsPidTransactionHistoryGet(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, List<String> filters, Map<String, String> metadata, String status, String transactionType, String loyaltySubscriptionId) throws ApiException {
+        ApiResponse<TransactionHistoryResp> resp = loyaltyBalanceProgramsPidTransactionHistoryGetWithHttpInfo(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters, metadata, status, transactionType, loyaltySubscriptionId);
         return resp.getData();
     }
 
@@ -2303,13 +2312,15 @@ public class BalanceApi {
      * @param sortField Field to sort by (optional, default to createdAt)
      * @param sort Sort order, either asc or desc (optional, default to desc)
      * @param filters Filters to apply (optional)
+     * @param metadata Filter transactions by metadata key-value pairs (optional)
      * @param status Transaction status filter: draft, completed, rejected, cancelled, expired (optional)
      * @param transactionType Transaction type filter: credit, debit (optional)
+     * @param loyaltySubscriptionId Loyalty Subscription ID filter (optional)
      * @return ApiResponse&lt;TransactionHistoryResp&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<TransactionHistoryResp> loyaltyBalanceProgramsPidTransactionHistoryGetWithHttpInfo(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, List<String> filters, String status, String transactionType) throws ApiException {
-        Call call = loyaltyBalanceProgramsPidTransactionHistoryGetValidateBeforeCall(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters, status, transactionType, null, null);
+    public ApiResponse<TransactionHistoryResp> loyaltyBalanceProgramsPidTransactionHistoryGetWithHttpInfo(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, List<String> filters, Map<String, String> metadata, String status, String transactionType, String loyaltySubscriptionId) throws ApiException {
+        Call call = loyaltyBalanceProgramsPidTransactionHistoryGetValidateBeforeCall(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters, metadata, status, transactionType, loyaltySubscriptionId, null, null);
         Type localVarReturnType = new TypeToken<TransactionHistoryResp>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -2325,13 +2336,15 @@ public class BalanceApi {
      * @param sortField Field to sort by (optional, default to createdAt)
      * @param sort Sort order, either asc or desc (optional, default to desc)
      * @param filters Filters to apply (optional)
+     * @param metadata Filter transactions by metadata key-value pairs (optional)
      * @param status Transaction status filter: draft, completed, rejected, cancelled, expired (optional)
      * @param transactionType Transaction type filter: credit, debit (optional)
+     * @param loyaltySubscriptionId Loyalty Subscription ID filter (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public Call loyaltyBalanceProgramsPidTransactionHistoryGetAsync(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, List<String> filters, String status, String transactionType, final ApiCallback<TransactionHistoryResp> callback) throws ApiException {
+    public Call loyaltyBalanceProgramsPidTransactionHistoryGetAsync(UUID pid, Integer contactId, UUID balanceDefinitionId, Integer limit, Integer offset, String sortField, String sort, List<String> filters, Map<String, String> metadata, String status, String transactionType, String loyaltySubscriptionId, final ApiCallback<TransactionHistoryResp> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -2352,7 +2365,7 @@ public class BalanceApi {
             };
         }
 
-        Call call = loyaltyBalanceProgramsPidTransactionHistoryGetValidateBeforeCall(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters, status, transactionType, progressListener, progressRequestListener);
+        Call call = loyaltyBalanceProgramsPidTransactionHistoryGetValidateBeforeCall(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters, metadata, status, transactionType, loyaltySubscriptionId, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<TransactionHistoryResp>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

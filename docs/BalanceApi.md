@@ -1003,7 +1003,7 @@ Name | Type | Description  | Notes
 
 <a name="loyaltyBalanceProgramsPidTransactionHistoryGet"></a>
 # **loyaltyBalanceProgramsPidTransactionHistoryGet**
-> TransactionHistoryResp loyaltyBalanceProgramsPidTransactionHistoryGet(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters, status, transactionType)
+> TransactionHistoryResp loyaltyBalanceProgramsPidTransactionHistoryGet(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters, metadata, status, transactionType, loyaltySubscriptionId)
 
 Get Transaction History API
 
@@ -1041,10 +1041,12 @@ Integer offset = 0; // Integer | Skip a number of records
 String sortField = "createdAt"; // String | Field to sort by
 String sort = "desc"; // String | Sort order, either asc or desc
 List<String> filters = Arrays.asList("filters_example"); // List<String> | Filters to apply
+Map<String, String> metadata = new HashMap<String, String>(); // Map<String, String> | Filter transactions by metadata key-value pairs
 String status = "status_example"; // String | Filter by transaction status
 String transactionType = "transactionType_example"; // String | Filter by transaction type
+String loyaltySubscriptionId = "loyaltySubscriptionId_example"; // String | Loyalty Subscription ID filter
 try {
-    TransactionHistoryResp result = apiInstance.loyaltyBalanceProgramsPidTransactionHistoryGet(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters, status, transactionType);
+    TransactionHistoryResp result = apiInstance.loyaltyBalanceProgramsPidTransactionHistoryGet(pid, contactId, balanceDefinitionId, limit, offset, sortField, sort, filters, metadata, status, transactionType, loyaltySubscriptionId);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling BalanceApi#loyaltyBalanceProgramsPidTransactionHistoryGet");
@@ -1064,8 +1066,10 @@ Name | Type | Description  | Notes
  **sortField** | **String**| Field to sort by | [optional] [default to createdAt] [enum: createdAt]
  **sort** | **String**| Sort order, either asc or desc | [optional] [default to desc] [enum: asc, desc]
  **filters** | [**List&lt;String&gt;**](String.md)| Filters to apply | [optional]
+ **metadata** | [**Map&lt;String, String&gt;**](String.md)| Filter transactions by metadata key-value pairs | [optional]
  **status** | **String**| Filter by transaction status | [optional]
  **transactionType** | **String**| Filter by transaction type | [optional]
+ **loyaltySubscriptionId** | **String**| Loyalty Subscription ID filter | [optional]
 
 ### Return type
 
